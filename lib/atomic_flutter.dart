@@ -77,21 +77,23 @@ export 'atoms/overlays/atomic_tooltip.dart';
 
 // ===== MOLECULES =====
 
-// Forms
-export 'molecules/forms/atomic_form_field.dart';
-
-// Inputs
+// Forms & Inputs
 export 'molecules/inputs/atomic_dropdown.dart';
+export 'molecules/forms/atomic_form_field.dart';
+export 'molecules/pickers/atomic_date_picker.dart';
+export 'molecules/pickers/atomic_time_picker.dart';
 
 // Navigation
 export 'molecules/navigation/atomic_navigation_bar.dart';
+export 'molecules/navigation/atomic_app_bar.dart';
+
+// Lists
+export 'molecules/lists/atomic_list_item.dart';
 
 // ===== REMAINING TODOS =====
-// TODO: Continue implementing complex molecules
-// - AtomicListItem
-// - AtomicAppBar  
-// - AtomicDatePicker
-// - AtomicTimePicker
+// TODO: Complex components combining atoms
+// ✅ All critical molecules completed!
+// Next phase: Organisms level coming soon...
 
 // ===== ORGANISMS =====
 // TODO: Create organism-level components combining molecules

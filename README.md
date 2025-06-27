@@ -240,14 +240,12 @@ class LoginScreen extends StatelessWidget {
 - AtomicDropdown
 - AtomicFormField
 - AtomicNavigationBar / AtomicNavigationRail
+- AtomicAppBar / AtomicSimpleAppBar / AtomicSearchAppBar
+- AtomicListItem / AtomicUserListItem / AtomicIconListItem
+- AtomicDatePicker / AtomicSimpleDatePicker / AtomicDateRangePicker
+- AtomicTimePicker / AtomicSimpleTimePicker
 
 ### 🚧 Coming Soon
-
-#### **Molecules**
-- AtomicListItem
-- AtomicAppBar
-- AtomicDatePicker
-- AtomicTimePicker
 
 #### **Organisms**
 - AtomicDataTable
