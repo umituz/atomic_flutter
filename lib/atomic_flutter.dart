@@ -28,22 +28,30 @@ export 'tokens/borders/atomic_borders.dart';
 
 // Buttons
 export 'atoms/buttons/atomic_button.dart';
+export 'atoms/buttons/atomic_icon_button.dart';
 
 // Containers
 export 'atoms/containers/atomic_card.dart';
+export 'atoms/containers/atomic_gradient_container.dart';
 
 // Inputs
 export 'atoms/inputs/atomic_text_field.dart';
 
+// Icons
+export 'atoms/icons/atomic_icon.dart';
+
+// Feedback
+export 'atoms/feedback/atomic_loader.dart';
+export 'atoms/feedback/atomic_chip.dart';
+
+// Overlays
+export 'atoms/overlays/atomic_divider.dart';
+
 // TODO: More atoms will be added as the package grows
 // - AtomicText
-// - AtomicIcon
 // - AtomicImage
-// - AtomicLoader
 // - AtomicBadge
-// - AtomicChip
 // - AtomicAvatar
-// - AtomicDivider
 // - AtomicSwitch
 // - AtomicCheckbox
 // - AtomicRadio
