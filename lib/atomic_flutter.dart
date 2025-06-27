@@ -47,6 +47,7 @@ export 'atoms/containers/atomic_collapse_box.dart';
 export 'atoms/inputs/atomic_text_field.dart';
 export 'atoms/inputs/atomic_switch.dart';
 export 'atoms/inputs/atomic_checkbox.dart';
+export 'atoms/inputs/atomic_radio.dart';
 
 // Icons
 export 'atoms/icons/atomic_icon.dart';
@@ -55,10 +56,16 @@ export 'atoms/icons/atomic_icon.dart';
 export 'atoms/feedback/atomic_loader.dart';
 export 'atoms/feedback/atomic_chip.dart';
 export 'atoms/feedback/atomic_shimmer.dart';
+export 'atoms/feedback/atomic_badge.dart';
+export 'atoms/feedback/atomic_toast.dart';
+
+// Display
+export 'atoms/display/atomic_avatar.dart';
 
 // Overlays
 export 'atoms/overlays/atomic_divider.dart';
 export 'atoms/overlays/atomic_dialog.dart';
+export 'atoms/overlays/atomic_bottom_sheet.dart';
 
 // TODO: More atoms will be added as the package grows
 // - AtomicText
