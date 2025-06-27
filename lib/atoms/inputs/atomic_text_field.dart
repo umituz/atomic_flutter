@@ -29,7 +29,7 @@ class AtomicTextField extends StatefulWidget {
     this.readOnly = false,
     this.autofocus = false,
     this.maxLines = 1,
-    this.minLines,
+    this.minLines = 1,
     this.maxLength,
     this.inputFormatters,
     this.focusNode,
