@@ -29,6 +29,9 @@ export 'tokens/borders/atomic_borders.dart';
 // Responsive utilities
 export 'utilities/atomic_responsive.dart';
 
+// Function utilities
+export 'utilities/atomic_debouncer.dart';
+
 // ===== ATOMS =====
 
 // Buttons
@@ -38,9 +41,12 @@ export 'atoms/buttons/atomic_icon_button.dart';
 // Containers
 export 'atoms/containers/atomic_card.dart';
 export 'atoms/containers/atomic_gradient_container.dart';
+export 'atoms/containers/atomic_collapse_box.dart';
 
 // Inputs
 export 'atoms/inputs/atomic_text_field.dart';
+export 'atoms/inputs/atomic_switch.dart';
+export 'atoms/inputs/atomic_checkbox.dart';
 
 // Icons
 export 'atoms/icons/atomic_icon.dart';
@@ -48,6 +54,7 @@ export 'atoms/icons/atomic_icon.dart';
 // Feedback
 export 'atoms/feedback/atomic_loader.dart';
 export 'atoms/feedback/atomic_chip.dart';
+export 'atoms/feedback/atomic_shimmer.dart';
 
 // Overlays
 export 'atoms/overlays/atomic_divider.dart';
