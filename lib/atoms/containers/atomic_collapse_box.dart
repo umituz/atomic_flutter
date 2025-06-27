@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../themes/atomic_theme_provider.dart';
-import '../../tokens/spacing/atomic_spacing.dart';
 import '../../tokens/animations/atomic_animations.dart';
 import '../../tokens/borders/atomic_borders.dart';
 import '../containers/atomic_card.dart';

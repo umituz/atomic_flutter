@@ -5,7 +5,6 @@ import '../../tokens/colors/atomic_colors.dart';
 import '../../tokens/spacing/atomic_spacing.dart';
 import '../../tokens/borders/atomic_borders.dart';
 import '../../tokens/animations/atomic_animations.dart';
-import '../buttons/atomic_button.dart';
 import '../overlays/atomic_divider.dart';
 
 /// Atomic Bottom Sheet Component
@@ -78,7 +77,7 @@ class AtomicBottomSheet {
         children: [
           if (message != null) ...[
             Padding(
-              padding: EdgeInsets.symmetric(
+              padding: const EdgeInsets.symmetric(
                 horizontal: AtomicSpacing.lg,
                 vertical: AtomicSpacing.sm,
               ),

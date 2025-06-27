@@ -139,7 +139,7 @@ class _AtomicTextFieldState extends State<AtomicTextField> {
               fontWeight: AtomicTypography.medium,
             ),
           ),
-          SizedBox(height: AtomicSpacing.xs),
+          const SizedBox(height: AtomicSpacing.xs),
         ],
         AnimatedContainer(
           duration: AtomicAnimations.fast,
@@ -168,7 +168,7 @@ class _AtomicTextFieldState extends State<AtomicTextField> {
           ),
         ),
         if (_errorText != null || widget.helperText != null) ...[
-          SizedBox(height: AtomicSpacing.xxs),
+          const SizedBox(height: AtomicSpacing.xxs),
           AnimatedDefaultTextStyle(
             duration: AtomicAnimations.fast,
             style: AtomicTypography.bodySmall.copyWith(
@@ -258,11 +258,11 @@ class _AtomicTextFieldState extends State<AtomicTextField> {
         horizontal: AtomicSpacing.inputPaddingX,
         vertical: AtomicSpacing.inputPaddingY,
       ),
-      border: OutlineInputBorder(
+      border: const OutlineInputBorder(
         borderRadius: AtomicBorders.input,
         borderSide: BorderSide.none,
       ),
-      enabledBorder: OutlineInputBorder(
+      enabledBorder: const OutlineInputBorder(
         borderRadius: AtomicBorders.input,
         borderSide: BorderSide.none,
       ),
@@ -280,7 +280,7 @@ class _AtomicTextFieldState extends State<AtomicTextField> {
         borderRadius: AtomicBorders.input,
         borderSide: AtomicBorders.errorSide,
       ),
-      disabledBorder: OutlineInputBorder(
+      disabledBorder: const OutlineInputBorder(
         borderRadius: AtomicBorders.input,
         borderSide: BorderSide.none,
       ),
@@ -329,7 +329,7 @@ class _AtomicTextFieldState extends State<AtomicTextField> {
       focusedErrorBorder: UnderlineInputBorder(
         borderSide: AtomicBorders.errorSide,
       ),
-      disabledBorder: UnderlineInputBorder(
+      disabledBorder: const UnderlineInputBorder(
         borderSide: BorderSide(
           color: AtomicColors.gray200,
           width: AtomicBorders.widthThin,

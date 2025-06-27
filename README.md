@@ -213,6 +213,7 @@ class LoginScreen extends StatelessWidget {
 - AtomicCollapseBox
 - AtomicSmoothContainer / AtomicAnimatedSmoothContainer
 - AtomicTextField
+- AtomicSlider / AtomicRangeSlider
 - AtomicSwitch
 - AtomicCheckbox
 - AtomicRadio
@@ -224,17 +225,16 @@ class LoginScreen extends StatelessWidget {
 - AtomicToast
 - AtomicAlert
 - AtomicTag
+- AtomicProgress / AtomicProgressCard / AtomicStepProgress
 - AtomicAvatar
 - AtomicText
 - AtomicImage / AtomicSvg
 - AtomicDivider
 - AtomicDialog
 - AtomicBottomSheet
+- AtomicTooltip / AtomicRichTooltip
 
 ### 🚧 Coming Soon
-- AtomicSlider
-- AtomicProgress
-- AtomicTooltip
 - AtomicFormField
 - AtomicListItem
 - AtomicNavigationBar

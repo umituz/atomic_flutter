@@ -53,14 +53,14 @@ class AtomicChip extends StatelessWidget {
               size: _getIconSize(),
               color: _getTextColor(),
             ),
-            SizedBox(width: AtomicSpacing.xxs),
+            const SizedBox(width: AtomicSpacing.xxs),
           ],
           Text(
             label,
             style: _getTextStyle(),
           ),
           if (onDeleted != null) ...[
-            SizedBox(width: AtomicSpacing.xxs),
+            const SizedBox(width: AtomicSpacing.xxs),
             GestureDetector(
               onTap: onDeleted,
               child: Icon(
@@ -98,17 +98,17 @@ class AtomicChip extends StatelessWidget {
   EdgeInsets _getPadding() {
     switch (size) {
       case AtomicChipSize.small:
-        return EdgeInsets.symmetric(
+        return const EdgeInsets.symmetric(
           horizontal: AtomicSpacing.xs,
           vertical: AtomicSpacing.xxs,
         );
       case AtomicChipSize.medium:
-        return EdgeInsets.symmetric(
+        return const EdgeInsets.symmetric(
           horizontal: AtomicSpacing.sm,
           vertical: AtomicSpacing.xs,
         );
       case AtomicChipSize.large:
-        return EdgeInsets.symmetric(
+        return const EdgeInsets.symmetric(
           horizontal: AtomicSpacing.md,
           vertical: AtomicSpacing.sm,
         );

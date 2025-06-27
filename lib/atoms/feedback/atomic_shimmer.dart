@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../themes/atomic_theme_provider.dart';
-import '../../tokens/colors/atomic_colors.dart';
 import '../../tokens/borders/atomic_borders.dart';
 import '../../tokens/animations/atomic_animations.dart';
 
@@ -99,7 +98,7 @@ class _AtomicShimmerState extends State<AtomicShimmer>
                 highlightColor,
                 baseColor,
               ],
-              stops: [
+              stops: const [
                 0.0,
                 0.5,
                 1.0,
@@ -204,7 +203,7 @@ class AtomicShimmerCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (showAvatar) ...[
-            AtomicShimmer(
+            const AtomicShimmer(
               width: 48,
               height: 48,
               borderRadius: AtomicBorders.full,
@@ -216,19 +215,19 @@ class AtomicShimmerCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 if (showTitle) ...[
-                  AtomicShimmer(
+                  const AtomicShimmer(
                     height: 20,
                     width: double.infinity,
                   ),
                   SizedBox(height: theme.spacing.xs),
                 ],
                 if (showSubtitle) ...[
-                  AtomicShimmer(
+                  const AtomicShimmer(
                     height: 16,
                     width: double.infinity,
                   ),
                   SizedBox(height: theme.spacing.xxs),
-                  AtomicShimmer(
+                  const AtomicShimmer(
                     height: 16,
                     width: 200,
                   ),
@@ -238,7 +237,7 @@ class AtomicShimmerCard extends StatelessWidget {
           ),
           if (showAction) ...[
             SizedBox(width: theme.spacing.md),
-            AtomicShimmer(
+            const AtomicShimmer(
               width: 24,
               height: 24,
               borderRadius: AtomicBorders.sm,

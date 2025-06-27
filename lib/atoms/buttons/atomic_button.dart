@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../themes/atomic_theme_provider.dart';
 import '../../themes/atomic_theme_data.dart';
-import '../../tokens/colors/atomic_colors.dart';
 import '../../tokens/spacing/atomic_spacing.dart';
 import '../../tokens/typography/atomic_typography.dart';
 import '../../tokens/animations/atomic_animations.dart';
@@ -160,7 +159,7 @@ class _AtomicButtonState extends State<AtomicButton>
         color: _getTextColor(colors),
       ));
       if (widget.label.isNotEmpty) {
-        children.add(SizedBox(width: AtomicSpacing.xs));
+        children.add(const SizedBox(width: AtomicSpacing.xs));
       }
     }
 
@@ -173,7 +172,7 @@ class _AtomicButtonState extends State<AtomicButton>
 
     if (widget.icon != null && widget.iconPosition == AtomicButtonIconPosition.end) {
       if (widget.label.isNotEmpty) {
-        children.add(SizedBox(width: AtomicSpacing.xs));
+        children.add(const SizedBox(width: AtomicSpacing.xs));
       }
       children.add(Icon(
         widget.icon,

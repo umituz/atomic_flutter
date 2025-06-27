@@ -83,27 +83,27 @@ class AtomicBorders {
   
   static const BorderSide noneSide = BorderSide.none;
   
-  static BorderSide get defaultSide => BorderSide(
+  static BorderSide get defaultSide => const BorderSide(
     color: AtomicColors.gray300,
     width: widthThin,
   );
 
-  static BorderSide get primarySide => BorderSide(
+  static BorderSide get primarySide => const BorderSide(
     color: AtomicColors.primary,
     width: widthThin,
   );
 
-  static BorderSide get secondarySide => BorderSide(
+  static BorderSide get secondarySide => const BorderSide(
     color: AtomicColors.secondary,
     width: widthThin,
   );
 
-  static BorderSide get errorSide => BorderSide(
+  static BorderSide get errorSide => const BorderSide(
     color: AtomicColors.error,
     width: widthThin,
   );
 
-  static BorderSide get successSide => BorderSide(
+  static BorderSide get successSide => const BorderSide(
     color: AtomicColors.success,
     width: widthThin,
   );
@@ -130,7 +130,7 @@ class AtomicBorders {
     borderSide: successSide,
   );
 
-  static OutlineInputBorder get inputDisabledBorder => OutlineInputBorder(
+  static OutlineInputBorder get inputDisabledBorder => const OutlineInputBorder(
     borderRadius: input,
     borderSide: BorderSide(
       color: AtomicColors.gray200,

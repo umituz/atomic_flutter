@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../tokens/colors/atomic_colors.dart';
 import '../tokens/typography/atomic_typography.dart';
 import '../tokens/spacing/atomic_spacing.dart';
-import '../tokens/shadows/atomic_shadows.dart';
 import '../tokens/borders/atomic_borders.dart';
 import '../tokens/animations/atomic_animations.dart';
 
@@ -28,7 +27,7 @@ class AtomicThemeData {
   final AtomicAnimationsTheme animations;
 
   /// Default theme
-  static AtomicThemeData get defaultTheme => AtomicThemeData(
+  static AtomicThemeData get defaultTheme => const AtomicThemeData(
     name: 'Default',
     colors: AtomicColorScheme.defaultScheme,
   );

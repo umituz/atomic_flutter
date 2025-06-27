@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../themes/atomic_theme_provider.dart';
-import '../../themes/atomic_theme_data.dart';
-import '../../tokens/spacing/atomic_spacing.dart';
-import '../../tokens/borders/atomic_borders.dart';
-import '../../tokens/shadows/atomic_shadows.dart';
 import '../containers/atomic_card.dart';
 import '../buttons/atomic_button.dart';
 

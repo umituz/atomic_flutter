@@ -42,7 +42,7 @@ class AtomicDivider extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: AtomicSpacing.md),
               child: Text(
                 text!,
-                style: textStyle ?? TextStyle(
+                style: textStyle ?? const TextStyle(
                   color: AtomicColors.textTertiary,
                   fontSize: 12,
                   fontWeight: FontWeight.w500,

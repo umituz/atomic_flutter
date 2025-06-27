@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../tokens/colors/atomic_colors.dart';
-import '../../tokens/spacing/atomic_spacing.dart';
 import '../../tokens/animations/atomic_animations.dart';
 import '../../tokens/shadows/atomic_shadows.dart';
 import '../../tokens/borders/atomic_borders.dart';

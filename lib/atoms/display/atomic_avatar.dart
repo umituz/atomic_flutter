@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../themes/atomic_theme_provider.dart';
 import '../../themes/atomic_theme_data.dart';
-import '../../tokens/colors/atomic_colors.dart';
 import '../../tokens/borders/atomic_borders.dart';
-import '../../tokens/typography/atomic_typography.dart';
 import '../../tokens/shadows/atomic_shadows.dart';
 
 /// Atomic Avatar Component
@@ -284,7 +282,7 @@ class AtomicAvatarGroup extends StatelessWidget {
                 ),
               ),
             );
-          }).toList(),
+          }),
           if (remaining > 0)
             Positioned(
               left: displayAvatars.length * offset,

@@ -49,6 +49,7 @@ export 'atoms/inputs/atomic_text_field.dart';
 export 'atoms/inputs/atomic_switch.dart';
 export 'atoms/inputs/atomic_checkbox.dart';
 export 'atoms/inputs/atomic_radio.dart';
+export 'atoms/inputs/atomic_slider.dart';
 
 // Icons
 export 'atoms/icons/atomic_icon.dart';
@@ -61,6 +62,7 @@ export 'atoms/feedback/atomic_badge.dart';
 export 'atoms/feedback/atomic_toast.dart';
 export 'atoms/feedback/atomic_alert.dart';
 export 'atoms/feedback/atomic_tag.dart';
+export 'atoms/feedback/atomic_progress.dart';
 
 // Display
 export 'atoms/display/atomic_avatar.dart';
@@ -71,6 +73,7 @@ export 'atoms/display/atomic_image.dart';
 export 'atoms/overlays/atomic_divider.dart';
 export 'atoms/overlays/atomic_dialog.dart';
 export 'atoms/overlays/atomic_bottom_sheet.dart';
+export 'atoms/overlays/atomic_tooltip.dart';
 
 // ===== MOLECULES =====
 // TODO: Complex components combining atoms
@@ -81,9 +84,6 @@ export 'atoms/overlays/atomic_bottom_sheet.dart';
 // - AtomicDropdown
 // - AtomicDatePicker
 // - AtomicTimePicker
-// - AtomicSlider
-// - AtomicProgress
-// - AtomicTooltip
 
 // ===== ORGANISMS =====
 // TODO: Page sections and complex UI patterns

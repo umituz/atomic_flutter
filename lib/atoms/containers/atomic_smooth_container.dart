@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../themes/atomic_theme_provider.dart';
 import '../../tokens/borders/atomic_borders.dart';
-import '../../tokens/shadows/atomic_shadows.dart';
 
 /// Atomic Smooth Container Component
 /// Container with smooth corners for a modern look

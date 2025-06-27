@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../themes/atomic_theme_provider.dart';
 import '../../themes/atomic_theme_data.dart';
-import '../../tokens/typography/atomic_typography.dart';
 
 /// Atomic Text Component
 /// Flexible text component with theme integration
