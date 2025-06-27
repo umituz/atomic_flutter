@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../themes/atomic_theme_provider.dart';
+import '../../themes/atomic_theme_data.dart';
 import '../../tokens/colors/atomic_colors.dart';
 import '../../tokens/spacing/atomic_spacing.dart';
 import '../../tokens/typography/atomic_typography.dart';
@@ -90,6 +92,12 @@ class _AtomicButtonState extends State<AtomicButton>
 
   @override
   Widget build(BuildContext context) {
+    final theme = AtomicTheme.maybeOf(context);
+    final colors = theme?.colors ?? AtomicColorScheme.defaultScheme;
+    final spacing = theme?.spacing ?? const AtomicSpacingTheme();
+    final typography = theme?.typography ?? const AtomicTypographyTheme();
+    final borders = theme?.borders ?? const AtomicBordersTheme();
+
     return GestureDetector(
       onTapDown: _handleTapDown,
       onTapUp: _handleTapUp,
@@ -104,9 +112,9 @@ class _AtomicButtonState extends State<AtomicButton>
               duration: AtomicAnimations.fast,
               width: widget.isFullWidth ? double.infinity : null,
               decoration: BoxDecoration(
-                color: _getBackgroundColor(),
-                borderRadius: AtomicBorders.button,
-                border: _getBorder(),
+                color: _getBackgroundColor(colors),
+                borderRadius: borders.button,
+                border: _getBorder(colors),
                 boxShadow: _isButtonEnabled && !_isPressed 
                   ? AtomicShadows.button 
                   : AtomicShadows.none,
@@ -115,12 +123,12 @@ class _AtomicButtonState extends State<AtomicButton>
                 color: Colors.transparent,
                 child: InkWell(
                   onTap: _isButtonEnabled ? widget.onPressed : null,
-                  borderRadius: AtomicBorders.button,
-                  splashColor: _getSplashColor(),
-                  highlightColor: _getHighlightColor(),
+                  borderRadius: borders.button,
+                  splashColor: _getSplashColor(colors),
+                  highlightColor: _getHighlightColor(colors),
                   child: Padding(
-                    padding: _getPadding(),
-                    child: _buildContent(),
+                    padding: _getPadding(spacing),
+                    child: _buildContent(colors, typography),
                   ),
                 ),
               ),
@@ -131,14 +139,14 @@ class _AtomicButtonState extends State<AtomicButton>
     );
   }
 
-  Widget _buildContent() {
+  Widget _buildContent(AtomicColorScheme colors, AtomicTypographyTheme typography) {
     if (widget.isLoading) {
       return SizedBox(
         height: _getIconSize(),
         width: _getIconSize(),
         child: CircularProgressIndicator(
           strokeWidth: 2,
-          valueColor: AlwaysStoppedAnimation<Color>(_getTextColor()),
+          valueColor: AlwaysStoppedAnimation<Color>(_getTextColor(colors)),
         ),
       );
     }
@@ -149,7 +157,7 @@ class _AtomicButtonState extends State<AtomicButton>
       children.add(Icon(
         widget.icon,
         size: _getIconSize(),
-        color: _getTextColor(),
+        color: _getTextColor(colors),
       ));
       if (widget.label.isNotEmpty) {
         children.add(SizedBox(width: AtomicSpacing.xs));
@@ -159,7 +167,7 @@ class _AtomicButtonState extends State<AtomicButton>
     if (widget.label.isNotEmpty) {
       children.add(Text(
         widget.label,
-        style: _getTextStyle(),
+        style: _getTextStyle(typography, colors),
       ));
     }
 
@@ -170,7 +178,7 @@ class _AtomicButtonState extends State<AtomicButton>
       children.add(Icon(
         widget.icon,
         size: _getIconSize(),
-        color: _getTextColor(),
+        color: _getTextColor(colors),
       ));
     }
 
@@ -181,30 +189,30 @@ class _AtomicButtonState extends State<AtomicButton>
     );
   }
 
-  EdgeInsets _getPadding() {
+  EdgeInsets _getPadding(AtomicSpacingTheme spacing) {
     switch (widget.size) {
       case AtomicButtonSize.small:
-        return AtomicSpacing.symmetric(horizontal: AtomicSpacing.sm, vertical: AtomicSpacing.xs);
+        return EdgeInsets.symmetric(horizontal: spacing.sm, vertical: spacing.xs);
       case AtomicButtonSize.medium:
-        return AtomicSpacing.symmetric(horizontal: AtomicSpacing.md, vertical: AtomicSpacing.sm);
+        return EdgeInsets.symmetric(horizontal: spacing.md, vertical: spacing.sm);
       case AtomicButtonSize.large:
-        return AtomicSpacing.symmetric(horizontal: AtomicSpacing.lg, vertical: AtomicSpacing.md);
+        return EdgeInsets.symmetric(horizontal: spacing.lg, vertical: spacing.md);
     }
   }
 
-  TextStyle _getTextStyle() {
+  TextStyle _getTextStyle(AtomicTypographyTheme typography, AtomicColorScheme colors) {
     final TextStyle baseStyle;
     switch (widget.size) {
       case AtomicButtonSize.small:
-        baseStyle = AtomicTypography.labelSmall;
+        baseStyle = typography.labelSmall;
       case AtomicButtonSize.medium:
-        baseStyle = AtomicTypography.labelMedium;
+        baseStyle = typography.labelMedium;
       case AtomicButtonSize.large:
-        baseStyle = AtomicTypography.labelLarge;
+        baseStyle = typography.labelLarge;
     }
     
     return baseStyle.copyWith(
-      color: _getTextColor(),
+      color: _getTextColor(colors),
       fontWeight: AtomicTypography.semiBold,
     );
   }
@@ -220,16 +228,16 @@ class _AtomicButtonState extends State<AtomicButton>
     }
   }
 
-  Color _getBackgroundColor() {
+  Color _getBackgroundColor(AtomicColorScheme colors) {
     if (!_isButtonEnabled) {
-      return AtomicColors.gray200;
+      return colors.gray200;
     }
 
     switch (widget.variant) {
       case AtomicButtonVariant.primary:
-        return AtomicColors.primary;
+        return colors.primary;
       case AtomicButtonVariant.secondary:
-        return AtomicColors.secondary;
+        return colors.secondary;
       case AtomicButtonVariant.tertiary:
         return Colors.transparent;
       case AtomicButtonVariant.outlined:
@@ -237,56 +245,62 @@ class _AtomicButtonState extends State<AtomicButton>
       case AtomicButtonVariant.ghost:
         return Colors.transparent;
       case AtomicButtonVariant.danger:
-        return AtomicColors.error;
+        return colors.error;
     }
   }
 
-  Color _getTextColor() {
+  Color _getTextColor(AtomicColorScheme colors) {
     if (!_isButtonEnabled) {
-      return AtomicColors.textDisabled;
+      return colors.textDisabled;
     }
 
     switch (widget.variant) {
       case AtomicButtonVariant.primary:
       case AtomicButtonVariant.secondary:
       case AtomicButtonVariant.danger:
-        return AtomicColors.textInverse;
+        return colors.textInverse;
       case AtomicButtonVariant.tertiary:
       case AtomicButtonVariant.outlined:
-        return AtomicColors.primary;
+        return colors.primary;
       case AtomicButtonVariant.ghost:
-        return AtomicColors.textPrimary;
+        return colors.textPrimary;
     }
   }
 
-  Border? _getBorder() {
+  Border? _getBorder(AtomicColorScheme colors) {
     if (!_isButtonEnabled) {
-      return AtomicBorders.disabledBorder;
+      return Border.all(
+        color: colors.gray200,
+        width: AtomicBorders.widthThin,
+      );
     }
 
     switch (widget.variant) {
       case AtomicButtonVariant.outlined:
-        return AtomicBorders.primaryBorder;
+        return Border.all(
+          color: colors.primary,
+          width: AtomicBorders.widthThin,
+        );
       default:
         return null;
     }
   }
 
-  Color _getSplashColor() {
+  Color _getSplashColor(AtomicColorScheme colors) {
     switch (widget.variant) {
       case AtomicButtonVariant.primary:
-        return AtomicColors.primaryDark.withValues(alpha: 0.1);
+        return colors.primaryDark.withValues(alpha: 0.1);
       case AtomicButtonVariant.secondary:
-        return AtomicColors.secondaryDark.withValues(alpha: 0.1);
+        return colors.secondaryDark.withValues(alpha: 0.1);
       case AtomicButtonVariant.danger:
-        return AtomicColors.errorDark.withValues(alpha: 0.1);
+        return colors.errorDark.withValues(alpha: 0.1);
       default:
-        return AtomicColors.primary.withValues(alpha: 0.1);
+        return colors.primary.withValues(alpha: 0.1);
     }
   }
 
-  Color _getHighlightColor() {
-    return _getSplashColor().withValues(alpha: 0.05);
+  Color _getHighlightColor(AtomicColorScheme colors) {
+    return _getSplashColor(colors).withValues(alpha: 0.05);
   }
 }
 

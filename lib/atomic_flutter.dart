@@ -1,5 +1,9 @@
 library atomic_flutter;
 
+// ===== THEMES =====
+export 'themes/atomic_theme_data.dart';
+export 'themes/atomic_theme_provider.dart';
+
 // ===== DESIGN TOKENS =====
 
 // Colors
