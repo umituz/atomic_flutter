@@ -33,6 +33,54 @@ class AtomicThemeData {
     colors: AtomicColorScheme.defaultScheme,
   );
 
+  /// Copy with method for theme customization
+  AtomicThemeData copyWith({
+    String? name,
+    AtomicColorScheme? colors,
+    AtomicTypographyTheme? typography,
+    AtomicSpacingTheme? spacing,
+    AtomicShadowsTheme? shadows,
+    AtomicBordersTheme? borders,
+    AtomicAnimationsTheme? animations,
+  }) {
+    return AtomicThemeData(
+      name: name ?? this.name,
+      colors: colors ?? this.colors,
+      typography: typography ?? this.typography,
+      spacing: spacing ?? this.spacing,
+      shadows: shadows ?? this.shadows,
+      borders: borders ?? this.borders,
+      animations: animations ?? this.animations,
+    );
+  }
+
+  /// Equality operator
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is AtomicThemeData &&
+        other.name == name &&
+        other.colors == colors &&
+        other.typography == typography &&
+        other.spacing == spacing &&
+        other.shadows == shadows &&
+        other.borders == borders &&
+        other.animations == animations;
+  }
+
+  @override
+  int get hashCode {
+    return Object.hash(
+      name,
+      colors,
+      typography,
+      spacing,
+      shadows,
+      borders,
+      animations,
+    );
+  }
+
   /// Create Material Theme from Atomic Theme
   ThemeData toMaterialTheme({Brightness brightness = Brightness.light}) {
     return ThemeData(
@@ -213,6 +261,118 @@ class AtomicColorScheme {
   final Color gray700;
   final Color gray800;
   final Color gray900;
+
+  /// Copy with method for color scheme customization
+  AtomicColorScheme copyWith({
+    Color? primary,
+    Color? primaryLight,
+    Color? primaryDark,
+    Color? secondary,
+    Color? secondaryLight,
+    Color? secondaryDark,
+    Color? accent,
+    Color? accentLight,
+    Color? accentDark,
+    Color? background,
+    Color? backgroundSecondary,
+    Color? surface,
+    Color? surfaceSecondary,
+    Color? textPrimary,
+    Color? textSecondary,
+    Color? textTertiary,
+    Color? textDisabled,
+    Color? textInverse,
+    Color? success,
+    Color? successLight,
+    Color? successDark,
+    Color? warning,
+    Color? warningLight,
+    Color? warningDark,
+    Color? error,
+    Color? errorLight,
+    Color? errorDark,
+    Color? info,
+    Color? infoLight,
+    Color? infoDark,
+    Color? gray50,
+    Color? gray100,
+    Color? gray200,
+    Color? gray300,
+    Color? gray400,
+    Color? gray500,
+    Color? gray600,
+    Color? gray700,
+    Color? gray800,
+    Color? gray900,
+  }) {
+    return AtomicColorScheme(
+      primary: primary ?? this.primary,
+      primaryLight: primaryLight ?? this.primaryLight,
+      primaryDark: primaryDark ?? this.primaryDark,
+      secondary: secondary ?? this.secondary,
+      secondaryLight: secondaryLight ?? this.secondaryLight,
+      secondaryDark: secondaryDark ?? this.secondaryDark,
+      accent: accent ?? this.accent,
+      accentLight: accentLight ?? this.accentLight,
+      accentDark: accentDark ?? this.accentDark,
+      background: background ?? this.background,
+      backgroundSecondary: backgroundSecondary ?? this.backgroundSecondary,
+      surface: surface ?? this.surface,
+      surfaceSecondary: surfaceSecondary ?? this.surfaceSecondary,
+      textPrimary: textPrimary ?? this.textPrimary,
+      textSecondary: textSecondary ?? this.textSecondary,
+      textTertiary: textTertiary ?? this.textTertiary,
+      textDisabled: textDisabled ?? this.textDisabled,
+      textInverse: textInverse ?? this.textInverse,
+      success: success ?? this.success,
+      successLight: successLight ?? this.successLight,
+      successDark: successDark ?? this.successDark,
+      warning: warning ?? this.warning,
+      warningLight: warningLight ?? this.warningLight,
+      warningDark: warningDark ?? this.warningDark,
+      error: error ?? this.error,
+      errorLight: errorLight ?? this.errorLight,
+      errorDark: errorDark ?? this.errorDark,
+      info: info ?? this.info,
+      infoLight: infoLight ?? this.infoLight,
+      infoDark: infoDark ?? this.infoDark,
+      gray50: gray50 ?? this.gray50,
+      gray100: gray100 ?? this.gray100,
+      gray200: gray200 ?? this.gray200,
+      gray300: gray300 ?? this.gray300,
+      gray400: gray400 ?? this.gray400,
+      gray500: gray500 ?? this.gray500,
+      gray600: gray600 ?? this.gray600,
+      gray700: gray700 ?? this.gray700,
+      gray800: gray800 ?? this.gray800,
+      gray900: gray900 ?? this.gray900,
+    );
+  }
+
+  /// Equality operator
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is AtomicColorScheme &&
+        other.primary == primary &&
+        other.secondary == secondary &&
+        other.accent == accent &&
+        other.background == background &&
+        other.surface == surface &&
+        other.textPrimary == textPrimary;
+  }
+
+  @override
+  int get hashCode {
+    return Object.hash(
+      primary,
+      secondary,
+      accent,
+      background,
+      surface,
+      textPrimary,
+    );
+  }
 
   /// Default color scheme
   static const AtomicColorScheme defaultScheme = AtomicColorScheme(

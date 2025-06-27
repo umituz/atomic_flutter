@@ -24,6 +24,11 @@ export 'tokens/shadows/atomic_shadows.dart';
 // Borders
 export 'tokens/borders/atomic_borders.dart';
 
+// ===== UTILITIES =====
+
+// Responsive utilities
+export 'utilities/atomic_responsive.dart';
+
 // ===== ATOMS =====
 
 // Buttons
