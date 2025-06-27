@@ -21,6 +21,9 @@ dependencies:
   # Icons
   lucide_icons: ^0.257.0
   
+  # SVG Support
+  flutter_svg: ^2.0.9
+  
   # Utilities
   intl: ^0.20.2
 

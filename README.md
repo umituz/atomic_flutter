@@ -207,23 +207,41 @@ class LoginScreen extends StatelessWidget {
 
 ### ✅ Available
 - AtomicButton
+- AtomicIconButton
 - AtomicCard
+- AtomicGradientContainer
+- AtomicCollapseBox
+- AtomicSmoothContainer / AtomicAnimatedSmoothContainer
 - AtomicTextField
-
-### 🚧 Coming Soon
-- AtomicText
-- AtomicIcon
-- AtomicImage
-- AtomicLoader
-- AtomicBadge
-- AtomicChip
-- AtomicAvatar
 - AtomicSwitch
 - AtomicCheckbox
 - AtomicRadio
+- AtomicIcon
+- AtomicLoader
+- AtomicChip
+- AtomicShimmer
+- AtomicBadge
+- AtomicToast
+- AtomicAlert
+- AtomicTag
+- AtomicAvatar
+- AtomicText
+- AtomicImage / AtomicSvg
+- AtomicDivider
 - AtomicDialog
 - AtomicBottomSheet
-- AtomicSnackBar
+
+### 🚧 Coming Soon
+- AtomicSlider
+- AtomicProgress
+- AtomicTooltip
+- AtomicFormField
+- AtomicListItem
+- AtomicNavigationBar
+- AtomicAppBar
+- AtomicDropdown
+- AtomicDatePicker
+- AtomicTimePicker
 
 ## Contributing
 
