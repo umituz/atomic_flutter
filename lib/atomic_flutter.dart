@@ -51,6 +51,7 @@ export 'atoms/feedback/atomic_chip.dart';
 
 // Overlays
 export 'atoms/overlays/atomic_divider.dart';
+export 'atoms/overlays/atomic_dialog.dart';
 
 // TODO: More atoms will be added as the package grows
 // - AtomicText
