@@ -206,6 +206,8 @@ class LoginScreen extends StatelessWidget {
 ## Components Roadmap
 
 ### ✅ Available
+
+#### **Atoms (Basic Components)**
 - AtomicButton
 - AtomicIconButton
 - AtomicCard
@@ -234,14 +236,24 @@ class LoginScreen extends StatelessWidget {
 - AtomicBottomSheet
 - AtomicTooltip / AtomicRichTooltip
 
-### 🚧 Coming Soon
-- AtomicFormField
-- AtomicListItem
-- AtomicNavigationBar
-- AtomicAppBar
+#### **Molecules (Combined Components)**
 - AtomicDropdown
+- AtomicFormField
+- AtomicNavigationBar / AtomicNavigationRail
+
+### 🚧 Coming Soon
+
+#### **Molecules**
+- AtomicListItem
+- AtomicAppBar
 - AtomicDatePicker
 - AtomicTimePicker
+
+#### **Organisms**
+- AtomicDataTable
+- AtomicForm
+- AtomicLayout
+- AtomicStepper
 
 ## Contributing
 

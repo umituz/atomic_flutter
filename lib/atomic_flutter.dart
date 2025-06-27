@@ -54,6 +54,11 @@ export 'atoms/inputs/atomic_slider.dart';
 // Icons
 export 'atoms/icons/atomic_icon.dart';
 
+// Display
+export 'atoms/display/atomic_text.dart';
+export 'atoms/display/atomic_image.dart';
+export 'atoms/display/atomic_avatar.dart';
+
 // Feedback
 export 'atoms/feedback/atomic_loader.dart';
 export 'atoms/feedback/atomic_chip.dart';
@@ -64,11 +69,6 @@ export 'atoms/feedback/atomic_alert.dart';
 export 'atoms/feedback/atomic_tag.dart';
 export 'atoms/feedback/atomic_progress.dart';
 
-// Display
-export 'atoms/display/atomic_avatar.dart';
-export 'atoms/display/atomic_text.dart';
-export 'atoms/display/atomic_image.dart';
-
 // Overlays
 export 'atoms/overlays/atomic_divider.dart';
 export 'atoms/overlays/atomic_dialog.dart';
@@ -76,24 +76,28 @@ export 'atoms/overlays/atomic_bottom_sheet.dart';
 export 'atoms/overlays/atomic_tooltip.dart';
 
 // ===== MOLECULES =====
-// TODO: Complex components combining atoms
-// - AtomicFormField
+
+// Forms
+export 'molecules/forms/atomic_form_field.dart';
+
+// Inputs
+export 'molecules/inputs/atomic_dropdown.dart';
+
+// Navigation
+export 'molecules/navigation/atomic_navigation_bar.dart';
+
+// ===== REMAINING TODOS =====
+// TODO: Continue implementing complex molecules
 // - AtomicListItem
-// - AtomicNavigationBar
-// - AtomicAppBar
-// - AtomicDropdown
+// - AtomicAppBar  
 // - AtomicDatePicker
 // - AtomicTimePicker
 
 // ===== ORGANISMS =====
-// TODO: Page sections and complex UI patterns
-// - AtomicHeader
-// - AtomicFooter
-// - AtomicSidebar
+// TODO: Create organism-level components combining molecules
 // - AtomicDataTable
-// - AtomicCarousel
-// - AtomicAccordion
-// - AtomicTabs
+// - AtomicForm
+// - AtomicLayout
 // - AtomicStepper
 
 // ===== TEMPLATES =====

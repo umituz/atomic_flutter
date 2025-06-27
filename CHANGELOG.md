@@ -5,6 +5,25 @@ All notable changes to the Atomic Flutter design system will be documented in th
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2024-12-21
+
+### Added - Molecules Level Components
+- ✨ **AtomicDropdown** - Material Design dropdown with enhanced functionality and filtering
+- ✨ **AtomicFormField** - Wrapper for form inputs with validation support
+- ✨ **AtomicNavigationBar** - Material Design 3 bottom navigation bar
+- ✨ **AtomicNavigationRail** - Navigation rail variant for larger screens  
+- ✨ **AtomicNavigationDestination** - Data class for navigation destinations with badge support
+
+### Architecture Updates
+- 🏗️ **Molecules folder structure** - Added organized molecules directory structure
+- 🏗️ **Export system** - Updated barrel exports to include new molecules
+- 🏗️ **Documentation** - Updated README with new component categories
+
+### Framework Compliance  
+- ✅ **Material Design 3** - All navigation components follow MD3 standards
+- ✅ **Atomic Design** - Proper separation of atoms vs molecules
+- ✅ **Flutter Standards** - Following umituz.com Flutter mobile standards
+
 ## [0.3.0] - 2024-12-21
 
 ### Added
@@ -15,9 +34,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ✨ **AtomicStepProgress** - Multi-step progress indicator for workflows
 - ✨ **AtomicTooltip** - Material Design tooltip with theme integration
 - ✨ **AtomicRichTooltip** - Enhanced tooltip with rich content support
-- ✨ **AtomicTooltipHelper** - Utility class for common tooltip patterns
-- 🎨 Modern color API support with `withValues(alpha:)` for Flutter 3.16+
-- 📱 Enhanced responsive design utilities
+- ✨ **AtomicTooltipHelper** - Utility functions for tooltip positioning
+
+### Enhanced
+- 🔧 **Build Configuration** - Updated flutter_svg dependency
+- 🔧 **Type Safety** - Improved enum definitions and type checking
+- 🔧 **Performance** - Optimized animation configurations
 
 ### Improved
 - 🔧 Better Material Design 3 compliance
