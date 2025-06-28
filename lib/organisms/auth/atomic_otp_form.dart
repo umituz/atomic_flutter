@@ -129,6 +129,8 @@ class _AtomicOTPFormState extends State<AtomicOTPForm> {
               keyboardType: TextInputType.emailAddress,
               prefixIcon: Icons.email_outlined,
               enabled: !widget.isLoading && !widget.isOTPSent,
+              borderType: AtomicTextFieldBorderType.filled,
+              fillColor: theme.colors.surfaceSecondary,
               onChanged: (_) => _debouncer.debounce(() {
                 if (_formError != null) setState(() => _formError = null);
               }),
@@ -150,6 +152,8 @@ class _AtomicOTPFormState extends State<AtomicOTPForm> {
                 prefixIcon: Icons.security,
                 maxLength: widget.otpLength,
                 enabled: !widget.isLoading,
+                borderType: AtomicTextFieldBorderType.filled,
+                fillColor: theme.colors.surfaceSecondary,
                 inputFormatters: [
                   FilteringTextInputFormatter.digitsOnly,
                   LengthLimitingTextInputFormatter(widget.otpLength),
