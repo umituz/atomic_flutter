@@ -130,13 +130,21 @@ class AtomicDialog extends StatelessWidget {
       actions: [
         AtomicButton(
           label: cancelLabel,
-          onPressed: () => Navigator.of(context).pop(false),
+          onPressed: () {
+            if (Navigator.of(context).canPop()) {
+              Navigator.of(context).pop(false);
+            }
+          },
           variant: AtomicButtonVariant.outlined,
           size: AtomicButtonSize.medium,
         ),
         AtomicButton(
           label: confirmLabel,
-          onPressed: () => Navigator.of(context).pop(true),
+          onPressed: () {
+            if (Navigator.of(context).canPop()) {
+              Navigator.of(context).pop(true);
+            }
+          },
           variant: isDangerous 
             ? AtomicButtonVariant.danger 
             : AtomicButtonVariant.primary,

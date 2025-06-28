@@ -143,6 +143,7 @@ export 'molecules/layouts/atomic_stacked_body.dart';
 // Auth Organisms
 export 'organisms/auth/atomic_login_form.dart';
 export 'organisms/auth/atomic_otp_form.dart';
+export 'organisms/ai_assistant/atomic_ai_assistant.dart';
 
 // ===== TEMPLATES =====
 
