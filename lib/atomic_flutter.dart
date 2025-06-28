@@ -139,18 +139,16 @@ export 'molecules/layouts/atomic_stacked_body.dart';
 // Next phase: Organisms level coming soon...
 
 // ===== ORGANISMS =====
-// TODO: Create organism-level components combining molecules
-// - AtomicDataTable
-// - AtomicForm
-// - AtomicLayout
-// - AtomicStepper
+
+// Auth Organisms
+export 'organisms/auth/atomic_login_form.dart';
+export 'organisms/auth/atomic_otp_form.dart';
 
 // ===== TEMPLATES =====
-// TODO: Page templates and layouts
-// - AtomicPageLayout
-// - AtomicAuthLayout
-// - AtomicDashboardLayout
-// - AtomicFormLayout
+
+// Auth Templates
+export 'templates/auth/atomic_auth_template.dart';
+export 'templates/auth/atomic_auth_template_helper.dart';
 
 // ===== UTILITIES =====
 // TODO: Helper functions and utilities
