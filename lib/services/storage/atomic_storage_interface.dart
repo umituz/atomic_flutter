@@ -45,44 +45,6 @@ extension AtomicStorageTypedExtensions on AtomicStorageInterface {
   }
 }
 
-/// Memory-based storage implementation for testing
-class AtomicMemoryStorage implements AtomicStorageInterface {
-  final Map<String, String> _storage = {};
-
-  @override
-  Future<String?> read(String key) async {
-    return _storage[key];
-  }
-
-  @override
-  Future<bool> write(String key, String value) async {
-    _storage[key] = value;
-    return true;
-  }
-
-  @override
-  Future<bool> delete(String key) async {
-    _storage.remove(key);
-    return true;
-  }
-
-  @override
-  Future<bool> clear() async {
-    _storage.clear();
-    return true;
-  }
-
-  @override
-  Future<bool> contains(String key) async {
-    return _storage.containsKey(key);
-  }
-
-  @override
-  Future<List<String>> getKeys() async {
-    return _storage.keys.toList();
-  }
-}
-
 /// Example app-specific implementations:
 /// 
 /// ```dart
