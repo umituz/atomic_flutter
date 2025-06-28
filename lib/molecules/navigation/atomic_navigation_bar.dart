@@ -8,8 +8,6 @@ import '../../tokens/spacing/atomic_spacing.dart';
 import '../../atoms/icons/atomic_icon.dart';
 import '../../atoms/feedback/atomic_badge.dart';
 
-/// Atomic Navigation Bar Component
-/// Modern glassmorphism bottom navigation with smooth animations
 class AtomicNavigationBar extends StatefulWidget {
   const AtomicNavigationBar({
     super.key,
@@ -18,9 +16,9 @@ class AtomicNavigationBar extends StatefulWidget {
     required this.onDestinationSelected,
     this.backgroundColor,
     this.glassMorphism = true,
-    this.height = 72.0,
+    this.height = 82.0,
     this.margin,
-    this.borderRadius = 24.0,
+    this.borderRadius = 0.0,
     this.animationDuration = AtomicAnimations.normal,
     this.showLabels = true,
     this.showSelectedLabels = true,
@@ -160,53 +158,71 @@ class _AtomicNavigationBarState extends State<AtomicNavigationBar>
                   }
                 : null,
             behavior: HitTestBehavior.opaque,
-            child: Container(
-              constraints: const BoxConstraints(
-                minHeight: 40,
-                maxHeight: 60,
-              ),
-              padding: EdgeInsets.symmetric(
-                vertical: 4.0,
-                horizontal: AtomicSpacing.xs,
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // Icon with animation
-                  AnimatedContainer(
-                    duration: widget.animationDuration,
-                    curve: Curves.easeInOut,
-                    padding: EdgeInsets.all(2.0),
-                    decoration: BoxDecoration(
-                      color: isSelected
-                          ? theme.colors.primary.withValues(alpha: 0.15)
-                          : Colors.transparent,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: _buildIcon(theme, destination, isSelected),
-                  ),
-                  
-                  // Label - only show for selected items to save space
-                  if (widget.showLabels && 
-                      destination.label.isNotEmpty && 
-                      isSelected)
-                    Container(
-                      margin: EdgeInsets.only(top: 2.0),
-                      child: Text(
-                        destination.label,
-                        style: theme.typography.labelSmall.copyWith(
-                          color: theme.colors.primary,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 9,
-                          height: 1.0,
+            child: ClipRect(
+              child: AnimatedContainer(
+                duration: widget.animationDuration,
+                curve: Curves.easeInOut,
+                padding: EdgeInsets.symmetric(
+                  vertical: AtomicSpacing.xs,
+                  horizontal: AtomicSpacing.xs,
+                ),
+                decoration: BoxDecoration(
+                  color: isSelected
+                      ? theme.colors.primary.withValues(alpha: 0.12)
+                      : Colors.transparent,
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: IntrinsicHeight(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // Icon with enhanced styling
+                      Flexible(
+                        flex: 2,
+                        child: Container(
+                          padding: EdgeInsets.all(AtomicSpacing.xxs),
+                          child: Center(
+                            child: AnimatedScale(
+                              duration: widget.animationDuration,
+                              scale: isSelected ? 1.1 : 1.0,
+                              child: _buildIcon(theme, destination, isSelected),
+                            ),
+                          ),
                         ),
-                        textAlign: TextAlign.center,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
                       ),
-                    ),
-                ],
+                      
+                      // Label - show for all items but highlight selected
+                      if (widget.showLabels && 
+                          destination.label.isNotEmpty)
+                        Flexible(
+                          flex: 1,
+                          child: Container(
+                            margin: EdgeInsets.only(top: AtomicSpacing.xxs),
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Text(
+                                destination.label,
+                                style: theme.typography.labelSmall.copyWith(
+                                  color: isSelected 
+                                      ? theme.colors.primary 
+                                      : theme.colors.textSecondary,
+                                  fontWeight: isSelected 
+                                      ? FontWeight.w700 
+                                      : FontWeight.w500,
+                                  fontSize: 11,
+                                  height: 1.2,
+                                ),
+                                textAlign: TextAlign.center,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
               ),
             ),
           );
@@ -226,7 +242,7 @@ class _AtomicNavigationBarState extends State<AtomicNavigationBar>
 
     Widget iconWidget = AtomicIcon(
       icon: iconData,
-      size: AtomicIconSize.small,
+      size: AtomicIconSize.medium,
       color: isSelected 
           ? theme.colors.primary 
           : theme.colors.textSecondary,
