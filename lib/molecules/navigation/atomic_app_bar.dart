@@ -4,9 +4,7 @@ import 'dart:ui' show ImageFilter;
 import '../../themes/atomic_theme_provider.dart';
 import '../../themes/atomic_theme_data.dart';
 import '../../tokens/colors/atomic_colors.dart';
-import '../../tokens/shadows/atomic_shadows.dart';
 import '../../atoms/display/atomic_text.dart';
-import '../../atoms/icons/atomic_icon.dart';
 import '../../atoms/buttons/atomic_icon_button.dart';
 
 /// Atomic App Bar Component

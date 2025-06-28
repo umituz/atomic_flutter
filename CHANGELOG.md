@@ -5,6 +5,51 @@ All notable changes to the Atomic Flutter design system will be documented in th
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.0] - 2024-12-21 - 🎯 Phase 4 Migration Complete
+
+### Added - Phase 4 Controllers & Enums Migration
+- ✨ **Controllers (Providers)**:
+  - `AtomicSheetSelectController<T>` - Enhanced sheet selection controller with generics
+    - Multi-selection support with allowMultipleSelection flag
+    - Validation and filtering capabilities
+    - Type-safe value extraction with selectedValue and selectedValues
+  - `AtomicValueController<T>` - Enhanced value notifier with custom listeners
+    - Custom VoidCallback listeners with indexed removal
+    - Value-change listeners with ValueChanged<T?> support
+    - Conditional notification with shouldNotify predicates
+  - `AtomicListValueController<T>` - Specialized controller for list values
+    - List operations: add, remove, toggle, clear
+    - Helper methods: contains, isEmpty, isNotEmpty, length
+- ✨ **Enums**:
+  - `AtomicLoadingState` - Loading states with transition validation and helpers
+    - States: idle, loading, success, error, refreshing
+    - Validation: canTransitionTo with state flow checking
+    - UI Helpers: color, icon, description getters
+  - `AtomicStatus` - Comprehensive status enum with semantic meanings
+    - States: loading, success, error, empty, cannot, timeout, idle, cancelled, warning
+    - UI Integration: color, icon, displayText properties
+    - State categorization: isCompleted, isActive, isNegative helpers
+  - `AtomicGender` - Inclusive gender options with modern approach
+    - Options: male, female, nonBinary, preferNotToSay, other
+    - Accessibility: displayText, shortText, commonPronouns
+    - API Integration: apiValue, fromApiValue, fromString
+    - Form helpers: formOptions, basicOptions, inclusiveOptions
+
+### Technical Improvements
+- 📚 Updated barrel exports in atomic_flutter.dart to include providers and enums
+- 🔧 Migrated 5 files from atomic project to atomic_flutter package
+- ✅ Enhanced controllers with generic type support and advanced features
+- ✅ Modern enum implementation with enhanced utility methods
+- ✅ Legacy compatibility support for smooth migration
+- 🎯 Achieved 60% migration progress (35/58 files)
+
+### Migration Progress Update
+- ✅ **Phase 1**: Atomic Components - COMPLETE
+- ✅ **Phase 2**: Extensions & Utilities - COMPLETE  
+- ✅ **Phase 3**: Data Models - COMPLETE
+- ✅ **Phase 4**: Controllers & Enums - COMPLETE
+- 🚧 **Phase 5**: Network & Services - REMAINING
+
 ## [0.7.0] - 2024-12-21 - 🚀 Phase 1-3 Migration Complete
 
 ### Added - Phase 1 Components Migration
