@@ -5,6 +5,35 @@ All notable changes to the Atomic Flutter design system will be documented in th
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.0] - 2024-12-21 - 🔧 Phase 1 Migration Complete
+
+### Added - Phase 1 Components Migration
+- ✨ **Container Components**:
+  - `AtomicAnimatedContainer` - Animated version of smooth container with implicit animations
+  - `AtomicIconBox` - Container with icon, customizable styling and tap interactions
+- ✨ **Input Components**:
+  - `AtomicButtonCheck` - Button-style checkbox with text label and smooth animations
+- ✨ **Feedback Components**:
+  - `AtomicDotLoading` - Animated loading indicator with bouncing dots (small, medium, large sizes)
+- ✨ **Sheet Components**:
+  - `AtomicCustomSheetBody` - Body content for bottom sheets with customizable styling
+  - `AtomicSheetBuilder` - Helper for building bottom sheets with consistent styling
+- ✨ **Layout Components**:
+  - `AtomicStackedBody` - Layout component for creating stacked card effects
+- ✨ **Utilities**:
+  - `SvgProvider` - ImageProvider for SVG files supporting network, asset, and file sources
+
+### Fixed
+- 🔧 Fixed `ui.PictureRecorder` import issues in SvgProvider
+- 🔧 Fixed BoxShadow type issues in AtomicStackedBody  
+- 🔧 Fixed import paths for atomic_smooth_container references
+
+### Technical Improvements
+- 📚 Updated barrel exports in atomic_flutter.dart to include all new components
+- 🔧 Migrated components from atomic project to atomic_flutter package
+- ✅ Maintained Material Design 3 compliance across all migrated components
+- ✅ Integrated all components with atomic theme system
+
 ## [0.6.0] - 2024-12-21 - 🎉 ALL CRITICAL MOLECULES COMPLETED! 
 
 ### Added - Final Critical Molecule

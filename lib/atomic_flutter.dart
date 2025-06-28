@@ -32,6 +32,9 @@ export 'utilities/atomic_responsive.dart';
 // Function utilities
 export 'utilities/atomic_debouncer.dart';
 
+// Image utilities
+export 'utils/svg_provider.dart';
+
 // ===== ATOMS =====
 
 // Buttons
@@ -43,6 +46,8 @@ export 'atoms/containers/atomic_card.dart';
 export 'atoms/containers/atomic_gradient_container.dart';
 export 'atoms/containers/atomic_collapse_box.dart';
 export 'atoms/containers/atomic_smooth_container.dart';
+export 'atoms/containers/atomic_animated_container.dart';
+export 'atoms/containers/atomic_icon_box.dart';
 
 // Inputs
 export 'atoms/inputs/atomic_text_field.dart';
@@ -50,6 +55,7 @@ export 'atoms/inputs/atomic_switch.dart';
 export 'atoms/inputs/atomic_checkbox.dart';
 export 'atoms/inputs/atomic_radio.dart';
 export 'atoms/inputs/atomic_slider.dart';
+export 'atoms/inputs/atomic_button_check.dart';
 
 // Icons
 export 'atoms/icons/atomic_icon.dart';
@@ -68,6 +74,7 @@ export 'atoms/feedback/atomic_toast.dart';
 export 'atoms/feedback/atomic_alert.dart';
 export 'atoms/feedback/atomic_tag.dart';
 export 'atoms/feedback/atomic_progress.dart';
+export 'atoms/feedback/atomic_dot_loading.dart';
 
 // Overlays
 export 'atoms/overlays/atomic_divider.dart';
@@ -89,6 +96,13 @@ export 'molecules/navigation/atomic_app_bar.dart';
 
 // Lists
 export 'molecules/lists/atomic_list_item.dart';
+
+// Sheets
+export 'molecules/sheets/atomic_custom_sheet_body.dart';
+export 'molecules/sheets/atomic_sheet_builder.dart';
+
+// Layouts
+export 'molecules/layouts/atomic_stacked_body.dart';
 
 // ===== REMAINING TODOS =====
 // TODO: Complex components combining atoms
