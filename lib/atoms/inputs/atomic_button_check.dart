@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import '../../themes/atomic_theme_provider.dart';
 import '../../themes/atomic_theme_data.dart';
-import '../../tokens/colors/atomic_colors.dart';
 import '../../tokens/borders/atomic_borders.dart';
 import '../../tokens/animations/atomic_animations.dart';
 import '../display/atomic_text.dart';
-import '../containers/atomic_smooth_container.dart';
 
 /// Atomic Button Check Component
 /// Button-style checkbox with text label and smooth animations
