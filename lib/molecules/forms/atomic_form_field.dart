@@ -39,17 +39,14 @@ class AtomicFormField<T> extends StatefulWidget {
 
 class _AtomicFormFieldState<T> extends State<AtomicFormField<T>> {
   String? _errorText;
-  T? _value;
 
   @override
   void initState() {
     super.initState();
-    _value = widget.initialValue;
   }
 
   void _onChanged(T? value) {
     setState(() {
-      _value = value;
       _errorText = widget.validator?.call(value);
     });
     widget.onChanged?.call(value);

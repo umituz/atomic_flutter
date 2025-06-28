@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 /// Atomic Value Controller
 /// Generic value notifier with enhanced listener management and conditional notifications
 class AtomicValueController<T> extends ValueNotifier<T?> {
-  AtomicValueController([T? initialValue]) : super(initialValue);
+  AtomicValueController([super.initialValue]);
 
   final List<VoidCallback> _customListeners = [];
   final List<ValueChanged<T?>> _valueListeners = [];

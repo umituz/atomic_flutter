@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../themes/atomic_theme_provider.dart';
 import '../../tokens/borders/atomic_borders.dart';
 
 /// Atomic Smooth Container Component
@@ -46,7 +45,6 @@ class AtomicSmoothContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = AtomicTheme.maybeOf(context);
     final effectiveBorderRadius = borderRadius ?? AtomicBorders.md;
 
     // If decoration is provided, use it directly

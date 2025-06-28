@@ -122,8 +122,6 @@ class AtomicDialog extends StatelessWidget {
     IconData? titleIcon,
     bool isDangerous = false,
   }) async {
-    final theme = AtomicTheme.of(context);
-    
     return show<bool>(
       context: context,
       title: title,

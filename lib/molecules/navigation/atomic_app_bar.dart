@@ -387,17 +387,17 @@ class _AtomicSearchAppBarState extends State<AtomicSearchAppBar> {
               decoration: InputDecoration(
                 hintText: widget.hintText,
                 border: InputBorder.none,
-                hintStyle: TextStyle(
+                hintStyle: const TextStyle(
                   color: AtomicColors.textSecondary,
                 ),
               ),
-              style: TextStyle(
+              style: const TextStyle(
                 color: AtomicColors.textPrimary,
               ),
               onChanged: widget.onSearchChanged,
               onSubmitted: widget.onSearch,
             )
-          : AtomicText(
+          : const AtomicText(
               'Search',
               atomicStyle: AtomicTextStyle.titleLarge,
             ),

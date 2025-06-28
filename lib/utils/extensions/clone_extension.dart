@@ -73,7 +73,7 @@ extension AtomicCloneExtension<T> on T {
     }
     
     // For other types, throw exception
-    throw CloneException('cloneSync() only supports primitives, lists, maps, and sets. Use clone() for complex objects.');
+    throw const CloneException('cloneSync() only supports primitives, lists, maps, and sets. Use clone() for complex objects.');
   }
 }
 

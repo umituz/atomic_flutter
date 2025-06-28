@@ -27,8 +27,6 @@ class AtomicBottomSheet {
     bool showCloseButton = false,
     VoidCallback? onClose,
   }) {
-    final theme = AtomicTheme.of(context);
-    
     return showModalBottomSheet<T>(
       context: context,
       isDismissible: isDismissible,

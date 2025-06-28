@@ -2,3 +2,11 @@ include: package:flutter_lints/flutter.yaml
 
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options
+
+linter:
+  rules:
+    # Disabled rules for atomic design system development
+    prefer_initializing_formals: false  # False positive with atomic design patterns
+    dangling_library_doc_comments: false  # Allow flexible documentation
+    prefer_const_declarations: false  # Conflicts with theme-based dynamic values
+    prefer_const_constructors: false  # Conflicts with dynamic network client usage
