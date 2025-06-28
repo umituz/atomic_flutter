@@ -117,7 +117,7 @@ class _AtomicNavigationBarState extends State<AtomicNavigationBar>
               child: Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: AtomicSpacing.sm,
-                  vertical: AtomicSpacing.xs,
+                  vertical: AtomicSpacing.sm,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -164,8 +164,8 @@ class _AtomicNavigationBarState extends State<AtomicNavigationBar>
                 duration: widget.animationDuration,
                 curve: Curves.easeInOut,
                 padding: EdgeInsets.symmetric(
-                  vertical: AtomicSpacing.xs,
-                  horizontal: AtomicSpacing.xs,
+                  vertical: AtomicSpacing.sm,
+                  horizontal: AtomicSpacing.sm,
                 ),
                 decoration: BoxDecoration(
                   color: isSelected
@@ -204,7 +204,7 @@ class _AtomicNavigationBarState extends State<AtomicNavigationBar>
                               fit: BoxFit.scaleDown,
                               child: Text(
                                 destination.label,
-                                style: theme.typography.labelSmall.copyWith(
+                                style: theme.typography.labelMedium.copyWith(
                                   color: isSelected 
                                       ? theme.colors.primary 
                                       : theme.colors.textSecondary,
@@ -241,7 +241,7 @@ class _AtomicNavigationBarState extends State<AtomicNavigationBar>
 
     Widget iconWidget = AtomicIcon(
       icon: iconData,
-      size: AtomicIconSize.medium,
+      size: AtomicIconSize.large,
       color: isSelected 
           ? theme.colors.primary 
           : theme.colors.textSecondary,
