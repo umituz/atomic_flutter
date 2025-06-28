@@ -250,6 +250,7 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
       content: 'Are you sure you want to clear all messages?',
       confirmLabel: 'Clear',
       cancelLabel: 'Cancel',
+      titleIcon: Icons.cleaning_services_rounded,
     );
     
     if (shouldClear == true && mounted) {
@@ -407,112 +408,147 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
   }
 
   Widget _buildEmptyState(AtomicThemeData theme) {
-    return Center(
-      child: Padding(
-        padding: EdgeInsets.all(theme.spacing.xl),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Animated Icon
-            TweenAnimationBuilder<double>(
-              tween: Tween(begin: 0.0, end: 1.0),
-              duration: AtomicAnimations.normal,
-              curve: AtomicAnimations.standardEasing,
-              builder: (context, value, child) {
-                return Transform.scale(
-                  scale: value,
-                  child: Container(
-                    padding: EdgeInsets.all(theme.spacing.xl),
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          theme.colors.primary.withValues(alpha: 0.1),
-                          theme.colors.primary.withValues(alpha: 0.05),
-                        ],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return SingleChildScrollView(
+          padding: EdgeInsets.only(
+            left: theme.spacing.lg,
+            right: theme.spacing.lg,
+            top: theme.spacing.md,
+            bottom: theme.spacing.md + MediaQuery.of(context).padding.bottom,
+          ),
+                      child: ConstrainedBox(
+              constraints: BoxConstraints(
+                minHeight: constraints.maxHeight - theme.spacing.md * 2,
+              ),
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                // Animated Icon
+                TweenAnimationBuilder<double>(
+                  tween: Tween(begin: 0.0, end: 1.0),
+                  duration: AtomicAnimations.normal,
+                  curve: AtomicAnimations.standardEasing,
+                  builder: (context, value, child) {
+                    return Transform.scale(
+                      scale: value,
+                      child: Container(
+                        padding: EdgeInsets.all(theme.spacing.lg),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              theme.colors.primary.withValues(alpha: 0.1),
+                              theme.colors.primary.withValues(alpha: 0.05),
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          widget.config.icon,
+                          size: 48,
+                          color: theme.colors.primary,
+                        ),
                       ),
-                      shape: BoxShape.circle,
+                    );
+                  },
+                ),
+                
+                SizedBox(height: theme.spacing.md),
+                
+                // Welcome Text
+                if (widget.config.emptyStateTitle != null)
+                  Text(
+                    widget.config.emptyStateTitle!,
+                    style: theme.typography.headlineSmall.copyWith(
+                      fontWeight: FontWeight.w600,
                     ),
-                    child: Icon(
-                      widget.config.icon,
-                      size: 64,
-                      color: theme.colors.primary,
+                    textAlign: TextAlign.center,
+                  ),
+                
+                if (widget.config.emptyStateSubtitle != null) ...[
+                  SizedBox(height: theme.spacing.xs),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: theme.spacing.md),
+                    child: Text(
+                      widget.config.emptyStateSubtitle!,
+                      style: theme.typography.bodyMedium.copyWith(
+                        color: theme.colors.textSecondary,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
                   ),
-                );
-              },
+                ],
+                
+                // Suggestions
+                if (widget.config.suggestions != null) ...[
+                  SizedBox(height: theme.spacing.lg),
+                  Flexible(
+                    child: _buildSuggestions(theme),
+                  ),
+                ],
+              ],
             ),
-            
-            SizedBox(height: theme.spacing.xl),
-            
-            // Welcome Text
-            if (widget.config.emptyStateTitle != null)
-              Text(
-                widget.config.emptyStateTitle!,
-                style: theme.typography.headlineSmall.copyWith(
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            
-            if (widget.config.emptyStateSubtitle != null) ...[
-              SizedBox(height: theme.spacing.sm),
-              Text(
-                widget.config.emptyStateSubtitle!,
-                style: theme.typography.bodyLarge.copyWith(
-                  color: theme.colors.textSecondary,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ],
-            
-            // Suggestions
-            if (widget.config.suggestions != null) ...[
-              SizedBox(height: theme.spacing.xl),
-              _buildSuggestions(theme),
-            ],
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 
   Widget _buildSuggestions(AtomicThemeData theme) {
     return Column(
-      children: widget.config.suggestions!.map((suggestion) {
+      mainAxisSize: MainAxisSize.min,
+      children: widget.config.suggestions!.take(4).map((suggestion) {
         return Padding(
-          padding: EdgeInsets.only(bottom: theme.spacing.sm),
+          padding: EdgeInsets.only(bottom: theme.spacing.xs),
           child: InkWell(
             onTap: suggestion.onTap ?? 
                 () => _handleSendMessage(suggestion.text),
             borderRadius: BorderRadius.circular(12),
             child: Container(
-              padding: EdgeInsets.all(theme.spacing.md),
+              padding: EdgeInsets.symmetric(
+                horizontal: theme.spacing.md,
+                vertical: theme.spacing.sm,
+              ),
               decoration: BoxDecoration(
+                color: theme.colors.surface,
                 border: Border.all(
-                  color: theme.colors.primary.withValues(alpha: 0.2),
+                  color: theme.colors.primary.withValues(alpha: 0.15),
                   width: 1,
                 ),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Row(
                 children: [
-                  Icon(
-                    suggestion.icon,
-                    color: theme.colors.primary,
-                    size: 20,
+                  Container(
+                    padding: EdgeInsets.all(theme.spacing.xxs),
+                    decoration: BoxDecoration(
+                      color: theme.colors.primary.withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: Icon(
+                      suggestion.icon,
+                      color: theme.colors.primary,
+                      size: 18,
+                    ),
                   ),
                   SizedBox(width: theme.spacing.sm),
                   Expanded(
                     child: Text(
                       suggestion.text,
-                      style: theme.typography.bodyMedium,
+                      style: theme.typography.bodySmall.copyWith(
+                        fontWeight: FontWeight.w500,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                   Icon(
                     Icons.arrow_forward_ios,
                     color: theme.colors.textTertiary,
-                    size: 16,
+                    size: 14,
                   ),
                 ],
               ),
@@ -620,7 +656,10 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
 
   Widget _buildDefaultInput(AtomicThemeData theme) {
     return Container(
-      padding: EdgeInsets.all(theme.spacing.md),
+      padding: EdgeInsets.symmetric(
+        horizontal: theme.spacing.md,
+        vertical: theme.spacing.sm,
+      ),
       decoration: BoxDecoration(
         color: theme.colors.surface,
         border: Border(
@@ -636,9 +675,10 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
           children: [
             Expanded(
               child: Container(
+                height: 44,
                 decoration: BoxDecoration(
                   color: theme.colors.primary.withValues(alpha: 0.05),
-                  borderRadius: BorderRadius.circular(24),
+                  borderRadius: BorderRadius.circular(22),
                   border: Border.all(
                     color: theme.colors.primary.withValues(alpha: 0.2),
                     width: 1,
@@ -661,9 +701,10 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
                             color: theme.colors.textTertiary,
                           ),
                           border: InputBorder.none,
+                          isDense: true,
                           contentPadding: EdgeInsets.symmetric(
                             horizontal: theme.spacing.md,
-                            vertical: theme.spacing.sm,
+                            vertical: theme.spacing.xs,
                           ),
                         ),
                       ),
@@ -671,7 +712,7 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
                     
                     // Send Button
                     Padding(
-                      padding: EdgeInsets.only(right: theme.spacing.xs),
+                      padding: EdgeInsets.only(right: theme.spacing.xxs),
                       child: AtomicIconButton(
                         icon: Icons.send_rounded,
                         onPressed: () {

@@ -97,10 +97,12 @@ class AtomicDialog extends StatelessWidget {
     IconData? titleIcon,
     double maxWidth = 400,
     bool barrierDismissible = true,
+    bool useRootNavigator = false,
   }) {
     return showDialog<T>(
       context: context,
       barrierDismissible: barrierDismissible,
+      useRootNavigator: useRootNavigator,
       builder: (context) => AtomicDialog(
         title: title,
         content: content,
@@ -121,36 +123,86 @@ class AtomicDialog extends StatelessWidget {
     String cancelLabel = 'Cancel',
     IconData? titleIcon,
     bool isDangerous = false,
+    bool useRootNavigator = false,
   }) async {
-    return show<bool>(
+    return showDialog<bool>(
       context: context,
-      title: title,
-      content: content,
-      titleIcon: titleIcon,
-      actions: [
-        AtomicButton(
-          label: cancelLabel,
-          onPressed: () {
-            if (Navigator.of(context).canPop()) {
-              Navigator.of(context).pop(false);
-            }
-          },
-          variant: AtomicButtonVariant.outlined,
-          size: AtomicButtonSize.medium,
-        ),
-        AtomicButton(
-          label: confirmLabel,
-          onPressed: () {
-            if (Navigator.of(context).canPop()) {
-              Navigator.of(context).pop(true);
-            }
-          },
-          variant: isDangerous 
-            ? AtomicButtonVariant.danger 
-            : AtomicButtonVariant.primary,
-          size: AtomicButtonSize.medium,
-        ),
-      ],
+      barrierDismissible: true,
+      useRootNavigator: useRootNavigator,
+      builder: (BuildContext dialogContext) {
+        final theme = AtomicTheme.of(dialogContext);
+        
+        return Dialog(
+          backgroundColor: Colors.transparent,
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 400),
+            child: AtomicCard(
+              padding: EdgeInsets.all(theme.spacing.lg),
+              shadow: AtomicCardShadow.large,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Title with optional icon
+                  Row(
+                    children: [
+                      if (titleIcon != null) ...[
+                        Icon(
+                          titleIcon,
+                          color: theme.colors.primary,
+                          size: 24,
+                        ),
+                        SizedBox(width: theme.spacing.sm),
+                      ],
+                      Expanded(
+                        child: Text(
+                          title,
+                          style: theme.typography.headlineSmall.copyWith(
+                            color: theme.colors.textPrimary,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: theme.spacing.md),
+                  
+                  // Content
+                  Text(
+                    content,
+                    style: theme.typography.bodyMedium.copyWith(
+                      color: theme.colors.textSecondary,
+                    ),
+                  ),
+                  SizedBox(height: theme.spacing.lg),
+                  
+                  // Actions
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      AtomicButton(
+                        label: cancelLabel,
+                        onPressed: () => Navigator.of(dialogContext).pop(false),
+                        variant: AtomicButtonVariant.outlined,
+                        size: AtomicButtonSize.medium,
+                      ),
+                      SizedBox(width: theme.spacing.sm),
+                      AtomicButton(
+                        label: confirmLabel,
+                        onPressed: () => Navigator.of(dialogContext).pop(true),
+                        variant: isDangerous 
+                          ? AtomicButtonVariant.danger 
+                          : AtomicButtonVariant.primary,
+                        size: AtomicButtonSize.medium,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 } 
