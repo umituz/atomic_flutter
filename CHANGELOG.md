@@ -5,6 +5,32 @@ All notable changes to the Atomic Flutter design system will be documented in th
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.0] - 2024-12-21 - 🌐 Phase 5 Selective Migration Complete
+
+### Added - Phase 5 Services Migration
+- ✨ **Services**:
+  - `AtomicHapticService` - Modern haptic feedback service using Flutter's built-in HapticFeedback API
+    - All standard haptic types: light, medium, heavy impact
+    - Selection click and vibrate support
+    - Semantic feedback types: success, warning, error
+    - `AtomicHapticType` enum with extension for convenient usage
+    - Type-safe API with async support
+    - No external dependencies, using platform native APIs
+
+### Migration Decisions
+- ❌ **Excluded from package** (app-specific):
+  - Network infrastructure (Dio dependent)
+  - Notification service (Firebase dependent)
+  - Storage services (app-specific implementation)
+  - These remain in the original atomic project
+
+### Migration Progress
+- **Total Files**: 58
+- **Migrated**: 36 ✅
+- **Excluded**: 9 ❌ (app-specific)
+- **Remaining**: 13 🚧
+- **Completion**: 78% of package-suitable files
+
 ## [0.8.0] - 2024-12-21 - 🎯 Phase 4 Migration Complete
 
 ### Added - Phase 4 Controllers & Enums Migration
