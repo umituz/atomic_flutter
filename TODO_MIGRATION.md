@@ -5,9 +5,9 @@ Bu dosya `/atomic` dizininden `atomic_flutter` paketine taşınacak tüm kompone
 ## 📊 Migration İstatistikleri
 
 - **Toplam Dosya**: 58 dosya
-- **Geçirilmiş**: 11 dosya ✅ 
-- **Kalan**: 47 dosya 🚧
-- **Tamamlanma**: %19
+- **Geçirilmiş**: 30 dosya ✅ 
+- **Kalan**: 28 dosya 🚧
+- **Tamamlanma**: %52
 
 ---
 
@@ -17,29 +17,29 @@ Bu dosya `/atomic` dizininden `atomic_flutter` paketine taşınacak tüm kompone
 
 | Dosya | Hedef Lokasyon | Durum | Açıklama |
 |-------|----------------|-------|----------|
-| `atomic/lib/src/atomic/component/box/animated_container.dart` | `atomic_flutter/lib/atoms/containers/atomic_animated_container.dart` | ⏳ TODO | Animasyonlu container komponenti |
-| `atomic/lib/src/atomic/component/box/icon_box.dart` | `atomic_flutter/lib/atoms/containers/atomic_icon_box.dart` | ⏳ TODO | Icon box komponenti |
-| `atomic/lib/src/atomic/component/box/svg_provider.dart` | `atomic_flutter/lib/utils/svg_provider.dart` | ⏳ TODO | SVG provider utility |
+| `atomic/lib/src/atomic/component/box/animated_container.dart` | `atomic_flutter/lib/atoms/containers/atomic_animated_container.dart` | ✅ DONE | Animasyonlu container komponenti |
+| `atomic/lib/src/atomic/component/box/icon_box.dart` | `atomic_flutter/lib/atoms/containers/atomic_icon_box.dart` | ✅ DONE | Icon box komponenti |
+| `atomic/lib/src/atomic/component/box/svg_provider.dart` | `atomic_flutter/lib/utils/svg_provider.dart` | ✅ DONE | SVG provider utility |
 
 ### 🧱 Atoms - Markable Components
 
 | Dosya | Hedef Lokasyon | Durum | Açıklama |
 |-------|----------------|-------|----------|
-| `atomic/lib/src/atomic/component/markable/button_check.dart` | `atomic_flutter/lib/atoms/inputs/atomic_button_check.dart` | ⏳ TODO | Button checkbox komponenti |
+| `atomic/lib/src/atomic/component/markable/button_check.dart` | `atomic_flutter/lib/atoms/inputs/atomic_button_check.dart` | ✅ DONE | Button checkbox komponenti |
 
 ### 🧱 Atoms - Feedback Components
 
 | Dosya | Hedef Lokasyon | Durum | Açıklama |
 |-------|----------------|-------|----------|
-| `atomic/lib/src/atomic/component/shimmer/dot_loading.dart` | `atomic_flutter/lib/atoms/feedback/atomic_dot_loading.dart` | ⏳ TODO | Dot loading animasyonu |
+| `atomic/lib/src/atomic/component/shimmer/dot_loading.dart` | `atomic_flutter/lib/atoms/feedback/atomic_dot_loading.dart` | ✅ DONE | Dot loading animasyonu |
 
 ### 🧩 Molecules - Layout Components
 
 | Dosya | Hedef Lokasyon | Durum | Açıklama |
 |-------|----------------|-------|----------|
-| `atomic/lib/src/atomic/partials/custom_sheet_body.dart` | `atomic_flutter/lib/molecules/modals/atomic_custom_sheet.dart` | ⏳ TODO | Custom sheet body |
-| `atomic/lib/src/atomic/partials/sheet_builder.dart` | `atomic_flutter/lib/molecules/modals/atomic_sheet_builder.dart` | ⏳ TODO | Sheet builder utility |
-| `atomic/lib/src/atomic/partials/stacked_body.dart` | `atomic_flutter/lib/molecules/layouts/atomic_stacked_layout.dart` | ⏳ TODO | Stacked body layout |
+| `atomic/lib/src/atomic/partials/custom_sheet_body.dart` | `atomic_flutter/lib/molecules/sheets/atomic_custom_sheet_body.dart` | ✅ DONE | Custom sheet body |
+| `atomic/lib/src/atomic/partials/sheet_builder.dart` | `atomic_flutter/lib/molecules/sheets/atomic_sheet_builder.dart` | ✅ DONE | Sheet builder utility |
+| `atomic/lib/src/atomic/partials/stacked_body.dart` | `atomic_flutter/lib/molecules/layouts/atomic_stacked_body.dart` | ✅ DONE | Stacked body layout |
 
 ---
 
@@ -71,11 +71,11 @@ Bu dosya `/atomic` dizininden `atomic_flutter` paketine taşınacak tüm kompone
 
 | Dosya | Hedef Lokasyon | Durum | Açıklama |
 |-------|----------------|-------|----------|
-| `atomic/lib/src/data/models/base/action_list_item.dart` | `atomic_flutter/lib/models/action_list_item.dart` | ⏳ TODO | Action list model |
-| `atomic/lib/src/data/models/base/bottom_bar_item.dart` | `atomic_flutter/lib/models/bottom_bar_item.dart` | ⏳ TODO | Bottom bar model |
-| `atomic/lib/src/data/models/base/icon_list_item.dart` | `atomic_flutter/lib/models/icon_list_item.dart` | ⏳ TODO | Icon list model |
-| `atomic/lib/src/data/models/base/select_list_item.dart` | `atomic_flutter/lib/models/select_list_item.dart` | ⏳ TODO | Select list model |
-| `atomic/lib/src/data/models/base/text_list_item.dart` | `atomic_flutter/lib/models/text_list_item.dart` | ⏳ TODO | Text list model |
+| `atomic/lib/src/data/models/base/action_list_item.dart` | `atomic_flutter/lib/models/action_list_item.dart` | ✅ DONE | Action list model → AtomicActionListItem |
+| `atomic/lib/src/data/models/base/bottom_bar_item.dart` | `atomic_flutter/lib/models/bottom_bar_item.dart` | ✅ DONE | Bottom bar model → AtomicBottomBarItem |
+| `atomic/lib/src/data/models/base/icon_list_item.dart` | `atomic_flutter/lib/models/icon_list_item.dart` | ✅ DONE | Icon list model → AtomicIconListItemModel |
+| `atomic/lib/src/data/models/base/select_list_item.dart` | `atomic_flutter/lib/models/select_list_item.dart` | ✅ DONE | Select list model → AtomicSelectListItem |
+| `atomic/lib/src/data/models/base/text_list_item.dart` | `atomic_flutter/lib/models/text_list_item.dart` | ✅ DONE | Text list model → AtomicTextListItem |
 
 ### 🎮 Controllers
 
@@ -124,11 +124,15 @@ Bu dosya `/atomic` dizininden `atomic_flutter` paketine taşınacak tüm kompone
 
 ## 🗂️ Migration Öncelikleri
 
-### 🚨 Phase 1 - Acil (Bu Sprint)
-- [ ] `atomic_animated_container.dart` - Animasyonlu container
-- [ ] `atomic_icon_box.dart` - Icon box komponenti  
-- [ ] `atomic_button_check.dart` - Button checkbox
-- [ ] `atomic_dot_loading.dart` - Dot loading
+### 🚨 Phase 1 - Acil (Bu Sprint) ✅ TAMAMLANDI!
+- [x] `atomic_animated_container.dart` - Animasyonlu container ✅
+- [x] `atomic_icon_box.dart` - Icon box komponenti ✅
+- [x] `atomic_button_check.dart` - Button checkbox ✅
+- [x] `atomic_dot_loading.dart` - Dot loading ✅
+- [x] `atomic_custom_sheet_body.dart` - Custom sheet body ✅
+- [x] `atomic_sheet_builder.dart` - Sheet builder utility ✅
+- [x] `atomic_stacked_body.dart` - Stacked body layout ✅
+- [x] `svg_provider.dart` - SVG provider utility ✅
 
 ### ⚡ Phase 2 - Yakın Gelecek (Gelecek Sprint)
 - [ ] Modal komponentleri (custom_sheet, sheet_builder)

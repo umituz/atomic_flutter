@@ -35,6 +35,19 @@ export 'utilities/atomic_debouncer.dart';
 // Image utilities
 export 'utils/svg_provider.dart';
 
+// Extensions
+export 'utils/extensions/extensions.dart';
+
+// Models
+export 'models/action_list_item.dart';
+export 'models/bottom_bar_item.dart';
+export 'models/icon_list_item.dart';
+export 'models/select_list_item.dart';
+export 'models/text_list_item.dart';
+
+// Legacy config (for backward compatibility)
+export 'config/config.dart';
+
 // ===== ATOMS =====
 
 // Buttons
