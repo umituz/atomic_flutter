@@ -38,36 +38,6 @@ extension AtomicMapExtension on Map<dynamic, dynamic> {
     return value as R?;
   }
 
-  /// Legacy method for backward compatibility
-  /// Use getWithTransform instead for new code
-  dynamic containsCheck(
-    String key, [
-    Function(dynamic item)? callback,
-    dynamic defaultValue,
-  ]) {
-    if (containsKey(key)) {
-      final value = this[key];
-      
-      if (value == null && defaultValue != null) {
-        return callback?.call(defaultValue) ?? defaultValue;
-      }
-      
-      if (value == null) {
-        return null;
-      }
-      
-      if (callback == null) {
-        return value;
-      }
-      
-      return callback(value);
-    } else if (defaultValue != null) {
-      return callback?.call(defaultValue) ?? defaultValue;
-    }
-    
-    return null;
-  }
-
   /// Safely gets a String value from the map
   String? getString(dynamic key, {String? defaultValue}) {
     return getOrDefault<String>(key, defaultValue: defaultValue);
@@ -78,6 +48,7 @@ extension AtomicMapExtension on Map<dynamic, dynamic> {
     final value = this[key];
     if (value is int) return value;
     if (value is String) return int.tryParse(value) ?? defaultValue;
+    if (value is double) return value.toInt();
     return defaultValue;
   }
 
@@ -85,20 +56,20 @@ extension AtomicMapExtension on Map<dynamic, dynamic> {
   double? getDouble(dynamic key, {double? defaultValue}) {
     final value = this[key];
     if (value is double) return value;
-    if (value is int) return value.toDouble();
     if (value is String) return double.tryParse(value) ?? defaultValue;
+    if (value is int) return value.toDouble();
     return defaultValue;
   }
 
   /// Safely gets a bool value from the map
-  bool getBool(dynamic key, {bool defaultValue = false}) {
+  bool? getBool(dynamic key, {bool? defaultValue}) {
     final value = this[key];
     if (value is bool) return value;
-    if (value is int) return value != 0;
     if (value is String) {
-      final lowered = value.toLowerCase();
-      return ['true', '1', 'yes', 'on'].contains(lowered);
+      if (value.toLowerCase() == 'true') return true;
+      if (value.toLowerCase() == 'false') return false;
     }
+    if (value is int) return value != 0;
     return defaultValue;
   }
 
@@ -118,6 +89,28 @@ extension AtomicMapExtension on Map<dynamic, dynamic> {
       return value.cast<K, V>();
     }
     return defaultValue;
+  }
+
+  /// Filters the map based on a predicate
+  Map<K, V> where<K, V>(bool Function(K key, V value) test) {
+    final result = <K, V>{};
+    forEach((key, value) {
+      if (key is K && value is V && test(key, value)) {
+        result[key] = value;
+      }
+    });
+    return result;
+  }
+
+  /// Creates a new map with transformed values
+  Map<K, R> mapValues<K, V, R>(R Function(V value) transform) {
+    final result = <K, R>{};
+    forEach((key, value) {
+      if (key is K && value is V) {
+        result[key] = transform(value);
+      }
+    });
+    return result;
   }
 
   /// Removes multiple keys from the map

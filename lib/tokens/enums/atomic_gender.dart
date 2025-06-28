@@ -180,36 +180,4 @@ enum AtomicGender {
     nonBinary,
     preferNotToSay,
   ];
-}
-
-/// Legacy compatibility for old GenderEnum
-@Deprecated('Use AtomicGender instead')
-enum GenderEnum { 
-  MALE, 
-  FEMALE;
-
-  /// Convert to AtomicGender
-  AtomicGender get toAtomicGender {
-    switch (this) {
-      case MALE:
-        return AtomicGender.male;
-      case FEMALE:
-        return AtomicGender.female;
-    }
-  }
-}
-
-/// Extension to convert AtomicGender to legacy GenderEnum if needed
-extension AtomicGenderExtension on AtomicGender {
-  /// Convert to legacy GenderEnum (limited support)
-  GenderEnum? get toLegacyEnum {
-    switch (this) {
-      case AtomicGender.male:
-        return GenderEnum.MALE;
-      case AtomicGender.female:
-        return GenderEnum.FEMALE;
-      default:
-        return null; // Other genders have no legacy equivalent
-    }
-  }
 } 

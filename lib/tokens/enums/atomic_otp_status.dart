@@ -74,25 +74,9 @@ extension AtomicOtpStatusExtension on AtomicOtpStatus {
            this == AtomicOtpStatus.loading;
   }
   
-  /// Check if status is error state
+  /// Check if the status indicates an error state
   bool get isError {
     return this == AtomicOtpStatus.error || 
            this == AtomicOtpStatus.timeout;
-  }
-  
-  /// Legacy compatibility
-  String get legacyName {
-    switch (this) {
-      case AtomicOtpStatus.verifyLoading:
-        return 'VERIFY_LOADING';
-      case AtomicOtpStatus.loading:
-        return 'LOADING';
-      case AtomicOtpStatus.timeout:
-        return 'TIMEOUT';
-      case AtomicOtpStatus.error:
-        return 'ERROR';
-      case AtomicOtpStatus.duration:
-        return 'DURATION';
-    }
   }
 } 

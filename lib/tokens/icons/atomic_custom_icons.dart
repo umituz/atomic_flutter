@@ -38,14 +38,4 @@ class AtomicCustomIcons {
   // Brand icons
   static const IconData brandLogo = IconData(0xe920, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData brandLogoSmall = IconData(0xe921, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-}
-
-/// Legacy compatibility
-@Deprecated('Use AtomicCustomIcons instead')
-class IconFonts {
-  IconFonts._();
-  static const _kFontFam = 'icomoon';
-  static const String? _kFontPkg = null;
-
-  static const IconData locationAdd = IconData(0xe90a, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 } 

@@ -5,6 +5,49 @@ All notable changes to the Atomic Flutter design system will be documented in th
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.12.0] - 2024-12-21 - 🧹 Legacy Code Cleanup Complete
+
+### Breaking Changes - Legacy Code Removal
+- ❌ **Removed all `@Deprecated` typedefs from models**
+  - `ActionListItem` → Use `AtomicActionListItem`
+  - `BottomBarItem` → Use `AtomicBottomBarItem`
+  - `IconListItem` → Use `AtomicIconListItemModel`
+  - `SelectListItem` → Use `AtomicSelectListItem`
+  - `TextListItem` → Use `AtomicTextListItem`
+  - `SheetSelectListController` → Use `AtomicSheetSelectController`
+  - `ValueController` → Use `AtomicValueController`
+- ❌ **Removed legacy color and dimension classes**
+  - `ColorResource` → Use `AtomicColors`
+  - `DimensionResource` → Use `AtomicSpacing`
+  - Deleted `/config/legacy_colors.dart`
+  - Deleted `/config/legacy_dimensions.dart`
+  - Deleted `/config/config.dart`
+- ❌ **Removed deprecated enums and extensions**
+  - `LoadingEnum` → Use `AtomicLoadingState`
+  - `GenderEnum` → Use `AtomicGender`
+  - `StatusEnum` → Use `AtomicStatus`
+  - Removed legacy enum conversion extensions
+- ❌ **Removed deprecated icon class**
+  - `IconFonts` → Use `AtomicCustomIcons`
+- ❌ **Removed legacy map extension method**
+  - `containsCheck` → Use `getWithTransform`
+
+### Changed
+- 🔧 Cleaned up exports in `atomic_flutter.dart` (removed legacy config export)
+- 🔧 Enhanced `MapExtension` with improved utility methods
+- 🔧 Improved code quality and documentation
+
+### Package Status
+- ✅ **100% Modern**: Zero legacy/deprecated code
+- ✅ **Clean Architecture**: Atomic design system fully implemented
+- ✅ **Production Ready**: Battle-tested components
+- ✅ **Zero External Dependencies**: For core features (no Dio, no Firebase)
+
+### Notes
+- The original `/atomic` project folder has been deleted
+- Migration from `/atomic` to `/atomic_flutter` is complete
+- All components now follow modern Flutter standards
+
 ## [0.11.0] - 2024-12-21
 
 ### Added - Final Migration Components

@@ -82,8 +82,4 @@ class AtomicBottomBarItem {
   String toString() {
     return 'AtomicBottomBarItem(icon: $icon, label: $label, enabled: $enabled)';
   }
-}
-
-/// Legacy compatibility - use AtomicBottomBarItem instead
-@Deprecated('Use AtomicBottomBarItem instead')
-typedef BottomBarItem = AtomicBottomBarItem; 
+} 

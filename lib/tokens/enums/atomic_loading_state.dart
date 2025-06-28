@@ -105,41 +105,4 @@ enum AtomicLoadingState {
         return newState == success || newState == error || newState == idle;
     }
   }
-}
-
-/// Legacy compatibility for old LoadingEnum
-@Deprecated('Use AtomicLoadingState instead')
-enum LoadingEnum { 
-  LOADING, 
-  SUCCESS, 
-  ERROR;
-
-  /// Convert to AtomicLoadingState
-  AtomicLoadingState get toAtomicState {
-    switch (this) {
-      case LOADING:
-        return AtomicLoadingState.loading;
-      case SUCCESS:
-        return AtomicLoadingState.success;
-      case ERROR:
-        return AtomicLoadingState.error;
-    }
-  }
-}
-
-/// Extension to convert AtomicLoadingState to legacy LoadingEnum if needed
-extension AtomicLoadingStateExtension on AtomicLoadingState {
-  /// Convert to legacy LoadingEnum (limited support)
-  LoadingEnum? get toLegacyEnum {
-    switch (this) {
-      case AtomicLoadingState.loading:
-        return LoadingEnum.LOADING;
-      case AtomicLoadingState.success:
-        return LoadingEnum.SUCCESS;
-      case AtomicLoadingState.error:
-        return LoadingEnum.ERROR;
-      default:
-        return null; // idle and refreshing have no legacy equivalent
-    }
-  }
 } 

@@ -95,8 +95,4 @@ class AtomicTextListItem {
   String toString() {
     return 'AtomicTextListItem(text: $text, subText: $subText, enabled: $enabled)';
   }
-}
-
-/// Legacy compatibility - use AtomicTextListItem instead
-@Deprecated('Use AtomicTextListItem instead')
-typedef TextListItem = AtomicTextListItem; 
+} 

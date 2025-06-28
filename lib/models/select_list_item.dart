@@ -98,8 +98,4 @@ class AtomicSelectListItemDynamic extends AtomicSelectListItem<dynamic> {
     super.enabled = true,
     super.selected = false,
   });
-}
-
-/// Legacy compatibility - use AtomicSelectListItem instead
-@Deprecated('Use AtomicSelectListItem instead')
-typedef SelectListItem = AtomicSelectListItemDynamic; 
+} 

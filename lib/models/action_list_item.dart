@@ -79,8 +79,4 @@ class AtomicActionListItem {
   String toString() {
     return 'AtomicActionListItem(text: $text, subtext: $subtext, uniqueKey: $uniqueKey)';
   }
-}
-
-/// Legacy compatibility - use AtomicActionListItem instead
-@Deprecated('Use AtomicActionListItem instead')
-typedef ActionListItem = AtomicActionListItem; 
+} 

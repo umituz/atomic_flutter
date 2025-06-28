@@ -191,8 +191,4 @@ class AtomicSheetSelectControllerDynamic extends AtomicSheetSelectController<dyn
     super.initialSelectedItems,
     super.allowMultipleSelection = false,
   });
-}
-
-/// Legacy compatibility - use AtomicSheetSelectController instead
-@Deprecated('Use AtomicSheetSelectController instead')
-typedef SheetSelectListController = AtomicSheetSelectControllerDynamic; 
+} 

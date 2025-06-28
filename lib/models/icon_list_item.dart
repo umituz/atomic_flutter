@@ -103,8 +103,4 @@ class AtomicIconListItemModel {
   String toString() {
     return 'AtomicIconListItemModel(title: $title, subtitle: $subtitle, icon: $icon)';
   }
-}
-
-/// Legacy compatibility - use AtomicIconListItemModel instead
-@Deprecated('Use AtomicIconListItemModel instead')
-typedef IconListItem = AtomicIconListItemModel; 
+} 

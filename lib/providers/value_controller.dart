@@ -258,8 +258,4 @@ extension AtomicListValueControllerExtensions<T> on AtomicListValueController<T>
   void makeUnique() {
     value = list.toSet().toList();
   }
-}
-
-/// Legacy compatibility - use AtomicValueController instead
-@Deprecated('Use AtomicValueController instead')
-typedef ValueController<T> = AtomicValueController<T>; 
+} 
