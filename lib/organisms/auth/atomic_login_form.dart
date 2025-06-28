@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../atoms/buttons/atomic_button.dart';
+import '../../atoms/buttons/atomic_icon_button.dart';
 import '../../atoms/inputs/atomic_text_field.dart';
+import '../../atoms/inputs/atomic_checkbox.dart';
 import '../../molecules/forms/atomic_form_field.dart';
 import '../../themes/atomic_theme_provider.dart';
 import '../../utilities/atomic_debouncer.dart';
@@ -124,9 +126,10 @@ class _AtomicLoginFormState extends State<AtomicLoginForm> {
               hint: widget.passwordHint,
               obscureText: _obscurePassword,
               prefixIcon: Icons.lock_outlined,
-              suffixIcon: IconButton(
-                icon: Icon(_obscurePassword ? Icons.visibility : Icons.visibility_off),
+              suffixIcon: AtomicIconButton(
+                icon: _obscurePassword ? Icons.visibility : Icons.visibility_off,
                 onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
+                variant: AtomicIconButtonVariant.ghost,
               ),
               enabled: !widget.isLoading,
               onChanged: (_) => _debouncer.debounce(() {
@@ -142,7 +145,7 @@ class _AtomicLoginFormState extends State<AtomicLoginForm> {
             Row(
               children: [
                 if (widget.showRememberMe) ...[
-                  Checkbox(
+                  AtomicCheckbox(
                     value: _rememberMe,
                     onChanged: widget.isLoading ? null : (value) {
                       setState(() => _rememberMe = value ?? false);
@@ -153,9 +156,10 @@ class _AtomicLoginFormState extends State<AtomicLoginForm> {
                 ],
                 const Spacer(),
                 if (widget.showForgotPassword)
-                  TextButton(
+                  AtomicButton(
+                    label: 'Forgot Password?',
                     onPressed: widget.isLoading ? null : widget.onForgotPassword,
-                    child: const Text('Forgot Password?'),
+                    variant: AtomicButtonVariant.ghost,
                   ),
               ],
             ),

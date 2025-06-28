@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../atoms/containers/atomic_card.dart';
 import '../../themes/atomic_theme_provider.dart';
 import '../../themes/atomic_theme_data.dart';
 import '../../utilities/atomic_responsive.dart';
@@ -106,7 +107,7 @@ class AtomicAuthTemplate extends StatelessWidget {
           Text(
             title!,
             style: theme.typography.headlineLarge.copyWith(
-              color: Colors.white,
+              color: theme.colors.textInverse,
               fontWeight: FontWeight.bold,
             ),
             textAlign: TextAlign.center,
@@ -119,7 +120,7 @@ class AtomicAuthTemplate extends StatelessWidget {
           Text(
             subtitle!,
             style: theme.typography.bodyLarge.copyWith(
-              color: Colors.white.withValues(alpha: 0.8),
+              color: theme.colors.textInverse.withValues(alpha: 0.8),
             ),
             textAlign: TextAlign.center,
           ),
@@ -132,16 +133,11 @@ class AtomicAuthTemplate extends StatelessWidget {
   }
 
   Widget _buildCard(AtomicThemeData theme) {
-    return Card(
-      elevation: cardElevation,
+    return AtomicCard(
+      padding: EdgeInsets.all(theme.spacing.xl),
       color: cardColor ?? theme.colors.surface,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(theme.borders.radiusXl),
-      ),
-      child: Padding(
-        padding: EdgeInsets.all(theme.spacing.xl),
-        child: child,
-      ),
+      shadow: cardElevation > 0 ? AtomicCardShadow.medium : AtomicCardShadow.none,
+      child: child,
     );
   }
 
@@ -150,16 +146,16 @@ class AtomicAuthTemplate extends StatelessWidget {
       width: 80,
       height: 80,
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.2),
+        color: theme.colors.textInverse.withValues(alpha: 0.2),
         borderRadius: BorderRadius.circular(theme.borders.radiusXl),
         border: Border.all(
-          color: Colors.white.withValues(alpha: 0.3),
+          color: theme.colors.textInverse.withValues(alpha: 0.3),
           width: 2,
         ),
       ),
-      child: const Icon(
+      child: Icon(
         Icons.lock_outline,
-        color: Colors.white,
+        color: theme.colors.textInverse,
         size: 40,
       ),
     );

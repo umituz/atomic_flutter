@@ -5,6 +5,7 @@ import '../../themes/atomic_theme_data.dart';
 import '../../tokens/colors/atomic_colors.dart';
 import '../../tokens/animations/atomic_animations.dart';
 import '../../tokens/spacing/atomic_spacing.dart';
+import '../../tokens/typography/atomic_typography.dart';
 import '../../atoms/icons/atomic_icon.dart';
 import '../../atoms/feedback/atomic_badge.dart';
 
@@ -208,10 +209,8 @@ class _AtomicNavigationBarState extends State<AtomicNavigationBar>
                                       ? theme.colors.primary 
                                       : theme.colors.textSecondary,
                                   fontWeight: isSelected 
-                                      ? FontWeight.w700 
-                                      : FontWeight.w500,
-                                  fontSize: 11,
-                                  height: 1.2,
+                                      ? AtomicTypography.bold 
+                                      : AtomicTypography.medium,
                                 ),
                                 textAlign: TextAlign.center,
                                 maxLines: 1,
