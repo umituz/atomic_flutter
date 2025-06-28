@@ -56,6 +56,8 @@ export 'tokens/enums/atomic_gender.dart';
 
 // Services
 export 'services/atomic_haptic_service.dart';
+export 'services/network/network.dart';
+export 'services/storage/atomic_storage_interface.dart';
 
 // Legacy config (for backward compatibility)
 export 'config/config.dart';
