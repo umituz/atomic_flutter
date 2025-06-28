@@ -41,6 +41,7 @@ class AtomicAIAssistantConfig {
   final String? emptyStateTitle;
   final String? emptyStateSubtitle;
   final String? inputPlaceholder;
+  final bool showClearButtonAlways;
 
   const AtomicAIAssistantConfig({
     this.title = 'AI Assistant',
@@ -51,6 +52,7 @@ class AtomicAIAssistantConfig {
     this.responseGenerator,
     this.onClearChat,
     this.showClearButton = true,
+    this.showClearButtonAlways = false,
     this.emptyStateTitle = 'Welcome to AI Assistant',
     this.emptyStateSubtitle = 'Ask me anything',
     this.inputPlaceholder = 'Type a message...',
@@ -253,7 +255,14 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
     if (shouldClear == true && mounted) {
       setState(() {
         _messages.clear();
+        _isTyping = false;
+        _messageController.clear();
       });
+      
+      // Scroll to top after clearing
+      if (_scrollController.hasClients) {
+        _scrollController.jumpTo(0);
+      }
       
       widget.config.onClearChat?.call();
       
@@ -350,7 +359,8 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
               ),
               
               // Actions
-              if (_messages.isNotEmpty && widget.config.showClearButton) ...[
+              if (widget.config.showClearButton && 
+                  (widget.config.showClearButtonAlways || _messages.isNotEmpty)) ...[
                 AtomicIconButton(
                   icon: Icons.cleaning_services_rounded,
                   onPressed: _clearChat,
