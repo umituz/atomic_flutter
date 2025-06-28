@@ -1,94 +1,246 @@
 import 'package:flutter/material.dart';
+import 'dart:ui';
 import '../../themes/atomic_theme_provider.dart';
+import '../../themes/atomic_theme_data.dart';
 import '../../tokens/colors/atomic_colors.dart';
 import '../../tokens/animations/atomic_animations.dart';
+import '../../tokens/spacing/atomic_spacing.dart';
 import '../../atoms/icons/atomic_icon.dart';
 import '../../atoms/feedback/atomic_badge.dart';
 
 /// Atomic Navigation Bar Component
-/// Material Design 3 bottom navigation bar
-class AtomicNavigationBar extends StatelessWidget {
+/// Modern glassmorphism bottom navigation with smooth animations
+class AtomicNavigationBar extends StatefulWidget {
   const AtomicNavigationBar({
     super.key,
     required this.destinations,
     required this.selectedIndex,
     required this.onDestinationSelected,
     this.backgroundColor,
-    this.elevation,
-    this.height = 80.0,
-    this.labelBehavior = NavigationDestinationLabelBehavior.alwaysShow,
+    this.glassMorphism = true,
+    this.height = 72.0,
+    this.margin,
+    this.borderRadius = 24.0,
     this.animationDuration = AtomicAnimations.normal,
-    this.indicatorColor,
-    this.indicatorShape,
-    this.surfaceTintColor,
-    this.shadowColor,
-    this.overlayColor,
+    this.showLabels = true,
+    this.showSelectedLabels = true,
   });
 
   final List<AtomicNavigationDestination> destinations;
   final int selectedIndex;
   final ValueChanged<int> onDestinationSelected;
   final Color? backgroundColor;
-  final double? elevation;
+  final bool glassMorphism;
   final double height;
-  final NavigationDestinationLabelBehavior labelBehavior;
+  final EdgeInsetsGeometry? margin;
+  final double borderRadius;
   final Duration animationDuration;
-  final Color? indicatorColor;
-  final ShapeBorder? indicatorShape;
-  final Color? surfaceTintColor;
-  final Color? shadowColor;
-  final WidgetStateProperty<Color?>? overlayColor;
+  final bool showLabels;
+  final bool showSelectedLabels;
+
+  @override
+  State<AtomicNavigationBar> createState() => _AtomicNavigationBarState();
+}
+
+class _AtomicNavigationBarState extends State<AtomicNavigationBar>
+    with TickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<double> _scaleAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      duration: widget.animationDuration,
+      vsync: this,
+    );
+    _scaleAnimation = Tween<double>(
+      begin: 0.95,
+      end: 1.0,
+    ).animate(CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeOutBack,
+    ));
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = AtomicTheme.of(context);
+    final bottomPadding = MediaQuery.of(context).padding.bottom;
     
-    return NavigationBar(
-      selectedIndex: selectedIndex,
-      onDestinationSelected: onDestinationSelected,
-      backgroundColor: backgroundColor ?? theme.colors.surface,
-      elevation: elevation ?? 3.0,
-      height: height,
-      labelBehavior: labelBehavior,
-      animationDuration: animationDuration,
-      indicatorColor: indicatorColor ?? theme.colors.secondary,
-      indicatorShape: indicatorShape,
-      surfaceTintColor: surfaceTintColor ?? theme.colors.surface,
-      shadowColor: shadowColor ?? theme.colors.gray300,
-      overlayColor: overlayColor,
-      destinations: destinations.map((destination) {
-        return NavigationDestination(
-          icon: _buildIcon(destination, false),
-          selectedIcon: _buildIcon(destination, true),
-          label: destination.label,
-          tooltip: destination.tooltip,
-          enabled: destination.enabled,
-        );
-      }).toList(),
+    return Container(
+      margin: widget.margin ?? EdgeInsets.symmetric(
+        horizontal: AtomicSpacing.md,
+        vertical: AtomicSpacing.sm,
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(widget.borderRadius),
+        child: BackdropFilter(
+          filter: widget.glassMorphism 
+              ? ImageFilter.blur(sigmaX: 10, sigmaY: 10)
+              : ImageFilter.blur(sigmaX: 0, sigmaY: 0),
+          child: Container(
+            height: widget.height + (bottomPadding > 0 ? bottomPadding : AtomicSpacing.sm),
+            decoration: BoxDecoration(
+              color: widget.glassMorphism
+                  ? (widget.backgroundColor ?? theme.colors.surface).withValues(alpha: 0.8)
+                  : (widget.backgroundColor ?? theme.colors.surface),
+              borderRadius: BorderRadius.circular(widget.borderRadius),
+              border: widget.glassMorphism 
+                  ? Border.all(
+                      color: theme.colors.gray200.withValues(alpha: 0.3),
+                      width: 1.5,
+                    )
+                  : null,
+              boxShadow: [
+                if (widget.glassMorphism) ...[
+                  BoxShadow(
+                    color: theme.colors.gray900.withValues(alpha: 0.1),
+                    blurRadius: 20,
+                    offset: const Offset(0, 8),
+                  ),
+                  BoxShadow(
+                    color: theme.colors.gray900.withValues(alpha: 0.05),
+                    blurRadius: 6,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ],
+            ),
+            child: SafeArea(
+              top: false,
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: AtomicSpacing.sm,
+                  vertical: AtomicSpacing.xs,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: List.generate(
+                    widget.destinations.length,
+                    (index) => _buildNavigationItem(
+                      theme,
+                      widget.destinations[index],
+                      index,
+                      widget.selectedIndex == index,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 
-  Widget _buildIcon(AtomicNavigationDestination destination, bool isSelected) {
-    Widget iconWidget = destination.selectedIcon != null && isSelected
-        ? AtomicIcon(
-            icon: destination.selectedIcon!,
-            size: AtomicIconSize.large,
-            color: isSelected ? null : AtomicColors.gray600,
-          )
-        : AtomicIcon(
-            icon: destination.icon,
-            size: AtomicIconSize.large,
-            color: isSelected ? null : AtomicColors.gray600,
+  Widget _buildNavigationItem(
+    AtomicThemeData theme,
+    AtomicNavigationDestination destination,
+    int index,
+    bool isSelected,
+  ) {
+    return Expanded(
+      child: AnimatedBuilder(
+        animation: _scaleAnimation,
+        builder: (context, child) {
+          return GestureDetector(
+            onTap: destination.enabled
+                ? () {
+                    widget.onDestinationSelected(index);
+                    _animationController.forward().then((_) {
+                      _animationController.reverse();
+                    });
+                  }
+                : null,
+            behavior: HitTestBehavior.opaque,
+            child: Container(
+              constraints: const BoxConstraints(
+                minHeight: 40,
+                maxHeight: 60,
+              ),
+              padding: EdgeInsets.symmetric(
+                vertical: 4.0,
+                horizontal: AtomicSpacing.xs,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Icon with animation
+                  AnimatedContainer(
+                    duration: widget.animationDuration,
+                    curve: Curves.easeInOut,
+                    padding: EdgeInsets.all(2.0),
+                    decoration: BoxDecoration(
+                      color: isSelected
+                          ? theme.colors.primary.withValues(alpha: 0.15)
+                          : Colors.transparent,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: _buildIcon(theme, destination, isSelected),
+                  ),
+                  
+                  // Label - only show for selected items to save space
+                  if (widget.showLabels && 
+                      destination.label.isNotEmpty && 
+                      isSelected)
+                    Container(
+                      margin: EdgeInsets.only(top: 2.0),
+                      child: Text(
+                        destination.label,
+                        style: theme.typography.labelSmall.copyWith(
+                          color: theme.colors.primary,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 9,
+                          height: 1.0,
+                        ),
+                        textAlign: TextAlign.center,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                ],
+              ),
+            ),
           );
+        },
+      ),
+    );
+  }
 
+  Widget _buildIcon(
+    AtomicThemeData theme,
+    AtomicNavigationDestination destination,
+    bool isSelected,
+  ) {
+    final iconData = isSelected && destination.selectedIcon != null
+        ? destination.selectedIcon!
+        : destination.icon;
+
+    Widget iconWidget = AtomicIcon(
+      icon: iconData,
+      size: AtomicIconSize.small,
+      color: isSelected 
+          ? theme.colors.primary 
+          : theme.colors.textSecondary,
+    );
+
+    // Add badge if present
     if (destination.badge != null) {
       return Stack(
         clipBehavior: Clip.none,
         children: [
           iconWidget,
           Positioned(
-            right: -6,
-            top: -6,
+            right: -8,
+            top: -8,
             child: destination.badge!,
           ),
         ],
