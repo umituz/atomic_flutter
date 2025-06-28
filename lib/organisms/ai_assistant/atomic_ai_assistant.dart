@@ -359,20 +359,6 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
                 ),
               ),
               
-              // Actions
-              if (widget.config.showClearButton && 
-                  (widget.config.showClearButtonAlways || _messages.isNotEmpty)) ...[
-                AtomicIconButton(
-                  icon: Icons.cleaning_services_rounded,
-                  onPressed: _clearChat,
-                  variant: AtomicIconButtonVariant.ghost,
-                  size: AtomicIconButtonSize.medium,
-                  color: theme.colors.textSecondary,
-                  tooltip: 'Clear chat',
-                ),
-                SizedBox(width: theme.spacing.xs),
-              ],
-              
               // Custom actions
               if (widget.config.headerActions != null)
                 ...widget.config.headerActions!.map((action) {
@@ -400,6 +386,20 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
                     );
                   }
                 }),
+              
+              // Clear button at the end
+              if (widget.config.showClearButton && 
+                  (widget.config.showClearButtonAlways || _messages.isNotEmpty)) ...[
+                SizedBox(width: theme.spacing.xs),
+                AtomicIconButton(
+                  icon: Icons.cleaning_services_rounded,
+                  onPressed: _clearChat,
+                  variant: AtomicIconButtonVariant.ghost,
+                  size: AtomicIconButtonSize.medium,
+                  color: theme.colors.textSecondary,
+                  tooltip: 'Clear chat',
+                ),
+              ],
             ],
           ),
         ),
