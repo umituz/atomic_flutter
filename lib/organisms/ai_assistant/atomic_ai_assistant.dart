@@ -646,7 +646,7 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
             ),
             child: AtomicDotLoading(
               dotSize: AtomicDotLoadingSize.small,
-              activeColor: theme.colors.textSecondary,
+              activeColor: theme.colors.primary,
             ),
           ),
         ],
@@ -656,79 +656,97 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
 
   Widget _buildDefaultInput(AtomicThemeData theme) {
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: theme.spacing.md,
-        vertical: theme.spacing.sm,
-      ),
       decoration: BoxDecoration(
         color: theme.colors.surface,
-        border: Border(
-          top: BorderSide(
-            color: theme.colors.primary.withValues(alpha: 0.1),
-            width: 1,
+        boxShadow: [
+          BoxShadow(
+            color: theme.colors.gray900.withValues(alpha: 0.05),
+            blurRadius: 10,
+            offset: const Offset(0, -2),
           ),
-        ),
+        ],
       ),
       child: SafeArea(
         top: false,
-        child: Row(
-          children: [
-            Expanded(
-              child: Container(
-                height: 44,
-                decoration: BoxDecoration(
-                  color: theme.colors.primary.withValues(alpha: 0.05),
-                  borderRadius: BorderRadius.circular(22),
-                  border: Border.all(
-                    color: theme.colors.primary.withValues(alpha: 0.2),
-                    width: 1,
+        child: Container(
+          padding: EdgeInsets.all(theme.spacing.md),
+          child: Row(
+            children: [
+              // Input Field
+              Expanded(
+                child: Container(
+                  height: 48,
+                  decoration: BoxDecoration(
+                    color: theme.colors.gray100,
+                    borderRadius: BorderRadius.circular(24),
                   ),
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        controller: _messageController,
-                        focusNode: _inputFocusNode,
-                        onSubmitted: (value) {
-                          _handleSendMessage(value);
-                          _messageController.clear();
-                        },
-                        style: theme.typography.bodyMedium,
-                        decoration: InputDecoration(
-                          hintText: widget.config.inputPlaceholder,
-                          hintStyle: theme.typography.bodyMedium.copyWith(
-                            color: theme.colors.textTertiary,
-                          ),
-                          border: InputBorder.none,
-                          isDense: true,
-                          contentPadding: EdgeInsets.symmetric(
-                            horizontal: theme.spacing.md,
-                            vertical: theme.spacing.xs,
-                          ),
-                        ),
+                  child: TextField(
+                    controller: _messageController,
+                    focusNode: _inputFocusNode,
+                    onSubmitted: (value) {
+                      final message = value.trim();
+                      if (message.isNotEmpty) {
+                        _handleSendMessage(message);
+                        _messageController.clear();
+                      }
+                    },
+                    style: theme.typography.bodyMedium,
+                    decoration: InputDecoration(
+                      hintText: widget.config.inputPlaceholder,
+                      hintStyle: theme.typography.bodyMedium.copyWith(
+                        color: theme.colors.textTertiary,
+                      ),
+                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.symmetric(
+                        horizontal: theme.spacing.lg,
+                        vertical: theme.spacing.sm,
                       ),
                     ),
-                    
-                    // Send Button
-                    Padding(
-                      padding: EdgeInsets.only(right: theme.spacing.xxs),
-                      child: AtomicIconButton(
-                        icon: Icons.send_rounded,
-                        onPressed: () {
-                          _handleSendMessage(_messageController.text);
-                          _messageController.clear();
-                        },
-                        variant: AtomicIconButtonVariant.filled,
-                        size: AtomicIconButtonSize.small,
-                        color: theme.colors.primary,
-                      ),
+                  ),
+                ),
+              ),
+              
+              // Spacing between input and button
+              SizedBox(width: theme.spacing.sm),
+              
+              // Send Button
+              Container(
+                width: 48,
+                height: 48,
+                decoration: BoxDecoration(
+                  color: theme.colors.primary,
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: theme.colors.primary.withValues(alpha: 0.25),
+                      blurRadius: 8,
+                      offset: const Offset(0, 2),
                     ),
                   ],
                 ),
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(24),
+                    onTap: () {
+                      final message = _messageController.text.trim();
+                      if (message.isNotEmpty) {
+                        _handleSendMessage(message);
+                        _messageController.clear();
+                      }
+                    },
+                    child: Center(
+                      child: Icon(
+                        Icons.send_rounded,
+                        size: 20,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
