@@ -38,4 +38,11 @@ class AtomicCustomIcons {
   // Brand icons
   static const IconData brandLogo = IconData(0xe920, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData brandLogoSmall = IconData(0xe921, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  
+  // Activity icons (added for random_activity app)
+  static const IconData trash = IconData(0xe930, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData users = IconData(0xe931, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData calendar = IconData(0xe932, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData notepadText = IconData(0xe933, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData star = IconData(0xe934, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 } 
