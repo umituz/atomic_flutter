@@ -15,6 +15,8 @@ class AtomicOTPForm extends StatefulWidget {
     required this.onVerifyOTP,
     this.emailController,
     this.otpController,
+    this.emailFocusNode,
+    this.otpFocusNode,
     this.isLoading = false,
     this.isOTPSent = false,
     this.requestButtonText = 'Send Code',
@@ -34,6 +36,8 @@ class AtomicOTPForm extends StatefulWidget {
   final Function(String email, String otp) onVerifyOTP;
   final TextEditingController? emailController;
   final TextEditingController? otpController;
+  final FocusNode? emailFocusNode;
+  final FocusNode? otpFocusNode;
   final bool isLoading;
   final bool isOTPSent;
   final String requestButtonText;
@@ -125,6 +129,7 @@ class _AtomicOTPFormState extends State<AtomicOTPForm> {
             validator: _validateEmail,
             child: AtomicTextField(
               controller: _emailController,
+              focusNode: widget.emailFocusNode,
               hint: widget.emailHint,
               keyboardType: TextInputType.emailAddress,
               prefixIcon: Icons.email_outlined,
@@ -147,6 +152,7 @@ class _AtomicOTPFormState extends State<AtomicOTPForm> {
               validator: _validateOTP,
               child: AtomicTextField(
                 controller: _otpController,
+                focusNode: widget.otpFocusNode,
                 hint: widget.otpHint,
                 keyboardType: TextInputType.number,
                 prefixIcon: Icons.security,
@@ -193,10 +199,27 @@ class _AtomicOTPFormState extends State<AtomicOTPForm> {
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(color: theme.colors.success.withValues(alpha: 0.3)),
               ),
-              child: Text(
-                'Verification code sent to ${_emailController.text}',
-                style: TextStyle(color: theme.colors.success),
-                textAlign: TextAlign.center,
+              child: Column(
+                children: [
+                  Text(
+                    'Verification code sent to ${_emailController.text}',
+                    style: TextStyle(color: theme.colors.success),
+                    textAlign: TextAlign.center,
+                  ),
+                  // Show dev mode hint if applicable
+                  if (_otpController.text.isNotEmpty) ...[
+                    SizedBox(height: theme.spacing.xs),
+                    Text(
+                      'Dev Mode: Use code ${_otpController.text}',
+                      style: TextStyle(
+                        color: theme.colors.success,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ],
               ),
             ),
             SizedBox(height: theme.spacing.md),
