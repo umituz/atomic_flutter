@@ -48,6 +48,7 @@ export 'models/text_list_item.dart';
 // Providers
 export 'providers/sheet_select_controller.dart';
 export 'providers/value_controller.dart';
+export 'providers/atomic_database_provider.dart';
 
 // Enums
 export 'tokens/enums/atomic_loading_state.dart';
@@ -63,6 +64,7 @@ export 'services/atomic_haptic_service.dart';
 export 'services/network/network.dart';
 export 'services/storage/storage.dart';
 export 'services/atomic_base_service.dart';
+export 'services/supabase/supabase.dart';
 
 // ===== ATOMS =====
 

@@ -84,31 +84,33 @@ class _AtomicShimmerState extends State<AtomicShimmer>
       return widget.child ?? _buildDefaultContainer(baseColor);
     }
 
-    return AnimatedBuilder(
-      animation: _animation,
-      builder: (context, child) {
-        return ShaderMask(
-          blendMode: BlendMode.srcATop,
-          shaderCallback: (Rect bounds) {
-            return LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: [
-                baseColor,
-                highlightColor,
-                baseColor,
-              ],
-              stops: const [
-                0.0,
-                0.5,
-                1.0,
-              ],
-              transform: _ShimmerSlideTransform(_animation.value),
-            ).createShader(bounds);
-          },
-          child: widget.child ?? _buildDefaultContainer(baseColor),
-        );
-      },
+    return RepaintBoundary(
+      child: AnimatedBuilder(
+        animation: _animation,
+        builder: (context, child) {
+          return ShaderMask(
+            blendMode: BlendMode.srcATop,
+            shaderCallback: (Rect bounds) {
+              return LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: [
+                  baseColor,
+                  highlightColor,
+                  baseColor,
+                ],
+                stops: const [
+                  0.0,
+                  0.5,
+                  1.0,
+                ],
+                transform: _ShimmerSlideTransform(_animation.value),
+              ).createShader(bounds);
+            },
+            child: widget.child ?? _buildDefaultContainer(baseColor),
+          );
+        },
+      ),
     );
   }
 

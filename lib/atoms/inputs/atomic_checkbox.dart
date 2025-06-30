@@ -131,8 +131,8 @@ class _AtomicCheckboxState extends State<AtomicCheckbox>
                   return widget.value == true
                       ? Transform.scale(
                           scale: _scaleAnimation.value,
-                          child: Opacity(
-                            opacity: _fadeAnimation.value,
+                          child: FadeTransition(
+                            opacity: _fadeAnimation,
                             child: Icon(
                               Icons.check,
                               size: size * 0.7,

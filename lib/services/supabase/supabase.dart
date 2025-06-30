@@ -19,5 +19,9 @@ export 'auth/supabase_session_manager.dart';
 export 'auth/supabase_auth_middleware.dart';
 export 'auth/supabase_auth_helpers.dart';
 
+// Atomic-specific Database Features
+export 'database/atomic_database_service.dart';
+export 'database/atomic_caching_service.dart';
+
 // Main Atomic Wrapper (Primary Interface)
 export 'supabase_atomic_wrapper.dart'; 
