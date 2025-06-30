@@ -94,10 +94,9 @@ class _AtomicTextFieldState extends State<AtomicTextField> {
 
   @override
   void dispose() {
+    _focusNode.removeListener(_handleFocusChange);
     if (widget.focusNode == null) {
       _focusNode.dispose();
-    } else {
-      _focusNode.removeListener(_handleFocusChange);
     }
     super.dispose();
   }
@@ -148,7 +147,12 @@ class _AtomicTextFieldState extends State<AtomicTextField> {
             focusNode: _focusNode,
             onChanged: _handleChanged,
             onSubmitted: widget.onSubmitted,
-            onTap: widget.onTap,
+            onTap: () {
+              widget.onTap?.call();
+              if (!_focusNode.hasFocus) {
+                _focusNode.requestFocus();
+              }
+            },
             keyboardType: widget.keyboardType,
             textInputAction: widget.textInputAction,
             obscureText: widget.obscureText,

@@ -158,6 +158,7 @@ class _AtomicOTPFormState extends State<AtomicOTPForm> {
                 prefixIcon: Icons.security,
                 maxLength: widget.otpLength,
                 enabled: !widget.isLoading,
+                autofocus: true,
                 borderType: AtomicTextFieldBorderType.filled,
                 fillColor: theme.colors.surfaceSecondary,
                 inputFormatters: [
