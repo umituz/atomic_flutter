@@ -164,9 +164,13 @@ class _AtomicButtonState extends State<AtomicButton>
     }
 
     if (widget.label.isNotEmpty) {
-      children.add(Text(
-        widget.label,
-        style: _getTextStyle(typography, colors),
+      children.add(Flexible(
+        child: Text(
+          widget.label,
+          style: _getTextStyle(typography, colors),
+          overflow: TextOverflow.ellipsis,
+          maxLines: 1,
+        ),
       ));
     }
 
