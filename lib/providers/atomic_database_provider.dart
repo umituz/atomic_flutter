@@ -58,8 +58,9 @@ abstract class AtomicDatabaseNotifier<T> extends StateNotifier<AtomicDatabaseSta
   AtomicDatabaseNotifier({
     required this.tableName,
     AtomicDatabaseService? databaseService,
+    required AtomicDatabaseState<T> initialState,
   }) : _databaseService = databaseService ?? AtomicDatabaseService(),
-       super(const AtomicDatabaseState());
+       super(initialState);
 
   /// Convert JSON to model - must be implemented by subclasses
   T fromJson(Map<String, dynamic> json);
@@ -324,7 +325,7 @@ abstract class AtomicDatabaseNotifier<T> extends StateNotifier<AtomicDatabaseSta
 
   /// Clear all data and errors
   void clear() {
-    state = const AtomicDatabaseState();
+    state = AtomicDatabaseState<T>();
   }
 
   /// Clear error
