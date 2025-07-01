@@ -28,6 +28,7 @@ export 'tokens/borders/atomic_borders.dart';
 
 // Responsive utilities
 export 'utilities/atomic_responsive.dart';
+export 'utilities/atomic_responsive_utils.dart';
 
 // Function utilities
 export 'utilities/atomic_debouncer.dart';
