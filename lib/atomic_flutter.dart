@@ -44,6 +44,7 @@ export 'models/bottom_bar_item.dart';
 export 'models/icon_list_item.dart';
 export 'models/select_list_item.dart';
 export 'models/text_list_item.dart';
+export 'models/base_model.dart';
 
 // Providers
 export 'providers/sheet_select_controller.dart';
