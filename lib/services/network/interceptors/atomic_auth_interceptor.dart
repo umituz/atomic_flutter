@@ -1,4 +1,4 @@
-import '../atomic_network_client.dart';
+import 'package:atomic_flutter/services/network/atomic_network_client.dart';
 
 class AtomicAuthInterceptor extends AtomicNetworkInterceptor {
   AtomicAuthInterceptor({

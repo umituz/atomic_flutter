@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import '../utilities/atomic_debouncer.dart';
+import 'package:atomic_flutter/utilities/atomic_debouncer.dart';
 
 abstract class AtomicBaseService extends ChangeNotifier {
   AtomicBaseService({

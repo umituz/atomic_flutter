@@ -135,7 +135,7 @@ class AtomicAnnouncements {
   static void announce(String message, {bool assertive = false}) {
     SemanticsService.announce(
       message,
-      assertive ? Directionality.of(debugDirectionality!) : TextDirection.ltr,
+      TextDirection.ltr,
     );
   }
 

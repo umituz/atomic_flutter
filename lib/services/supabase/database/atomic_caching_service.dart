@@ -3,8 +3,8 @@ library atomic_caching_service;
 import 'dart:async';
 import 'dart:convert';
 
-import '../models/supabase_response.dart';
-import '../models/supabase_error.dart';
+import 'package:atomic_flutter/services/supabase/models/supabase_response.dart';
+import 'package:atomic_flutter/services/supabase/models/supabase_error.dart';
 import 'atomic_database_service.dart';
 
 class CacheEntry<T> {

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import '../../themes/atomic_theme_provider.dart';
-import '../../themes/atomic_theme_data.dart';
-import '../../tokens/colors/atomic_colors.dart';
-import '../../tokens/spacing/atomic_spacing.dart';
-import '../../tokens/borders/atomic_borders.dart';
-import '../../tokens/animations/atomic_animations.dart';
-import '../overlays/atomic_divider.dart';
+import 'package:atomic_flutter/themes/atomic_theme_provider.dart';
+import 'package:atomic_flutter/themes/atomic_theme_data.dart';
+import 'package:atomic_flutter/tokens/colors/atomic_colors.dart';
+import 'package:atomic_flutter/tokens/spacing/atomic_spacing.dart';
+import 'package:atomic_flutter/tokens/borders/atomic_borders.dart';
+import 'package:atomic_flutter/tokens/animations/atomic_animations.dart';
+import 'package:atomic_flutter/atoms/overlays/atomic_divider.dart';
 
 class AtomicBottomSheet {
   static Future<T?> show<T>({

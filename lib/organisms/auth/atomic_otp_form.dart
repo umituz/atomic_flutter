@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../atoms/buttons/atomic_button.dart';
-import '../../atoms/inputs/atomic_text_field.dart';
-import '../../molecules/forms/atomic_form_field.dart';
-import '../../themes/atomic_theme_provider.dart';
-import '../../utilities/atomic_debouncer.dart';
+import 'package:atomic_flutter/atoms/buttons/atomic_button.dart';
+import 'package:atomic_flutter/atoms/inputs/atomic_text_field.dart';
+import 'package:atomic_flutter/molecules/forms/atomic_form_field.dart';
+import 'package:atomic_flutter/themes/atomic_theme_provider.dart';
+import 'package:atomic_flutter/utilities/atomic_debouncer.dart';
 
 class AtomicOTPForm extends StatefulWidget {
   const AtomicOTPForm({

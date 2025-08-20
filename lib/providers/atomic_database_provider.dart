@@ -3,9 +3,9 @@ library atomic_database_provider;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/foundation.dart';
 
-import '../services/supabase/database/atomic_database_service.dart';
-import '../services/supabase/models/supabase_response.dart';
-import '../services/supabase/models/supabase_error.dart';
+import 'package:atomic_flutter/services/supabase/database/atomic_database_service.dart';
+import 'package:atomic_flutter/services/supabase/models/supabase_response.dart';
+import 'package:atomic_flutter/services/supabase/models/supabase_error.dart';
 
 @immutable
 class AtomicDatabaseState<T> {

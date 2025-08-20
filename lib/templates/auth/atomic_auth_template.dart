@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../atoms/containers/atomic_card.dart';
-import '../../themes/atomic_theme_provider.dart';
-import '../../themes/atomic_theme_data.dart';
-import '../../utilities/atomic_responsive.dart';
+import 'package:atomic_flutter/atoms/containers/atomic_card.dart';
+import 'package:atomic_flutter/themes/atomic_theme_provider.dart';
+import 'package:atomic_flutter/themes/atomic_theme_data.dart';
+import 'package:atomic_flutter/utilities/atomic_responsive.dart';
 
 class AtomicAuthTemplate extends StatelessWidget {
   const AtomicAuthTemplate({

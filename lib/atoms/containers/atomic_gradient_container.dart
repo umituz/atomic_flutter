@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../tokens/borders/atomic_borders.dart';
-import '../../tokens/shadows/atomic_shadows.dart';
+import 'package:atomic_flutter/tokens/borders/atomic_borders.dart';
+import 'package:atomic_flutter/tokens/shadows/atomic_shadows.dart';
 
 class AtomicGradientContainer extends StatelessWidget {
   const AtomicGradientContainer({

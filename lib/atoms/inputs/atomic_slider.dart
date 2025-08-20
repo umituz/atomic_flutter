@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../themes/atomic_theme_provider.dart';
-import '../../themes/atomic_theme_data.dart';
-import '../display/atomic_text.dart';
+import 'package:atomic_flutter/themes/atomic_theme_provider.dart';
+import 'package:atomic_flutter/themes/atomic_theme_data.dart';
+import 'package:atomic_flutter/atoms/display/atomic_text.dart';
 
 class AtomicSlider extends StatelessWidget {
   final double value;

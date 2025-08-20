@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../tokens/colors/atomic_colors.dart';
+import 'package:atomic_flutter/tokens/colors/atomic_colors.dart';
 
 class AtomicIconListItemModel {
   const AtomicIconListItemModel({

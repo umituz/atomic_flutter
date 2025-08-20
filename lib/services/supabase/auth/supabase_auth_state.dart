@@ -1,6 +1,6 @@
 
-import '../models/supabase_user.dart';
-import '../models/supabase_response.dart';
+import 'package:atomic_flutter/services/supabase/models/supabase_user.dart';
+import 'package:atomic_flutter/services/supabase/models/supabase_response.dart';
 
 enum AuthState {
   unauthenticated,

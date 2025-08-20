@@ -3,7 +3,7 @@ library supabase_session_manager;
 import 'dart:async';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../models/supabase_response.dart';
+import 'package:atomic_flutter/services/supabase/models/supabase_response.dart';
 
 class SupabaseSessionManager {
   static SupabaseSessionManager? _instance;

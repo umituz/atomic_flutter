@@ -2,7 +2,7 @@ library supabase_auth_helpers;
 
 import 'dart:math';
 
-import '../models/supabase_user.dart';
+import 'package:atomic_flutter/services/supabase/models/supabase_user.dart';
 
 class EmailValidator {
   static final RegExp _emailRegex = RegExp(

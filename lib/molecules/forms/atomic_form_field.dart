@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../atoms/display/atomic_text.dart';
-import '../../atoms/inputs/atomic_text_field.dart';
-import '../../molecules/inputs/atomic_dropdown.dart';
+import 'package:atomic_flutter/atoms/display/atomic_text.dart';
+import 'package:atomic_flutter/atoms/inputs/atomic_text_field.dart';
+import 'package:atomic_flutter/molecules/inputs/atomic_dropdown.dart';
 
 class AtomicFormField<T> extends StatefulWidget {
   const AtomicFormField({

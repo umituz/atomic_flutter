@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../themes/atomic_theme_provider.dart';
-import '../../tokens/borders/atomic_borders.dart';
-import '../../tokens/animations/atomic_animations.dart';
-import '../../atoms/display/atomic_text.dart';
-import '../../atoms/overlays/atomic_bottom_sheet.dart';
+import 'package:atomic_flutter/themes/atomic_theme_provider.dart';
+import 'package:atomic_flutter/tokens/borders/atomic_borders.dart';
+import 'package:atomic_flutter/tokens/animations/atomic_animations.dart';
+import 'package:atomic_flutter/atoms/display/atomic_text.dart';
+import 'package:atomic_flutter/atoms/overlays/atomic_bottom_sheet.dart';
 
 class AtomicDropdown<T> extends StatefulWidget {
   const AtomicDropdown({

@@ -3,9 +3,9 @@ import 'dart:math' as math;
 
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../models/supabase_response.dart';
-import '../models/supabase_error.dart';
-import '../exceptions/supabase_exceptions.dart';
+import 'package:atomic_flutter/services/supabase/models/supabase_response.dart';
+import 'package:atomic_flutter/services/supabase/models/supabase_error.dart';
+import 'package:atomic_flutter/services/supabase/exceptions/supabase_exceptions.dart';
 
 class AtomicDatabaseService {
   final SupabaseClient _client;

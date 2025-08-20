@@ -5,7 +5,7 @@ import 'dart:async';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'supabase_session_manager.dart';
-import '../models/supabase_user.dart';
+import 'package:atomic_flutter/services/supabase/models/supabase_user.dart';
 
 enum AuthGuardResult {
   allowed,
