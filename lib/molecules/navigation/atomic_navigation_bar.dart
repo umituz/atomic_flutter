@@ -178,7 +178,6 @@ class _AtomicNavigationBarState extends State<AtomicNavigationBar>
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // Icon with enhanced styling
                       Flexible(
                         flex: 2,
                         child: Container(
@@ -193,7 +192,6 @@ class _AtomicNavigationBarState extends State<AtomicNavigationBar>
                         ),
                       ),
                       
-                      // Label - show for all items but highlight selected
                       if (widget.showLabels && 
                           destination.label.isNotEmpty)
                         Flexible(
@@ -247,7 +245,6 @@ class _AtomicNavigationBarState extends State<AtomicNavigationBar>
           : theme.colors.textSecondary,
     );
 
-    // Add badge if present
     if (destination.badge != null) {
       return Stack(
         clipBehavior: Clip.none,
@@ -266,7 +263,6 @@ class _AtomicNavigationBarState extends State<AtomicNavigationBar>
   }
 }
 
-/// Navigation destination data class
 class AtomicNavigationDestination {
   const AtomicNavigationDestination({
     required this.icon,
@@ -285,7 +281,6 @@ class AtomicNavigationDestination {
   final bool enabled;
 }
 
-/// Rail variant for larger screens
 class AtomicNavigationRail extends StatelessWidget {
   const AtomicNavigationRail({
     super.key,
@@ -396,7 +391,6 @@ class AtomicNavigationRail extends StatelessWidget {
   }
 }
 
-/// Navigation rail destination data class
 class AtomicNavigationRailDestination {
   const AtomicNavigationRailDestination({
     required this.icon,

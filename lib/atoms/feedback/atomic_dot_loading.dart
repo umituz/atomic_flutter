@@ -5,8 +5,6 @@ import '../../themes/atomic_theme_data.dart';
 
 import '../../tokens/animations/atomic_animations.dart';
 
-/// Atomic Dot Loading Component
-/// Animated loading indicator with bouncing dots
 class AtomicDotLoading extends StatefulWidget {
   const AtomicDotLoading({
     super.key,
@@ -132,7 +130,6 @@ class _AtomicDotLoadingState extends State<AtomicDotLoading> {
   }
 }
 
-/// Dot loading size options
 enum AtomicDotLoadingSize {
   small,
   medium,

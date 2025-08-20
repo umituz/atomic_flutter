@@ -4,8 +4,6 @@ import '../../themes/atomic_theme_data.dart';
 import '../../tokens/animations/atomic_animations.dart';
 import '../../tokens/borders/atomic_borders.dart';
 
-/// Atomic Checkbox Component
-/// Customizable checkbox with smooth animations
 class AtomicCheckbox extends StatefulWidget {
   const AtomicCheckbox({
     super.key,
@@ -248,21 +246,18 @@ class _AtomicCheckboxState extends State<AtomicCheckbox>
   }
 }
 
-/// Checkbox size options
 enum AtomicCheckboxSize {
   small,
   medium,
   large,
 }
 
-/// Checkbox shape options
 enum AtomicCheckboxShape {
   square,
   rounded,
   circle,
 }
 
-/// Checkbox label position options
 enum AtomicCheckboxLabelPosition {
   start,
   end,

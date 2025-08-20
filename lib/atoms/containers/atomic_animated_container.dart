@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Atomic Animated Container Component
-/// Animated version of smooth container with implicit animations
 class AtomicAnimatedContainer extends ImplicitlyAnimatedWidget {
   const AtomicAnimatedContainer({
     super.key,

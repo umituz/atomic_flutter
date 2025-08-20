@@ -4,8 +4,6 @@ import '../../tokens/spacing/atomic_spacing.dart';
 import '../../tokens/typography/atomic_typography.dart';
 import '../../tokens/borders/atomic_borders.dart';
 
-/// Atomic Chip Component
-/// Tag-like component for labels, categories, and selections
 class AtomicChip extends StatelessWidget {
   const AtomicChip({
     super.key,
@@ -181,14 +179,12 @@ class AtomicChip extends StatelessWidget {
   }
 }
 
-/// Chip variant options
 enum AtomicChipVariant {
   filled,
   outlined,
   subtle,
 }
 
-/// Chip size options
 enum AtomicChipSize {
   small,
   medium,

@@ -4,8 +4,6 @@ import '../../tokens/animations/atomic_animations.dart';
 import '../../tokens/shadows/atomic_shadows.dart';
 import '../../tokens/borders/atomic_borders.dart';
 
-/// Atomic Icon Button Component
-/// Icon-only button with various styles and states
 class AtomicIconButton extends StatefulWidget {
   const AtomicIconButton({
     super.key,
@@ -237,7 +235,6 @@ class _AtomicIconButtonState extends State<AtomicIconButton>
   }
 }
 
-/// Icon button variant options
 enum AtomicIconButtonVariant {
   filled,
   outlined,
@@ -245,7 +242,6 @@ enum AtomicIconButtonVariant {
   subtle,
 }
 
-/// Icon button size options
 enum AtomicIconButtonSize {
   small,
   medium,

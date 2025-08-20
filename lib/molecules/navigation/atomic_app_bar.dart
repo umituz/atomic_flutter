@@ -7,8 +7,6 @@ import '../../tokens/colors/atomic_colors.dart';
 import '../../atoms/display/atomic_text.dart';
 import '../../atoms/buttons/atomic_icon_button.dart';
 
-/// Atomic App Bar Component
-/// Material Design app bar with theme integration
 class AtomicAppBar extends StatelessWidget implements PreferredSizeWidget {
   const AtomicAppBar({
     super.key,
@@ -39,7 +37,6 @@ class AtomicAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.onBackPressed,
   });
 
-  // Standard AppBar properties
   final Widget? leading;
   final bool automaticallyImplyLeading;
   final Widget? title;
@@ -60,7 +57,6 @@ class AtomicAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double? toolbarHeight;
   final double? leadingWidth;
 
-  // Atomic-specific properties
   final AtomicAppBarVariant variant;
   final AtomicAppBarSize size;
   final Gradient? gradient;
@@ -95,7 +91,6 @@ class AtomicAppBar extends StatelessWidget implements PreferredSizeWidget {
       systemOverlayStyle: _getSystemOverlayStyle(theme),
     );
 
-    // Add blur effect if needed
     if (blur) {
       appBar = ClipRRect(
         child: BackdropFilter(
@@ -139,7 +134,6 @@ class AtomicAppBar extends StatelessWidget implements PreferredSizeWidget {
   List<Widget>? _buildActions(AtomicThemeData theme) {
     if (actions == null) return null;
     
-    // Ensure proper spacing between actions
     return actions!.map((action) {
       if (action is AtomicIconButton) {
         return Padding(
@@ -215,7 +209,6 @@ class AtomicAppBar extends StatelessWidget implements PreferredSizeWidget {
   bool? _getCenterTitle(BuildContext context) {
     if (centerTitle != null) return centerTitle;
     
-    // Follow platform conventions
     return Theme.of(context).platform == TargetPlatform.iOS;
   }
 
@@ -273,7 +266,6 @@ class AtomicAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-/// Atomic App Bar variant types
 enum AtomicAppBarVariant {
   standard,     // Default app bar
   elevated,     // Elevated with shadow
@@ -281,14 +273,12 @@ enum AtomicAppBarVariant {
   transparent,  // Transparent background
 }
 
-/// Atomic App Bar size variants
 enum AtomicAppBarSize {
   compact,      // Compact height
   medium,       // Standard height
   large,        // Large height
 }
 
-/// Simple App Bar Helper
 class AtomicSimpleAppBar extends StatelessWidget implements PreferredSizeWidget {
   const AtomicSimpleAppBar({
     super.key,
@@ -323,7 +313,6 @@ class AtomicSimpleAppBar extends StatelessWidget implements PreferredSizeWidget 
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
 
-/// Search App Bar Helper
 class AtomicSearchAppBar extends StatefulWidget implements PreferredSizeWidget {
   const AtomicSearchAppBar({
     super.key,

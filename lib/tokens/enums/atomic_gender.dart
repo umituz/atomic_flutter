@@ -1,37 +1,24 @@
-/// Atomic Gender Enum
-/// Represents gender options with inclusive choices
 enum AtomicGender {
-  /// Male
   male,
   
-  /// Female
   female,
   
-  /// Non-binary
   nonBinary,
   
-  /// Prefer not to say
   preferNotToSay,
   
-  /// Other
   other;
 
-  /// Check if male
   bool get isMale => this == male;
 
-  /// Check if female
   bool get isFemale => this == female;
 
-  /// Check if non-binary
   bool get isNonBinary => this == nonBinary;
 
-  /// Check if prefer not to say
   bool get isPreferNotToSay => this == preferNotToSay;
 
-  /// Check if other
   bool get isOther => this == other;
 
-  /// Get display text for the gender
   String get displayText {
     switch (this) {
       case male:
@@ -47,7 +34,6 @@ enum AtomicGender {
     }
   }
 
-  /// Get short display text for the gender
   String get shortText {
     switch (this) {
       case male:
@@ -63,7 +49,6 @@ enum AtomicGender {
     }
   }
 
-  /// Get icon name for the gender
   String get iconName {
     switch (this) {
       case male:
@@ -79,7 +64,6 @@ enum AtomicGender {
     }
   }
 
-  /// Get pronoun suggestions (common pronouns, not exhaustive)
   List<String> get commonPronouns {
     switch (this) {
       case male:
@@ -95,7 +79,6 @@ enum AtomicGender {
     }
   }
 
-  /// Create from string value
   static AtomicGender fromString(String value) {
     switch (value.toLowerCase()) {
       case 'male':
@@ -121,10 +104,8 @@ enum AtomicGender {
     }
   }
 
-  /// Convert to string
   String get value => name;
 
-  /// Get API value (for backend compatibility)
   String get apiValue {
     switch (this) {
       case male:
@@ -140,7 +121,6 @@ enum AtomicGender {
     }
   }
 
-  /// Create from API value
   static AtomicGender fromApiValue(String value) {
     switch (value.toUpperCase()) {
       case 'MALE':
@@ -158,7 +138,6 @@ enum AtomicGender {
     }
   }
 
-  /// Get options for form dropdowns
   static List<AtomicGender> get formOptions => [
     male,
     female,
@@ -167,13 +146,11 @@ enum AtomicGender {
     other,
   ];
 
-  /// Get basic options (traditional binary)
   static List<AtomicGender> get basicOptions => [
     male,
     female,
   ];
 
-  /// Get inclusive options (modern inclusive list)
   static List<AtomicGender> get inclusiveOptions => [
     male,
     female,

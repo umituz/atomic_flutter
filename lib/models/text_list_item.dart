@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Atomic Text List Item Model
-/// Represents a simple text item with primary text and optional subtext
 class AtomicTextListItem {
   const AtomicTextListItem({
     required this.text,
@@ -23,7 +21,6 @@ class AtomicTextListItem {
   final int? maxLines;
   final TextOverflow? overflow;
 
-  /// Create a copy of this item with modified properties
   AtomicTextListItem copyWith({
     String? text,
     String? subText,
@@ -46,7 +43,6 @@ class AtomicTextListItem {
     );
   }
 
-  /// Create from JSON
   factory AtomicTextListItem.fromJson(Map<String, dynamic> json) {
     return AtomicTextListItem(
       text: json['text'] ?? '',
@@ -56,7 +52,6 @@ class AtomicTextListItem {
     );
   }
 
-  /// Convert to JSON
   Map<String, dynamic> toJson() {
     return {
       'text': text,
@@ -66,13 +61,10 @@ class AtomicTextListItem {
     };
   }
 
-  /// Check if item has subtext
   bool get hasSubText => subText != null && subText!.isNotEmpty;
 
-  /// Get display text with fallback
   String get displayText => text.isEmpty ? 'No title' : text;
 
-  /// Get display subtext with fallback
   String get displaySubText => hasSubText ? subText! : '';
 
   @override

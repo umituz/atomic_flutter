@@ -1,7 +1,5 @@
 import 'atomic_storage_interface.dart';
 
-/// Atomic Memory Storage
-/// In-memory implementation of AtomicStorageInterface for testing
 class AtomicMemoryStorage implements AtomicStorageInterface {
   AtomicMemoryStorage({Map<String, String>? initialData}) 
     : _storage = initialData ?? {};
@@ -40,9 +38,7 @@ class AtomicMemoryStorage implements AtomicStorageInterface {
     return _storage.keys.toList();
   }
 
-  /// Get all stored data (for testing purposes)
   Map<String, String> get allData => Map.unmodifiable(_storage);
 
-  /// Get storage size
   int get size => _storage.length;
 } 

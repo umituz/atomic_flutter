@@ -1,5 +1,3 @@
-/// Authentication middleware for route protection and auth guards
-/// Provides Flutter navigation guards and automatic auth validation
 library supabase_auth_middleware;
 
 import 'dart:async';
@@ -9,21 +7,18 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'supabase_session_manager.dart';
 import '../models/supabase_user.dart';
 
-/// Auth guard result
 enum AuthGuardResult {
   allowed,
   denied,
   redirect,
 }
 
-/// Auth requirement for routes
 enum AuthRequirement {
   authenticated,    // Requires valid session
   unauthenticated, // Requires no session (login/register pages)
   optional,        // Works with or without session
 }
 
-/// Auth guard configuration
 class AuthGuardConfig {
   final AuthRequirement requirement;
   final String? redirectRoute;
@@ -39,31 +34,26 @@ class AuthGuardConfig {
     this.checkPhoneVerified = false,
   });
   
-  /// Config for authenticated routes
   static const authenticated = AuthGuardConfig(
     requirement: AuthRequirement.authenticated,
     redirectRoute: '/login',
   );
   
-  /// Config for unauthenticated routes (login, register)
   static const unauthenticated = AuthGuardConfig(
     requirement: AuthRequirement.unauthenticated,
     redirectRoute: '/home',
   );
   
-  /// Config for optional auth routes
   static const optional = AuthGuardConfig(
     requirement: AuthRequirement.optional,
   );
   
-  /// Config for admin routes
   static const admin = AuthGuardConfig(
     requirement: AuthRequirement.authenticated,
     redirectRoute: '/login',
     requiredPermissions: ['admin'],
   );
   
-  /// Config for verified email routes
   static const emailVerified = AuthGuardConfig(
     requirement: AuthRequirement.authenticated,
     redirectRoute: '/verify-email',
@@ -71,7 +61,6 @@ class AuthGuardConfig {
   );
 }
 
-/// Auth guard result data
 class AuthGuardResultData {
   final AuthGuardResult result;
   final String? redirectRoute;
@@ -88,7 +77,6 @@ class AuthGuardResultData {
   bool get shouldRedirect => result == AuthGuardResult.redirect;
 }
 
-/// Authentication middleware for Flutter applications
 class SupabaseAuthMiddleware {
   static SupabaseAuthMiddleware? _instance;
   static SupabaseAuthMiddleware get instance => _instance ??= SupabaseAuthMiddleware._();
@@ -100,17 +88,13 @@ class SupabaseAuthMiddleware {
   final StreamController<AuthGuardResultData> _guardResultController = 
       StreamController<AuthGuardResultData>.broadcast();
   
-  /// Stream of guard results for navigation listeners
   Stream<AuthGuardResultData> get guardResultStream => _guardResultController.stream;
   
-  /// Check if user can access route with given config
   Future<AuthGuardResultData> checkAccess(AuthGuardConfig config) async {
     try {
-      // Check session validity
       final session = _sessionManager.currentSession;
       final isAuthenticated = _sessionManager.isAuthenticated;
       
-      // Handle authentication requirement
       switch (config.requirement) {
         case AuthRequirement.authenticated:
           if (!isAuthenticated) {
@@ -131,18 +115,15 @@ class SupabaseAuthMiddleware {
           break;
           
         case AuthRequirement.optional:
-          // Always allow, no checks needed
           break;
       }
       
-      // If not authenticated, skip further checks
       if (!isAuthenticated || session?.user == null) {
         return const AuthGuardResultData(result: AuthGuardResult.allowed);
       }
       
       final user = session!.user!;
       
-      // Check email verification
       if (config.checkEmailVerified && !user.isEmailConfirmed) {
         return _createRedirectResult(
           '/verify-email',
@@ -150,7 +131,6 @@ class SupabaseAuthMiddleware {
         );
       }
       
-      // Check phone verification
       if (config.checkPhoneVerified && !user.isPhoneConfirmed) {
         return _createRedirectResult(
           '/verify-phone',
@@ -158,7 +138,6 @@ class SupabaseAuthMiddleware {
         );
       }
       
-      // Check required permissions
       if (config.requiredPermissions != null && config.requiredPermissions!.isNotEmpty) {
         final hasRequiredPermissions = _checkPermissions(user, config.requiredPermissions!);
         if (!hasRequiredPermissions) {
@@ -169,7 +148,6 @@ class SupabaseAuthMiddleware {
         }
       }
       
-      // All checks passed
       return const AuthGuardResultData(result: AuthGuardResult.allowed);
       
     } catch (e) {
@@ -180,7 +158,6 @@ class SupabaseAuthMiddleware {
     }
   }
   
-  /// Create redirect result
   AuthGuardResultData _createRedirectResult(String route, String message) {
     final result = AuthGuardResultData(
       result: AuthGuardResult.redirect,
@@ -191,13 +168,8 @@ class SupabaseAuthMiddleware {
     return result;
   }
   
-  /// Check if user has required permissions
   bool _checkPermissions(SupabaseUser user, List<String> requiredPermissions) {
-    // TODO: Implement permission checking based on user metadata or roles
-    // This could check user.userMetadata for roles or permissions
-    // Example: user.userMetadata?['roles'] or user.userMetadata?['permissions']
     
-    // Placeholder implementation
     final userRoles = user.userMetadata?['roles'] as List<dynamic>? ?? [];
     final userPermissions = user.userMetadata?['permissions'] as List<dynamic>? ?? [];
     
@@ -210,8 +182,6 @@ class SupabaseAuthMiddleware {
     return true;
   }
   
-  /// Route guard for GoRouter or similar navigation
-  /// Returns true if access is allowed, false otherwise
   Future<bool> routeGuard(
     String routePath,
     AuthGuardConfig config, {
@@ -238,14 +208,11 @@ class SupabaseAuthMiddleware {
     }
   }
   
-  /// Auto-refresh middleware
-  /// Automatically refreshes token if it's about to expire
   Future<bool> autoRefreshMiddleware() async {
     try {
       final session = _sessionManager.currentSession;
       if (session == null) return false;
       
-      // Check if session expires soon
       if (session.expiresSoon) {
         final refreshedSession = await _sessionManager.forceRefresh();
         return refreshedSession != null;
@@ -257,11 +224,8 @@ class SupabaseAuthMiddleware {
     }
   }
   
-  /// HTTP request middleware for API calls
-  /// Adds auth headers and handles token refresh
   Future<Map<String, String>?> getAuthHeaders() async {
     try {
-      // Auto-refresh if needed
       await autoRefreshMiddleware();
       
       final accessToken = _sessionManager.accessToken;
@@ -276,14 +240,11 @@ class SupabaseAuthMiddleware {
     }
   }
   
-  /// Session validation middleware
-  /// Validates current session and refreshes if needed
   Future<bool> validateSession() async {
     try {
       final session = _sessionManager.currentSession;
       if (session == null) return false;
       
-      // If session is expired, try to refresh
       if (session.isExpired) {
         final refreshedSession = await _sessionManager.forceRefresh();
         return refreshedSession != null;
@@ -295,37 +256,28 @@ class SupabaseAuthMiddleware {
     }
   }
   
-  /// Logout middleware
-  /// Clears session and redirects to login
   Future<void> logoutMiddleware({
     Function(String route)? onRedirect,
   }) async {
     try {
-      // TODO: Use official supabase client for sign out
       await _sessionManager.clearSession();
       
       if (onRedirect != null) {
         onRedirect('/login');
       }
     } catch (e) {
-      // Handle logout error
     }
   }
   
-  /// Dispose resources
   void dispose() {
     _guardResultController.close();
   }
 }
 
-/// Auth middleware extensions for easy usage
 extension AuthMiddlewareExtensions on SupabaseAuthMiddleware {
-  /// Quick check for authenticated user
   bool get isAuthenticated => _sessionManager.isAuthenticated;
   
-  /// Quick check for user ID
   String? get currentUserId => _sessionManager.userId;
   
-  /// Quick check for access token
   String? get currentAccessToken => _sessionManager.accessToken;
 } 

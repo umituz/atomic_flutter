@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import '../../themes/atomic_theme_provider.dart';
 import '../../themes/atomic_theme_data.dart';
 
-/// Atomic Tooltip Component
-/// Material Design tooltip with theme integration
 class AtomicTooltip extends StatelessWidget {
   final Widget child;
   final String message;
@@ -121,8 +119,6 @@ class AtomicTooltip extends StatelessWidget {
   }
 }
 
-/// Atomic Rich Tooltip Component
-/// Enhanced tooltip with rich content support
 class AtomicRichTooltip extends StatelessWidget {
   final Widget child;
   final InlineSpan message;
@@ -202,7 +198,6 @@ class AtomicRichTooltip extends StatelessWidget {
   }
 }
 
-/// Tooltip helper utility for common tooltip patterns
 class AtomicTooltipHelper {
   static Widget help({
     required Widget child,
@@ -240,14 +235,12 @@ class AtomicTooltipHelper {
   }
 }
 
-/// Tooltip variant options
 enum AtomicTooltipVariant {
   standard,
   dark,
   accent,
 }
 
-/// Tooltip size options
 enum AtomicTooltipSize {
   small,
   medium,

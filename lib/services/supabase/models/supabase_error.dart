@@ -1,7 +1,4 @@
-/// Supabase Error Model
-/// Standardized error representation for Supabase operations
 
-/// Represents an error returned by Supabase
 class SupabaseError {
   const SupabaseError({
     required this.message,
@@ -11,22 +8,16 @@ class SupabaseError {
     this.statusCode,
   });
 
-  /// Error message
   final String message;
   
-  /// Error code
   final String? code;
   
-  /// Additional error details
   final String? details;
   
-  /// Hint for resolving the error
   final String? hint;
   
-  /// HTTP status code
   final int? statusCode;
 
-  /// Create from JSON
   factory SupabaseError.fromJson(Map<String, dynamic> json) {
     return SupabaseError(
       message: json['message'] as String? ?? 'Unknown error',
@@ -37,7 +28,6 @@ class SupabaseError {
     );
   }
 
-  /// Create from Exception
   factory SupabaseError.fromException(Exception exception) {
     return SupabaseError(
       message: exception.toString(),
@@ -45,7 +35,6 @@ class SupabaseError {
     );
   }
 
-  /// Create network error
   factory SupabaseError.network({String? message}) {
     return SupabaseError(
       message: message ?? 'Network connection failed',
@@ -54,7 +43,6 @@ class SupabaseError {
     );
   }
 
-  /// Create timeout error
   factory SupabaseError.timeout({String? message}) {
     return SupabaseError(
       message: message ?? 'Request timed out',
@@ -63,7 +51,6 @@ class SupabaseError {
     );
   }
 
-  /// Create auth error
   factory SupabaseError.auth({String? message}) {
     return SupabaseError(
       message: message ?? 'Authentication failed',
@@ -72,7 +59,6 @@ class SupabaseError {
     );
   }
 
-  /// Create permission error
   factory SupabaseError.permission({String? message}) {
     return SupabaseError(
       message: message ?? 'Insufficient permissions',
@@ -81,7 +67,6 @@ class SupabaseError {
     );
   }
 
-  /// Create not found error
   factory SupabaseError.notFound({String? message}) {
     return SupabaseError(
       message: message ?? 'Resource not found',
@@ -90,7 +75,6 @@ class SupabaseError {
     );
   }
 
-  /// Create validation error
   factory SupabaseError.validation({String? message}) {
     return SupabaseError(
       message: message ?? 'Validation failed',
@@ -99,7 +83,6 @@ class SupabaseError {
     );
   }
 
-  /// Create server error
   factory SupabaseError.server({String? message}) {
     return SupabaseError(
       message: message ?? 'Internal server error',
@@ -108,7 +91,6 @@ class SupabaseError {
     );
   }
 
-  /// Create database error
   factory SupabaseError.database(String message) {
     return SupabaseError(
       message: message,
@@ -117,7 +99,6 @@ class SupabaseError {
     );
   }
 
-  /// Create storage error
   factory SupabaseError.storage(String message) {
     return SupabaseError(
       message: message,
@@ -126,7 +107,6 @@ class SupabaseError {
     );
   }
 
-  /// Convert to JSON
   Map<String, dynamic> toJson() {
     return {
       'message': message,
@@ -137,22 +117,16 @@ class SupabaseError {
     };
   }
 
-  /// Check if error is related to authentication
   bool get isAuthError => code?.contains('AUTH') == true || statusCode == 401;
 
-  /// Check if error is related to permissions
   bool get isPermissionError => code?.contains('PERMISSION') == true || statusCode == 403;
 
-  /// Check if error is network related
   bool get isNetworkError => code?.contains('NETWORK') == true || statusCode == 0;
 
-  /// Check if error is server related
   bool get isServerError => (statusCode ?? 0) >= 500;
 
-  /// Check if error is client related
   bool get isClientError => (statusCode ?? 0) >= 400 && (statusCode ?? 0) < 500;
 
-  /// Get user-friendly error message
   String get userFriendlyMessage {
     if (isNetworkError) {
       return 'Please check your internet connection and try again.';

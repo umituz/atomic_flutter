@@ -4,8 +4,6 @@ import '../../themes/atomic_theme_data.dart';
 import '../../tokens/borders/atomic_borders.dart';
 import '../../tokens/shadows/atomic_shadows.dart';
 
-/// Atomic Avatar Component
-/// User avatars with image, initials, or icon support
 class AtomicAvatar extends StatelessWidget {
   const AtomicAvatar({
     super.key,
@@ -222,8 +220,6 @@ class AtomicAvatar extends StatelessWidget {
   }
 }
 
-/// Avatar Group Component
-/// Display multiple avatars in a stack
 class AtomicAvatarGroup extends StatelessWidget {
   const AtomicAvatarGroup({
     super.key,
@@ -327,7 +323,6 @@ class AtomicAvatarGroup extends StatelessWidget {
   }
 }
 
-/// Avatar size options
 enum AtomicAvatarSize {
   tiny,
   small,
@@ -337,13 +332,11 @@ enum AtomicAvatarSize {
   massive,
 }
 
-/// Avatar shape options
 enum AtomicAvatarShape {
   circle,
   square,
 }
 
-/// Avatar shadow options
 enum AtomicAvatarShadow {
   none,
   small,

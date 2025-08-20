@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import '../tokens/colors/atomic_colors.dart';
 
-/// Atomic Icon List Item Model
-/// Represents a list item with icon, title, and subtitle with customizable colors
 class AtomicIconListItemModel {
   const AtomicIconListItemModel({
     required this.title,
@@ -24,7 +22,6 @@ class AtomicIconListItemModel {
   final VoidCallback? onTap;
   final bool enabled;
 
-  /// Create a copy of this item with modified properties
   AtomicIconListItemModel copyWith({
     String? title,
     String? subtitle,
@@ -47,7 +44,6 @@ class AtomicIconListItemModel {
     );
   }
 
-  /// Create from JSON
   factory AtomicIconListItemModel.fromJson(Map<String, dynamic> json) {
     return AtomicIconListItemModel(
       title: json['title'] ?? '',
@@ -62,7 +58,6 @@ class AtomicIconListItemModel {
     );
   }
 
-  /// Convert to JSON
   Map<String, dynamic> toJson() {
     return {
       'title': title,

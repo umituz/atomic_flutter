@@ -3,8 +3,6 @@ import '../../themes/atomic_theme_provider.dart';
 import '../../themes/atomic_theme_data.dart';
 import '../../tokens/animations/atomic_animations.dart';
 
-/// Atomic Radio Component
-/// Radio button for single selection from multiple options
 class AtomicRadio<T> extends StatelessWidget {
   const AtomicRadio({
     super.key,
@@ -123,8 +121,6 @@ class AtomicRadio<T> extends StatelessWidget {
   }
 }
 
-/// Atomic Radio Group Component
-/// Group of radio buttons for single selection
 class AtomicRadioGroup<T> extends StatelessWidget {
   const AtomicRadioGroup({
     super.key,
@@ -199,7 +195,6 @@ class AtomicRadioGroup<T> extends StatelessWidget {
   }
 }
 
-/// Radio item configuration
 class AtomicRadioItem<T> {
   const AtomicRadioItem({
     required this.value,
@@ -212,7 +207,6 @@ class AtomicRadioItem<T> {
   final bool enabled;
 }
 
-/// Radio size options
 enum AtomicRadioSize {
   small,
   medium,

@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 import '../colors/atomic_colors.dart';
 
-/// Atomic Design System Typography Tokens
-/// Following Material Design 3 principles
 class AtomicTypography {
-  // Private constructor to prevent instantiation
   AtomicTypography._();
 
-  // ===== FONT FAMILIES =====
   static const String fontFamily = 'Roboto';
   static const String monospaceFontFamily = 'RobotoMono';
 
-  // ===== FONT WEIGHTS =====
   static const FontWeight thin = FontWeight.w100;
   static const FontWeight light = FontWeight.w300;
   static const FontWeight regular = FontWeight.w400;
@@ -21,9 +16,7 @@ class AtomicTypography {
   static const FontWeight extraBold = FontWeight.w800;
   static const FontWeight black = FontWeight.w900;
 
-  // ===== TEXT STYLES =====
   
-  // Display
   static const TextStyle displayLarge = TextStyle(
     fontSize: 57,
     fontWeight: regular,
@@ -45,7 +38,6 @@ class AtomicTypography {
     height: 1.22,
   );
 
-  // Headline
   static const TextStyle headlineLarge = TextStyle(
     fontSize: 32,
     fontWeight: regular,
@@ -67,7 +59,6 @@ class AtomicTypography {
     height: 1.33,
   );
 
-  // Title
   static const TextStyle titleLarge = TextStyle(
     fontSize: 22,
     fontWeight: medium,
@@ -89,7 +80,6 @@ class AtomicTypography {
     height: 1.43,
   );
 
-  // Body
   static const TextStyle bodyLarge = TextStyle(
     fontSize: 16,
     fontWeight: regular,
@@ -111,7 +101,6 @@ class AtomicTypography {
     height: 1.33,
   );
 
-  // Label
   static const TextStyle labelLarge = TextStyle(
     fontSize: 14,
     fontWeight: medium,
@@ -133,14 +122,11 @@ class AtomicTypography {
     height: 1.45,
   );
 
-  // ===== HELPER METHODS =====
   
-  /// Apply color to text style
   static TextStyle withColor(TextStyle style, Color color) {
     return style.copyWith(color: color);
   }
   
-  /// Common text style variations
   static TextStyle get displayLargePrimary => displayLarge.copyWith(color: AtomicColors.textPrimary);
   static TextStyle get displayMediumPrimary => displayMedium.copyWith(color: AtomicColors.textPrimary);
   static TextStyle get displaySmallPrimary => displaySmall.copyWith(color: AtomicColors.textPrimary);

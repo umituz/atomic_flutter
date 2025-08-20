@@ -3,8 +3,6 @@ import '../../themes/atomic_theme_provider.dart';
 import '../../themes/atomic_theme_data.dart';
 import '../display/atomic_text.dart';
 
-/// Atomic Slider Component
-/// Material Design slider with theme integration
 class AtomicSlider extends StatelessWidget {
   final double value;
   final ValueChanged<double>? onChanged;
@@ -131,8 +129,6 @@ class AtomicSlider extends StatelessWidget {
   }
 }
 
-/// Atomic Range Slider Component
-/// Material Design range slider for selecting a range of values
 class AtomicRangeSlider extends StatelessWidget {
   final RangeValues values;
   final ValueChanged<RangeValues>? onChanged;

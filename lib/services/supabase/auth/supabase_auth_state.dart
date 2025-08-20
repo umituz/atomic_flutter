@@ -1,43 +1,29 @@
-/// Supabase Authentication State
-/// Manages authentication state for Supabase integration
 
 import '../models/supabase_user.dart';
 import '../models/supabase_response.dart';
 
-/// Authentication state
 enum AuthState {
-  /// User is not authenticated
   unauthenticated,
   
-  /// User is authenticated
   authenticated,
   
-  /// Authentication is in progress
   loading,
   
-  /// Authentication failed
   error,
 }
 
-/// Authentication event types
 enum AuthEvent {
-  /// User signed in
   signedIn,
   
-  /// User signed out
   signedOut,
   
-  /// Token refreshed
   tokenRefreshed,
   
-  /// Password recovery initiated
   passwordRecovery,
   
-  /// User updated
   userUpdated,
 }
 
-/// Authentication state data
 class SupabaseAuthState {
   const SupabaseAuthState({
     required this.state,
@@ -47,39 +33,28 @@ class SupabaseAuthState {
     this.isLoading = false,
   });
 
-  /// Current authentication state
   final AuthState state;
   
-  /// Current authenticated user
   final SupabaseUser? user;
   
-  /// Current session
   final SupabaseSession? session;
   
-  /// Current error message
   final String? errorMessage;
   
-  /// Loading indicator
   final bool isLoading;
 
-  /// Check if user is authenticated
   bool get isAuthenticated => state == AuthState.authenticated && user != null;
 
-  /// Check if user is not authenticated
   bool get isUnauthenticated => state == AuthState.unauthenticated;
 
-  /// Check if authentication is in progress
   bool get isLoadingAuth => state == AuthState.loading;
 
-  /// Check if there's an error
   bool get hasError => state == AuthState.error && errorMessage != null;
 
-  /// Initial unauthenticated state
   static const initial = SupabaseAuthState(
     state: AuthState.unauthenticated,
   );
 
-  /// Create loading state
   SupabaseAuthState loading() {
     return SupabaseAuthState(
       state: AuthState.loading,
@@ -89,7 +64,6 @@ class SupabaseAuthState {
     );
   }
 
-  /// Create authenticated state
   SupabaseAuthState authenticated({
     required SupabaseUser user,
     SupabaseSession? session,
@@ -101,14 +75,12 @@ class SupabaseAuthState {
     );
   }
 
-  /// Create unauthenticated state
   SupabaseAuthState unauthenticated() {
     return const SupabaseAuthState(
       state: AuthState.unauthenticated,
     );
   }
 
-  /// Create error state
   SupabaseAuthState withError(String errorMessage) {
     return SupabaseAuthState(
       state: AuthState.error,
@@ -118,7 +90,6 @@ class SupabaseAuthState {
     );
   }
 
-  /// Copy with new values
   SupabaseAuthState copyWith({
     AuthState? state,
     SupabaseUser? user,
@@ -157,7 +128,6 @@ class SupabaseAuthState {
   }
 }
 
-/// Authentication event data
 class SupabaseAuthEvent {
   const SupabaseAuthEvent({
     required this.event,
@@ -166,16 +136,12 @@ class SupabaseAuthEvent {
     this.error,
   });
 
-  /// Event type
   final AuthEvent event;
   
-  /// User associated with event
   final SupabaseUser? user;
   
-  /// Session associated with event
   final SupabaseSession? session;
   
-  /// Error associated with event
   final String? error;
 
   @override

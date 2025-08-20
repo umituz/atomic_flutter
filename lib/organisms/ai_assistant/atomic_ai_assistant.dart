@@ -1,5 +1,3 @@
-// 🤖 ATOMIC AI ASSISTANT - Reusable AI Chat Interface
-// A complete AI assistant component with chat interface, message history, and customizable actions
 
 import 'package:flutter/material.dart';
 import '../../themes/atomic_theme_provider.dart';
@@ -11,7 +9,6 @@ import '../../atoms/feedback/atomic_dot_loading.dart';
 import '../../atoms/overlays/atomic_dialog.dart';
 import '../../tokens/animations/atomic_animations.dart';
 
-/// Message model for AI chat
 class AtomicAIMessage {
   final String content;
   final bool isUser;
@@ -28,7 +25,6 @@ class AtomicAIMessage {
   });
 }
 
-/// Configuration for AI Assistant
 class AtomicAIAssistantConfig {
   final String title;
   final String subtitle;
@@ -59,7 +55,6 @@ class AtomicAIAssistantConfig {
   });
 }
 
-/// Header action button
 class AtomicAIAction {
   final String label;
   final IconData icon;
@@ -74,7 +69,6 @@ class AtomicAIAction {
   });
 }
 
-/// Suggestion card
 class AtomicAISuggestion {
   final String text;
   final IconData icon;
@@ -87,10 +81,8 @@ class AtomicAISuggestion {
   });
 }
 
-/// Response generator function type
 typedef AtomicAIResponseGenerator = Future<String> Function(String message);
 
-/// Atomic AI Assistant Component
 class AtomicAIAssistant extends StatefulWidget {
   final AtomicAIAssistantConfig config;
   final Function(String message)? onSendMessage;
@@ -149,7 +141,6 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
   void _handleSendMessage(String message) async {
     if (message.trim().isEmpty) return;
 
-    // Add user message
     final userMessage = AtomicAIMessage(
       content: message,
       isUser: true,
@@ -166,7 +157,6 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
     widget.onMessageAdded?.call(userMessage);
     widget.onSendMessage?.call(message);
 
-    // Generate AI response
     if (widget.config.responseGenerator != null) {
       try {
         final response = await widget.config.responseGenerator!(message);
@@ -197,7 +187,6 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
         }
       }
     } else {
-      // Default response if no generator provided
       await Future.delayed(const Duration(milliseconds: 800));
       
       if (mounted) {
@@ -260,7 +249,6 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
         _messageController.clear();
       });
       
-      // Scroll to top after clearing
       if (_scrollController.hasClients) {
         _scrollController.jumpTo(0);
       }
@@ -280,17 +268,14 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
     
     return Column(
       children: [
-        // Header
         widget.customHeader ?? _buildDefaultHeader(theme),
         
-        // Chat Messages Area
         Expanded(
           child: _messages.isEmpty 
               ? _buildEmptyState(theme)
               : _buildMessageList(theme),
         ),
         
-        // Input Area
         widget.customInput ?? _buildDefaultInput(theme),
       ],
     );
@@ -317,7 +302,6 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
           ),
           child: Row(
             children: [
-              // Icon
               Container(
                 padding: EdgeInsets.all(theme.spacing.xs),
                 decoration: BoxDecoration(
@@ -337,7 +321,6 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
               ),
               SizedBox(width: theme.spacing.sm),
               
-              // Title
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -359,7 +342,6 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
                 ),
               ),
               
-              // Custom actions
               if (widget.config.headerActions != null)
                 ...widget.config.headerActions!.map((action) {
                   if (action.showLabel) {
@@ -387,7 +369,6 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
                   }
                 }),
               
-              // Clear button at the end
               if (widget.config.showClearButton && 
                   (widget.config.showClearButtonAlways || _messages.isNotEmpty)) ...[
                 SizedBox(width: theme.spacing.xs),
@@ -425,7 +406,6 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                // Animated Icon
                 TweenAnimationBuilder<double>(
                   tween: Tween(begin: 0.0, end: 1.0),
                   duration: AtomicAnimations.normal,
@@ -458,7 +438,6 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
                 
                 SizedBox(height: theme.spacing.md),
                 
-                // Welcome Text
                 if (widget.config.emptyStateTitle != null)
                   Text(
                     widget.config.emptyStateTitle!,
@@ -482,7 +461,6 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
                   ),
                 ],
                 
-                // Suggestions
                 if (widget.config.suggestions != null) ...[
                   SizedBox(height: theme.spacing.lg),
                   Flexible(
@@ -672,7 +650,6 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
           padding: EdgeInsets.all(theme.spacing.md),
           child: Row(
             children: [
-              // Input Field
               Expanded(
                 child: Container(
                   height: 48,
@@ -706,10 +683,8 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
                 ),
               ),
               
-              // Spacing between input and button
               SizedBox(width: theme.spacing.sm),
               
-              // Send Button
               Container(
                 width: 48,
                 height: 48,

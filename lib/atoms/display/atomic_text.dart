@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import '../../themes/atomic_theme_provider.dart';
 import '../../themes/atomic_theme_data.dart';
 
-/// Atomic Text Component
-/// Flexible text component with theme integration
 class AtomicText extends StatelessWidget {
   final String text;
   final TextStyle? style;
@@ -26,7 +24,6 @@ class AtomicText extends StatelessWidget {
     this.atomicStyle,
   });
 
-  // Display variants
   const AtomicText.displayLarge(
     this.text, {
     super.key,
@@ -60,7 +57,6 @@ class AtomicText extends StatelessWidget {
     this.lineHeight,
   }) : atomicStyle = AtomicTextStyle.displaySmall;
 
-  // Headline variants
   const AtomicText.headlineLarge(
     this.text, {
     super.key,
@@ -94,7 +90,6 @@ class AtomicText extends StatelessWidget {
     this.lineHeight,
   }) : atomicStyle = AtomicTextStyle.headlineSmall;
 
-  // Title variants
   const AtomicText.titleLarge(
     this.text, {
     super.key,
@@ -128,7 +123,6 @@ class AtomicText extends StatelessWidget {
     this.lineHeight,
   }) : atomicStyle = AtomicTextStyle.titleSmall;
 
-  // Body variants
   const AtomicText.bodyLarge(
     this.text, {
     super.key,
@@ -162,7 +156,6 @@ class AtomicText extends StatelessWidget {
     this.lineHeight,
   }) : atomicStyle = AtomicTextStyle.bodySmall;
 
-  // Label variants
   const AtomicText.labelLarge(
     this.text, {
     super.key,
@@ -254,12 +247,10 @@ class AtomicText extends StatelessWidget {
         break;
     }
 
-    // Apply custom height if provided
     if (lineHeight != null) {
       baseStyle = baseStyle.copyWith(height: lineHeight);
     }
 
-    // Merge with custom style if provided
     final effectiveStyle = style != null ? baseStyle.merge(style) : baseStyle;
 
     return Text(
@@ -273,7 +264,6 @@ class AtomicText extends StatelessWidget {
   }
 }
 
-/// Text style variants
 enum AtomicTextStyle {
   displayLarge,
   displayMedium,

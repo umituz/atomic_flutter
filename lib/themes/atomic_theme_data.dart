@@ -5,8 +5,6 @@ import '../tokens/spacing/atomic_spacing.dart';
 import '../tokens/borders/atomic_borders.dart';
 import '../tokens/animations/atomic_animations.dart';
 
-/// Atomic Theme Data
-/// Holds all theme configuration for an atomic design system
 class AtomicThemeData {
   const AtomicThemeData({
     required this.name,
@@ -26,13 +24,11 @@ class AtomicThemeData {
   final AtomicBordersTheme borders;
   final AtomicAnimationsTheme animations;
 
-  /// Default theme
   static AtomicThemeData get defaultTheme => const AtomicThemeData(
     name: 'Default',
     colors: AtomicColorScheme.defaultScheme,
   );
 
-  /// Copy with method for theme customization
   AtomicThemeData copyWith({
     String? name,
     AtomicColorScheme? colors,
@@ -53,7 +49,6 @@ class AtomicThemeData {
     );
   }
 
-  /// Equality operator
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
@@ -80,7 +75,6 @@ class AtomicThemeData {
     );
   }
 
-  /// Create Material Theme from Atomic Theme
   ThemeData toMaterialTheme({Brightness brightness = Brightness.light}) {
     return ThemeData(
       useMaterial3: true,
@@ -174,8 +168,6 @@ class AtomicThemeData {
   }
 }
 
-/// Atomic Color Scheme
-/// Defines all colors for a theme
 class AtomicColorScheme {
   const AtomicColorScheme({
     required this.primary,
@@ -261,7 +253,6 @@ class AtomicColorScheme {
   final Color gray800;
   final Color gray900;
 
-  /// Copy with method for color scheme customization
   AtomicColorScheme copyWith({
     Color? primary,
     Color? primaryLight,
@@ -348,7 +339,6 @@ class AtomicColorScheme {
     );
   }
 
-  /// Equality operator
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
@@ -373,7 +363,6 @@ class AtomicColorScheme {
     );
   }
 
-  /// Default color scheme
   static const AtomicColorScheme defaultScheme = AtomicColorScheme(
     primary: AtomicColors.primary,
     primaryLight: AtomicColors.primaryLight,
@@ -418,7 +407,6 @@ class AtomicColorScheme {
   );
 }
 
-/// Typography Theme
 class AtomicTypographyTheme {
   const AtomicTypographyTheme({
     this.displayLarge = AtomicTypography.displayLarge,
@@ -455,7 +443,6 @@ class AtomicTypographyTheme {
   final TextStyle labelSmall;
 }
 
-/// Spacing Theme
 class AtomicSpacingTheme {
   const AtomicSpacingTheme({
     this.unit = AtomicSpacing.unit,
@@ -492,13 +479,10 @@ class AtomicSpacingTheme {
   final double inputPaddingY;
 }
 
-/// Shadows Theme
 class AtomicShadowsTheme {
   const AtomicShadowsTheme();
-  // Shadows are generated dynamically based on colors
 }
 
-/// Borders Theme
 class AtomicBordersTheme {
   const AtomicBordersTheme({
     this.radiusXs = AtomicBorders.radiusXs,
@@ -527,7 +511,6 @@ class AtomicBordersTheme {
   final BorderRadius modal;
 }
 
-/// Animations Theme
 class AtomicAnimationsTheme {
   const AtomicAnimationsTheme({
     this.fast = AtomicAnimations.fast,

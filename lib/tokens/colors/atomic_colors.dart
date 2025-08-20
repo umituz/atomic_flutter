@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 
-/// Atomic Design System Color Tokens
-/// Following Flutter Mobile Standards with modern color API
 class AtomicColors {
-  // Private constructor to prevent instantiation
   AtomicColors._();
 
-  // ===== BRAND COLORS =====
   static const Color primary = Color(0xFF8B5CF6);
   static const Color primaryLight = Color(0xFFA78BFA);
   static const Color primaryDark = Color(0xFF7C3AED);
@@ -19,7 +15,6 @@ class AtomicColors {
   static const Color accentLight = Color(0xFFFBBF24);
   static const Color accentDark = Color(0xFFD97706);
 
-  // ===== NEUTRAL COLORS =====
   static const Color gray50 = Color(0xFFFAFAFA);
   static const Color gray100 = Color(0xFFF4F4F5);
   static const Color gray200 = Color(0xFFE4E4E7);
@@ -31,7 +26,6 @@ class AtomicColors {
   static const Color gray800 = Color(0xFF27272A);
   static const Color gray900 = Color(0xFF18181B);
 
-  // ===== SEMANTIC COLORS =====
   static const Color success = Color(0xFF10B981);
   static const Color successLight = Color(0xFF34D399);
   static const Color successDark = Color(0xFF059669);
@@ -48,27 +42,22 @@ class AtomicColors {
   static const Color infoLight = Color(0xFF60A5FA);
   static const Color infoDark = Color(0xFF2563EB);
 
-  // ===== SURFACE COLORS =====
   static const Color background = Color(0xFFFFFFFF);
   static const Color backgroundSecondary = Color(0xFFF9FAFB);
   static const Color surface = Color(0xFFFFFFFF);
   static const Color surfaceSecondary = Color(0xFFF3F4F6);
   
-  // ===== TEXT COLORS =====
   static const Color textPrimary = gray900;
   static const Color textSecondary = gray600;
   static const Color textTertiary = gray400;
   static const Color textDisabled = gray300;
   static const Color textInverse = Color(0xFFFFFFFF);
 
-  // ===== UTILITY METHODS =====
   
-  /// Get color with opacity using modern Flutter API
   static Color withAlpha(Color color, double alpha) {
     return color.withValues(alpha: alpha);
   }
   
-  /// Common opacity values
   static Color get primaryWithAlpha10 => primary.withValues(alpha: 0.1);
   static Color get primaryWithAlpha20 => primary.withValues(alpha: 0.2);
   static Color get primaryWithAlpha50 => primary.withValues(alpha: 0.5);
@@ -78,7 +67,6 @@ class AtomicColors {
   static Color get overlayColor => gray900.withValues(alpha: 0.5);
   static Color get dividerColor => gray200.withValues(alpha: 0.5);
   
-  /// Gradient Helpers
   static const LinearGradient primaryGradient = LinearGradient(
     colors: [primary, primaryDark],
     begin: Alignment.topLeft,

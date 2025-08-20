@@ -4,8 +4,6 @@ import '../../themes/atomic_theme_data.dart';
 import '../../tokens/borders/atomic_borders.dart';
 import '../display/atomic_text.dart';
 
-/// Atomic Tag Component
-/// Small label/tag component for categorization
 class AtomicTag extends StatelessWidget {
   final String label;
   final Color? color;
@@ -186,14 +184,12 @@ class AtomicTag extends StatelessWidget {
   }
 }
 
-/// Tag size options
 enum AtomicTagSize {
   small,
   medium,
   large,
 }
 
-/// Tag variant options
 enum AtomicTagVariant {
   filled,
   outlined,

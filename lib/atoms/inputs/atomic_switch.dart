@@ -3,8 +3,6 @@ import '../../themes/atomic_theme_provider.dart';
 import '../../themes/atomic_theme_data.dart';
 import '../../tokens/animations/atomic_animations.dart';
 
-/// Atomic Switch Component
-/// Modern toggle switch with customizable styling
 class AtomicSwitch extends StatefulWidget {
   const AtomicSwitch({
     super.key,
@@ -261,14 +259,12 @@ class _AtomicSwitchState extends State<AtomicSwitch>
   }
 }
 
-/// Switch size options
 enum AtomicSwitchSize {
   small,
   medium,
   large,
 }
 
-/// Switch label position options
 enum AtomicSwitchLabelPosition {
   start,
   end,

@@ -6,8 +6,6 @@ import '../../tokens/borders/atomic_borders.dart';
 import '../../atoms/display/atomic_text.dart';
 import '../../atoms/buttons/atomic_icon_button.dart';
 
-/// Atomic Date Picker Component
-/// Material Design date picker with theme integration
 class AtomicDatePicker extends StatefulWidget {
   const AtomicDatePicker({
     super.key,
@@ -43,7 +41,6 @@ class AtomicDatePicker extends StatefulWidget {
     this.dateFormat,
   });
 
-  // Core date picker properties
   final DateTime? initialDate;
   final DateTime? firstDate;
   final DateTime? lastDate;
@@ -52,7 +49,6 @@ class AtomicDatePicker extends StatefulWidget {
   final DatePickerMode initialDatePickerMode;
   final SelectableDayPredicate? selectableDayPredicate;
 
-  // Dialog properties
   final String? helpText;
   final String? cancelText;
   final String? confirmText;
@@ -62,7 +58,6 @@ class AtomicDatePicker extends StatefulWidget {
   final TextDirection? textDirection;
   final TransitionBuilder? builder;
 
-  // Entry mode properties
   final DatePickerEntryMode initialEntryMode;
   final String? fieldHintText;
   final String? fieldLabelText;
@@ -70,7 +65,6 @@ class AtomicDatePicker extends StatefulWidget {
   final String? errorInvalidText;
   final TextInputType? keyboardType;
 
-  // Atomic-specific properties
   final AtomicDatePickerVariant variant;
   final AtomicDatePickerSize size;
   final bool showIcon;
@@ -121,7 +115,6 @@ class _AtomicDatePickerState extends State<AtomicDatePicker> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        // Label
         if (widget.label != null) ...[
           AtomicText(
             widget.label!,
@@ -130,7 +123,6 @@ class _AtomicDatePickerState extends State<AtomicDatePicker> {
           SizedBox(height: theme.spacing.xs),
         ],
         
-        // Date picker field
         InkWell(
           onTap: widget.enabled && !widget.readOnly ? _showDatePicker : null,
           borderRadius: _getBorderRadius(theme),
@@ -140,7 +132,6 @@ class _AtomicDatePickerState extends State<AtomicDatePicker> {
             decoration: _getDecoration(theme),
             child: Row(
               children: [
-                // Leading icon
                 if (widget.showIcon) ...[
                   AtomicIconButton(
                     icon: Icons.calendar_today,
@@ -151,7 +142,6 @@ class _AtomicDatePickerState extends State<AtomicDatePicker> {
                   SizedBox(width: theme.spacing.sm),
                 ],
                 
-                // Date text
                 Expanded(
                   child: TextField(
                     controller: _controller,
@@ -166,7 +156,6 @@ class _AtomicDatePickerState extends State<AtomicDatePicker> {
                   ),
                 ),
                 
-                // Trailing icon
                 if (widget.showIcon) ...[
                   SizedBox(width: theme.spacing.sm),
                   Icon(
@@ -182,7 +171,6 @@ class _AtomicDatePickerState extends State<AtomicDatePicker> {
           ),
         ),
         
-        // Helper text or error text
         if (widget.helperText != null || widget.errorText != null) ...[
           SizedBox(height: theme.spacing.xs),
           AtomicText(
@@ -252,7 +240,6 @@ class _AtomicDatePickerState extends State<AtomicDatePicker> {
       return widget.dateFormat!(date);
     }
     
-    // Default format: DD/MM/YYYY
     return '${date.day.toString().padLeft(2, '0')}/'
            '${date.month.toString().padLeft(2, '0')}/'
            '${date.year}';
@@ -375,21 +362,18 @@ class _AtomicDatePickerState extends State<AtomicDatePicker> {
   }
 }
 
-/// Atomic Date Picker variant types
 enum AtomicDatePickerVariant {
   filled,      // Filled background
   outlined,    // Outlined border
   underlined,  // Bottom underline
 }
 
-/// Atomic Date Picker size variants
 enum AtomicDatePickerSize {
   small,       // Compact size
   medium,      // Standard size
   large,       // Large size
 }
 
-/// Simple Date Picker Helper
 class AtomicSimpleDatePicker extends StatelessWidget {
   const AtomicSimpleDatePicker({
     super.key,
@@ -418,7 +402,6 @@ class AtomicSimpleDatePicker extends StatelessWidget {
   }
 }
 
-/// Date Range Picker Helper
 class AtomicDateRangePicker extends StatefulWidget {
   const AtomicDateRangePicker({
     super.key,
@@ -470,7 +453,6 @@ class _AtomicDateRangePickerState extends State<AtomicDateRangePicker> {
           onDateSelected: (date) {
             setState(() {
               _startDate = date;
-              // If end date is before start date, clear it
               if (_endDate != null && date != null && _endDate!.isBefore(date)) {
                 _endDate = null;
               }

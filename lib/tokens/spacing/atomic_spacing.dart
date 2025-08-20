@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 
-/// Atomic Design System Spacing Tokens
-/// Based on 8-point grid system
 class AtomicSpacing {
-  // Private constructor to prevent instantiation
   AtomicSpacing._();
 
-  // ===== BASE UNIT =====
   static const double unit = 8.0;
 
-  // ===== SPACING SCALE =====
   static const double xxs = unit * 0.5;  // 4
   static const double xs = unit * 1;     // 8
   static const double sm = unit * 1.5;   // 12
@@ -20,7 +15,6 @@ class AtomicSpacing {
   static const double xxxl = unit * 6;   // 48
   static const double huge = unit * 8;   // 64
 
-  // ===== COMPONENT SPACING =====
   static const double buttonPaddingX = md;
   static const double buttonPaddingY = sm;
   
@@ -36,10 +30,8 @@ class AtomicSpacing {
   static const double modalPadding = lg;
   static const double sectionPadding = xl;
   
-  // ===== EDGE INSETS HELPERS =====
   static const EdgeInsets zero = EdgeInsets.zero;
   
-  // All sides
   static EdgeInsets all(double value) => EdgeInsets.all(value);
   static const EdgeInsets allXxs = EdgeInsets.all(xxs);
   static const EdgeInsets allXs = EdgeInsets.all(xs);
@@ -49,7 +41,6 @@ class AtomicSpacing {
   static const EdgeInsets allXl = EdgeInsets.all(xl);
   static const EdgeInsets allXxl = EdgeInsets.all(xxl);
   
-  // Horizontal
   static EdgeInsets horizontal(double value) => EdgeInsets.symmetric(horizontal: value);
   static const EdgeInsets horizontalXs = EdgeInsets.symmetric(horizontal: xs);
   static const EdgeInsets horizontalSm = EdgeInsets.symmetric(horizontal: sm);
@@ -57,7 +48,6 @@ class AtomicSpacing {
   static const EdgeInsets horizontalLg = EdgeInsets.symmetric(horizontal: lg);
   static const EdgeInsets horizontalXl = EdgeInsets.symmetric(horizontal: xl);
   
-  // Vertical
   static EdgeInsets vertical(double value) => EdgeInsets.symmetric(vertical: value);
   static const EdgeInsets verticalXs = EdgeInsets.symmetric(vertical: xs);
   static const EdgeInsets verticalSm = EdgeInsets.symmetric(vertical: sm);
@@ -65,11 +55,9 @@ class AtomicSpacing {
   static const EdgeInsets verticalLg = EdgeInsets.symmetric(vertical: lg);
   static const EdgeInsets verticalXl = EdgeInsets.symmetric(vertical: xl);
   
-  // Symmetric
   static EdgeInsets symmetric({double horizontal = 0, double vertical = 0}) => 
     EdgeInsets.symmetric(horizontal: horizontal, vertical: vertical);
   
-  // Only
   static EdgeInsets only({
     double left = 0,
     double top = 0,
@@ -77,7 +65,6 @@ class AtomicSpacing {
     double bottom = 0,
   }) => EdgeInsets.only(left: left, top: top, right: right, bottom: bottom);
   
-  // Common patterns
   static const EdgeInsets listPadding = EdgeInsets.symmetric(horizontal: md, vertical: xs);
   static const EdgeInsets cardContentPadding = EdgeInsets.all(lg);
   static const EdgeInsets screenPadding = EdgeInsets.all(md);

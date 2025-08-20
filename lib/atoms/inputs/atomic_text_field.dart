@@ -6,8 +6,6 @@ import '../../tokens/typography/atomic_typography.dart';
 import '../../tokens/animations/atomic_animations.dart';
 import '../../tokens/borders/atomic_borders.dart';
 
-/// Atomic Text Field Component
-/// Customizable text input with validation and error handling
 class AtomicTextField extends StatefulWidget {
   const AtomicTextField({
     super.key,
@@ -372,7 +370,6 @@ class _AtomicTextFieldState extends State<AtomicTextField> {
   }
 }
 
-/// Text field border type options
 enum AtomicTextFieldBorderType {
   outlined,
   filled,

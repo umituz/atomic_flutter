@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import '../../tokens/colors/atomic_colors.dart';
 import '../../tokens/spacing/atomic_spacing.dart';
 
-/// Atomic Divider Component
-/// Visual separator with customizable styling
 class AtomicDivider extends StatelessWidget {
   const AtomicDivider({
     super.key,
@@ -117,13 +115,11 @@ class AtomicDivider extends StatelessWidget {
   }
 }
 
-/// Divider orientation options
 enum AtomicDividerOrientation {
   horizontal,
   vertical,
 }
 
-/// Divider variant options
 enum AtomicDividerVariant {
   solid,
   dashed,

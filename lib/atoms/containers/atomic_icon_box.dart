@@ -8,8 +8,6 @@ import '../../tokens/animations/atomic_animations.dart';
 import '../../tokens/shadows/atomic_shadows.dart';
 import 'atomic_smooth_container.dart';
 
-/// Atomic Icon Box Component
-/// Container with icon, customizable styling and tap interactions
 class AtomicIconBox extends StatefulWidget {
   const AtomicIconBox({
     super.key,
@@ -90,7 +88,6 @@ class _AtomicIconBoxState extends State<AtomicIconBox> with SingleTickerProvider
     if (_isPressed) {
       setState(() => _isPressed = false);
       _animationController.reverse();
-      // Delay the callback to show the animation
       Future.delayed(const Duration(milliseconds: 120), () {
         widget.onTap?.call();
       });
@@ -135,7 +132,6 @@ class _AtomicIconBoxState extends State<AtomicIconBox> with SingleTickerProvider
       ),
     );
 
-    // Apply blur effect if needed
     if (widget.blur) {
       return ClipRRect(
         borderRadius: widget.borderRadius ?? AtomicBorders.md,
@@ -203,7 +199,6 @@ class _AtomicIconBoxState extends State<AtomicIconBox> with SingleTickerProvider
   }
 }
 
-/// Icon box shadow options
 enum AtomicIconBoxShadow {
   none,
   small,

@@ -1,60 +1,46 @@
 import 'package:flutter/material.dart';
 
-/// Atomic Design System Responsive Utilities
-/// Standardized breakpoints and responsive helpers
 class AtomicResponsive {
-  // Private constructor to prevent instantiation
   AtomicResponsive._();
 
-  // ===== BREAKPOINTS =====
   static const double mobileSmall = 320;  // iPhone SE
   static const double mobile = 480;       // Standard mobile
   static const double tablet = 768;       // Tablet portrait
   static const double desktop = 1024;     // Desktop/laptop
   static const double desktopLarge = 1440; // Large desktop
 
-  // ===== SCREEN SIZE DETECTION =====
   
-  /// Check if current screen is mobile small (320px and below)
   static bool isMobileSmall(BuildContext context) {
     return MediaQuery.of(context).size.width <= mobileSmall;
   }
 
-  /// Check if current screen is mobile (480px and below)
   static bool isMobile(BuildContext context) {
     return MediaQuery.of(context).size.width <= mobile;
   }
 
-  /// Check if current screen is tablet (768px and below, but above mobile)
   static bool isTablet(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     return width > mobile && width <= tablet;
   }
 
-  /// Check if current screen is desktop (1024px and below, but above tablet)
   static bool isDesktop(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     return width > tablet && width <= desktop;
   }
 
-  /// Check if current screen is large desktop (above 1024px)
   static bool isDesktopLarge(BuildContext context) {
     return MediaQuery.of(context).size.width > desktop;
   }
 
-  /// Check if current screen width matches or exceeds breakpoint
   static bool isMinWidth(BuildContext context, double breakpoint) {
     return MediaQuery.of(context).size.width >= breakpoint;
   }
 
-  /// Check if current screen width is below breakpoint
   static bool isMaxWidth(BuildContext context, double breakpoint) {
     return MediaQuery.of(context).size.width < breakpoint;
   }
 
-  // ===== RESPONSIVE VALUE SELECTION =====
   
-  /// Get responsive value based on screen size
   static T value<T>(
     BuildContext context, {
     required T mobile,
@@ -75,7 +61,6 @@ class AtomicResponsive {
     }
   }
 
-  /// Get responsive column count for grids
   static int columns(BuildContext context, {
     int mobile = 1,
     int? tablet,
@@ -91,7 +76,6 @@ class AtomicResponsive {
     );
   }
 
-  /// Get responsive spacing multiplier
   static double spacingMultiplier(BuildContext context) {
     return value<double>(
       context,
@@ -102,7 +86,6 @@ class AtomicResponsive {
     );
   }
 
-  /// Get responsive font size multiplier
   static double fontSizeMultiplier(BuildContext context) {
     return value<double>(
       context,
@@ -113,9 +96,7 @@ class AtomicResponsive {
     );
   }
 
-  // ===== RESPONSIVE LAYOUT HELPERS =====
   
-  /// Build responsive layout with different widgets for different screen sizes
   static Widget layout(
     BuildContext context, {
     required Widget mobile,
@@ -132,7 +113,6 @@ class AtomicResponsive {
     );
   }
 
-  /// Build responsive padding
   static EdgeInsets padding(
     BuildContext context, {
     required EdgeInsets mobile,
@@ -149,7 +129,6 @@ class AtomicResponsive {
     );
   }
 
-  /// Build responsive margin
   static EdgeInsets margin(
     BuildContext context, {
     required EdgeInsets mobile,
@@ -166,16 +145,13 @@ class AtomicResponsive {
     );
   }
 
-  // ===== RESPONSIVE WRAP/FLEX HELPERS =====
   
-  /// Determine if content should wrap based on available space and children count
   static bool shouldWrap(BuildContext context, int childrenCount, double minChildWidth) {
     final availableWidth = MediaQuery.of(context).size.width;
     final totalMinWidth = childrenCount * minChildWidth;
     return totalMinWidth > availableWidth;
   }
 
-  /// Get responsive flex direction (Row for larger screens, Column for mobile)
   static Axis flexDirection(BuildContext context, {bool forceMobileColumn = true}) {
     if (forceMobileColumn && isMobile(context)) {
       return Axis.vertical;
@@ -183,7 +159,6 @@ class AtomicResponsive {
     return Axis.horizontal;
   }
 
-  /// Get responsive main axis alignment
   static MainAxisAlignment mainAxisAlignment(BuildContext context, {
     MainAxisAlignment mobile = MainAxisAlignment.start,
     MainAxisAlignment? tablet,
@@ -197,7 +172,6 @@ class AtomicResponsive {
     );
   }
 
-  /// Get responsive cross axis alignment
   static CrossAxisAlignment crossAxisAlignment(BuildContext context, {
     CrossAxisAlignment mobile = CrossAxisAlignment.stretch,
     CrossAxisAlignment? tablet,
@@ -211,9 +185,7 @@ class AtomicResponsive {
     );
   }
 
-  // ===== RESPONSIVE COMPONENT BUILDERS =====
   
-  /// Build responsive button layout (full width on mobile, auto on larger screens)
   static Widget responsiveButtonLayout(
     BuildContext context, {
     required List<Widget> buttons,
@@ -238,7 +210,6 @@ class AtomicResponsive {
     }
   }
 
-  /// Build responsive grid
   static Widget responsiveGrid(
     BuildContext context, {
     required List<Widget> children,

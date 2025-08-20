@@ -1,15 +1,7 @@
 import 'dart:convert';
 import 'atomic_storage_interface.dart';
 
-/// Atomic Secure Storage Example
-/// Example implementation of secure storage for sensitive data like tokens
-/// 
-/// Note: This is just an example. For production use, implement with:
-/// - flutter_secure_storage for secure key-value storage
-/// - encrypted_shared_preferences for encrypted preferences
-/// - hive with encryption for complex data
 abstract class AtomicSecureStorageExample implements AtomicStorageInterface {
-  /// Store authentication token
   Future<bool> storeAuthToken(String token) async {
     return await writeTyped<Map<String, dynamic>>(
       'auth_token',
@@ -21,7 +13,6 @@ abstract class AtomicSecureStorageExample implements AtomicStorageInterface {
     );
   }
 
-  /// Get authentication token
   Future<String?> getAuthToken() async {
     final data = await readTyped<Map<String, dynamic>>(
       'auth_token',
@@ -30,7 +21,6 @@ abstract class AtomicSecureStorageExample implements AtomicStorageInterface {
     return data?['token'] as String?;
   }
 
-  /// Check if token is expired
   Future<bool> isTokenExpired() async {
     final data = await readTyped<Map<String, dynamic>>(
       'auth_token',
@@ -45,12 +35,10 @@ abstract class AtomicSecureStorageExample implements AtomicStorageInterface {
     return DateTime.now().isAfter(timestamp.add(expiryDuration));
   }
 
-  /// Store user credentials (encrypted)
   Future<bool> storeCredentials({
     required String username,
     required String password,
   }) async {
-    // In production, encrypt the password before storing
     return await writeTyped<Map<String, String>>(
       'user_credentials',
       {
@@ -61,7 +49,6 @@ abstract class AtomicSecureStorageExample implements AtomicStorageInterface {
     );
   }
 
-  /// Clear all secure data
   Future<bool> clearSecureData() async {
     final keys = await getKeys();
     final secureKeys = keys.where((key) => 
@@ -79,7 +66,6 @@ abstract class AtomicSecureStorageExample implements AtomicStorageInterface {
   }
 }
 
-/// Example token model for reference
 class AtomicTokenModel {
   const AtomicTokenModel({
     required this.accessToken,
@@ -93,15 +79,12 @@ class AtomicTokenModel {
   final DateTime expiresAt;
   final String tokenType;
 
-  /// Check if token is expired
   bool get isExpired => DateTime.now().isAfter(expiresAt);
 
-  /// Check if token needs refresh (5 minutes before expiry)
   bool get needsRefresh => DateTime.now().isAfter(
     expiresAt.subtract(const Duration(minutes: 5))
   );
 
-  /// Create from JSON
   factory AtomicTokenModel.fromJson(Map<String, dynamic> json) {
     return AtomicTokenModel(
       accessToken: json['access_token'] as String,
@@ -111,7 +94,6 @@ class AtomicTokenModel {
     );
   }
 
-  /// Convert to JSON
   Map<String, dynamic> toJson() {
     return {
       'access_token': accessToken,
@@ -122,11 +104,9 @@ class AtomicTokenModel {
   }
 }
 
-/// Token storage mixin for services
 mixin AtomicTokenStorageMixin {
   AtomicStorageInterface get storage;
 
-  /// Store token
   Future<bool> storeToken(AtomicTokenModel token) async {
     return await storage.writeTyped<AtomicTokenModel>(
       'app_token',
@@ -135,7 +115,6 @@ mixin AtomicTokenStorageMixin {
     );
   }
 
-  /// Get token
   Future<AtomicTokenModel?> getToken() async {
     return await storage.readTyped<AtomicTokenModel>(
       'app_token',
@@ -145,12 +124,10 @@ mixin AtomicTokenStorageMixin {
     );
   }
 
-  /// Clear token
   Future<bool> clearToken() async {
     return await storage.delete('app_token');
   }
 
-  /// Get valid token (refresh if needed)
   Future<AtomicTokenModel?> getValidToken({
     Future<AtomicTokenModel?> Function(String refreshToken)? onRefresh,
   }) async {
@@ -159,7 +136,6 @@ mixin AtomicTokenStorageMixin {
     
     if (!token.isExpired) return token;
     
-    // Try to refresh if refresh token is available
     if (token.refreshToken != null && onRefresh != null) {
       final newToken = await onRefresh(token.refreshToken!);
       if (newToken != null) {
@@ -168,7 +144,6 @@ mixin AtomicTokenStorageMixin {
       }
     }
     
-    // Token is expired and can't be refreshed
     await clearToken();
     return null;
   }

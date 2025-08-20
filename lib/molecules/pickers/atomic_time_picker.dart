@@ -6,8 +6,6 @@ import '../../tokens/borders/atomic_borders.dart';
 import '../../atoms/display/atomic_text.dart';
 import '../../atoms/buttons/atomic_icon_button.dart';
 
-/// Atomic Time Picker Component
-/// Material Design time picker with theme integration
 class AtomicTimePicker extends StatefulWidget {
   const AtomicTimePicker({
     super.key,
@@ -36,11 +34,9 @@ class AtomicTimePicker extends StatefulWidget {
     this.use24HourFormat,
   });
 
-  // Core time picker properties
   final TimeOfDay? initialTime;
   final ValueChanged<TimeOfDay?>? onTimeSelected;
 
-  // Dialog properties
   final String? helpText;
   final String? cancelText;
   final String? confirmText;
@@ -53,7 +49,6 @@ class AtomicTimePicker extends StatefulWidget {
   final TimePickerEntryMode entryMode;
   final Orientation? orientation;
 
-  // Atomic-specific properties
   final AtomicTimePickerVariant variant;
   final AtomicTimePickerSize size;
   final bool showIcon;
@@ -105,7 +100,6 @@ class _AtomicTimePickerState extends State<AtomicTimePicker> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        // Label
         if (widget.label != null) ...[
           AtomicText(
             widget.label!,
@@ -114,7 +108,6 @@ class _AtomicTimePickerState extends State<AtomicTimePicker> {
           SizedBox(height: theme.spacing.xs),
         ],
         
-        // Time picker field
         InkWell(
           onTap: widget.enabled && !widget.readOnly ? _showTimePicker : null,
           borderRadius: AtomicBorders.md,
@@ -124,7 +117,6 @@ class _AtomicTimePickerState extends State<AtomicTimePicker> {
             decoration: _getDecoration(theme),
             child: Row(
               children: [
-                // Leading icon
                 if (widget.showIcon) ...[
                   AtomicIconButton(
                     icon: Icons.access_time,
@@ -135,7 +127,6 @@ class _AtomicTimePickerState extends State<AtomicTimePicker> {
                   SizedBox(width: theme.spacing.sm),
                 ],
                 
-                // Time text
                 Expanded(
                   child: TextField(
                     controller: _controller,
@@ -156,7 +147,6 @@ class _AtomicTimePickerState extends State<AtomicTimePicker> {
                   ),
                 ),
                 
-                // Trailing icon
                 if (widget.showIcon) ...[
                   SizedBox(width: theme.spacing.sm),
                   Icon(
@@ -172,7 +162,6 @@ class _AtomicTimePickerState extends State<AtomicTimePicker> {
           ),
         ),
         
-        // Helper text or error text
         if (widget.helperText != null || widget.errorText != null) ...[
           SizedBox(height: theme.spacing.xs),
           AtomicText(
@@ -257,11 +246,9 @@ class _AtomicTimePickerState extends State<AtomicTimePicker> {
     final use24Hour = widget.use24HourFormat ?? MediaQuery.of(context).alwaysUse24HourFormat;
     
     if (use24Hour) {
-      // 24-hour format: HH:MM
       return '${time.hour.toString().padLeft(2, '0')}:'
              '${time.minute.toString().padLeft(2, '0')}';
     } else {
-      // 12-hour format: H:MM AM/PM
       final hour = time.hourOfPeriod == 0 ? 12 : time.hourOfPeriod;
       final period = time.period == DayPeriod.am ? 'AM' : 'PM';
       return '$hour:${time.minute.toString().padLeft(2, '0')} $period';
@@ -321,21 +308,18 @@ class _AtomicTimePickerState extends State<AtomicTimePicker> {
   }
 }
 
-/// Atomic Time Picker variant types
 enum AtomicTimePickerVariant {
   filled,      // Filled background
   outlined,    // Outlined border
   underlined,  // Bottom underline
 }
 
-/// Atomic Time Picker size variants
 enum AtomicTimePickerSize {
   small,       // Compact size
   medium,      // Standard size
   large,       // Large size
 }
 
-/// Simple Time Picker Helper
 class AtomicSimpleTimePicker extends StatelessWidget {
   const AtomicSimpleTimePicker({
     super.key,
@@ -366,7 +350,6 @@ class AtomicSimpleTimePicker extends StatelessWidget {
   }
 }
 
-/// Time Range Picker Helper
 class AtomicTimeRangePicker extends StatefulWidget {
   const AtomicTimeRangePicker({
     super.key,
@@ -414,7 +397,6 @@ class _AtomicTimeRangePickerState extends State<AtomicTimeRangePicker> {
           onTimeSelected: (time) {
             setState(() {
               _startTime = time;
-              // If end time is before start time, clear it
               if (_endTime != null && time != null && _isTimeBefore(_endTime!, time)) {
                 _endTime = null;
               }
@@ -461,7 +443,6 @@ class _AtomicTimeRangePickerState extends State<AtomicTimeRangePicker> {
   }
 }
 
-/// Time Range Data Class
 class TimeRange {
   const TimeRange({
     required this.start,
@@ -477,7 +458,6 @@ class TimeRange {
     
     int diffMinutes = endMinutes - startMinutes;
     
-    // Handle overnight ranges
     if (diffMinutes < 0) {
       diffMinutes += 24 * 60; // Add 24 hours
     }

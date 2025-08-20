@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../tokens/borders/atomic_borders.dart';
 
-/// Atomic Smooth Container Component
-/// Container with smooth corners for a modern look
 class AtomicSmoothContainer extends StatelessWidget {
   const AtomicSmoothContainer({
     super.key,
@@ -47,7 +45,6 @@ class AtomicSmoothContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final effectiveBorderRadius = borderRadius ?? AtomicBorders.md;
 
-    // If decoration is provided, use it directly
     if (decoration != null) {
       return Container(
         width: width,
@@ -65,7 +62,6 @@ class AtomicSmoothContainer extends StatelessWidget {
       );
     }
 
-    // Otherwise, build decoration from properties
     return Container(
       width: width,
       height: height,
@@ -89,8 +85,6 @@ class AtomicSmoothContainer extends StatelessWidget {
   }
 }
 
-/// Atomic Animated Smooth Container Component
-/// Animated version of smooth container with implicit animations
 class AtomicAnimatedSmoothContainer extends ImplicitlyAnimatedWidget {
   AtomicAnimatedSmoothContainer({
     super.key,

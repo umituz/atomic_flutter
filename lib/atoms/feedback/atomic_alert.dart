@@ -5,8 +5,6 @@ import '../../tokens/borders/atomic_borders.dart';
 import '../icons/atomic_icon.dart';
 import '../display/atomic_text.dart';
 
-/// Atomic Alert Component
-/// Notification/alert component with multiple variants
 class AtomicAlert extends StatelessWidget {
   final String text;
   final String? subtitle;
@@ -27,7 +25,6 @@ class AtomicAlert extends StatelessWidget {
     this.margin,
   });
 
-  // Variant constructors
   const AtomicAlert.success({
     super.key,
     required this.text,
@@ -195,7 +192,6 @@ class AtomicAlert extends StatelessWidget {
   }
 }
 
-/// Alert variant options
 enum AtomicAlertVariant {
   success,
   error,

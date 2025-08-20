@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../tokens/colors/atomic_colors.dart';
 
-/// Atomic Icon Component
-/// Standardized icon component with consistent sizing and colors
 class AtomicIcon extends StatelessWidget {
   const AtomicIcon({
     super.key,
@@ -43,7 +41,6 @@ class AtomicIcon extends StatelessWidget {
   }
 }
 
-/// Icon size options
 enum AtomicIconSize {
   tiny,
   small,

@@ -8,12 +8,9 @@ import '../../tokens/shadows/atomic_shadows.dart';
 import '../../tokens/animations/atomic_animations.dart';
 import '../icons/atomic_icon.dart';
 
-/// Atomic Toast Component
-/// Non-intrusive notification messages
 class AtomicToast {
   static OverlayEntry? _currentToast;
 
-  /// Show a toast message
   static void show({
     required BuildContext context,
     required String message,
@@ -28,7 +25,6 @@ class AtomicToast {
     double? width,
     EdgeInsets? margin,
   }) {
-    // Dismiss previous toast if exists
     dismiss();
 
     final overlay = Overlay.of(context);
@@ -57,7 +53,6 @@ class AtomicToast {
     overlay.insert(_currentToast!);
   }
 
-  /// Show success toast
   static void success({
     required BuildContext context,
     required String message,
@@ -74,7 +69,6 @@ class AtomicToast {
     );
   }
 
-  /// Show error toast
   static void error({
     required BuildContext context,
     required String message,
@@ -92,7 +86,6 @@ class AtomicToast {
     );
   }
 
-  /// Show warning toast
   static void warning({
     required BuildContext context,
     required String message,
@@ -109,7 +102,6 @@ class AtomicToast {
     );
   }
 
-  /// Show info toast
   static void info({
     required BuildContext context,
     required String message,
@@ -126,14 +118,12 @@ class AtomicToast {
     );
   }
 
-  /// Dismiss current toast
   static void dismiss() {
     _currentToast?.remove();
     _currentToast = null;
   }
 }
 
-/// Toast widget implementation
 class _AtomicToastWidget extends StatefulWidget {
   const _AtomicToastWidget({
     required this.message,
@@ -356,7 +346,6 @@ class _AtomicToastWidgetState extends State<_AtomicToastWidget>
   }
 }
 
-/// Toast variant options
 enum AtomicToastVariant {
   success,
   error,
@@ -365,7 +354,6 @@ enum AtomicToastVariant {
   neutral,
 }
 
-/// Toast position options
 enum AtomicToastPosition {
   top,
   bottom,

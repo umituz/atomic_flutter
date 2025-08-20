@@ -1,8 +1,5 @@
-/// List Extension for Atomic Flutter
-/// Provides additional functionality for List operations
 
 extension AtomicListExtension<T> on List<T> {
-  /// Returns the first element that satisfies the test, or null if none found
   T? firstWhereOrNull(bool Function(T element) test) {
     try {
       return firstWhere(test);
@@ -11,7 +8,6 @@ extension AtomicListExtension<T> on List<T> {
     }
   }
 
-  /// Returns the last element that satisfies the test, or null if none found
   T? lastWhereOrNull(bool Function(T element) test) {
     try {
       return lastWhere(test);
@@ -20,13 +16,11 @@ extension AtomicListExtension<T> on List<T> {
     }
   }
 
-  /// Safely gets element at index, returns null if out of bounds
   T? getOrNull(int index) {
     if (index < 0 || index >= length) return null;
     return this[index];
   }
 
-  /// Chunks the list into smaller lists of specified size
   List<List<T>> chunk(int size) {
     if (size <= 0) throw ArgumentError('Chunk size must be positive');
     
@@ -38,13 +32,11 @@ extension AtomicListExtension<T> on List<T> {
     return chunks;
   }
 
-  /// Removes duplicates from the list while preserving order
   List<T> unique() {
     final seen = <T>{};
     return where((element) => seen.add(element)).toList();
   }
 
-  /// Groups elements by a key function
   Map<K, List<T>> groupBy<K>(K Function(T element) keyFunction) {
     final map = <K, List<T>>{};
     for (final element in this) {
@@ -54,7 +46,6 @@ extension AtomicListExtension<T> on List<T> {
     return map;
   }
 
-  /// Separates the list into two lists based on a predicate
   (List<T>, List<T>) partition(bool Function(T element) predicate) {
     final matches = <T>[];
     final nonMatches = <T>[];
@@ -70,7 +61,6 @@ extension AtomicListExtension<T> on List<T> {
     return (matches, nonMatches);
   }
 
-  /// Inserts separator between each element
   List<T> intersperse(T separator) {
     if (isEmpty) return [];
     
@@ -82,7 +72,6 @@ extension AtomicListExtension<T> on List<T> {
     return result;
   }
 
-  /// Rotates the list by n positions
   List<T> rotate(int n) {
     if (isEmpty) return [];
     
@@ -93,23 +82,11 @@ extension AtomicListExtension<T> on List<T> {
   }
 }
 
-/// Extension specifically for List<Map>
 extension AtomicListMapExtension on List<Map<dynamic, dynamic>> {
-  /// Plucks values for a specific key from a list of maps
-  /// 
-  /// Example:
-  /// ```dart
-  /// final users = [
-  ///   {'name': 'John', 'age': 25},
-  ///   {'name': 'Jane', 'age': 30},
-  /// ];
-  /// final names = users.pluck('name'); // ['John', 'Jane']
-  /// ```
   List<T?> pluck<T>(String key) {
     return map((e) => e[key] as T?).toList();
   }
 
-  /// Plucks values for a specific key, filtering out nulls
   List<T> pluckNotNull<T>(String key) {
     return map((e) => e[key] as T?)
         .where((value) => value != null)
@@ -117,7 +94,6 @@ extension AtomicListMapExtension on List<Map<dynamic, dynamic>> {
         .toList();
   }
 
-  /// Plucks multiple keys from maps
   List<Map<String, dynamic>> pluckKeys(List<String> keys) {
     return map((map) {
       final result = <String, dynamic>{};
@@ -130,7 +106,6 @@ extension AtomicListMapExtension on List<Map<dynamic, dynamic>> {
     }).toList();
   }
 
-  /// Finds the first map containing the specified key-value pair
   Map<dynamic, dynamic>? findByKeyValue(String key, dynamic value) {
     try {
       return firstWhere((map) => map[key] == value);
@@ -139,12 +114,10 @@ extension AtomicListMapExtension on List<Map<dynamic, dynamic>> {
     }
   }
 
-  /// Filters maps that contain all specified keys
   List<Map<dynamic, dynamic>> whereHasKeys(List<String> keys) {
     return where((map) => keys.every((key) => map.containsKey(key))).toList();
   }
 
-  /// Sorts maps by a specific key
   List<Map<dynamic, dynamic>> sortByKey(String key, {bool ascending = true}) {
     final sorted = List<Map<dynamic, dynamic>>.from(this);
     sorted.sort((a, b) {
@@ -162,9 +135,7 @@ extension AtomicListMapExtension on List<Map<dynamic, dynamic>> {
   }
 }
 
-/// Extension for typed lists
 extension AtomicTypedListExtension<T> on List<T> {
-  /// Converts list to a map using key and value extractors
   Map<K, V> toMap<K, V>({
     required K Function(T element) key,
     required V Function(T element) value,
@@ -176,7 +147,6 @@ extension AtomicTypedListExtension<T> on List<T> {
     return map;
   }
 
-  /// Finds the minimum element according to a comparator
   T? minBy<R extends Comparable>(R Function(T element) selector) {
     if (isEmpty) return null;
     
@@ -185,7 +155,6 @@ extension AtomicTypedListExtension<T> on List<T> {
     });
   }
 
-  /// Finds the maximum element according to a comparator
   T? maxBy<R extends Comparable>(R Function(T element) selector) {
     if (isEmpty) return null;
     

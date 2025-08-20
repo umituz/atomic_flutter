@@ -6,8 +6,6 @@ import '../../molecules/forms/atomic_form_field.dart';
 import '../../themes/atomic_theme_provider.dart';
 import '../../utilities/atomic_debouncer.dart';
 
-/// Atomic OTP Form Organism
-/// Handles both email input and OTP verification in a single form
 class AtomicOTPForm extends StatefulWidget {
   const AtomicOTPForm({
     super.key,
@@ -84,7 +82,6 @@ class _AtomicOTPFormState extends State<AtomicOTPForm> {
     
     final email = _emailController.text.trim();
     
-    // Custom validation
     final error = widget.validator?.call(email, null);
     if (error != null) {
       setState(() => _formError = error);
@@ -101,7 +98,6 @@ class _AtomicOTPFormState extends State<AtomicOTPForm> {
     final email = _emailController.text.trim();
     final otp = _otpController.text.trim();
     
-    // Custom validation
     final error = widget.validator?.call(email, otp);
     if (error != null) {
       setState(() => _formError = error);
@@ -122,7 +118,6 @@ class _AtomicOTPFormState extends State<AtomicOTPForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // Email Field (always visible, disabled after OTP sent)
           AtomicFormField<String>(
             label: 'Email',
             required: true,
@@ -144,7 +139,6 @@ class _AtomicOTPFormState extends State<AtomicOTPForm> {
           
           SizedBox(height: theme.spacing.md),
           
-          // OTP Field (only visible after OTP sent)
           if (widget.isOTPSent) ...[
             AtomicFormField<String>(
               label: 'Verification Code',
@@ -173,7 +167,6 @@ class _AtomicOTPFormState extends State<AtomicOTPForm> {
             SizedBox(height: theme.spacing.md),
           ],
           
-          // Form Error
           if (_formError != null) ...[
             Container(
               padding: EdgeInsets.all(theme.spacing.sm),
@@ -191,7 +184,6 @@ class _AtomicOTPFormState extends State<AtomicOTPForm> {
             SizedBox(height: theme.spacing.md),
           ],
           
-          // Success Message (when OTP sent)
           if (widget.isOTPSent && _formError == null) ...[
             Container(
               padding: EdgeInsets.all(theme.spacing.sm),
@@ -207,7 +199,6 @@ class _AtomicOTPFormState extends State<AtomicOTPForm> {
                     style: TextStyle(color: theme.colors.success),
                     textAlign: TextAlign.center,
                   ),
-                  // Show dev mode hint if applicable
                   if (_otpController.text.isNotEmpty) ...[
                     SizedBox(height: theme.spacing.xs),
                     Text(
@@ -226,7 +217,6 @@ class _AtomicOTPFormState extends State<AtomicOTPForm> {
             SizedBox(height: theme.spacing.md),
           ],
           
-          // Main Action Button
           AtomicButton(
             label: widget.isOTPSent ? widget.verifyButtonText : widget.requestButtonText,
             onPressed: widget.isLoading ? null : (widget.isOTPSent ? _handleVerifyOTP : _handleRequestOTP),
@@ -236,7 +226,6 @@ class _AtomicOTPFormState extends State<AtomicOTPForm> {
             size: AtomicButtonSize.large,
           ),
           
-          // Resend Button (only visible after OTP sent and can resend)
           if (widget.isOTPSent && widget.canResend) ...[
             SizedBox(height: theme.spacing.sm),
             AtomicButton(
@@ -252,7 +241,6 @@ class _AtomicOTPFormState extends State<AtomicOTPForm> {
             ),
           ],
           
-          // Help Text
           if (widget.isOTPSent) ...[
             SizedBox(height: theme.spacing.md),
             Text(

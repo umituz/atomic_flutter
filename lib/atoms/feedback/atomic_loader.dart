@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../tokens/colors/atomic_colors.dart';
 
-/// Atomic Loader Component
-/// Customizable loading indicator
 class AtomicLoader extends StatelessWidget {
   const AtomicLoader({
     super.key,
@@ -62,7 +60,6 @@ class AtomicLoader extends StatelessWidget {
   }
 }
 
-/// Loader size options
 enum AtomicLoaderSize {
   small,
   medium,

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Atomic Select List Item Model
-/// Represents a selectable item in a dropdown or picker with text, value, and optional subtext
 class AtomicSelectListItem<T> {
   const AtomicSelectListItem({
     required this.text,
@@ -19,7 +17,6 @@ class AtomicSelectListItem<T> {
   final bool enabled;
   final bool selected;
 
-  /// Create a copy of this item with modified properties
   AtomicSelectListItem<T> copyWith({
     String? text,
     String? subText,
@@ -38,12 +35,10 @@ class AtomicSelectListItem<T> {
     );
   }
 
-  /// Generate a unique value if not provided
   static String generateUniqueValue() {
     return DateTime.now().microsecondsSinceEpoch.toString();
   }
 
-  /// Create from JSON
   factory AtomicSelectListItem.fromJson(Map<String, dynamic> json) {
     return AtomicSelectListItem<T>(
       text: json['text'] ?? '',
@@ -54,7 +49,6 @@ class AtomicSelectListItem<T> {
     );
   }
 
-  /// Convert to JSON
   Map<String, dynamic> toJson() {
     return {
       'text': text,
@@ -88,7 +82,6 @@ class AtomicSelectListItem<T> {
   }
 }
 
-/// Non-generic version for backward compatibility
 class AtomicSelectListItemDynamic extends AtomicSelectListItem<dynamic> {
   const AtomicSelectListItemDynamic({
     required super.text,

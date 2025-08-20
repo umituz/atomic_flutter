@@ -4,10 +4,7 @@ import '../../themes/atomic_theme_data.dart';
 
 import 'atomic_custom_sheet_body.dart';
 
-/// Atomic Sheet Builder Component
-/// Helper for building bottom sheets with consistent styling
 class AtomicSheetBuilder {
-  /// Show a custom bottom sheet
   static Future<T?> showCustomSheet<T>({
     required BuildContext context,
     required Widget Function(BuildContext) builder,
@@ -51,7 +48,6 @@ class AtomicSheetBuilder {
     );
   }
 
-  /// Show a simple action sheet with list of options
   static Future<T?> showActionSheet<T>({
     required BuildContext context,
     required List<AtomicSheetAction<T>> actions,
@@ -207,7 +203,6 @@ class AtomicSheetBuilder {
   }
 }
 
-/// Action item for sheet builder
 class AtomicSheetAction<T> {
   const AtomicSheetAction({
     required this.label,

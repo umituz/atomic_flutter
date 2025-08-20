@@ -7,8 +7,6 @@ import '../../molecules/forms/atomic_form_field.dart';
 import '../../themes/atomic_theme_provider.dart';
 import '../../utilities/atomic_debouncer.dart';
 
-/// Atomic Login Form Organism
-/// Reusable login form that can be used across projects
 class AtomicLoginForm extends StatefulWidget {
   const AtomicLoginForm({
     super.key,
@@ -76,7 +74,6 @@ class _AtomicLoginFormState extends State<AtomicLoginForm> {
     final email = _emailController.text.trim();
     final password = _passwordController.text;
     
-    // Custom validation
     final error = widget.validator?.call(email, password);
     if (error != null) {
       setState(() => _formError = error);
@@ -97,7 +94,6 @@ class _AtomicLoginFormState extends State<AtomicLoginForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // Email Field
           AtomicFormField<String>(
             label: 'Email',
             required: true,
@@ -116,7 +112,6 @@ class _AtomicLoginFormState extends State<AtomicLoginForm> {
           
           SizedBox(height: theme.spacing.md),
           
-          // Password Field
           AtomicFormField<String>(
             label: 'Password',
             required: true,
@@ -140,7 +135,6 @@ class _AtomicLoginFormState extends State<AtomicLoginForm> {
           
           SizedBox(height: theme.spacing.md),
           
-          // Remember Me & Forgot Password Row
           if (widget.showRememberMe || widget.showForgotPassword)
             Row(
               children: [
@@ -167,7 +161,6 @@ class _AtomicLoginFormState extends State<AtomicLoginForm> {
           if (widget.showRememberMe || widget.showForgotPassword)
             SizedBox(height: theme.spacing.md),
           
-          // Form Error
           if (_formError != null) ...[
             Container(
               padding: EdgeInsets.all(theme.spacing.sm),
@@ -184,7 +177,6 @@ class _AtomicLoginFormState extends State<AtomicLoginForm> {
             SizedBox(height: theme.spacing.md),
           ],
           
-          // Submit Button
           AtomicButton(
             label: widget.submitButtonText,
             onPressed: widget.isLoading ? null : _handleSubmit,

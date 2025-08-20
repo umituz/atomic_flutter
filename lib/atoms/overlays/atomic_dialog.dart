@@ -3,8 +3,6 @@ import '../../themes/atomic_theme_provider.dart';
 import '../containers/atomic_card.dart';
 import '../buttons/atomic_button.dart';
 
-/// Atomic Dialog Component
-/// Modern dialog with atomic design system styling
 class AtomicDialog extends StatelessWidget {
   const AtomicDialog({
     super.key,
@@ -38,7 +36,6 @@ class AtomicDialog extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Title with optional icon
               Row(
                 children: [
                   if (titleIcon != null) ...[
@@ -62,7 +59,6 @@ class AtomicDialog extends StatelessWidget {
               ),
               SizedBox(height: theme.spacing.md),
               
-              // Content
               Text(
                 content,
                 style: theme.typography.bodyMedium.copyWith(
@@ -71,7 +67,6 @@ class AtomicDialog extends StatelessWidget {
               ),
               SizedBox(height: theme.spacing.lg),
               
-              // Actions
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: actions
@@ -88,7 +83,6 @@ class AtomicDialog extends StatelessWidget {
     );
   }
 
-  /// Show atomic dialog
   static Future<T?> show<T>({
     required BuildContext context,
     required String title,
@@ -114,7 +108,6 @@ class AtomicDialog extends StatelessWidget {
     );
   }
 
-  /// Show confirmation dialog
   static Future<bool?> showConfirmation({
     required BuildContext context,
     required String title,
@@ -143,7 +136,6 @@ class AtomicDialog extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Title with optional icon
                   Row(
                     children: [
                       if (titleIcon != null) ...[
@@ -167,7 +159,6 @@ class AtomicDialog extends StatelessWidget {
                   ),
                   SizedBox(height: theme.spacing.md),
                   
-                  // Content
                   Text(
                     content,
                     style: theme.typography.bodyMedium.copyWith(
@@ -176,7 +167,6 @@ class AtomicDialog extends StatelessWidget {
                   ),
                   SizedBox(height: theme.spacing.lg),
                   
-                  // Actions
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [

@@ -4,8 +4,6 @@ import '../../themes/atomic_theme_provider.dart';
 import '../../themes/atomic_theme_data.dart';
 import '../../utilities/atomic_responsive.dart';
 
-/// Atomic Auth Template
-/// Reusable template for authentication screens (login, register, forgot password, etc.)
 class AtomicAuthTemplate extends StatelessWidget {
   const AtomicAuthTemplate({
     super.key,
@@ -73,17 +71,14 @@ class AtomicAuthTemplate extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        // Header/Logo Section
         if (showLogo || headerWidget != null)
           _buildHeader(theme),
         
         if (showLogo || headerWidget != null)
           SizedBox(height: theme.spacing.xl),
         
-        // Main Card
         _buildCard(theme),
         
-        // Footer Section
         if (footerWidget != null) ...[
           SizedBox(height: theme.spacing.xl),
           footerWidget!,
@@ -95,14 +90,12 @@ class AtomicAuthTemplate extends StatelessWidget {
   Widget _buildHeader(AtomicThemeData theme) {
     return Column(
       children: [
-        // Logo
         if (showLogo)
           logoWidget ?? _buildDefaultLogo(theme),
         
         if (showLogo && (title != null || subtitle != null))
           SizedBox(height: theme.spacing.lg),
         
-        // Title & Subtitle
         if (title != null) ...[
           Text(
             title!,
@@ -125,7 +118,6 @@ class AtomicAuthTemplate extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
         
-        // Custom header widget
         if (headerWidget != null)
           headerWidget!,
       ],

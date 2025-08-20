@@ -1,28 +1,19 @@
 import 'package:flutter/material.dart';
 import '../../tokens/colors/atomic_colors.dart';
 
-/// Atomic OTP Status Enum
-/// Represents various states for OTP (One-Time Password) operations
 enum AtomicOtpStatus {
-  /// Verification in progress
   verifyLoading,
   
-  /// General loading state
   loading,
   
-  /// OTP operation timed out
   timeout,
   
-  /// Error occurred during OTP process
   error,
   
-  /// Duration/timer state
   duration,
 }
 
-/// Extension methods for OTP status
 extension AtomicOtpStatusExtension on AtomicOtpStatus {
-  /// Get display text for the status
   String get displayText {
     switch (this) {
       case AtomicOtpStatus.verifyLoading:
@@ -38,7 +29,6 @@ extension AtomicOtpStatusExtension on AtomicOtpStatus {
     }
   }
   
-  /// Get color for the status
   Color get color {
     switch (this) {
       case AtomicOtpStatus.verifyLoading:
@@ -53,7 +43,6 @@ extension AtomicOtpStatusExtension on AtomicOtpStatus {
     }
   }
   
-  /// Get icon for the status
   IconData get icon {
     switch (this) {
       case AtomicOtpStatus.verifyLoading:
@@ -68,13 +57,11 @@ extension AtomicOtpStatusExtension on AtomicOtpStatus {
     }
   }
   
-  /// Check if status is loading
   bool get isLoading {
     return this == AtomicOtpStatus.verifyLoading || 
            this == AtomicOtpStatus.loading;
   }
   
-  /// Check if the status indicates an error state
   bool get isError {
     return this == AtomicOtpStatus.error || 
            this == AtomicOtpStatus.timeout;

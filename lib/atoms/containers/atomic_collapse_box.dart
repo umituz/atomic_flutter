@@ -5,8 +5,6 @@ import '../../tokens/borders/atomic_borders.dart';
 import '../containers/atomic_card.dart';
 import '../icons/atomic_icon.dart';
 
-/// Atomic Collapse Box Component
-/// Expandable/Collapsible container with smooth animations
 class AtomicCollapseBox extends StatefulWidget {
   const AtomicCollapseBox({
     super.key,

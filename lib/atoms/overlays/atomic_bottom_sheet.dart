@@ -7,10 +7,7 @@ import '../../tokens/borders/atomic_borders.dart';
 import '../../tokens/animations/atomic_animations.dart';
 import '../overlays/atomic_divider.dart';
 
-/// Atomic Bottom Sheet Component
-/// Modern bottom sheet with smooth animations
 class AtomicBottomSheet {
-  /// Show a bottom sheet
   static Future<T?> show<T>({
     required BuildContext context,
     required Widget child,
@@ -54,7 +51,6 @@ class AtomicBottomSheet {
     );
   }
 
-  /// Show action sheet with list of options
   static Future<T?> showActions<T>({
     required BuildContext context,
     required List<AtomicBottomSheetAction<T>> actions,
@@ -106,7 +102,6 @@ class AtomicBottomSheet {
   }
 }
 
-/// Bottom sheet content widget
 class _AtomicBottomSheetContent extends StatelessWidget {
   const _AtomicBottomSheetContent({
     required this.child,
@@ -224,7 +219,6 @@ class _AtomicBottomSheetContent extends StatelessWidget {
   }
 }
 
-/// Action item widget
 class _ActionItem<T> extends StatelessWidget {
   const _ActionItem({
     required this.action,
@@ -292,7 +286,6 @@ class _ActionItem<T> extends StatelessWidget {
   }
 }
 
-/// Bottom sheet action configuration
 class AtomicBottomSheetAction<T> {
   const AtomicBottomSheetAction({
     required this.label,

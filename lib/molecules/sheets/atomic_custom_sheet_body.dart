@@ -5,8 +5,6 @@ import '../../themes/atomic_theme_data.dart';
 import '../../tokens/borders/atomic_borders.dart';
 import '../../tokens/animations/atomic_animations.dart';
 
-/// Atomic Custom Sheet Body Component
-/// Body content for bottom sheets with customizable styling
 class AtomicCustomSheetBody extends StatelessWidget {
   const AtomicCustomSheetBody({
     super.key,

@@ -4,8 +4,6 @@ import '../../themes/atomic_theme_data.dart';
 import '../../tokens/borders/atomic_borders.dart';
 import '../../tokens/animations/atomic_animations.dart';
 
-/// Atomic Badge Component
-/// Notification badges for counters, status indicators, etc.
 class AtomicBadge extends StatelessWidget {
   const AtomicBadge({
     super.key,
@@ -210,7 +208,6 @@ class AtomicBadge extends StatelessWidget {
   }
 }
 
-/// Badge variant options
 enum AtomicBadgeVariant {
   primary,
   secondary,
@@ -221,21 +218,18 @@ enum AtomicBadgeVariant {
   neutral,
 }
 
-/// Badge size options
 enum AtomicBadgeSize {
   small,
   medium,
   large,
 }
 
-/// Badge shape options
 enum AtomicBadgeShape {
   square,
   rounded,
   pill,
 }
 
-/// Badge position options
 enum AtomicBadgePosition {
   topStart,
   topEnd,

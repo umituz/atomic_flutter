@@ -7,8 +7,6 @@ import '../../tokens/animations/atomic_animations.dart';
 import '../../tokens/shadows/atomic_shadows.dart';
 import '../../tokens/borders/atomic_borders.dart';
 
-/// Atomic Button Component
-/// Flexible button component with multiple variants and states
 class AtomicButton extends StatefulWidget {
   const AtomicButton({
     super.key,
@@ -307,7 +305,6 @@ class _AtomicButtonState extends State<AtomicButton>
   }
 }
 
-/// Button variant options
 enum AtomicButtonVariant {
   primary,
   secondary,
@@ -317,14 +314,12 @@ enum AtomicButtonVariant {
   danger,
 }
 
-/// Button size options
 enum AtomicButtonSize {
   small,
   medium,
   large,
 }
 
-/// Button icon position
 enum AtomicButtonIconPosition {
   start,
   end,

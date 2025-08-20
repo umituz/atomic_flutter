@@ -4,8 +4,6 @@ import '../../themes/atomic_theme_provider.dart';
 import '../../tokens/borders/atomic_borders.dart';
 import '../../tokens/shadows/atomic_shadows.dart';
 
-/// Atomic Stacked Body Component
-/// Layout component for creating stacked card effects
 class AtomicStackedBody extends StatelessWidget {
   const AtomicStackedBody({
     super.key,
@@ -34,7 +32,6 @@ class AtomicStackedBody extends StatelessWidget {
     final radius = borderRadius ?? AtomicBorders.lg;
     final bgColor = backgroundColor ?? theme.colors.surface;
     
-    // Generate stack colors
     final colors = stackColors ?? 
       List.generate(stackCount, (index) {
         final opacity = 0.05 + (index * 0.02);
@@ -43,7 +40,6 @@ class AtomicStackedBody extends StatelessWidget {
 
     return Stack(
       children: [
-        // Build stack layers
         ...List.generate(stackCount, (index) {
           final reverseIndex = stackCount - index - 1;
           final offset = stackOffset * (reverseIndex + 1);
@@ -62,7 +58,6 @@ class AtomicStackedBody extends StatelessWidget {
           );
         }),
         
-        // Main content
         Container(
           margin: EdgeInsets.only(top: stackOffset * stackCount),
           decoration: BoxDecoration(

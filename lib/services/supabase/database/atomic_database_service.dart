@@ -1,8 +1,4 @@
-/// Generic Database Service for Supabase operations
-/// Provides reusable CRUD operations with typed responses and error handling
 library atomic_database_service;
-
-import 'dart:developer' as developer;
 import 'dart:math' as math;
 
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -11,14 +7,12 @@ import '../models/supabase_response.dart';
 import '../models/supabase_error.dart';
 import '../exceptions/supabase_exceptions.dart';
 
-/// Generic database service for common CRUD operations
 class AtomicDatabaseService {
   final SupabaseClient _client;
   
   AtomicDatabaseService({SupabaseClient? client}) 
     : _client = client ?? Supabase.instance.client;
 
-  /// Select records with typed response
   Future<SupabaseResponse<List<Map<String, dynamic>>>> select(
     String table, {
     String columns = '*',
@@ -31,19 +25,16 @@ class AtomicDatabaseService {
     try {
       dynamic query = _client.from(table).select(columns);
       
-      // Apply filters
       if (filters != null) {
         for (final entry in filters.entries) {
           query = query.eq(entry.key, entry.value);
         }
       }
       
-      // Apply ordering
       if (orderBy != null) {
         query = query.order(orderBy, ascending: ascending);
       }
       
-      // Apply pagination
       if (limit != null) {
         query = query.limit(limit);
       }
@@ -54,14 +45,12 @@ class AtomicDatabaseService {
       final result = await query;
       return SupabaseResponse.success(List<Map<String, dynamic>>.from(result));
     } catch (e) {
-      developer.log('Database select error: $e', error: e);
       return SupabaseResponse.error(
         SupabaseError.database('Failed to fetch records: ${e.toString()}'),
       );
     }
   }
 
-  /// Select single record by ID
   Future<SupabaseResponse<Map<String, dynamic>?>> selectById(
     String table,
     String id, {
@@ -77,14 +66,12 @@ class AtomicDatabaseService {
       
       return SupabaseResponse.success(result);
     } catch (e) {
-      developer.log('Database selectById error: $e', error: e);
       return SupabaseResponse.error(
         SupabaseError.database('Failed to fetch record: ${e.toString()}'),
       );
     }
   }
 
-  /// Insert record with typed response
   Future<SupabaseResponse<List<Map<String, dynamic>>>> insert(
     String table,
     Map<String, dynamic> data, {
@@ -99,14 +86,12 @@ class AtomicDatabaseService {
         return SupabaseResponse.success([]);
       }
     } catch (e) {
-      developer.log('Database insert error: $e', error: e);
       return SupabaseResponse.error(
         SupabaseError.database('Failed to insert record: ${e.toString()}'),
       );
     }
   }
 
-  /// Update record with typed response
   Future<SupabaseResponse<List<Map<String, dynamic>>>> update(
     String table,
     String id,
@@ -130,14 +115,12 @@ class AtomicDatabaseService {
         return SupabaseResponse.success([]);
       }
     } catch (e) {
-      developer.log('Database update error: $e', error: e);
       return SupabaseResponse.error(
         SupabaseError.database('Failed to update record: ${e.toString()}'),
       );
     }
   }
 
-  /// Delete record with typed response
   Future<SupabaseResponse<void>> delete(
     String table,
     String id, {
@@ -151,14 +134,12 @@ class AtomicDatabaseService {
       
       return SupabaseResponse.success(null);
     } catch (e) {
-      developer.log('Database delete error: $e', error: e);
       return SupabaseResponse.error(
         SupabaseError.database('Failed to delete record: ${e.toString()}'),
       );
     }
   }
 
-  /// Check if record exists
   Future<bool> exists(
     String table,
     String id, {
@@ -173,12 +154,10 @@ class AtomicDatabaseService {
       
       return result != null;
     } catch (e) {
-      developer.log('Database exists check error: $e', error: e);
       return false;
     }
   }
 
-  /// Count records with filters
   Future<SupabaseResponse<int>> count(
     String table, {
     Map<String, dynamic>? filters,
@@ -186,7 +165,6 @@ class AtomicDatabaseService {
     try {
       dynamic query = _client.from(table).select('*');
       
-      // Apply filters
       if (filters != null) {
         for (final entry in filters.entries) {
           query = query.eq(entry.key, entry.value);
@@ -197,14 +175,12 @@ class AtomicDatabaseService {
       final count = (result as List).length;
       return SupabaseResponse.success(count);
     } catch (e) {
-      developer.log('Database count error: $e', error: e);
       return SupabaseResponse.error(
         SupabaseError.database('Failed to count records: ${e.toString()}'),
       );
     }
   }
 
-  /// Get random record(s) from table
   Future<SupabaseResponse<List<Map<String, dynamic>>>> selectRandom(
     String table, {
     String columns = '*',
@@ -216,14 +192,12 @@ class AtomicDatabaseService {
     try {
       dynamic query = _client.from(table).select(columns);
       
-      // Apply filters
       if (filters != null) {
         for (final entry in filters.entries) {
           query = query.eq(entry.key, entry.value);
         }
       }
       
-      // Exclude specific IDs
       if (excludeIds != null && excludeIds.isNotEmpty) {
         query = query.not(idColumn, 'in', excludeIds);
       }
@@ -234,7 +208,6 @@ class AtomicDatabaseService {
         return SupabaseResponse.success([]);
       }
       
-      // Select random records
       final random = math.Random();
       final selectedRecords = <Map<String, dynamic>>[];
       final availableRecords = List<Map<String, dynamic>>.from(result);
@@ -246,14 +219,12 @@ class AtomicDatabaseService {
       
       return SupabaseResponse.success(selectedRecords);
     } catch (e) {
-      developer.log('Database selectRandom error: $e', error: e);
       return SupabaseResponse.error(
         SupabaseError.database('Failed to fetch random records: ${e.toString()}'),
       );
     }
   }
 
-  /// Advanced filtering with multiple conditions
   Future<SupabaseResponse<List<Map<String, dynamic>>>> selectWithFilters(
     String table, {
     String columns = '*',
@@ -266,7 +237,6 @@ class AtomicDatabaseService {
     try {
       dynamic query = _client.from(table).select(columns);
       
-      // Apply filters
       if (filters != null) {
         for (final filter in filters) {
           switch (filter.operator) {
@@ -301,12 +271,10 @@ class AtomicDatabaseService {
         }
       }
       
-      // Apply ordering
       if (orderBy != null) {
         query = query.order(orderBy, ascending: ascending);
       }
       
-      // Apply pagination
       if (limit != null) {
         query = query.limit(limit);
       }
@@ -317,7 +285,6 @@ class AtomicDatabaseService {
       final result = await query;
       return SupabaseResponse.success(List<Map<String, dynamic>>.from(result));
     } catch (e) {
-      developer.log('Database selectWithFilters error: $e', error: e);
       return SupabaseResponse.error(
         SupabaseError.database('Failed to fetch filtered records: ${e.toString()}'),
       );
@@ -325,7 +292,6 @@ class AtomicDatabaseService {
   }
 }
 
-/// Database filter for advanced queries
 class DatabaseFilter {
   final String column;
   final FilterOperator operator;
@@ -337,7 +303,6 @@ class DatabaseFilter {
     required this.value,
   });
 
-  /// Factory constructors for common filters
   factory DatabaseFilter.equals(String column, dynamic value) =>
       DatabaseFilter(column: column, operator: FilterOperator.equals, value: value);
 
@@ -357,7 +322,6 @@ class DatabaseFilter {
       DatabaseFilter(column: column, operator: FilterOperator.inList, value: value);
 }
 
-/// Filter operators for database queries
 enum FilterOperator {
   equals,
   notEquals,

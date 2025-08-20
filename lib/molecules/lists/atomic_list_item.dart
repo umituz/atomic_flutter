@@ -8,8 +8,6 @@ import '../../atoms/icons/atomic_icon.dart';
 import '../../atoms/feedback/atomic_badge.dart';
 import '../../atoms/display/atomic_avatar.dart';
 
-/// Atomic List Item Component
-/// Material Design list item with flexible layout options
 class AtomicListItem extends StatelessWidget {
   const AtomicListItem({
     super.key,
@@ -44,22 +42,18 @@ class AtomicListItem extends StatelessWidget {
     this.badge,
   });
 
-  // Content
   final Widget? leading;
   final Widget? title;
   final Widget? subtitle;
   final Widget? trailing;
 
-  // Interactions
   final VoidCallback? onTap;
   final VoidCallback? onLongPress;
 
-  // State
   final bool selected;
   final bool enabled;
   final bool autofocus;
 
-  // Layout
   final bool dense;
   final VisualDensity? visualDensity;
   final EdgeInsetsGeometry? contentPadding;
@@ -68,7 +62,6 @@ class AtomicListItem extends StatelessWidget {
   final double? minLeadingWidth;
   final ListTileTitleAlignment? titleAlignment;
 
-  // Styling
   final Color? tileColor;
   final Color? selectedTileColor;
   final Color? splashColor;
@@ -77,7 +70,6 @@ class AtomicListItem extends StatelessWidget {
   final ShapeBorder? shape;
   final bool enableFeedback;
 
-  // Atomic-specific properties
   final AtomicListItemVariant variant;
   final AtomicListItemSize size;
   final EdgeInsetsGeometry? margin;
@@ -115,7 +107,6 @@ class AtomicListItem extends StatelessWidget {
       shape: shape ?? _getShape(theme),
     );
 
-    // Wrap with container for custom styling
     if (variant != AtomicListItemVariant.standard || 
         borderRadius != null || 
         margin != null) {
@@ -138,7 +129,6 @@ class AtomicListItem extends StatelessWidget {
       );
     }
 
-    // Add divider if needed
     if (showDivider) {
       return Column(
         mainAxisSize: MainAxisSize.min,
@@ -174,7 +164,6 @@ class AtomicListItem extends StatelessWidget {
   Widget? _buildTrailing() {
     if (trailing == null) return null;
     
-    // Ensure trailing is properly sized
     if (trailing is Icon || trailing is AtomicIcon) {
       return SizedBox(
         width: 24,
@@ -292,7 +281,6 @@ class AtomicListItem extends StatelessWidget {
   }
 }
 
-/// AtomicListItem variant types
 enum AtomicListItemVariant {
   standard,    // Default Material ListTile
   filled,      // Filled background
@@ -300,14 +288,12 @@ enum AtomicListItemVariant {
   elevated,    // Elevated with shadow
 }
 
-/// AtomicListItem size variants
 enum AtomicListItemSize {
   small,       // Compact size
   medium,      // Standard size
   large,       // Large size
 }
 
-/// Helper for creating user list items
 class AtomicUserListItem extends StatelessWidget {
   const AtomicUserListItem({
     super.key,
@@ -380,7 +366,6 @@ class AtomicUserListItem extends StatelessWidget {
   }
 }
 
-/// Helper for creating icon list items
 class AtomicIconListItem extends StatelessWidget {
   const AtomicIconListItem({
     super.key,

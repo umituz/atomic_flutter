@@ -1,6 +1,3 @@
-/// Atomic Flutter wrapper for Supabase
-/// Provides typed responses and atomic-specific features
-/// Built on top of the official supabase_flutter package
 library supabase_atomic_wrapper;
 
 import 'dart:async';
@@ -12,7 +9,6 @@ import 'models/supabase_error.dart';
 import 'auth/supabase_session_manager.dart';
 import 'auth/supabase_auth_middleware.dart';
 
-/// Atomic Flutter Supabase configuration
 class AtomicSupabaseConfig {
   final String url;
   final String anonKey;
@@ -26,7 +22,6 @@ class AtomicSupabaseConfig {
     this.sessionRefreshThreshold = const Duration(minutes: 5),
   });
   
-  /// Create config from environment variables
   factory AtomicSupabaseConfig.fromEnvironment() {
     return AtomicSupabaseConfig(
       url: const String.fromEnvironment('SUPABASE_URL'),
@@ -36,7 +31,6 @@ class AtomicSupabaseConfig {
   }
 }
 
-/// Main Atomic Supabase client wrapper
 class AtomicSupabase {
   static AtomicSupabase? _instance;
   static AtomicSupabase get instance => _instance ??= AtomicSupabase._();
@@ -47,7 +41,6 @@ class AtomicSupabase {
   late AtomicSupabaseConfig _config;
   bool _isInitialized = false;
   
-  /// Initialize Atomic Supabase wrapper
   Future<void> initialize(AtomicSupabaseConfig config) async {
     if (_isInitialized) return;
     
@@ -60,50 +53,39 @@ class AtomicSupabase {
     );
     _client = Supabase.instance.client;
     
-    // Initialize our atomic features
     await SupabaseSessionManager.instance.initialize();
     
     _isInitialized = true;
   }
   
-  /// Get the official Supabase client
   SupabaseClient get client => _client;
   
-  /// Auth wrapper with atomic features
   AtomicAuth get auth => AtomicAuth._();
   
-  /// Database wrapper with typed responses
   AtomicDatabase get database => AtomicDatabase._();
   
-  /// Storage wrapper with atomic features
   AtomicStorage get storage => AtomicStorage._();
   
-  /// Configuration
   AtomicSupabaseConfig get config => _config;
   
-  /// Check if initialized
   bool get isInitialized => _isInitialized;
 }
 
-/// Atomic Authentication wrapper
 class AtomicAuth {
   AtomicAuth._();
   
   GoTrueClient get _auth => AtomicSupabase.instance.client.auth;
   
-  /// Current user with atomic typing
   SupabaseUser? get currentUser {
     final user = _auth.currentUser;
     return user != null ? SupabaseUser.fromSupabaseUser(user) : null;
   }
   
-  /// Current session
   SupabaseSession? get currentSession {
     final session = _auth.currentSession;
     return session != null ? SupabaseSession.fromSupabaseSession(session) : null;
   }
   
-  /// Auth state stream with atomic types
   Stream<SupabaseAuthResponse> get onAuthStateChange {
     return _auth.onAuthStateChange.map((data) {
       return SupabaseAuthResponse.success(
@@ -113,7 +95,6 @@ class AtomicAuth {
     });
   }
   
-  /// Sign up with typed response
   Future<SupabaseAuthResponse> signUp({
     required String email,
     required String password,
@@ -141,7 +122,6 @@ class AtomicAuth {
     }
   }
   
-  /// Sign in with password
   Future<SupabaseAuthResponse> signInWithPassword({
     required String email,
     required String password,
@@ -165,7 +145,6 @@ class AtomicAuth {
     }
   }
   
-  /// Sign in with OTP
   Future<SupabaseResponse<void>> signInWithOtp({
     String? email,
     String? phone,
@@ -188,7 +167,6 @@ class AtomicAuth {
     }
   }
   
-  /// Verify OTP
   Future<SupabaseAuthResponse> verifyOtp({
     required String token,
     required OtpType type,
@@ -214,7 +192,6 @@ class AtomicAuth {
     }
   }
   
-  /// Sign out
   Future<SupabaseResponse<void>> signOut() async {
     try {
       await _auth.signOut();
@@ -227,7 +204,6 @@ class AtomicAuth {
     }
   }
   
-  /// Reset password
   Future<SupabaseResponse<void>> resetPasswordForEmail(
     String email, {
     String? redirectTo,
@@ -246,7 +222,6 @@ class AtomicAuth {
     }
   }
   
-  /// Update user
   Future<SupabaseAuthResponse> updateUser({
     String? email,
     String? phone,
@@ -274,17 +249,14 @@ class AtomicAuth {
     }
   }
   
-  /// Get middleware instance
   SupabaseAuthMiddleware get middleware => SupabaseAuthMiddleware.instance;
 }
 
-/// Atomic Database wrapper
 class AtomicDatabase {
   AtomicDatabase._();
   
   SupabaseClient get _client => AtomicSupabase.instance.client;
   
-  /// Select with typed response
   Future<SupabaseResponse<List<Map<String, dynamic>>>> select(
     String table, {
     String columns = '*',
@@ -299,7 +271,6 @@ class AtomicDatabase {
     }
   }
   
-  /// Select with filters
   Future<SupabaseResponse<List<Map<String, dynamic>>>> selectWhere(
     String table,
     String column,
@@ -319,7 +290,6 @@ class AtomicDatabase {
     }
   }
   
-  /// Insert with typed response
   Future<SupabaseResponse<List<Map<String, dynamic>>>> insert(
     String table,
     Map<String, dynamic> data,
@@ -334,7 +304,6 @@ class AtomicDatabase {
     }
   }
   
-  /// Update with typed response
   Future<SupabaseResponse<List<Map<String, dynamic>>>> update(
     String table,
     String whereColumn,
@@ -355,7 +324,6 @@ class AtomicDatabase {
     }
   }
   
-  /// Delete with typed response
   Future<SupabaseResponse<void>> delete(
     String table,
     String whereColumn,
@@ -375,14 +343,10 @@ class AtomicDatabase {
   }
 }
 
-/// Atomic Storage wrapper
 class AtomicStorage {
   AtomicStorage._();
   
-  // TODO: Get official storage client
-  // SupabaseStorageClient get _storage => AtomicSupabase.instance.client.storage;
   
-  /// Upload file with typed response
   Future<SupabaseResponse<String>> uploadFile(
     String bucket,
     String path,
@@ -390,57 +354,29 @@ class AtomicStorage {
     String? contentType,
     bool upsert = false,
   }) async {
-    // TODO: Implement with official supabase_flutter package
     return SupabaseResponse.error(
       SupabaseError.storage('Not implemented yet'),
     );
   }
   
-  /// Download file with typed response
   Future<SupabaseResponse<List<int>>> downloadFile(
     String bucket,
     String path,
   ) async {
-    // TODO: Implement with official supabase_flutter package
     return SupabaseResponse.error(
       SupabaseError.storage('Not implemented yet'),
     );
   }
   
-  /// Get public URL
   String getPublicUrl(String bucket, String path) {
-    // TODO: Implement with official supabase_flutter package
     return '';
   }
 }
 
-/// Custom local storage for atomic features
 class AtomicLocalStorage {
-  // TODO: Implement custom local storage if needed
-  // This can extend the official LocalStorage interface
 }
 
-/// Helper to convert between official and atomic types
 class TypeConverter {
-  // TODO: Add conversion methods between official Supabase types and our atomic types
   
-  /// Convert official User to SupabaseUser
-  // static SupabaseUser convertUser(User user) {
-  //   return SupabaseUser(
-  //     id: user.id,
-  //     email: user.email,
-  //     phone: user.phone,
-  //     // ... other conversions
-  //   );
-  // }
   
-  /// Convert official Session to SupabaseSession
-  // static SupabaseSession convertSession(Session session) {
-  //   return SupabaseSession(
-  //     accessToken: session.accessToken,
-  //     refreshToken: session.refreshToken,
-  //     expiresAt: session.expiresAt,
-  //     // ... other conversions
-  //   );
-  // }
 } 

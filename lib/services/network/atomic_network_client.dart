@@ -3,8 +3,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 
-/// Atomic Network Client
-/// A simple, clean HTTP client without external dependencies (no Dio)
 class AtomicNetworkClient {
   AtomicNetworkClient({
     this.baseUrl = '',
@@ -18,20 +16,16 @@ class AtomicNetworkClient {
   final Duration timeout;
   final http.Client _httpClient;
 
-  /// Interceptors for request/response modification
   final List<AtomicNetworkInterceptor> _interceptors = [];
 
-  /// Add an interceptor
   void addInterceptor(AtomicNetworkInterceptor interceptor) {
     _interceptors.add(interceptor);
   }
 
-  /// Remove an interceptor
   void removeInterceptor(AtomicNetworkInterceptor interceptor) {
     _interceptors.remove(interceptor);
   }
 
-  /// GET request
   Future<AtomicResponse<T>> get<T>(
     String path, {
     Map<String, String>? headers,
@@ -47,7 +41,6 @@ class AtomicNetworkClient {
     );
   }
 
-  /// POST request
   Future<AtomicResponse<T>> post<T>(
     String path, {
     Map<String, String>? headers,
@@ -65,7 +58,6 @@ class AtomicNetworkClient {
     );
   }
 
-  /// PUT request
   Future<AtomicResponse<T>> put<T>(
     String path, {
     Map<String, String>? headers,
@@ -83,7 +75,6 @@ class AtomicNetworkClient {
     );
   }
 
-  /// DELETE request
   Future<AtomicResponse<T>> delete<T>(
     String path, {
     Map<String, String>? headers,
@@ -101,7 +92,6 @@ class AtomicNetworkClient {
     );
   }
 
-  /// PATCH request
   Future<AtomicResponse<T>> patch<T>(
     String path, {
     Map<String, String>? headers,
@@ -119,7 +109,6 @@ class AtomicNetworkClient {
     );
   }
 
-  /// Perform the actual HTTP request
   Future<AtomicResponse<T>> _performRequest<T>({
     required String method,
     required String path,
@@ -129,17 +118,14 @@ class AtomicNetworkClient {
     AtomicResponseParser<T>? parser,
   }) async {
     try {
-      // Build URL
       final uri = _buildUri(path, queryParameters);
       
-      // Build headers
       final requestHeaders = {
         ...defaultHeaders,
         if (headers != null) ...headers,
         if (body != null && body is! String) 'Content-Type': 'application/json',
       };
 
-      // Apply request interceptors
       var interceptedRequest = AtomicRequest(
         method: method,
         uri: uri,
@@ -151,11 +137,9 @@ class AtomicNetworkClient {
         interceptedRequest = await interceptor.onRequest(interceptedRequest);
       }
 
-      // Create request
       final request = http.Request(interceptedRequest.method, interceptedRequest.uri)
         ..headers.addAll(interceptedRequest.headers);
 
-      // Add body
       if (interceptedRequest.body != null) {
         if (interceptedRequest.body is String) {
           request.body = interceptedRequest.body;
@@ -164,11 +148,9 @@ class AtomicNetworkClient {
         }
       }
 
-      // Send request with timeout
       final streamedResponse = await _httpClient.send(request).timeout(timeout);
       final response = await http.Response.fromStream(streamedResponse);
 
-      // Create atomic response
       var atomicResponse = AtomicResponse<T>(
         statusCode: response.statusCode,
         headers: response.headers,
@@ -176,7 +158,6 @@ class AtomicNetworkClient {
         isSuccess: response.statusCode >= 200 && response.statusCode < 300,
       );
 
-      // Parse response body
       if (response.body.isNotEmpty) {
         try {
           final decodedBody = jsonDecode(response.body);
@@ -192,19 +173,16 @@ class AtomicNetworkClient {
             );
           }
         } catch (e) {
-          // Body is not JSON, keep as string
           atomicResponse = atomicResponse.copyWith(
             rawData: response.body,
           );
         }
       }
 
-      // Apply response interceptors
       for (final interceptor in _interceptors) {
         atomicResponse = await interceptor.onResponse(atomicResponse) as AtomicResponse<T>;
       }
 
-      // Handle error responses
       if (!atomicResponse.isSuccess) {
         throw AtomicNetworkException(
           message: 'Request failed with status ${atomicResponse.statusCode}',
@@ -234,7 +212,6 @@ class AtomicNetworkClient {
     }
   }
 
-  /// Build URI with query parameters
   Uri _buildUri(String path, Map<String, dynamic>? queryParameters) {
     final fullPath = baseUrl.isEmpty ? path : '$baseUrl$path';
     final uri = Uri.parse(fullPath);
@@ -250,16 +227,13 @@ class AtomicNetworkClient {
     return uri;
   }
 
-  /// Dispose the client
   void dispose() {
     _httpClient.close();
   }
 }
 
-/// Response parser function type
 typedef AtomicResponseParser<T> = T Function(dynamic data);
 
-/// Atomic HTTP Request
 class AtomicRequest {
   const AtomicRequest({
     required this.method,
@@ -288,7 +262,6 @@ class AtomicRequest {
   }
 }
 
-/// Atomic HTTP Response
 class AtomicResponse<T> {
   const AtomicResponse({
     required this.statusCode,
@@ -325,31 +298,22 @@ class AtomicResponse<T> {
   }
 }
 
-/// Network interceptor interface
 abstract class AtomicNetworkInterceptor {
-  /// Called before request is sent
   Future<AtomicRequest> onRequest(AtomicRequest request);
 
-  /// Called after response is received
   Future<AtomicResponse<dynamic>> onResponse(AtomicResponse<dynamic> response);
 }
 
-/// Network exception types
 enum AtomicNetworkExceptionType {
-  /// Network connection error
   network,
   
-  /// Request timeout
   timeout,
   
-  /// HTTP error response
   response,
   
-  /// Unknown error
   unknown,
 }
 
-/// Atomic Network Exception
 class AtomicNetworkException implements Exception {
   const AtomicNetworkException({
     required this.message,

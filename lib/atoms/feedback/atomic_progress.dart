@@ -3,8 +3,6 @@ import '../../themes/atomic_theme_provider.dart';
 import '../../themes/atomic_theme_data.dart';
 import '../display/atomic_text.dart';
 
-/// Atomic Progress Component
-/// Material Design progress indicator with linear and circular variants
 class AtomicProgress extends StatelessWidget {
   final double? value;
   final Color? backgroundColor;
@@ -31,7 +29,6 @@ class AtomicProgress extends StatelessWidget {
     this.margin,
   });
 
-  // Linear progress constructor
   const AtomicProgress.linear({
     super.key,
     this.value,
@@ -45,7 +42,6 @@ class AtomicProgress extends StatelessWidget {
   }) : variant = AtomicProgressVariant.linear,
        strokeWidth = null;
 
-  // Circular progress constructor
   const AtomicProgress.circular({
     super.key,
     this.value,
@@ -186,8 +182,6 @@ class AtomicProgress extends StatelessWidget {
   }
 }
 
-/// Atomic Progress Card Component
-/// Progress indicator with a card wrapper for more prominent display
 class AtomicProgressCard extends StatelessWidget {
   final double? value;
   final String title;
@@ -294,8 +288,6 @@ class AtomicProgressCard extends StatelessWidget {
   }
 }
 
-/// Atomic Step Progress Component
-/// Multi-step progress indicator for workflows
 class AtomicStepProgress extends StatelessWidget {
   final List<AtomicProgressStep> steps;
   final int currentStep;
@@ -480,7 +472,6 @@ class AtomicStepProgress extends StatelessWidget {
   }
 }
 
-/// Progress step data model
 class AtomicProgressStep {
   final String title;
   final String? subtitle;
@@ -493,20 +484,17 @@ class AtomicProgressStep {
   });
 }
 
-/// Progress variant enum
 enum AtomicProgressVariant {
   linear,
   circular,
 }
 
-/// Progress size enum
 enum AtomicProgressSize {
   small,
   medium,
   large,
 }
 
-/// Step progress orientation enum
 enum AtomicStepProgressOrientation {
   horizontal,
   vertical,

@@ -3,8 +3,6 @@ import '../../themes/atomic_theme_provider.dart';
 import '../../tokens/borders/atomic_borders.dart';
 import '../../tokens/animations/atomic_animations.dart';
 
-/// Atomic Shimmer Component
-/// Skeleton loading effect for content placeholders
 class AtomicShimmer extends StatefulWidget {
   const AtomicShimmer({
     super.key,
@@ -126,7 +124,6 @@ class _AtomicShimmerState extends State<AtomicShimmer>
   }
 }
 
-/// Transform for shimmer slide effect
 class _ShimmerSlideTransform extends GradientTransform {
   const _ShimmerSlideTransform(this.slidePercent);
 
@@ -138,8 +135,6 @@ class _ShimmerSlideTransform extends GradientTransform {
   }
 }
 
-/// Atomic Shimmer List Component
-/// Pre-built shimmer list for common loading states
 class AtomicShimmerList extends StatelessWidget {
   const AtomicShimmerList({
     super.key,
@@ -179,8 +174,6 @@ class AtomicShimmerList extends StatelessWidget {
   }
 }
 
-/// Atomic Shimmer Card Component
-/// Pre-built shimmer card for loading states
 class AtomicShimmerCard extends StatelessWidget {
   const AtomicShimmerCard({
     super.key,

@@ -5,8 +5,6 @@ import '../../tokens/animations/atomic_animations.dart';
 import '../../atoms/display/atomic_text.dart';
 import '../../atoms/overlays/atomic_bottom_sheet.dart';
 
-/// Atomic Dropdown Component
-/// Material Design dropdown with enhanced functionality
 class AtomicDropdown<T> extends StatefulWidget {
   const AtomicDropdown({
     super.key,
@@ -291,7 +289,6 @@ class _AtomicDropdownState<T> extends State<AtomicDropdown<T>> {
   }
 }
 
-/// Dropdown item model
 class AtomicDropdownItem<T> {
   const AtomicDropdownItem({
     required this.value,
@@ -310,10 +307,7 @@ class AtomicDropdownItem<T> {
   final bool enabled;
 }
 
-/// Atomic Dropdown Helper
-/// Utility for common dropdown patterns
 class AtomicDropdownHelper {
-  /// Create a simple string dropdown
   static AtomicDropdown<String> simple({
     required List<String> options,
     required ValueChanged<String?> onChanged,
@@ -339,7 +333,6 @@ class AtomicDropdownHelper {
     );
   }
 
-  /// Create an icon dropdown
   static AtomicDropdown<T> withIcons<T>({
     required List<AtomicDropdownItem<T>> items,
     required ValueChanged<T?> onChanged,
@@ -356,7 +349,6 @@ class AtomicDropdownHelper {
     );
   }
 
-  /// Create a searchable dropdown
   static AtomicDropdown<T> searchable<T>({
     required List<AtomicDropdownItem<T>> items,
     required ValueChanged<T?> onChanged,

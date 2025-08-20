@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import '../../tokens/borders/atomic_borders.dart';
 import '../../tokens/shadows/atomic_shadows.dart';
 
-/// Atomic Gradient Container Component
-/// Container with gradient background support
 class AtomicGradientContainer extends StatelessWidget {
   const AtomicGradientContainer({
     super.key,
@@ -102,7 +100,6 @@ class AtomicGradientContainer extends StatelessWidget {
   }
 }
 
-/// Gradient container shadow options
 enum AtomicGradientShadow {
   none,
   small,

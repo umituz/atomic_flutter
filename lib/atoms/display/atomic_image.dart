@@ -7,8 +7,6 @@ import '../../tokens/borders/atomic_borders.dart';
 import '../../tokens/colors/atomic_colors.dart';
 import '../feedback/atomic_shimmer.dart';
 
-/// Atomic Image Component
-/// Flexible image component with multiple sources and loading states
 class AtomicImage extends StatelessWidget {
   final String? path;
   final double? width;
@@ -155,8 +153,6 @@ class AtomicImage extends StatelessWidget {
   }
 }
 
-/// Atomic SVG Component
-/// SVG image component with theme integration
 class AtomicSvg extends StatelessWidget {
   final String? path;
   final double? width;
@@ -231,14 +227,12 @@ class AtomicSvg extends StatelessWidget {
   }
 }
 
-/// Image source types
 enum AtomicImageSource {
   network,
   asset,
   file,
 }
 
-/// SVG source types
 enum AtomicSvgSource {
   network,
   asset,

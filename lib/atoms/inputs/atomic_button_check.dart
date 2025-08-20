@@ -5,8 +5,6 @@ import '../../tokens/borders/atomic_borders.dart';
 import '../../tokens/animations/atomic_animations.dart';
 import '../display/atomic_text.dart';
 
-/// Atomic Button Check Component
-/// Button-style checkbox with text label and smooth animations
 class AtomicButtonCheck extends StatefulWidget {
   const AtomicButtonCheck({
     super.key,

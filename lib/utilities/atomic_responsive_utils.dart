@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
 
-/// Atomic Responsive Utils - Central responsive utility class
-/// Standardized breakpoints and responsive helpers for consistent UI across devices
 class AtomicResponsiveUtils {
-  // Standard breakpoint definitions based on Material Design and common devices
   static const double mobileBreakpoint = 600;    // Phones (portrait)
   static const double tabletBreakpoint = 905;    // Small tablets (portrait)
   static const double desktopBreakpoint = 1240;  // Desktop/Large tablets (landscape)
   static const double largeDesktopBreakpoint = 1440; // Large desktop screens
 
-  // Height-based breakpoints for better responsive design
   static const double shortScreenBreakpoint = 700;   // Short screens (small phones)
   static const double mediumScreenBreakpoint = 800;  // Medium screens (most phones)
   static const double tallScreenBreakpoint = 900;    // Tall screens (large phones/tablets)
 
-  // Device type detection
   static bool isMobile(BuildContext context) {
     return MediaQuery.of(context).size.width < mobileBreakpoint;
   }
@@ -33,7 +28,6 @@ class AtomicResponsiveUtils {
     return MediaQuery.of(context).size.width >= largeDesktopBreakpoint;
   }
 
-  // Screen height helpers
   static bool isShortScreen(BuildContext context) {
     return MediaQuery.of(context).size.height < shortScreenBreakpoint;
   }
@@ -47,7 +41,6 @@ class AtomicResponsiveUtils {
     return MediaQuery.of(context).size.height >= tallScreenBreakpoint;
   }
 
-  // Orientation helpers
   static bool isPortrait(BuildContext context) {
     return MediaQuery.of(context).orientation == Orientation.portrait;
   }
@@ -56,7 +49,6 @@ class AtomicResponsiveUtils {
     return MediaQuery.of(context).orientation == Orientation.landscape;
   }
 
-  // Screen dimension utilities
   static Size screenSize(BuildContext context) {
     return MediaQuery.of(context).size;
   }
@@ -77,7 +69,6 @@ class AtomicResponsiveUtils {
     return MediaQuery.of(context).size.height * fraction;
   }
 
-  // Safe area utilities
   static EdgeInsets safeArea(BuildContext context) {
     return MediaQuery.of(context).padding;
   }
@@ -94,7 +85,6 @@ class AtomicResponsiveUtils {
     return MediaQuery.of(context).padding.bottom > 0;
   }
 
-  // Responsive value selection
   static T responsiveValue<T>(
     BuildContext context, {
     required T mobile,
@@ -108,7 +98,6 @@ class AtomicResponsiveUtils {
     return mobile;
   }
 
-  // Responsive spacing helpers
   static double responsiveSpacing(
     BuildContext context, {
     double mobile = 16.0,
@@ -123,7 +112,6 @@ class AtomicResponsiveUtils {
     );
   }
 
-  // Responsive font size helpers
   static double responsiveFontSize(
     BuildContext context, {
     double mobile = 16.0,
@@ -138,7 +126,6 @@ class AtomicResponsiveUtils {
     );
   }
 
-  // Responsive padding helpers
   static EdgeInsets responsivePadding(
     BuildContext context, {
     EdgeInsets? mobile,
@@ -153,7 +140,6 @@ class AtomicResponsiveUtils {
     );
   }
 
-  // Responsive margin helpers
   static EdgeInsets responsiveMargin(
     BuildContext context, {
     EdgeInsets? mobile,
@@ -168,7 +154,6 @@ class AtomicResponsiveUtils {
     );
   }
 
-  // Responsive width calculations
   static double responsiveWidth(
     BuildContext context, {
     double mobileRatio = 1.0,
@@ -194,7 +179,6 @@ class AtomicResponsiveUtils {
     return width;
   }
 
-  // Grid column calculations
   static int responsiveColumns(BuildContext context) {
     if (isLargeDesktop(context)) return 4;
     if (isDesktop(context)) return 3;
@@ -202,14 +186,11 @@ class AtomicResponsiveUtils {
     return 1;
   }
 
-  // Responsive text scale
   static double getTextScaleFactor(BuildContext context) {
     final textScaleFactor = MediaQuery.of(context).textScaleFactor;
-    // Limit text scale for better UI consistency
     return textScaleFactor.clamp(0.8, 1.3);
   }
 
-  // Device category detection for specific handling
   static AtomicDeviceCategory getDeviceCategory(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final shortestSide = size.shortestSide;
@@ -223,7 +204,6 @@ class AtomicResponsiveUtils {
     }
   }
 
-  // Responsive behavior helpers
   static bool shouldUseDrawer(BuildContext context) {
     return isMobile(context) || (isTablet(context) && isPortrait(context));
   }
@@ -240,7 +220,6 @@ class AtomicResponsiveUtils {
     return isTablet(context) || isDesktop(context);
   }
 
-  // Responsive dialog sizing
   static double getDialogWidth(BuildContext context) {
     return responsiveValue(
       context,
@@ -250,7 +229,6 @@ class AtomicResponsiveUtils {
     );
   }
 
-  // Responsive card sizing for grids
   static double getCardWidth(BuildContext context, {int columns = 1}) {
     final screenWidth = MediaQuery.of(context).size.width;
     final spacing = responsiveSpacing(context);
@@ -259,14 +237,12 @@ class AtomicResponsiveUtils {
   }
 }
 
-/// Device category enum for specific handling
 enum AtomicDeviceCategory {
   mobile,
   tablet,
   desktop,
 }
 
-/// Responsive breakpoint extensions for easy access
 extension AtomicResponsiveExtensions on BuildContext {
   bool get isMobile => AtomicResponsiveUtils.isMobile(this);
   bool get isTablet => AtomicResponsiveUtils.isTablet(this);

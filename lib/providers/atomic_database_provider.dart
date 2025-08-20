@@ -1,5 +1,3 @@
-/// Generic Database Provider Pattern for Riverpod
-/// Provides reusable state management patterns for database operations
 library atomic_database_provider;
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,7 +7,6 @@ import '../services/supabase/database/atomic_database_service.dart';
 import '../services/supabase/models/supabase_response.dart';
 import '../services/supabase/models/supabase_error.dart';
 
-/// Generic database state for any model type
 @immutable
 class AtomicDatabaseState<T> {
   final List<T> data;
@@ -42,7 +39,6 @@ class AtomicDatabaseState<T> {
     );
   }
 
-  // Helper getters
   bool get hasData => data.isNotEmpty;
   bool get hasError => error != null;
   int get itemCount => data.length;
@@ -50,7 +46,6 @@ class AtomicDatabaseState<T> {
   T? get lastItem => data.isNotEmpty ? data.last : null;
 }
 
-/// Generic database notifier for CRUD operations
 abstract class AtomicDatabaseNotifier<T> extends StateNotifier<AtomicDatabaseState<T>> {
   final AtomicDatabaseService _databaseService;
   final String tableName;
@@ -62,16 +57,12 @@ abstract class AtomicDatabaseNotifier<T> extends StateNotifier<AtomicDatabaseSta
   }) : _databaseService = databaseService ?? AtomicDatabaseService(),
        super(initialState);
 
-  /// Convert JSON to model - must be implemented by subclasses
   T fromJson(Map<String, dynamic> json);
 
-  /// Convert model to JSON - must be implemented by subclasses
   Map<String, dynamic> toJson(T model);
 
-  /// Get model ID - must be implemented by subclasses
   String getId(T model);
 
-  /// Load all records
   Future<void> loadAll({
     Map<String, dynamic>? filters,
     String? orderBy,
@@ -110,7 +101,6 @@ abstract class AtomicDatabaseNotifier<T> extends StateNotifier<AtomicDatabaseSta
     }
   }
 
-  /// Load paginated records
   Future<void> loadPaginated({
     Map<String, dynamic>? filters,
     String? orderBy,
@@ -159,14 +149,12 @@ abstract class AtomicDatabaseNotifier<T> extends StateNotifier<AtomicDatabaseSta
     }
   }
 
-  /// Load next page (append to existing data)
   Future<void> loadNextPage() async {
     if (state.isLoading || !state.hasMore) return;
     
     await loadPaginated(append: true);
   }
 
-  /// Add new record
   Future<bool> add(T model) async {
     try {
       final result = await _databaseService.insert(
@@ -192,7 +180,6 @@ abstract class AtomicDatabaseNotifier<T> extends StateNotifier<AtomicDatabaseSta
     }
   }
 
-  /// Update existing record
   Future<bool> update(T model) async {
     try {
       final id = getId(model);
@@ -222,7 +209,6 @@ abstract class AtomicDatabaseNotifier<T> extends StateNotifier<AtomicDatabaseSta
     }
   }
 
-  /// Delete record
   Future<bool> delete(String id) async {
     try {
       final result = await _databaseService.delete(tableName, id);
@@ -243,7 +229,6 @@ abstract class AtomicDatabaseNotifier<T> extends StateNotifier<AtomicDatabaseSta
     }
   }
 
-  /// Search/filter records
   Future<void> search({
     required List<DatabaseFilter> filters,
     String? orderBy,
@@ -282,7 +267,6 @@ abstract class AtomicDatabaseNotifier<T> extends StateNotifier<AtomicDatabaseSta
     }
   }
 
-  /// Get random records
   Future<void> loadRandom({
     Map<String, dynamic>? filters,
     List<String>? excludeIds,
@@ -318,22 +302,18 @@ abstract class AtomicDatabaseNotifier<T> extends StateNotifier<AtomicDatabaseSta
     }
   }
 
-  /// Refresh data
   Future<void> refresh() async {
     await loadAll();
   }
 
-  /// Clear all data and errors
   void clear() {
     state = AtomicDatabaseState<T>();
   }
 
-  /// Clear error
   void clearError() {
     state = state.copyWith(error: null);
   }
 
-  /// Get record by ID
   T? getById(String id) {
     try {
       return state.data.firstWhere((item) => getId(item) == id);
@@ -342,25 +322,20 @@ abstract class AtomicDatabaseNotifier<T> extends StateNotifier<AtomicDatabaseSta
     }
   }
 
-  /// Check if record exists
   bool exists(String id) {
     return getById(id) != null;
   }
 
-  /// Get records count
   int get count => state.data.length;
 }
 
-/// Generic database provider factory
 class AtomicDatabaseProviderFactory {
-  /// Create a StateNotifierProvider for any model type
   static StateNotifierProvider<T, AtomicDatabaseState<M>> create<T extends AtomicDatabaseNotifier<M>, M>(
     T Function(Ref ref) create,
   ) {
     return StateNotifierProvider<T, AtomicDatabaseState<M>>((ref) => create(ref));
   }
 
-  /// Create a family provider for dynamic table/filter combinations
   static StateNotifierProviderFamily<T, AtomicDatabaseState<M>, P> createFamily<T extends AtomicDatabaseNotifier<M>, M, P>(
     T Function(Ref ref, P parameter) create,
   ) {

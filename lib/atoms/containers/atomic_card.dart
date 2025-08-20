@@ -5,8 +5,6 @@ import '../../tokens/animations/atomic_animations.dart';
 import '../../tokens/shadows/atomic_shadows.dart';
 import '../../tokens/borders/atomic_borders.dart';
 
-/// Atomic Card Component
-/// Versatile container component with elevation and interaction support
 class AtomicCard extends StatefulWidget {
   const AtomicCard({
     super.key,
@@ -169,7 +167,6 @@ class _AtomicCardState extends State<AtomicCard>
   }
 }
 
-/// Card shadow options
 enum AtomicCardShadow {
   none,
   small,

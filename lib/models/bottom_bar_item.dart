@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Atomic Bottom Bar Item Model
-/// Represents a navigation item for bottom navigation bars
 class AtomicBottomBarItem {
   const AtomicBottomBarItem({
     required this.icon,
@@ -19,7 +17,6 @@ class AtomicBottomBarItem {
   final bool enabled;
   final String? tooltip;
 
-  /// Create a copy of this item with modified properties
   AtomicBottomBarItem copyWith({
     IconData? icon,
     String? label,
@@ -38,7 +35,6 @@ class AtomicBottomBarItem {
     );
   }
 
-  /// Create from JSON
   factory AtomicBottomBarItem.fromJson(Map<String, dynamic> json) {
     return AtomicBottomBarItem(
       icon: IconData(
@@ -51,7 +47,6 @@ class AtomicBottomBarItem {
     );
   }
 
-  /// Convert to JSON
   Map<String, dynamic> toJson() {
     return {
       'icon_code_point': icon.codePoint,

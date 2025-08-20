@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
-/// Atomic Debouncer Utility
-/// Prevents excessive function calls by delaying execution
 class AtomicDebouncer {
   AtomicDebouncer({
     this.delay = const Duration(milliseconds: 500),
@@ -12,32 +10,26 @@ class AtomicDebouncer {
   Timer? _timer;
   VoidCallback? _callback;
 
-  /// Debounce a callback function
   void debounce(VoidCallback callback) {
     _callback = callback;
     cancel();
     _timer = Timer(delay, flush);
   }
 
-  /// Cancel the current debounce timer
   void cancel() {
     _timer?.cancel();
   }
 
-  /// Execute the callback immediately and cancel timer
   void flush() {
     _callback?.call();
     cancel();
   }
 
-  /// Dispose the debouncer
   void dispose() {
     cancel();
   }
 }
 
-/// Atomic Search Debouncer
-/// Specialized debouncer for search operations
 class AtomicSearchDebouncer {
   AtomicSearchDebouncer({
     this.delay = const Duration(milliseconds: 300),
@@ -49,7 +41,6 @@ class AtomicSearchDebouncer {
   Timer? _timer;
   String _lastQuery = '';
 
-  /// Debounce search query
   void search(String query) {
     _lastQuery = query;
     _timer?.cancel();
@@ -66,19 +57,15 @@ class AtomicSearchDebouncer {
     });
   }
 
-  /// Cancel current search
   void cancel() {
     _timer?.cancel();
   }
 
-  /// Dispose the search debouncer
   void dispose() {
     cancel();
   }
 }
 
-/// Atomic Throttle Utility
-/// Limits function calls to a maximum frequency
 class AtomicThrottle {
   AtomicThrottle({
     required this.duration,
@@ -87,7 +74,6 @@ class AtomicThrottle {
   final Duration duration;
   DateTime? _lastRun;
 
-  /// Throttle a callback function
   void throttle(VoidCallback callback) {
     final now = DateTime.now();
     if (_lastRun == null || now.difference(_lastRun!) >= duration) {
@@ -96,14 +82,11 @@ class AtomicThrottle {
     }
   }
 
-  /// Reset the throttle
   void reset() {
     _lastRun = null;
   }
 }
 
-/// Atomic Function Controller
-/// Combines debounce and throttle capabilities
 class AtomicFunctionController {
   AtomicFunctionController({
     this.debounceDelay = const Duration(milliseconds: 500),
@@ -117,7 +100,6 @@ class AtomicFunctionController {
   DateTime? _lastThrottleRun;
   VoidCallback? _pendingCallback;
 
-  /// Debounce a callback
   void debounce(VoidCallback callback) {
     _pendingCallback = callback;
     _debounceTimer?.cancel();
@@ -126,7 +108,6 @@ class AtomicFunctionController {
     });
   }
 
-  /// Throttle a callback
   void throttle(VoidCallback callback) {
     final now = DateTime.now();
     if (_lastThrottleRun == null || 
@@ -136,12 +117,9 @@ class AtomicFunctionController {
     }
   }
 
-  /// Debounce with throttle fallback
-  /// Ensures function is called at least once per throttle duration
   void debounceWithThrottle(VoidCallback callback) {
     _pendingCallback = callback;
     
-    // Check if we should throttle
     final now = DateTime.now();
     if (_lastThrottleRun == null || 
         now.difference(_lastThrottleRun!) >= throttleDuration) {
@@ -151,20 +129,17 @@ class AtomicFunctionController {
       return;
     }
     
-    // Otherwise debounce
     _debounceTimer?.cancel();
     _debounceTimer = Timer(debounceDelay, () {
       _pendingCallback?.call();
     });
   }
 
-  /// Cancel all pending operations
   void cancel() {
     _debounceTimer?.cancel();
     _pendingCallback = null;
   }
 
-  /// Dispose the controller
   void dispose() {
     cancel();
   }

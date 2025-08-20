@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Atomic Action List Item Model
-/// Represents an actionable item in a list with text, optional subtext, and unique identifier
 class AtomicActionListItem {
   const AtomicActionListItem({
     required this.text,
@@ -19,7 +17,6 @@ class AtomicActionListItem {
   final bool enabled;
   final String uniqueKey;
 
-  /// Create a copy of this item with modified properties
   AtomicActionListItem copyWith({
     String? text,
     String? subtext,
@@ -38,12 +35,10 @@ class AtomicActionListItem {
     );
   }
 
-  /// Generate a unique key if not provided
   static String generateUniqueKey() {
     return DateTime.now().microsecondsSinceEpoch.toString();
   }
 
-  /// Create from JSON
   factory AtomicActionListItem.fromJson(Map<String, dynamic> json) {
     return AtomicActionListItem(
       text: json['text'] ?? '',
@@ -52,7 +47,6 @@ class AtomicActionListItem {
     );
   }
 
-  /// Convert to JSON
   Map<String, dynamic> toJson() {
     return {
       'text': text,

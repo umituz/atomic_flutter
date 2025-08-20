@@ -1,67 +1,44 @@
-/// Atomic Status Enum
-/// Represents different status states for operations and data
 enum AtomicStatus {
-  /// Currently loading/processing
   loading,
   
-  /// Successfully completed
   success,
   
-  /// Failed with error
   error,
   
-  /// Empty result or no data
   empty,
   
-  /// Cannot perform operation
   cannot,
   
-  /// Operation timed out
   timeout,
   
-  /// Initial/idle state
   idle,
   
-  /// Cancelled by user
   cancelled,
   
-  /// Warning state
   warning;
 
-  /// Check if in loading state
   bool get isLoading => this == loading;
 
-  /// Check if in success state
   bool get isSuccess => this == success;
 
-  /// Check if in error state
   bool get isError => this == error;
 
-  /// Check if empty
   bool get isEmpty => this == empty;
 
-  /// Check if cannot perform
   bool get isCannot => this == cannot;
 
-  /// Check if timed out
   bool get isTimeout => this == timeout;
 
-  /// Check if idle
   bool get isIdle => this == idle;
 
-  /// Check if cancelled
   bool get isCancelled => this == cancelled;
 
-  /// Check if warning
   bool get isWarning => this == warning;
 
-  /// Check if in final state (success, error, empty, cannot, timeout, cancelled)
   bool get isFinal => !isLoading && !isIdle;
 
-  /// Check if failed (error, timeout, cannot)
   bool get isFailed => isError || isTimeout || isCannot;
 
-  /// Get display text for the status
   String get displayText {
     switch (this) {
       case loading:
@@ -85,7 +62,6 @@ enum AtomicStatus {
     }
   }
 
-  /// Get icon name for the status
   String get iconName {
     switch (this) {
       case loading:
@@ -109,7 +85,6 @@ enum AtomicStatus {
     }
   }
 
-  /// Get color semantic for the status
   String get colorSemantic {
     switch (this) {
       case loading:
@@ -133,7 +108,6 @@ enum AtomicStatus {
     }
   }
 
-  /// Create from string value
   static AtomicStatus fromString(String value) {
     switch (value.toLowerCase()) {
       case 'loading':
@@ -160,12 +134,9 @@ enum AtomicStatus {
     }
   }
 
-  /// Convert to string
   String get value => name;
 
-  /// Check if can retry operation
   bool get canRetry => isFailed || isCancelled;
 
-  /// Check if operation is complete
   bool get isComplete => isSuccess || isEmpty;
 } 

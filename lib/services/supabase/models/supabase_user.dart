@@ -1,5 +1,3 @@
-/// Supabase User Model
-/// Represents a user in the Supabase system
 
 class SupabaseUser {
   const SupabaseUser({
@@ -17,43 +15,30 @@ class SupabaseUser {
     this.identities,
   });
 
-  /// User ID (UUID)
   final String id;
   
-  /// User email
   final String email;
   
-  /// User phone number
   final String? phone;
   
-  /// Email confirmation timestamp
   final DateTime? emailConfirmedAt;
   
-  /// Phone confirmation timestamp
   final DateTime? phoneConfirmedAt;
   
-  /// Last sign in timestamp
   final DateTime? lastSignInAt;
   
-  /// User role
   final String? role;
   
-  /// Account creation timestamp
   final DateTime? createdAt;
   
-  /// Last update timestamp
   final DateTime? updatedAt;
   
-  /// User metadata (editable by user)
   final Map<String, dynamic>? userMetadata;
   
-  /// App metadata (controlled by app)
   final Map<String, dynamic>? appMetadata;
   
-  /// User identities (providers)
   final List<SupabaseUserIdentity>? identities;
 
-  /// Create from official Supabase User
   factory SupabaseUser.fromSupabaseUser(dynamic user) {
     return SupabaseUser(
       id: user.id,
@@ -70,7 +55,6 @@ class SupabaseUser {
     );
   }
 
-  /// Create from JSON
   factory SupabaseUser.fromJson(Map<String, dynamic> json) {
     return SupabaseUser(
       id: json['id'] as String,
@@ -100,7 +84,6 @@ class SupabaseUser {
     );
   }
 
-  /// Convert to JSON
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -118,7 +101,6 @@ class SupabaseUser {
     };
   }
 
-  /// Copy with new values
   SupabaseUser copyWith({
     String? id,
     String? email,
@@ -149,13 +131,10 @@ class SupabaseUser {
     );
   }
 
-  /// Check if email is confirmed
   bool get isEmailConfirmed => emailConfirmedAt != null;
 
-  /// Check if phone is confirmed
   bool get isPhoneConfirmed => phoneConfirmedAt != null;
 
-  /// Get display name from metadata or email
   String get displayName {
     if (userMetadata?['full_name'] != null) {
       return userMetadata!['full_name'] as String;
@@ -169,12 +148,10 @@ class SupabaseUser {
     return email.split('@').first;
   }
 
-  /// Get avatar URL from metadata
   String? get avatarUrl {
     return userMetadata?['avatar_url'] as String?;
   }
 
-  /// Get provider list
   List<String> get providers {
     return identities?.map((i) => i.provider).toList() ?? [];
   }
@@ -192,7 +169,6 @@ class SupabaseUser {
   String toString() => 'SupabaseUser(id: $id, email: $email)';
 }
 
-/// User Identity (OAuth provider info)
 class SupabaseUserIdentity {
   const SupabaseUserIdentity({
     required this.id,
@@ -204,28 +180,20 @@ class SupabaseUserIdentity {
     this.updatedAt,
   });
 
-  /// Identity ID
   final String id;
   
-  /// User ID this identity belongs to
   final String userId;
   
-  /// Provider name (email, google, github, etc.)
   final String provider;
   
-  /// Identity data from provider
   final Map<String, dynamic> identityData;
   
-  /// Last sign in with this identity
   final DateTime? lastSignInAt;
   
-  /// Identity creation timestamp
   final DateTime? createdAt;
   
-  /// Last update timestamp
   final DateTime? updatedAt;
 
-  /// Create from JSON
   factory SupabaseUserIdentity.fromJson(Map<String, dynamic> json) {
     return SupabaseUserIdentity(
       id: json['id'] as String,
@@ -244,7 +212,6 @@ class SupabaseUserIdentity {
     );
   }
 
-  /// Convert to JSON
   Map<String, dynamic> toJson() {
     return {
       'id': id,

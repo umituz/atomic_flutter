@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'atomic_theme_data.dart';
 
-/// Atomic Theme
-/// Inherited widget for providing theme data to widgets
 class AtomicTheme extends InheritedWidget {
   const AtomicTheme({
     super.key,
@@ -32,8 +30,6 @@ class AtomicTheme extends InheritedWidget {
   }
 }
 
-/// Atomic Theme Provider Widget
-/// Wraps the app with AtomicTheme and Material Theme
 class AtomicThemeProvider extends StatelessWidget {
   const AtomicThemeProvider({
     super.key,
@@ -57,12 +53,10 @@ class AtomicThemeProvider extends StatelessWidget {
   }
 }
 
-/// Riverpod provider for theme management
 final atomicThemeProvider = StateProvider<AtomicThemeData>((ref) {
   return AtomicThemeData.defaultTheme;
 });
 
-/// Extension to access theme from BuildContext
 extension AtomicThemeExtension on BuildContext {
   AtomicThemeData get atomicTheme => AtomicTheme.of(this);
   AtomicColorScheme get atomicColors => atomicTheme.colors;

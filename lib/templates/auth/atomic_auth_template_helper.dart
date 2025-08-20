@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'atomic_auth_template.dart';
 
-/// Atomic Auth Template Helper
-/// Provides pre-configured auth templates for common use cases
 class AtomicAuthTemplateHelper {
   
-  /// Login template with standard configuration
   static Widget login({
     required Widget form,
     String? title,
@@ -41,7 +38,6 @@ class AtomicAuthTemplateHelper {
     );
   }
 
-  /// Register template with standard configuration
   static Widget register({
     required Widget form,
     String? title,
@@ -77,7 +73,6 @@ class AtomicAuthTemplateHelper {
     );
   }
 
-  /// Forgot password template with standard configuration
   static Widget forgotPassword({
     required Widget form,
     String? title,
@@ -113,7 +108,6 @@ class AtomicAuthTemplateHelper {
     );
   }
 
-  /// OTP verification template with standard configuration
   static Widget otpVerification({
     required Widget form,
     String? title,
@@ -149,7 +143,6 @@ class AtomicAuthTemplateHelper {
     );
   }
 
-  /// Profile setup template with standard configuration
   static Widget profileSetup({
     required Widget form,
     String? title,
@@ -186,7 +179,6 @@ class AtomicAuthTemplateHelper {
     );
   }
 
-  /// OTP authentication template with standard configuration
   static Widget otpAuth({
     required Widget form,
     String? title,
