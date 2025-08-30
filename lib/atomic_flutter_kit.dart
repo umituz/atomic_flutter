@@ -1,4 +1,4 @@
-library atomic_flutter;
+library atomic_flutter_kit;
 
 export 'themes/atomic_theme_data.dart';
 export 'themes/atomic_theme_provider.dart';

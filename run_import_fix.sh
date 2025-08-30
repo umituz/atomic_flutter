@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Ensure we are in the correct directory
-cd /Users/umituz/Desktop/Github/umituz/mobile/atomic_flutter
+cd /Users/umituz/Desktop/Github/umituz/mobile/atomic_flutter_kit
 
 echo "Running Python script to fix relative imports..."
 python3 fix_relative_imports.py .

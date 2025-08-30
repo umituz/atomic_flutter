@@ -1,8 +1,8 @@
-name: atomic_flutter
+name: atomic_flutter_kit
 description: A comprehensive atomic design system for Flutter applications with Material Design 3 support.
 version: 0.12.1
-homepage: https://github.com/umituz/atomic_flutter
-repository: https://github.com/umituz/atomic_flutter
+homepage: https://github.com/umituz/atomic_flutter_kit
+repository: https://github.com/umituz/atomic_flutter_kit
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
