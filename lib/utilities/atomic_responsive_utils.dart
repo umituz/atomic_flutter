@@ -187,7 +187,7 @@ class AtomicResponsiveUtils {
   }
 
   static double getTextScaleFactor(BuildContext context) {
-    final textScaleFactor = MediaQuery.of(context).textScaleFactor;
+    final textScaleFactor = MediaQuery.of(context).textScaler.scale(1.0);
     return textScaleFactor.clamp(0.8, 1.3);
   }
 

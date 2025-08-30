@@ -95,6 +95,7 @@ class AtomicValueController<T> extends ValueNotifier<T?> {
       try {
         listener();
       } catch (e) {
+        debugPrint('Error in custom listener: $e');
       }
     }
   }
@@ -104,6 +105,7 @@ class AtomicValueController<T> extends ValueNotifier<T?> {
       try {
         listener(newValue);
       } catch (e) {
+        debugPrint('Error in value listener: $e');
       }
     }
   }

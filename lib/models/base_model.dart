@@ -20,9 +20,7 @@ abstract class BaseModel {
   }
   
   void beforeCreate() {
-    if (id == null) {
-      id = generateUuid();
-    }
+    id ??= generateUuid();
     createdAt ??= DateTime.now();
     updatedAt ??= DateTime.now();
   }

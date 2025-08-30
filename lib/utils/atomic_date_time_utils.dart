@@ -261,7 +261,7 @@ class AtomicDateTimeUtils {
     var remaining = days;
     
     while (remaining > 0) {
-      result = result!.add(const Duration(days: 1));
+      result = result.add(const Duration(days: 1));
       if (result.weekday < 6) {
         remaining--;
       }
