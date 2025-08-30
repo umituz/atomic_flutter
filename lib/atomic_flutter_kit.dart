@@ -1,3 +1,32 @@
+/// A comprehensive atomic design system for Flutter applications.
+///
+/// This library provides a complete set of atomic design components,
+/// design tokens, and utilities following Material Design 3 principles.
+/// Perfect for building consistent, accessible, and performant Flutter apps.
+///
+/// Key features:
+/// - 🎨 Modern Design Tokens (colors, typography, spacing, shadows, borders)
+/// - 🧱 Atomic Components (atoms, molecules, organisms)
+/// - 🚀 Performance Optimized (60fps animations, efficient rendering)
+/// - 📱 Responsive Design (mobile-first with responsive utilities)
+/// - 🌈 Theme Support (light/dark mode with customization)
+/// - ♿ Accessibility (WCAG 2.1 AA compliant)
+///
+/// ## Quick Start
+///
+/// ```dart
+/// import 'package:atomic_flutter_kit/atomic_flutter_kit.dart';
+///
+/// // Use design tokens
+/// Container(
+///   color: AtomicColors.primary,
+///   padding: AtomicSpacing.allMd,
+///   child: AtomicButton(
+///     label: 'Hello World',
+///     onPressed: () {},
+///   ),
+/// )
+/// ```
 library atomic_flutter_kit;
 
 export 'themes/atomic_theme_data.dart';

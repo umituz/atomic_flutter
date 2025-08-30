@@ -1,5 +1,34 @@
 import 'package:flutter/material.dart';
 
+/// Comprehensive color tokens for atomic design system.
+///
+/// This class provides a complete color palette following Material Design 3
+/// principles with support for semantic colors, gradients, and utility methods.
+/// All colors are carefully crafted for accessibility (WCAG AA compliance).
+///
+/// Color categories:
+/// - **Brand colors**: [primary], [secondary], [accent]
+/// - **Semantic colors**: [success], [warning], [error], [info]
+/// - **Neutral colors**: [surface], [background], [outline]
+/// - **Text colors**: [textPrimary], [textSecondary], [textTertiary]
+///
+/// Example usage:
+/// ```dart
+/// Container(
+///   color: AtomicColors.primary,
+///   decoration: BoxDecoration(
+///     gradient: AtomicColors.primaryGradient,
+///   ),
+///   child: Text(
+///     'Hello World',
+///     style: TextStyle(color: AtomicColors.onPrimary),
+///   ),
+/// )
+/// ```
+///
+/// Utility methods:
+/// - [withAlpha]: Create color with custom opacity
+/// - [blend]: Blend two colors with specified ratio
 class AtomicColors {
   AtomicColors._();
 

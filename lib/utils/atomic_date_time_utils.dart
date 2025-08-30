@@ -1,3 +1,23 @@
+/// Comprehensive date and time utilities for Flutter applications.
+///
+/// This library provides a collection of useful date and time manipulation
+/// utilities, formatters, and extensions optimized for Flutter development.
+///
+/// Features:
+/// - Date formatting and parsing
+/// - Time zone handling
+/// - Date calculations and comparisons
+/// - Human-readable date displays
+/// - Business day calculations
+///
+/// Example usage:
+/// ```dart
+/// import 'package:atomic_flutter_kit/utils/atomic_date_time_utils.dart';
+///
+/// final now = DateTime.now();
+/// final formatted = AtomicDateTimeUtils.formatDate(now);
+/// final isToday = AtomicDateTimeUtils.isToday(now);
+/// ```
 library atomic_date_time_utils;
 
 import 'package:intl/intl.dart';

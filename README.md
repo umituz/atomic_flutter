@@ -11,7 +11,7 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/to/develop-packages).
 -->
 
-# Atomic Flutter
+# Atomic Flutter Kit
 
 A modern atomic design system for Flutter applications following umituz.com standards. Built with Flutter 3.16+ and modern Dart patterns.
 
@@ -31,7 +31,7 @@ Add `atomic_flutter_kit` to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  atomic_flutter_kit: ^0.0.1
+  atomic_flutter_kit: ^0.12.1
 ```
 
 Then run:

@@ -7,6 +7,34 @@ import 'package:atomic_flutter_kit/tokens/animations/atomic_animations.dart';
 import 'package:atomic_flutter_kit/tokens/shadows/atomic_shadows.dart';
 import 'package:atomic_flutter_kit/tokens/borders/atomic_borders.dart';
 
+/// A modern, customizable button component following atomic design principles.
+///
+/// The [AtomicButton] provides a comprehensive button solution with multiple
+/// variants, sizes, loading states, and icon support. Built with Material Design 3
+/// principles and optimized for accessibility.
+///
+/// Features:
+/// - Multiple variants (primary, secondary, tertiary, ghost, destructive)
+/// - Three sizes (small, medium, large)
+/// - Loading state with animated indicators
+/// - Icon support with flexible positioning
+/// - Full-width option for forms
+/// - Accessibility optimized (screen readers, focus handling)
+/// - Smooth animations and hover effects
+///
+/// Example usage:
+/// ```dart
+/// AtomicButton(
+///   label: 'Save Changes',
+///   onPressed: () => _handleSave(),
+///   variant: AtomicButtonVariant.primary,
+///   size: AtomicButtonSize.large,
+///   icon: Icons.save,
+///   isLoading: _isSaving,
+/// )
+/// ```
+///
+/// For icon-only buttons, consider using [AtomicIconButton] instead.
 class AtomicButton extends StatefulWidget {
   const AtomicButton({
     super.key,
