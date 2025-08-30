@@ -120,3 +120,4 @@ Yayınladığınız her sürüm için Git'te bir etiket (tag) oluşturmak iyi bi
 git tag v1.0.0
 git push origin v1.0.0
 ```
+\n## Sorun Giderme\n\nYayınlama sırasında bir sorunla karşılaşırsanız, daha önce karşılaşılan sorunların ve çözümlerinin bir listesi için `GEMINI.md` dosyasına başvurun.

@@ -30,3 +30,4 @@ migrate_working_dir/
 .flutter-plugins-dependencies
 build/
 \n# Documentation for publishing, not part of the package\nPUBLISH.md
+GEMINI.md
