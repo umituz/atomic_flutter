@@ -5,6 +5,20 @@ All notable changes to the Atomic Flutter design system will be documented in th
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.12.1] - 2025-01-30 - 🔧 Package Name Update
+
+### Changed
+- 📦 **Package renamed from `atomic_flutter` to `atomic_flutter_kit`**
+  - Updated package name in `pubspec.yaml`
+  - Renamed main library file from `atomic_flutter.dart` to `atomic_flutter_kit.dart`
+  - Updated library declaration to `atomic_flutter_kit`
+  - Updated all GitHub repository URLs
+  - Updated test imports to use new package name
+
+### Fixed
+- 🔧 Fixed package naming conflicts for pub.dev publishing
+- 🔧 Updated import references in test files
+
 ## [0.12.0] - 2024-12-21 - 🧹 Legacy Code Cleanup Complete
 
 ### Breaking Changes - Legacy Code Removal
