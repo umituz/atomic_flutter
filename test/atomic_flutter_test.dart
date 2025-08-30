@@ -24,7 +24,8 @@ void main() {
   });
 
   group('AtomicButton', () {
-    testWidgets('should render with correct label', (WidgetTester tester) async {
+    testWidgets('should render with correct label',
+        (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -39,7 +40,8 @@ void main() {
       expect(find.text('Test Button'), findsOneWidget);
     });
 
-    testWidgets('should show loading indicator when isLoading is true', (WidgetTester tester) async {
+    testWidgets('should show loading indicator when isLoading is true',
+        (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -75,7 +77,7 @@ void main() {
   group('AtomicTextField', () {
     testWidgets('should show label when provided', (WidgetTester tester) async {
       final controller = TextEditingController();
-      
+
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(

@@ -63,7 +63,7 @@ class AtomicButton extends StatefulWidget {
   State<AtomicButton> createState() => _AtomicButtonState();
 }
 
-class _AtomicButtonState extends State<AtomicButton> 
+class _AtomicButtonState extends State<AtomicButton>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _scaleAnimation;
@@ -112,8 +112,8 @@ class _AtomicButtonState extends State<AtomicButton>
     }
   }
 
-  bool get _isButtonEnabled => 
-    widget.onPressed != null && !widget.isLoading && !widget.isDisabled;
+  bool get _isButtonEnabled =>
+      widget.onPressed != null && !widget.isLoading && !widget.isDisabled;
 
   @override
   Widget build(BuildContext context) {
@@ -140,9 +140,9 @@ class _AtomicButtonState extends State<AtomicButton>
                 color: _getBackgroundColor(colors),
                 borderRadius: borders.button,
                 border: _getBorder(colors),
-                boxShadow: _isButtonEnabled && !_isPressed 
-                  ? AtomicShadows.button 
-                  : AtomicShadows.none,
+                boxShadow: _isButtonEnabled && !_isPressed
+                    ? AtomicShadows.button
+                    : AtomicShadows.none,
               ),
               child: Material(
                 color: Colors.transparent,
@@ -164,7 +164,8 @@ class _AtomicButtonState extends State<AtomicButton>
     );
   }
 
-  Widget _buildContent(AtomicColorScheme colors, AtomicTypographyTheme typography) {
+  Widget _buildContent(
+      AtomicColorScheme colors, AtomicTypographyTheme typography) {
     if (widget.isLoading) {
       return SizedBox(
         height: _getIconSize(),
@@ -177,8 +178,9 @@ class _AtomicButtonState extends State<AtomicButton>
     }
 
     final List<Widget> children = [];
-    
-    if (widget.icon != null && widget.iconPosition == AtomicButtonIconPosition.start) {
+
+    if (widget.icon != null &&
+        widget.iconPosition == AtomicButtonIconPosition.start) {
       children.add(Icon(
         widget.icon,
         size: _getIconSize(),
@@ -200,7 +202,8 @@ class _AtomicButtonState extends State<AtomicButton>
       ));
     }
 
-    if (widget.icon != null && widget.iconPosition == AtomicButtonIconPosition.end) {
+    if (widget.icon != null &&
+        widget.iconPosition == AtomicButtonIconPosition.end) {
       if (widget.label.isNotEmpty) {
         children.add(const SizedBox(width: AtomicSpacing.xs));
       }
@@ -221,15 +224,19 @@ class _AtomicButtonState extends State<AtomicButton>
   EdgeInsets _getPadding(AtomicSpacingTheme spacing) {
     switch (widget.size) {
       case AtomicButtonSize.small:
-        return EdgeInsets.symmetric(horizontal: spacing.sm, vertical: spacing.xs);
+        return EdgeInsets.symmetric(
+            horizontal: spacing.sm, vertical: spacing.xs);
       case AtomicButtonSize.medium:
-        return EdgeInsets.symmetric(horizontal: spacing.md, vertical: spacing.sm);
+        return EdgeInsets.symmetric(
+            horizontal: spacing.md, vertical: spacing.sm);
       case AtomicButtonSize.large:
-        return EdgeInsets.symmetric(horizontal: spacing.lg, vertical: spacing.md);
+        return EdgeInsets.symmetric(
+            horizontal: spacing.lg, vertical: spacing.md);
     }
   }
 
-  TextStyle _getTextStyle(AtomicTypographyTheme typography, AtomicColorScheme colors) {
+  TextStyle _getTextStyle(
+      AtomicTypographyTheme typography, AtomicColorScheme colors) {
     final TextStyle baseStyle;
     switch (widget.size) {
       case AtomicButtonSize.small:
@@ -239,7 +246,7 @@ class _AtomicButtonState extends State<AtomicButton>
       case AtomicButtonSize.large:
         baseStyle = typography.labelLarge;
     }
-    
+
     return baseStyle.copyWith(
       color: _getTextColor(colors),
       fontWeight: AtomicTypography.semiBold,
@@ -334,21 +341,42 @@ class _AtomicButtonState extends State<AtomicButton>
 }
 
 enum AtomicButtonVariant {
+  /// A prominent button for primary actions.
   primary,
+
+  /// A secondary button for less prominent actions.
   secondary,
+
+  /// A tertiary button, often text-only, for least prominent actions.
   tertiary,
+
+  /// An outlined button with a transparent background and a border.
   outlined,
+
+  /// A ghost button with no background or border, typically text-only.
   ghost,
+
+  /// A button for destructive or critical actions, typically red.
   danger,
 }
 
+/// Defines the size variants of an [AtomicButton].
 enum AtomicButtonSize {
+  /// A small button, suitable for compact UIs.
   small,
+
+  /// A medium-sized button, the default size.
   medium,
+
+  /// A large button, suitable for prominent actions.
   large,
 }
 
+/// Defines the position of an icon within an [AtomicButton].
 enum AtomicButtonIconPosition {
+  /// The icon is placed at the start (left) of the button.
   start,
+
+  /// The icon is placed at the end (right) of the button.
   end,
-} 
+}

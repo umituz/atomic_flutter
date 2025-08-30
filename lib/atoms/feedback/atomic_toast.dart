@@ -8,9 +8,61 @@ import 'package:atomic_flutter_kit/tokens/shadows/atomic_shadows.dart';
 import 'package:atomic_flutter_kit/tokens/animations/atomic_animations.dart';
 import 'package:atomic_flutter_kit/atoms/icons/atomic_icon.dart';
 
+/// A utility class for displaying temporary, non-intrusive messages to the user.
+///
+/// The [AtomicToast] provides a simple way to show feedback messages (success,
+/// error, warning, info) that appear briefly and then disappear. It supports
+/// various positions, durations, and customizable content.
+///
+/// Features:
+/// - Static methods for easy display of toasts.
+/// - Multiple variants ([AtomicToastVariant]) for different message types.
+/// - Customizable position ([AtomicToastPosition]) (top, bottom, center).
+/// - Adjustable display duration.
+/// - Optional title, icon, and tap callback.
+/// - Optional close button for user dismissal.
+/// - Swipe to dismiss functionality.
+///
+/// Example usage:
+/// ```dart
+/// // Show a success toast
+/// AtomicToast.success(
+///   context: context,
+///   message: 'Item added to cart!',
+///   title: 'Success',
+/// );
+///
+/// // Show a custom info toast at the top
+/// AtomicToast.show(
+///   context: context,
+///   message: 'New update available.',
+///   icon: Icons.system_update,
+///   variant: AtomicToastVariant.info,
+///   position: AtomicToastPosition.top,
+///   duration: const Duration(seconds: 5),
+///   showCloseButton: true,
+///   onTap: () {
+///     print('Toast tapped!');
+///   },
+/// );
+/// ```
 class AtomicToast {
   static OverlayEntry? _currentToast;
 
+  /// Displays a customizable toast message.
+  ///
+  /// [context] is the BuildContext to show the toast in.
+  /// [message] is the main text content of the toast.
+  /// [title] is an optional bold title displayed above the message.
+  /// [icon] is an optional leading icon for the toast.
+  /// [variant] specifies the toast's visual style. Defaults to [AtomicToastVariant.info].
+  /// [position] defines where the toast appears on the screen. Defaults to [AtomicToastPosition.bottom].
+  /// [duration] is how long the toast remains visible. Defaults to 3 seconds. Set to [Duration.zero] for infinite.
+  /// [onTap] is the callback function executed when the toast is tapped.
+  /// [onDismiss] is the callback function executed when the toast is dismissed (either automatically or by user).
+  /// [showCloseButton] if true, displays a close button on the toast. Defaults to false.
+  /// [width] specifies a fixed width for the toast. If null, it adapts to content up to maxWidth.
+  /// [margin] is the external margin around the toast.
   static void show({
     required BuildContext context,
     required String message,
@@ -25,7 +77,7 @@ class AtomicToast {
     double? width,
     EdgeInsets? margin,
   }) {
-    dismiss();
+    dismiss(); // Dismiss any existing toast before showing a new one.
 
     final overlay = Overlay.of(context);
     final theme = AtomicTheme.of(context);
@@ -53,6 +105,9 @@ class AtomicToast {
     overlay.insert(_currentToast!);
   }
 
+  /// Displays a success-themed toast message.
+  ///
+  /// Defaults to [Icons.check_circle] as the icon and [AtomicToastVariant.success].
   static void success({
     required BuildContext context,
     required String message,
@@ -69,6 +124,10 @@ class AtomicToast {
     );
   }
 
+  /// Displays an error-themed toast message.
+  ///
+  /// Defaults to [Icons.error] as the icon and [AtomicToastVariant.error].
+  /// Includes a close button by default.
   static void error({
     required BuildContext context,
     required String message,
@@ -86,6 +145,9 @@ class AtomicToast {
     );
   }
 
+  /// Displays a warning-themed toast message.
+  ///
+  /// Defaults to [Icons.warning] as the icon and [AtomicToastVariant.warning].
   static void warning({
     required BuildContext context,
     required String message,
@@ -102,6 +164,9 @@ class AtomicToast {
     );
   }
 
+  /// Displays an info-themed toast message.
+  ///
+  /// Defaults to [Icons.info] as the icon and [AtomicToastVariant.info].
   static void info({
     required BuildContext context,
     required String message,
@@ -118,6 +183,7 @@ class AtomicToast {
     );
   }
 
+  /// Dismisses the currently displayed toast, if any.
   static void dismiss() {
     _currentToast?.remove();
     _currentToast = null;
@@ -171,12 +237,12 @@ class _AtomicToastWidgetState extends State<_AtomicToastWidget>
       duration: AtomicAnimations.normal,
       vsync: this,
     );
-    
+
     _fadeAnimation = CurvedAnimation(
       parent: _controller,
       curve: AtomicAnimations.decelerateEasing,
     );
-    
+
     _slideAnimation = Tween<Offset>(
       begin: _getStartOffset(),
       end: Offset.zero,
@@ -228,7 +294,8 @@ class _AtomicToastWidgetState extends State<_AtomicToastWidget>
               ? mediaQuery.size.height / 2 - 50
               : null,
       bottom: widget.position == AtomicToastPosition.bottom
-          ? mediaQuery.padding.bottom + (widget.margin?.bottom ?? theme.spacing.md)
+          ? mediaQuery.padding.bottom +
+              (widget.margin?.bottom ?? theme.spacing.md)
           : widget.position == AtomicToastPosition.center
               ? mediaQuery.size.height / 2 - 50
               : null,
@@ -252,8 +319,8 @@ class _AtomicToastWidgetState extends State<_AtomicToastWidget>
                 child: Container(
                   width: widget.width,
                   constraints: BoxConstraints(
-                    maxWidth: mediaQuery.size.width - 
-                             (widget.margin?.horizontal ?? theme.spacing.md * 2),
+                    maxWidth: mediaQuery.size.width -
+                        (widget.margin?.horizontal ?? theme.spacing.md * 2),
                   ),
                   padding: EdgeInsets.symmetric(
                     horizontal: theme.spacing.md,
@@ -346,16 +413,32 @@ class _AtomicToastWidgetState extends State<_AtomicToastWidget>
   }
 }
 
+/// Defines the visual variants for an [AtomicToast].
 enum AtomicToastVariant {
+  /// A success-themed toast.
   success,
+
+  /// An error-themed toast.
   error,
+
+  /// A warning-themed toast.
   warning,
+
+  /// An informational toast.
   info,
+
+  /// A neutral-themed toast.
   neutral,
 }
 
+/// Defines the possible positions for an [AtomicToast] on the screen.
 enum AtomicToastPosition {
+  /// Positions the toast at the top of the screen.
   top,
+
+  /// Positions the toast at the bottom of the screen.
   bottom,
+
+  /// Positions the toast in the center of the screen.
   center,
 }

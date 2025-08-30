@@ -3,7 +3,61 @@ import 'package:atomic_flutter_kit/themes/atomic_theme_provider.dart';
 import 'package:atomic_flutter_kit/atoms/containers/atomic_card.dart';
 import 'package:atomic_flutter_kit/atoms/buttons/atomic_button.dart';
 
+/// A customizable dialog component for displaying alerts, confirmations, or custom content.
+///
+/// The [AtomicDialog] provides a flexible way to present modal content to the user.
+/// It supports a title, content message, and a list of actions. It also offers
+/// static methods for easily showing generic dialogs and confirmation dialogs.
+///
+/// Features:
+/// - Customizable title with optional icon.
+/// - Displays a content message.
+/// - Accepts a list of custom action widgets.
+/// - Customizable maximum width.
+/// - Control over barrier dismissibility.
+/// - Static methods for common dialog patterns ([show], [showConfirmation]).
+/// - Integrates with the theme for consistent styling.
+///
+/// Example usage:
+/// ```dart
+/// // Show a simple alert dialog
+/// AtomicDialog.show(
+///   context: context,
+///   title: 'Alert!',
+///   content: 'This is an important message.',
+///   actions: [
+///     AtomicButton(
+///       text: 'OK',
+///       onPressed: () => Navigator.of(context).pop(),
+///     ),
+///   ],
+/// );
+///
+/// // Show a confirmation dialog
+/// AtomicDialog.showConfirmation(
+///   context: context,
+///   title: 'Delete Item',
+///   content: 'Are you sure you want to delete this item?',
+///   confirmLabel: 'Delete',
+///   cancelLabel: 'Cancel',
+///   isDangerous: true,
+/// ).then((confirmed) {
+///   if (confirmed == true) {
+///     print('Item deleted!');
+///   } else {
+///     print('Deletion cancelled.');
+///   }
+/// });
+/// ```
 class AtomicDialog extends StatelessWidget {
+  /// Creates an [AtomicDialog] widget.
+  ///
+  /// [title] is the main title of the dialog.
+  /// [content] is the main message or content of the dialog.
+  /// [actions] is a list of widgets (typically [AtomicButton]s) to display as actions.
+  /// [titleIcon] is an optional icon displayed next to the title.
+  /// [maxWidth] specifies the maximum width of the dialog. Defaults to 400.
+  /// [barrierDismissible] if true, the dialog can be dismissed by tapping outside.
   const AtomicDialog({
     super.key,
     required this.title,
@@ -14,17 +68,28 @@ class AtomicDialog extends StatelessWidget {
     this.barrierDismissible = true,
   });
 
+  /// The main title of the dialog.
   final String title;
+
+  /// The main message or content of the dialog.
   final String content;
+
+  /// A list of widgets (typically [AtomicButton]s) to display as actions at the bottom of the dialog.
   final List<Widget> actions;
+
+  /// An optional icon displayed next to the title.
   final IconData? titleIcon;
+
+  /// The maximum width of the dialog. Defaults to 400.
   final double maxWidth;
+
+  /// If true, the dialog can be dismissed by tapping outside the dialog.
   final bool barrierDismissible;
 
   @override
   Widget build(BuildContext context) {
     final theme = AtomicTheme.of(context);
-    
+
     return Dialog(
       backgroundColor: Colors.transparent,
       child: ConstrainedBox(
@@ -58,7 +123,6 @@ class AtomicDialog extends StatelessWidget {
                 ],
               ),
               SizedBox(height: theme.spacing.md),
-              
               Text(
                 content,
                 style: theme.typography.bodyMedium.copyWith(
@@ -66,7 +130,6 @@ class AtomicDialog extends StatelessWidget {
                 ),
               ),
               SizedBox(height: theme.spacing.lg),
-              
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: actions
@@ -83,6 +146,16 @@ class AtomicDialog extends StatelessWidget {
     );
   }
 
+  /// Displays a generic [AtomicDialog].
+  ///
+  /// [context] is the BuildContext to show the dialog in.
+  /// [title] is the main title of the dialog.
+  /// [content] is the main message or content of the dialog.
+  /// [actions] is a list of widgets (typically [AtomicButton]s) to display as actions.
+  /// [titleIcon] is an optional icon displayed next to the title.
+  /// [maxWidth] specifies the maximum width of the dialog. Defaults to 400.
+  /// [barrierDismissible] if true, the dialog can be dismissed by tapping outside.
+  /// [useRootNavigator] if true, the dialog is pushed onto the root navigator.
   static Future<T?> show<T>({
     required BuildContext context,
     required String title,
@@ -108,6 +181,19 @@ class AtomicDialog extends StatelessWidget {
     );
   }
 
+  /// Displays a confirmation dialog with customizable confirm and cancel buttons.
+  ///
+  /// Returns a [Future] that resolves to `true` if confirmed, `false` if cancelled,
+  /// or `null` if dismissed by tapping outside (if [barrierDismissible] is true).
+  ///
+  /// [context] is the BuildContext to show the dialog in.
+  /// [title] is the main title of the dialog.
+  /// [content] is the main message or content of the dialog.
+  /// [confirmLabel] is the label for the confirmation button. Defaults to 'Confirm'.
+  /// [cancelLabel] is the label for the cancellation button. Defaults to 'Cancel'.
+  /// [titleIcon] is an optional icon displayed next to the title.
+  /// [isDangerous] if true, the confirm button will be styled as a destructive action.
+  /// [useRootNavigator] if true, the dialog is pushed onto the root navigator.
   static Future<bool?> showConfirmation({
     required BuildContext context,
     required String title,
@@ -124,7 +210,7 @@ class AtomicDialog extends StatelessWidget {
       useRootNavigator: useRootNavigator,
       builder: (BuildContext dialogContext) {
         final theme = AtomicTheme.of(dialogContext);
-        
+
         return Dialog(
           backgroundColor: Colors.transparent,
           child: ConstrainedBox(
@@ -158,7 +244,6 @@ class AtomicDialog extends StatelessWidget {
                     ],
                   ),
                   SizedBox(height: theme.spacing.md),
-                  
                   Text(
                     content,
                     style: theme.typography.bodyMedium.copyWith(
@@ -166,7 +251,6 @@ class AtomicDialog extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: theme.spacing.lg),
-                  
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -180,9 +264,9 @@ class AtomicDialog extends StatelessWidget {
                       AtomicButton(
                         label: confirmLabel,
                         onPressed: () => Navigator.of(dialogContext).pop(true),
-                        variant: isDangerous 
-                          ? AtomicButtonVariant.danger 
-                          : AtomicButtonVariant.primary,
+                        variant: isDangerous
+                            ? AtomicButtonVariant.danger
+                            : AtomicButtonVariant.primary,
                         size: AtomicButtonSize.medium,
                       ),
                     ],
@@ -195,4 +279,4 @@ class AtomicDialog extends StatelessWidget {
       },
     );
   }
-} 
+}

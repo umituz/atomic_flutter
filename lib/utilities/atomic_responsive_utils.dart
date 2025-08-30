@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 
 class AtomicResponsiveUtils {
-  static const double mobileBreakpoint = 600;    // Phones (portrait)
-  static const double tabletBreakpoint = 905;    // Small tablets (portrait)
-  static const double desktopBreakpoint = 1240;  // Desktop/Large tablets (landscape)
+  static const double mobileBreakpoint = 600; // Phones (portrait)
+  static const double tabletBreakpoint = 905; // Small tablets (portrait)
+  static const double desktopBreakpoint =
+      1240; // Desktop/Large tablets (landscape)
   static const double largeDesktopBreakpoint = 1440; // Large desktop screens
 
-  static const double shortScreenBreakpoint = 700;   // Short screens (small phones)
-  static const double mediumScreenBreakpoint = 800;  // Medium screens (most phones)
-  static const double tallScreenBreakpoint = 900;    // Tall screens (large phones/tablets)
+  static const double shortScreenBreakpoint =
+      700; // Short screens (small phones)
+  static const double mediumScreenBreakpoint =
+      800; // Medium screens (most phones)
+  static const double tallScreenBreakpoint =
+      900; // Tall screens (large phones/tablets)
 
   static bool isMobile(BuildContext context) {
     return MediaQuery.of(context).size.width < mobileBreakpoint;
@@ -194,7 +198,7 @@ class AtomicResponsiveUtils {
   static AtomicDeviceCategory getDeviceCategory(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final shortestSide = size.shortestSide;
-    
+
     if (shortestSide < 600) {
       return AtomicDeviceCategory.mobile;
     } else if (shortestSide < 905) {
@@ -251,10 +255,11 @@ extension AtomicResponsiveExtensions on BuildContext {
   bool get isTallScreen => AtomicResponsiveUtils.isTallScreen(this);
   bool get isPortrait => AtomicResponsiveUtils.isPortrait(this);
   bool get isLandscape => AtomicResponsiveUtils.isLandscape(this);
-  
+
   Size get screenSize => AtomicResponsiveUtils.screenSize(this);
   double get screenWidth => AtomicResponsiveUtils.screenWidth(this);
   double get screenHeight => AtomicResponsiveUtils.screenHeight(this);
-  
-  AtomicDeviceCategory get deviceCategory => AtomicResponsiveUtils.getDeviceCategory(this);
-} 
+
+  AtomicDeviceCategory get deviceCategory =>
+      AtomicResponsiveUtils.getDeviceCategory(this);
+}

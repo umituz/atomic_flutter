@@ -1,4 +1,3 @@
-
 extension AtomicMapExtension on Map<dynamic, dynamic> {
   T? getOrDefault<T>(
     dynamic key, {
@@ -128,7 +127,7 @@ extension AtomicTypedMapExtension<K, V> on Map<K, V> {
     V Function(V existing, V incoming)? resolver,
   }) {
     final result = Map<K, V>.from(this);
-    
+
     other.forEach((key, value) {
       if (result.containsKey(key) && resolver != null) {
         result[key] = resolver(result[key] as V, value);
@@ -136,7 +135,7 @@ extension AtomicTypedMapExtension<K, V> on Map<K, V> {
         result[key] = value;
       }
     });
-    
+
     return result;
   }
-} 
+}

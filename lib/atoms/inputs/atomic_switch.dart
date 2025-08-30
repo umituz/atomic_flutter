@@ -3,7 +3,53 @@ import 'package:atomic_flutter_kit/themes/atomic_theme_provider.dart';
 import 'package:atomic_flutter_kit/themes/atomic_theme_data.dart';
 import 'package:atomic_flutter_kit/tokens/animations/atomic_animations.dart';
 
+/// A customizable switch component for toggling a boolean value.
+///
+/// The [AtomicSwitch] provides an interactive way for users to toggle
+/// between two states (on/off, true/false). It supports an optional label,
+/// customizable colors for its active and inactive states, and different sizes.
+///
+/// Features:
+/// - Supports controlled state via [value] and [onChanged].
+/// - Customizable colors for active/inactive thumb and track.
+/// - Optional active and inactive icons on the thumb.
+/// - Optional text label with customizable position ([AtomicSwitchLabelPosition]).
+/// - Three predefined sizes ([AtomicSwitchSize]).
+/// - Enabled/disabled states.
+/// - Animated state transitions.
+///
+/// Example usage:
+/// ```dart
+/// bool _isNotificationsEnabled = true;
+/// AtomicSwitch(
+///   value: _isNotificationsEnabled,
+///   onChanged: (newValue) {
+///     setState(() {
+///       _isNotificationsEnabled = newValue;
+///     });
+///   },
+///   label: 'Enable Notifications',
+///   activeColor: Colors.green,
+///   inactiveColor: Colors.grey,
+///   activeIcon: Icons.check,
+///   inactiveIcon: Icons.close,
+/// )
+/// ```
 class AtomicSwitch extends StatefulWidget {
+  /// Creates an [AtomicSwitch] widget.
+  ///
+  /// [value] is the current state of the switch (true for on, false for off).
+  /// [onChanged] is the callback function executed when the switch value changes.
+  /// [activeColor] is the color of the thumb when the switch is on.
+  /// [inactiveColor] is the color of the thumb when the switch is off.
+  /// [activeTrackColor] is the color of the track when the switch is on.
+  /// [inactiveTrackColor] is the color of the track when the switch is off.
+  /// [activeIcon] is an optional icon to display on the thumb when the switch is on.
+  /// [inactiveIcon] is an optional icon to display on the thumb when the switch is off.
+  /// [label] is an optional text label displayed next to the switch.
+  /// [labelPosition] defines where the label is placed relative to the switch. Defaults to [AtomicSwitchLabelPosition.end].
+  /// [size] defines the overall size of the switch. Defaults to [AtomicSwitchSize.medium].
+  /// [enabled] if true, the switch is interactive. Defaults to true.
   const AtomicSwitch({
     super.key,
     required this.value,
@@ -20,24 +66,47 @@ class AtomicSwitch extends StatefulWidget {
     this.enabled = true,
   });
 
+  /// The current state of the switch (true for on, false for off).
   final bool value;
+
+  /// The callback function executed when the switch value changes.
   final ValueChanged<bool>? onChanged;
+
+  /// The color of the thumb when the switch is on.
   final Color? activeColor;
+
+  /// The color of the thumb when the switch is off.
   final Color? inactiveColor;
+
+  /// The color of the track when the switch is on.
   final Color? activeTrackColor;
+
+  /// The color of the track when the switch is off.
   final Color? inactiveTrackColor;
+
+  /// An optional icon to display on the thumb when the switch is on.
   final IconData? activeIcon;
+
+  /// An optional icon to display on the thumb when the switch is off.
   final IconData? inactiveIcon;
+
+  /// An optional text label displayed next to the switch.
   final String? label;
+
+  /// Defines where the label is placed relative to the switch. Defaults to [AtomicSwitchLabelPosition.end].
   final AtomicSwitchLabelPosition labelPosition;
+
+  /// The overall size of the switch. Defaults to [AtomicSwitchSize.medium].
   final AtomicSwitchSize size;
+
+  /// If true, the switch is interactive. Defaults to true.
   final bool enabled;
 
   @override
   State<AtomicSwitch> createState() => _AtomicSwitchState();
 }
 
-class _AtomicSwitchState extends State<AtomicSwitch> 
+class _AtomicSwitchState extends State<AtomicSwitch>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _positionAnimation;
@@ -112,7 +181,9 @@ class _AtomicSwitchState extends State<AtomicSwitch>
                 AnimatedPositioned(
                   duration: AtomicAnimations.fast,
                   curve: AtomicAnimations.standardEasing,
-                  left: _positionAnimation.value * (trackWidth - thumbSize - 4) + 2,
+                  left:
+                      _positionAnimation.value * (trackWidth - thumbSize - 4) +
+                          2,
                   top: (trackHeight - thumbSize) / 2,
                   child: Transform.scale(
                     scale: _scaleAnimation.value,
@@ -149,9 +220,9 @@ class _AtomicSwitchState extends State<AtomicSwitch>
             Text(
               widget.label!,
               style: theme.typography.bodyMedium.copyWith(
-                color: widget.enabled 
-                  ? theme.colors.textPrimary 
-                  : theme.colors.textDisabled,
+                color: widget.enabled
+                    ? theme.colors.textPrimary
+                    : theme.colors.textDisabled,
               ),
             ),
             SizedBox(width: theme.spacing.sm),
@@ -162,9 +233,9 @@ class _AtomicSwitchState extends State<AtomicSwitch>
             Text(
               widget.label!,
               style: theme.typography.bodyMedium.copyWith(
-                color: widget.enabled 
-                  ? theme.colors.textPrimary 
-                  : theme.colors.textDisabled,
+                color: widget.enabled
+                    ? theme.colors.textPrimary
+                    : theme.colors.textDisabled,
               ),
             ),
           ],
@@ -183,9 +254,7 @@ class _AtomicSwitchState extends State<AtomicSwitch>
       child: Icon(
         icon,
         size: _getIconSize(),
-        color: widget.value 
-          ? theme.colors.primary 
-          : theme.colors.textTertiary,
+        color: widget.value ? theme.colors.primary : theme.colors.textTertiary,
       ),
     );
   }
@@ -240,7 +309,8 @@ class _AtomicSwitchState extends State<AtomicSwitch>
     }
 
     if (widget.value) {
-      return widget.activeTrackColor ?? theme.colors.primary.withValues(alpha: 0.2);
+      return widget.activeTrackColor ??
+          theme.colors.primary.withValues(alpha: 0.2);
     } else {
       return widget.inactiveTrackColor ?? theme.colors.gray300;
     }
@@ -259,13 +329,23 @@ class _AtomicSwitchState extends State<AtomicSwitch>
   }
 }
 
+/// Defines the predefined sizes for an [AtomicSwitch].
 enum AtomicSwitchSize {
+  /// A small switch.
   small,
+
+  /// A medium-sized switch.
   medium,
+
+  /// A large switch.
   large,
 }
 
+/// Defines the possible positions for the label of an [AtomicSwitch].
 enum AtomicSwitchLabelPosition {
+  /// Positions the label at the start (left) of the switch.
   start,
+
+  /// Positions the label at the end (right) of the switch.
   end,
-} 
+}

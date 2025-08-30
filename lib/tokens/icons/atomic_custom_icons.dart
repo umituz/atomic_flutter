@@ -6,25 +6,42 @@ class AtomicCustomIcons {
   static const _kFontFam = 'AtomicIcons';
   static const String? _kFontPkg = null;
 
-  static const IconData locationAdd = IconData(0xe90a, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData locationPin = IconData(0xe90b, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData locationSearch = IconData(0xe90c, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  
-  static const IconData customHome = IconData(0xe900, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData customProfile = IconData(0xe901, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData customSettings = IconData(0xe902, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  
-  static const IconData socialFacebook = IconData(0xe910, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData socialTwitter = IconData(0xe911, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData socialLinkedin = IconData(0xe912, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData socialInstagram = IconData(0xe913, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  
-  static const IconData brandLogo = IconData(0xe920, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData brandLogoSmall = IconData(0xe921, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  
-  static const IconData trash = IconData(0xe930, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData users = IconData(0xe931, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData calendar = IconData(0xe932, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData notepadText = IconData(0xe933, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData star = IconData(0xe934, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-} 
+  static const IconData locationAdd =
+      IconData(0xe90a, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData locationPin =
+      IconData(0xe90b, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData locationSearch =
+      IconData(0xe90c, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+
+  static const IconData customHome =
+      IconData(0xe900, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData customProfile =
+      IconData(0xe901, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData customSettings =
+      IconData(0xe902, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+
+  static const IconData socialFacebook =
+      IconData(0xe910, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData socialTwitter =
+      IconData(0xe911, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData socialLinkedin =
+      IconData(0xe912, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData socialInstagram =
+      IconData(0xe913, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+
+  static const IconData brandLogo =
+      IconData(0xe920, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData brandLogoSmall =
+      IconData(0xe921, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+
+  static const IconData trash =
+      IconData(0xe930, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData users =
+      IconData(0xe931, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData calendar =
+      IconData(0xe932, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData notepadText =
+      IconData(0xe933, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData star =
+      IconData(0xe934, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+}

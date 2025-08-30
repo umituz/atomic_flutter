@@ -25,9 +25,9 @@ class AtomicThemeData {
   final AtomicAnimationsTheme animations;
 
   static AtomicThemeData get defaultTheme => const AtomicThemeData(
-    name: 'Default',
-    colors: AtomicColorScheme.defaultScheme,
-  );
+        name: 'Default',
+        colors: AtomicColorScheme.defaultScheme,
+      );
 
   AtomicThemeData copyWith({
     String? name,
@@ -148,12 +148,18 @@ class AtomicThemeData {
         ),
       ),
       textTheme: TextTheme(
-        displayLarge: typography.displayLarge.copyWith(color: colors.textPrimary),
-        displayMedium: typography.displayMedium.copyWith(color: colors.textPrimary),
-        displaySmall: typography.displaySmall.copyWith(color: colors.textPrimary),
-        headlineLarge: typography.headlineLarge.copyWith(color: colors.textPrimary),
-        headlineMedium: typography.headlineMedium.copyWith(color: colors.textPrimary),
-        headlineSmall: typography.headlineSmall.copyWith(color: colors.textPrimary),
+        displayLarge:
+            typography.displayLarge.copyWith(color: colors.textPrimary),
+        displayMedium:
+            typography.displayMedium.copyWith(color: colors.textPrimary),
+        displaySmall:
+            typography.displaySmall.copyWith(color: colors.textPrimary),
+        headlineLarge:
+            typography.headlineLarge.copyWith(color: colors.textPrimary),
+        headlineMedium:
+            typography.headlineMedium.copyWith(color: colors.textPrimary),
+        headlineSmall:
+            typography.headlineSmall.copyWith(color: colors.textPrimary),
         titleLarge: typography.titleLarge.copyWith(color: colors.textPrimary),
         titleMedium: typography.titleMedium.copyWith(color: colors.textPrimary),
         titleSmall: typography.titleSmall.copyWith(color: colors.textPrimary),
@@ -527,4 +533,4 @@ class AtomicAnimationsTheme {
   final Curve buttonCurve;
   final Curve modalCurve;
   final Curve pageCurve;
-} 
+}

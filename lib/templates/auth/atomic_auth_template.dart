@@ -40,7 +40,7 @@ class AtomicAuthTemplate extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = AtomicTheme.of(context);
     final screenHeight = MediaQuery.of(context).size.height;
-    
+
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -50,15 +50,15 @@ class AtomicAuthTemplate extends StatelessWidget {
           child: Center(
             child: ConstrainedBox(
               constraints: BoxConstraints(maxWidth: maxWidth),
-              child: scrollable 
-                ? SingleChildScrollView(
-                    padding: padding ?? _getDefaultPadding(theme, context),
-                    child: _buildContent(theme, screenHeight),
-                  )
-                : Padding(
-                    padding: padding ?? _getDefaultPadding(theme, context),
-                    child: _buildContent(theme, screenHeight),
-                  ),
+              child: scrollable
+                  ? SingleChildScrollView(
+                      padding: padding ?? _getDefaultPadding(theme, context),
+                      child: _buildContent(theme, screenHeight),
+                    )
+                  : Padding(
+                      padding: padding ?? _getDefaultPadding(theme, context),
+                      child: _buildContent(theme, screenHeight),
+                    ),
             ),
           ),
         ),
@@ -71,14 +71,10 @@ class AtomicAuthTemplate extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        if (showLogo || headerWidget != null)
-          _buildHeader(theme),
-        
+        if (showLogo || headerWidget != null) _buildHeader(theme),
         if (showLogo || headerWidget != null)
           SizedBox(height: theme.spacing.xl),
-        
         _buildCard(theme),
-        
         if (footerWidget != null) ...[
           SizedBox(height: theme.spacing.xl),
           footerWidget!,
@@ -90,12 +86,9 @@ class AtomicAuthTemplate extends StatelessWidget {
   Widget _buildHeader(AtomicThemeData theme) {
     return Column(
       children: [
-        if (showLogo)
-          logoWidget ?? _buildDefaultLogo(theme),
-        
+        if (showLogo) logoWidget ?? _buildDefaultLogo(theme),
         if (showLogo && (title != null || subtitle != null))
           SizedBox(height: theme.spacing.lg),
-        
         if (title != null) ...[
           Text(
             title!,
@@ -105,10 +98,8 @@ class AtomicAuthTemplate extends StatelessWidget {
             ),
             textAlign: TextAlign.center,
           ),
-          if (subtitle != null)
-            SizedBox(height: theme.spacing.sm),
+          if (subtitle != null) SizedBox(height: theme.spacing.sm),
         ],
-        
         if (subtitle != null)
           Text(
             subtitle!,
@@ -117,9 +108,7 @@ class AtomicAuthTemplate extends StatelessWidget {
             ),
             textAlign: TextAlign.center,
           ),
-        
-        if (headerWidget != null)
-          headerWidget!,
+        if (headerWidget != null) headerWidget!,
       ],
     );
   }
@@ -128,7 +117,8 @@ class AtomicAuthTemplate extends StatelessWidget {
     return AtomicCard(
       padding: EdgeInsets.all(theme.spacing.xl),
       color: cardColor ?? theme.colors.surface,
-      shadow: cardElevation > 0 ? AtomicCardShadow.medium : AtomicCardShadow.none,
+      shadow:
+          cardElevation > 0 ? AtomicCardShadow.medium : AtomicCardShadow.none,
       child: child,
     );
   }
@@ -153,23 +143,22 @@ class AtomicAuthTemplate extends StatelessWidget {
     );
   }
 
-  EdgeInsetsGeometry _getDefaultPadding(AtomicThemeData theme, BuildContext context) {
+  EdgeInsetsGeometry _getDefaultPadding(
+      AtomicThemeData theme, BuildContext context) {
     return EdgeInsets.symmetric(
-      horizontal: AtomicResponsive.isMobile(context) 
-        ? theme.spacing.lg 
-        : theme.spacing.xl,
+      horizontal: AtomicResponsive.isMobile(context)
+          ? theme.spacing.lg
+          : theme.spacing.xl,
       vertical: theme.spacing.lg,
     );
   }
 
   Gradient get _defaultGradient => const LinearGradient(
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-    colors: [
-      Color(0xFF667eea),
-      Color(0xFF764ba2),
-    ],
-  );
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: [
+          Color(0xFF667eea),
+          Color(0xFF764ba2),
+        ],
+      );
 }
-
- 

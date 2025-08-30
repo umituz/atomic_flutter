@@ -1,4 +1,3 @@
-
 extension AtomicListExtension<T> on List<T> {
   T? firstWhereOrNull(bool Function(T element) test) {
     try {
@@ -23,7 +22,7 @@ extension AtomicListExtension<T> on List<T> {
 
   List<List<T>> chunk(int size) {
     if (size <= 0) throw ArgumentError('Chunk size must be positive');
-    
+
     final chunks = <List<T>>[];
     for (var i = 0; i < length; i += size) {
       final end = (i + size < length) ? i + size : length;
@@ -49,7 +48,7 @@ extension AtomicListExtension<T> on List<T> {
   (List<T>, List<T>) partition(bool Function(T element) predicate) {
     final matches = <T>[];
     final nonMatches = <T>[];
-    
+
     for (final element in this) {
       if (predicate(element)) {
         matches.add(element);
@@ -57,13 +56,13 @@ extension AtomicListExtension<T> on List<T> {
         nonMatches.add(element);
       }
     }
-    
+
     return (matches, nonMatches);
   }
 
   List<T> intersperse(T separator) {
     if (isEmpty) return [];
-    
+
     final result = <T>[];
     for (var i = 0; i < length; i++) {
       if (i > 0) result.add(separator);
@@ -74,10 +73,10 @@ extension AtomicListExtension<T> on List<T> {
 
   List<T> rotate(int n) {
     if (isEmpty) return [];
-    
+
     final normalizedN = n % length;
     if (normalizedN == 0) return List.from(this);
-    
+
     return [...sublist(normalizedN), ...sublist(0, normalizedN)];
   }
 }
@@ -123,11 +122,11 @@ extension AtomicListMapExtension on List<Map<dynamic, dynamic>> {
     sorted.sort((a, b) {
       final aValue = a[key];
       final bValue = b[key];
-      
+
       if (aValue == null && bValue == null) return 0;
       if (aValue == null) return ascending ? -1 : 1;
       if (bValue == null) return ascending ? 1 : -1;
-      
+
       final comparison = (aValue as Comparable).compareTo(bValue);
       return ascending ? comparison : -comparison;
     });
@@ -149,7 +148,7 @@ extension AtomicTypedListExtension<T> on List<T> {
 
   T? minBy<R extends Comparable>(R Function(T element) selector) {
     if (isEmpty) return null;
-    
+
     return reduce((current, next) {
       return selector(current).compareTo(selector(next)) <= 0 ? current : next;
     });
@@ -157,9 +156,9 @@ extension AtomicTypedListExtension<T> on List<T> {
 
   T? maxBy<R extends Comparable>(R Function(T element) selector) {
     if (isEmpty) return null;
-    
+
     return reduce((current, next) {
       return selector(current).compareTo(selector(next)) >= 0 ? current : next;
     });
   }
-} 
+}

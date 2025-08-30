@@ -64,4 +64,4 @@ extension AtomicThemeExtension on BuildContext {
   AtomicSpacingTheme get atomicSpacing => atomicTheme.spacing;
   AtomicBordersTheme get atomicBorders => atomicTheme.borders;
   AtomicAnimationsTheme get atomicAnimations => atomicTheme.animations;
-} 
+}

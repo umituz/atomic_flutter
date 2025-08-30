@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 class AtomicResponsive {
   AtomicResponsive._();
 
-  static const double mobileSmall = 320;  // iPhone SE
-  static const double mobile = 480;       // Standard mobile
-  static const double tablet = 768;       // Tablet portrait
-  static const double desktop = 1024;     // Desktop/laptop
+  static const double mobileSmall = 320; // iPhone SE
+  static const double mobile = 480; // Standard mobile
+  static const double tablet = 768; // Tablet portrait
+  static const double desktop = 1024; // Desktop/laptop
   static const double desktopLarge = 1440; // Large desktop
 
-  
   static bool isMobileSmall(BuildContext context) {
     return MediaQuery.of(context).size.width <= mobileSmall;
   }
@@ -40,7 +39,6 @@ class AtomicResponsive {
     return MediaQuery.of(context).size.width < breakpoint;
   }
 
-  
   static T value<T>(
     BuildContext context, {
     required T mobile,
@@ -49,7 +47,7 @@ class AtomicResponsive {
     T? desktopLarge,
   }) {
     final width = MediaQuery.of(context).size.width;
-    
+
     if (width > AtomicResponsive.desktop && desktopLarge != null) {
       return desktopLarge;
     } else if (width > AtomicResponsive.tablet && desktop != null) {
@@ -61,7 +59,8 @@ class AtomicResponsive {
     }
   }
 
-  static int columns(BuildContext context, {
+  static int columns(
+    BuildContext context, {
     int mobile = 1,
     int? tablet,
     int? desktop,
@@ -96,7 +95,6 @@ class AtomicResponsive {
     );
   }
 
-  
   static Widget layout(
     BuildContext context, {
     required Widget mobile,
@@ -145,21 +143,23 @@ class AtomicResponsive {
     );
   }
 
-  
-  static bool shouldWrap(BuildContext context, int childrenCount, double minChildWidth) {
+  static bool shouldWrap(
+      BuildContext context, int childrenCount, double minChildWidth) {
     final availableWidth = MediaQuery.of(context).size.width;
     final totalMinWidth = childrenCount * minChildWidth;
     return totalMinWidth > availableWidth;
   }
 
-  static Axis flexDirection(BuildContext context, {bool forceMobileColumn = true}) {
+  static Axis flexDirection(BuildContext context,
+      {bool forceMobileColumn = true}) {
     if (forceMobileColumn && isMobile(context)) {
       return Axis.vertical;
     }
     return Axis.horizontal;
   }
 
-  static MainAxisAlignment mainAxisAlignment(BuildContext context, {
+  static MainAxisAlignment mainAxisAlignment(
+    BuildContext context, {
     MainAxisAlignment mobile = MainAxisAlignment.start,
     MainAxisAlignment? tablet,
     MainAxisAlignment? desktop,
@@ -172,7 +172,8 @@ class AtomicResponsive {
     );
   }
 
-  static CrossAxisAlignment crossAxisAlignment(BuildContext context, {
+  static CrossAxisAlignment crossAxisAlignment(
+    BuildContext context, {
     CrossAxisAlignment mobile = CrossAxisAlignment.stretch,
     CrossAxisAlignment? tablet,
     CrossAxisAlignment? desktop,
@@ -185,7 +186,6 @@ class AtomicResponsive {
     );
   }
 
-  
   static Widget responsiveButtonLayout(
     BuildContext context, {
     required List<Widget> buttons,
@@ -242,10 +242,12 @@ class AtomicResponsive {
       runSpacing: runSpacing,
       children: children
           .map((child) => SizedBox(
-                width: (MediaQuery.of(context).size.width - (spacing * (columnCount - 1))) / columnCount,
+                width: (MediaQuery.of(context).size.width -
+                        (spacing * (columnCount - 1))) /
+                    columnCount,
                 child: child,
               ))
           .toList(),
     );
   }
-} 
+}

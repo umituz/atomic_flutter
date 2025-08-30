@@ -21,50 +21,48 @@ class AtomicAnimations {
   static const Curve easeIn = Curves.easeIn;
   static const Curve easeOut = Curves.easeOut;
   static const Curve easeInOut = Curves.easeInOut;
-  
+
   static const Curve standardEasing = Curves.fastOutSlowIn;
   static const Curve decelerateEasing = Curves.decelerate;
   static const Curve accelerateEasing = Curves.fastLinearToSlowEaseIn;
-  
+
   static const Curve bounceIn = Curves.bounceIn;
   static const Curve bounceOut = Curves.bounceOut;
   static const Curve bounceInOut = Curves.bounceInOut;
   static const Curve elasticIn = Curves.elasticIn;
   static const Curve elasticOut = Curves.elasticOut;
-  
+
   static const Curve buttonCurve = easeInOut;
   static const Curve modalCurve = decelerateEasing;
   static const Curve pageCurve = standardEasing;
   static const Curve listItemCurve = easeOut;
 
-  
   static Tween<double> fadeTween({double begin = 0.0, double end = 1.0}) {
     return Tween<double>(begin: begin, end: end);
   }
-  
+
   static Tween<double> scaleTween({double begin = 0.0, double end = 1.0}) {
     return Tween<double>(begin: begin, end: end);
   }
-  
+
   static Tween<Offset> slideTween({
     Offset begin = const Offset(0.0, 1.0),
     Offset end = Offset.zero,
   }) {
     return Tween<Offset>(begin: begin, end: end);
   }
-  
+
   static Tween<double> rotationTween({double begin = 0.0, double end = 1.0}) {
     return Tween<double>(begin: begin, end: end);
   }
 
-  
-  static Duration staggerDelay(int index, {Duration baseDelay = const Duration(milliseconds: 50)}) {
+  static Duration staggerDelay(int index,
+      {Duration baseDelay = const Duration(milliseconds: 50)}) {
     return baseDelay * index;
   }
-  
+
   static const Duration staggerInterval = Duration(milliseconds: 100);
 
-  
   static Route<T> pageRouteBuilder<T>({
     required Widget page,
     Duration duration = normal,
@@ -76,7 +74,7 @@ class AtomicAnimations {
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         final tween = Tween(begin: const Offset(1.0, 0.0), end: Offset.zero)
             .chain(CurveTween(curve: curve));
-        
+
         return SlideTransition(
           position: animation.drive(tween),
           child: child,
@@ -84,7 +82,7 @@ class AtomicAnimations {
       },
     );
   }
-  
+
   static HeroFlightShuttleBuilder heroFlightShuttleBuilder = (
     BuildContext flightContext,
     Animation<double> animation,
@@ -95,4 +93,4 @@ class AtomicAnimations {
     final Hero toHero = toHeroContext.widget as Hero;
     return toHero;
   };
-} 
+}

@@ -25,12 +25,11 @@ import 'package:intl/intl.dart';
 class AtomicDateTimeUtils {
   AtomicDateTimeUtils._(); // Private constructor
 
-
   static DateTime? parseDateTime(String? dateString) {
     if (dateString == null || dateString.isEmpty) {
       return null;
     }
-    
+
     try {
       return DateTime.parse(dateString);
     } catch (e) {
@@ -42,7 +41,7 @@ class AtomicDateTimeUtils {
     if (dateString == null || dateString.isEmpty) {
       return null;
     }
-    
+
     try {
       final formatter = DateFormat(format);
       return formatter.parse(dateString);
@@ -53,7 +52,7 @@ class AtomicDateTimeUtils {
 
   static DateTime? parseFromMilliseconds(int? milliseconds) {
     if (milliseconds == null) return null;
-    
+
     try {
       return DateTime.fromMillisecondsSinceEpoch(milliseconds);
     } catch (e) {
@@ -63,7 +62,7 @@ class AtomicDateTimeUtils {
 
   static DateTime? parseFromSeconds(int? seconds) {
     if (seconds == null) return null;
-    
+
     try {
       return DateTime.fromMillisecondsSinceEpoch(seconds * 1000);
     } catch (e) {
@@ -75,7 +74,7 @@ class AtomicDateTimeUtils {
     if (dateString == null || dateString.isEmpty) {
       return null;
     }
-    
+
     try {
       return DateTime.parse(dateString);
     } catch (e) {
@@ -85,7 +84,7 @@ class AtomicDateTimeUtils {
 
   static DateTime? parseFromJson(dynamic value) {
     if (value == null) return null;
-    
+
     if (value is String) {
       return parseDateTime(value);
     } else if (value is int) {
@@ -97,10 +96,9 @@ class AtomicDateTimeUtils {
     } else if (value is DateTime) {
       return value;
     }
-    
+
     return null;
   }
-
 
   static String? formatToIso8601(DateTime? dateTime) {
     return dateTime?.toIso8601String();
@@ -108,7 +106,7 @@ class AtomicDateTimeUtils {
 
   static String? formatWithPattern(DateTime? dateTime, String pattern) {
     if (dateTime == null) return null;
-    
+
     try {
       final formatter = DateFormat(pattern);
       return formatter.format(dateTime);
@@ -124,7 +122,7 @@ class AtomicDateTimeUtils {
 
   static String? formatForDisplay(DateTime? dateTime, {String? locale}) {
     if (dateTime == null) return null;
-    
+
     try {
       final formatter = DateFormat.yMMMd(locale);
       return formatter.format(dateTime);
@@ -136,7 +134,6 @@ class AtomicDateTimeUtils {
   static String? formatForApi(DateTime? dateTime) {
     return formatToIso8601(dateTime);
   }
-
 
   static String? formatDateOnly(DateTime? dateTime) {
     return formatWithPattern(dateTime, 'dd/MM/yyyy');
@@ -152,10 +149,10 @@ class AtomicDateTimeUtils {
 
   static String formatRelativeTime(DateTime? dateTime) {
     if (dateTime == null) return 'Unknown time';
-    
+
     final now = DateTime.now();
     final difference = now.difference(dateTime);
-    
+
     if (difference.inSeconds < 60) {
       return 'Just now';
     } else if (difference.inMinutes < 60) {
@@ -176,7 +173,6 @@ class AtomicDateTimeUtils {
     }
   }
 
-
   static bool isInPast(DateTime? dateTime) {
     if (dateTime == null) return false;
     return dateTime.isBefore(DateTime.now());
@@ -191,16 +187,16 @@ class AtomicDateTimeUtils {
     if (dateTime == null) return false;
     final now = DateTime.now();
     return dateTime.year == now.year &&
-           dateTime.month == now.month &&
-           dateTime.day == now.day;
+        dateTime.month == now.month &&
+        dateTime.day == now.day;
   }
 
   static bool isYesterday(DateTime? dateTime) {
     if (dateTime == null) return false;
     final yesterday = DateTime.now().subtract(const Duration(days: 1));
     return dateTime.year == yesterday.year &&
-           dateTime.month == yesterday.month &&
-           dateTime.day == yesterday.day;
+        dateTime.month == yesterday.month &&
+        dateTime.day == yesterday.day;
   }
 
   static bool isWithinRange(DateTime? dateTime, DateTime start, DateTime end) {
@@ -211,16 +207,15 @@ class AtomicDateTimeUtils {
   static bool isSameDay(DateTime? date1, DateTime? date2) {
     if (date1 == null || date2 == null) return false;
     return date1.year == date2.year &&
-           date1.month == date2.month &&
-           date1.day == date2.day;
+        date1.month == date2.month &&
+        date1.day == date2.day;
   }
-
 
   static int calculateAge(DateTime? birthDate) {
     if (birthDate == null) return 0;
     final now = DateTime.now();
     int age = now.year - birthDate.year;
-    if (now.month < birthDate.month || 
+    if (now.month < birthDate.month ||
         (now.month == birthDate.month && now.day < birthDate.day)) {
       age--;
     }
@@ -234,7 +229,8 @@ class AtomicDateTimeUtils {
 
   static DateTime? endOfDay(DateTime? dateTime) {
     if (dateTime == null) return null;
-    return DateTime(dateTime.year, dateTime.month, dateTime.day, 23, 59, 59, 999);
+    return DateTime(
+        dateTime.year, dateTime.month, dateTime.day, 23, 59, 59, 999);
   }
 
   static DateTime? startOfWeek(DateTime? dateTime) {
@@ -253,10 +249,10 @@ class AtomicDateTimeUtils {
     return DateTime(dateTime.year, 1, 1);
   }
 
-
   static String get currentTimestamp => DateTime.now().toIso8601String();
 
-  static String get currentUtcTimestamp => DateTime.now().toUtc().toIso8601String();
+  static String get currentUtcTimestamp =>
+      DateTime.now().toUtc().toIso8601String();
 
   static DateTime? createDateTime({
     required int year,
@@ -276,45 +272,48 @@ class AtomicDateTimeUtils {
 
   static DateTime? addBusinessDays(DateTime? dateTime, int days) {
     if (dateTime == null) return null;
-    
+
     var result = dateTime;
     var remaining = days;
-    
+
     while (remaining > 0) {
       result = result.add(const Duration(days: 1));
       if (result.weekday < 6) {
         remaining--;
       }
     }
-    
+
     return result;
   }
 }
 
 extension AtomicDateTimeExtension on DateTime {
-  String get toDisplayString => AtomicDateTimeUtils.formatForDisplay(this) ?? toString();
-  
-  String get toDatabaseString => AtomicDateTimeUtils.formatForDatabase(this) ?? toIso8601String();
-  
-  String get toApiString => AtomicDateTimeUtils.formatForApi(this) ?? toIso8601String();
-  
+  String get toDisplayString =>
+      AtomicDateTimeUtils.formatForDisplay(this) ?? toString();
+
+  String get toDatabaseString =>
+      AtomicDateTimeUtils.formatForDatabase(this) ?? toIso8601String();
+
+  String get toApiString =>
+      AtomicDateTimeUtils.formatForApi(this) ?? toIso8601String();
+
   String get toRelativeString => AtomicDateTimeUtils.formatRelativeTime(this);
-  
+
   bool get isToday => AtomicDateTimeUtils.isToday(this);
-  
+
   bool get isYesterday => AtomicDateTimeUtils.isYesterday(this);
-  
+
   bool get isInPast => AtomicDateTimeUtils.isInPast(this);
-  
+
   bool get isInFuture => AtomicDateTimeUtils.isInFuture(this);
-  
+
   DateTime get startOfDay => AtomicDateTimeUtils.startOfDay(this)!;
-  
+
   DateTime get endOfDay => AtomicDateTimeUtils.endOfDay(this)!;
-  
+
   DateTime get startOfWeek => AtomicDateTimeUtils.startOfWeek(this)!;
-  
+
   DateTime get startOfMonth => AtomicDateTimeUtils.startOfMonth(this)!;
-  
+
   DateTime get startOfYear => AtomicDateTimeUtils.startOfYear(this)!;
 }

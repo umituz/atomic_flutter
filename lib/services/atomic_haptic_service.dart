@@ -71,25 +71,25 @@ class AtomicHapticService {
 
 enum AtomicHapticType {
   light,
-  
+
   medium,
-  
+
   heavy,
-  
+
   selection,
-  
+
   vibrate,
-  
+
   success,
-  
+
   warning,
-  
+
   error,
 }
 
 extension AtomicHapticTypeExtension on AtomicHapticType {
   Future<void> trigger() => AtomicHapticService.feedback(this);
-  
+
   String get name {
     switch (this) {
       case AtomicHapticType.light:
@@ -110,4 +110,4 @@ extension AtomicHapticTypeExtension on AtomicHapticType {
         return 'Error';
     }
   }
-} 
+}

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'atomic_auth_template.dart';
 
 class AtomicAuthTemplateHelper {
-  
   static Widget login({
     required Widget form,
     String? title,
@@ -19,19 +18,21 @@ class AtomicAuthTemplateHelper {
       subtitle: subtitle ?? 'Sign in to your account',
       headerWidget: headerWidget,
       footerWidget: footerWidget,
-      backgroundGradient: backgroundGradient ?? const LinearGradient(
-        colors: [
-          Color(0xFF667eea),
-          Color(0xFF764ba2),
-        ],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-      logoWidget: logoWidget ?? const Icon(
-        Icons.person,
-        size: 48,
-        color: Colors.white,
-      ),
+      backgroundGradient: backgroundGradient ??
+          const LinearGradient(
+            colors: [
+              Color(0xFF667eea),
+              Color(0xFF764ba2),
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+      logoWidget: logoWidget ??
+          const Icon(
+            Icons.person,
+            size: 48,
+            color: Colors.white,
+          ),
       maxWidth: maxWidth,
       padding: padding,
       child: form,
@@ -54,19 +55,21 @@ class AtomicAuthTemplateHelper {
       subtitle: subtitle ?? 'Join us today',
       headerWidget: headerWidget,
       footerWidget: footerWidget,
-      backgroundGradient: backgroundGradient ?? const LinearGradient(
-        colors: [
-          Color(0xFF11998e),
-          Color(0xFF38ef7d),
-        ],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-      logoWidget: logoWidget ?? const Icon(
-        Icons.person_add,
-        size: 48,
-        color: Colors.white,
-      ),
+      backgroundGradient: backgroundGradient ??
+          const LinearGradient(
+            colors: [
+              Color(0xFF11998e),
+              Color(0xFF38ef7d),
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+      logoWidget: logoWidget ??
+          const Icon(
+            Icons.person_add,
+            size: 48,
+            color: Colors.white,
+          ),
       maxWidth: maxWidth,
       padding: padding,
       child: form,
@@ -89,19 +92,21 @@ class AtomicAuthTemplateHelper {
       subtitle: subtitle ?? 'Enter your email to reset password',
       headerWidget: headerWidget,
       footerWidget: footerWidget,
-      backgroundGradient: backgroundGradient ?? const LinearGradient(
-        colors: [
-          Color(0xFFe65c00),
-          Color(0xFFf9d423),
-        ],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-      logoWidget: logoWidget ?? const Icon(
-        Icons.lock_reset,
-        size: 48,
-        color: Colors.white,
-      ),
+      backgroundGradient: backgroundGradient ??
+          const LinearGradient(
+            colors: [
+              Color(0xFFe65c00),
+              Color(0xFFf9d423),
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+      logoWidget: logoWidget ??
+          const Icon(
+            Icons.lock_reset,
+            size: 48,
+            color: Colors.white,
+          ),
       maxWidth: maxWidth,
       padding: padding,
       child: form,
@@ -124,19 +129,21 @@ class AtomicAuthTemplateHelper {
       subtitle: subtitle ?? 'Enter the code sent to your email',
       headerWidget: headerWidget,
       footerWidget: footerWidget,
-      backgroundGradient: backgroundGradient ?? const LinearGradient(
-        colors: [
-          Color(0xFF434343),
-          Color(0xFF000000),
-        ],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-      logoWidget: logoWidget ?? const Icon(
-        Icons.verified_user,
-        size: 48,
-        color: Colors.white,
-      ),
+      backgroundGradient: backgroundGradient ??
+          const LinearGradient(
+            colors: [
+              Color(0xFF434343),
+              Color(0xFF000000),
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+      logoWidget: logoWidget ??
+          const Icon(
+            Icons.verified_user,
+            size: 48,
+            color: Colors.white,
+          ),
       maxWidth: maxWidth,
       padding: padding,
       child: form,
@@ -159,19 +166,21 @@ class AtomicAuthTemplateHelper {
       subtitle: subtitle ?? 'Tell us more about yourself',
       headerWidget: headerWidget,
       footerWidget: footerWidget,
-      backgroundGradient: backgroundGradient ?? const LinearGradient(
-        colors: [
-          Color(0xFF8360c3),
-          Color(0xFF2ebf91),
-        ],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-      logoWidget: logoWidget ?? const Icon(
-        Icons.account_circle,
-        size: 48,
-        color: Colors.white,
-      ),
+      backgroundGradient: backgroundGradient ??
+          const LinearGradient(
+            colors: [
+              Color(0xFF8360c3),
+              Color(0xFF2ebf91),
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+      logoWidget: logoWidget ??
+          const Icon(
+            Icons.account_circle,
+            size: 48,
+            color: Colors.white,
+          ),
       maxWidth: maxWidth,
       padding: padding,
       scrollable: true, // Profile forms are usually longer
@@ -195,22 +204,24 @@ class AtomicAuthTemplateHelper {
       subtitle: subtitle ?? 'Enter your email to receive verification code',
       headerWidget: headerWidget,
       footerWidget: footerWidget,
-      backgroundGradient: backgroundGradient ?? const LinearGradient(
-        colors: [
-          Color(0xFF667eea),
-          Color(0xFF764ba2),
-        ],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-      logoWidget: logoWidget ?? const Icon(
-        Icons.security,
-        size: 48,
-        color: Colors.white,
-      ),
+      backgroundGradient: backgroundGradient ??
+          const LinearGradient(
+            colors: [
+              Color(0xFF667eea),
+              Color(0xFF764ba2),
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+      logoWidget: logoWidget ??
+          const Icon(
+            Icons.security,
+            size: 48,
+            color: Colors.white,
+          ),
       maxWidth: maxWidth,
       padding: padding,
       child: form,
     );
   }
-} 
+}

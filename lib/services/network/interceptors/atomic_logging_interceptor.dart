@@ -20,48 +20,58 @@ class AtomicLoggingInterceptor extends AtomicNetworkInterceptor {
   Future<AtomicRequest> onRequest(AtomicRequest request) async {
     if (logRequest) {
       final buffer = StringBuffer();
-      buffer.writeln('╔═══════════════════════════════════════════════════════════════════════════');
+      buffer.writeln(
+          '╔═══════════════════════════════════════════════════════════════════════════');
       buffer.writeln('║ REQUEST: ${request.method} ${request.uri}');
-      buffer.writeln('╟───────────────────────────────────────────────────────────────────────────');
-      
+      buffer.writeln(
+          '╟───────────────────────────────────────────────────────────────────────────');
+
       if (logHeaders && request.headers.isNotEmpty) {
         buffer.writeln('║ Headers:');
         request.headers.forEach((key, value) {
           buffer.writeln('║   $key: $value');
         });
-        buffer.writeln('╟───────────────────────────────────────────────────────────────────────────');
+        buffer.writeln(
+            '╟───────────────────────────────────────────────────────────────────────────');
       }
-      
+
       if (logBody && request.body != null) {
         buffer.writeln('║ Body:');
         buffer.writeln('║   ${request.body}');
-        buffer.writeln('╟───────────────────────────────────────────────────────────────────────────');
+        buffer.writeln(
+            '╟───────────────────────────────────────────────────────────────────────────');
       }
-      
-      buffer.writeln('╚═══════════════════════════════════════════════════════════════════════════');
-      
+
+      buffer.writeln(
+          '╚═══════════════════════════════════════════════════════════════════════════');
+
       developer.log(buffer.toString(), name: 'AtomicNetwork');
     }
-    
+
     return request;
   }
 
   @override
-  Future<AtomicResponse<dynamic>> onResponse(AtomicResponse<dynamic> response) async {
+  Future<AtomicResponse<dynamic>> onResponse(
+      AtomicResponse<dynamic> response) async {
     if (logResponse) {
       final buffer = StringBuffer();
-      buffer.writeln('╔═══════════════════════════════════════════════════════════════════════════');
-      buffer.writeln('║ RESPONSE: ${response.statusCode} ${response.isSuccess ? "✓" : "✗"}');
-      buffer.writeln('╟───────────────────────────────────────────────────────────────────────────');
-      
+      buffer.writeln(
+          '╔═══════════════════════════════════════════════════════════════════════════');
+      buffer.writeln(
+          '║ RESPONSE: ${response.statusCode} ${response.isSuccess ? "✓" : "✗"}');
+      buffer.writeln(
+          '╟───────────────────────────────────────────────────────────────────────────');
+
       if (logHeaders && response.headers.isNotEmpty) {
         buffer.writeln('║ Headers:');
         response.headers.forEach((key, value) {
           buffer.writeln('║   $key: $value');
         });
-        buffer.writeln('╟───────────────────────────────────────────────────────────────────────────');
+        buffer.writeln(
+            '╟───────────────────────────────────────────────────────────────────────────');
       }
-      
+
       if (logBody) {
         if (response.rawData != null) {
           buffer.writeln('║ Data:');
@@ -70,14 +80,16 @@ class AtomicLoggingInterceptor extends AtomicNetworkInterceptor {
           buffer.writeln('║ Body:');
           buffer.writeln('║   ${response.body}');
         }
-        buffer.writeln('╟───────────────────────────────────────────────────────────────────────────');
+        buffer.writeln(
+            '╟───────────────────────────────────────────────────────────────────────────');
       }
-      
-      buffer.writeln('╚═══════════════════════════════════════════════════════════════════════════');
-      
+
+      buffer.writeln(
+          '╚═══════════════════════════════════════════════════════════════════════════');
+
       developer.log(buffer.toString(), name: 'AtomicNetwork');
     }
-    
+
     return response;
   }
-} 
+}

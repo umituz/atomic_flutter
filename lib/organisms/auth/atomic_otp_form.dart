@@ -59,7 +59,7 @@ class _AtomicOTPFormState extends State<AtomicOTPForm> {
   late final TextEditingController _emailController;
   late final TextEditingController _otpController;
   final _debouncer = AtomicDebouncer(delay: const Duration(milliseconds: 300));
-  
+
   String? _formError;
 
   @override
@@ -79,31 +79,31 @@ class _AtomicOTPFormState extends State<AtomicOTPForm> {
 
   void _handleRequestOTP() {
     if (!_formKey.currentState!.validate()) return;
-    
+
     final email = _emailController.text.trim();
-    
+
     final error = widget.validator?.call(email, null);
     if (error != null) {
       setState(() => _formError = error);
       return;
     }
-    
+
     setState(() => _formError = null);
     widget.onRequestOTP(email);
   }
 
   void _handleVerifyOTP() {
     if (!_formKey.currentState!.validate()) return;
-    
+
     final email = _emailController.text.trim();
     final otp = _otpController.text.trim();
-    
+
     final error = widget.validator?.call(email, otp);
     if (error != null) {
       setState(() => _formError = error);
       return;
     }
-    
+
     setState(() => _formError = null);
     widget.onVerifyOTP(email, otp);
   }
@@ -111,7 +111,7 @@ class _AtomicOTPFormState extends State<AtomicOTPForm> {
   @override
   Widget build(BuildContext context) {
     final theme = AtomicTheme.of(context);
-    
+
     return Form(
       key: _formKey,
       autovalidateMode: widget.autovalidateMode,
@@ -136,9 +136,7 @@ class _AtomicOTPFormState extends State<AtomicOTPForm> {
               }),
             ),
           ),
-          
           SizedBox(height: theme.spacing.md),
-          
           if (widget.isOTPSent) ...[
             AtomicFormField<String>(
               label: 'Verification Code',
@@ -166,14 +164,14 @@ class _AtomicOTPFormState extends State<AtomicOTPForm> {
             ),
             SizedBox(height: theme.spacing.md),
           ],
-          
           if (_formError != null) ...[
             Container(
               padding: EdgeInsets.all(theme.spacing.sm),
               decoration: BoxDecoration(
                 color: theme.colors.error.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: theme.colors.error.withValues(alpha: 0.3)),
+                border: Border.all(
+                    color: theme.colors.error.withValues(alpha: 0.3)),
               ),
               child: Text(
                 _formError!,
@@ -183,14 +181,14 @@ class _AtomicOTPFormState extends State<AtomicOTPForm> {
             ),
             SizedBox(height: theme.spacing.md),
           ],
-          
           if (widget.isOTPSent && _formError == null) ...[
             Container(
               padding: EdgeInsets.all(theme.spacing.sm),
               decoration: BoxDecoration(
                 color: theme.colors.success.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: theme.colors.success.withValues(alpha: 0.3)),
+                border: Border.all(
+                    color: theme.colors.success.withValues(alpha: 0.3)),
               ),
               child: Column(
                 children: [
@@ -216,31 +214,35 @@ class _AtomicOTPFormState extends State<AtomicOTPForm> {
             ),
             SizedBox(height: theme.spacing.md),
           ],
-          
           AtomicButton(
-            label: widget.isOTPSent ? widget.verifyButtonText : widget.requestButtonText,
-            onPressed: widget.isLoading ? null : (widget.isOTPSent ? _handleVerifyOTP : _handleRequestOTP),
+            label: widget.isOTPSent
+                ? widget.verifyButtonText
+                : widget.requestButtonText,
+            onPressed: widget.isLoading
+                ? null
+                : (widget.isOTPSent ? _handleVerifyOTP : _handleRequestOTP),
             isLoading: widget.isLoading,
             isFullWidth: true,
             variant: AtomicButtonVariant.primary,
             size: AtomicButtonSize.large,
           ),
-          
           if (widget.isOTPSent && widget.canResend) ...[
             SizedBox(height: theme.spacing.sm),
             AtomicButton(
-              label: widget.countdownSeconds != null && widget.countdownSeconds! > 0
+              label: widget.countdownSeconds != null &&
+                      widget.countdownSeconds! > 0
                   ? '${widget.resendButtonText} (${widget.countdownSeconds}s)'
                   : widget.resendButtonText,
-              onPressed: widget.isLoading || (widget.countdownSeconds != null && widget.countdownSeconds! > 0)
-                  ? null 
+              onPressed: widget.isLoading ||
+                      (widget.countdownSeconds != null &&
+                          widget.countdownSeconds! > 0)
+                  ? null
                   : widget.onResendOTP,
               isFullWidth: true,
               variant: AtomicButtonVariant.outlined,
               size: AtomicButtonSize.medium,
             ),
           ],
-          
           if (widget.isOTPSent) ...[
             SizedBox(height: theme.spacing.md),
             Text(
@@ -260,12 +262,12 @@ class _AtomicOTPFormState extends State<AtomicOTPForm> {
     if (value == null || value.trim().isEmpty) {
       return 'Email is required';
     }
-    
+
     final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
     if (!emailRegex.hasMatch(value.trim())) {
       return 'Please enter a valid email address';
     }
-    
+
     return null;
   }
 
@@ -273,15 +275,15 @@ class _AtomicOTPFormState extends State<AtomicOTPForm> {
     if (value == null || value.trim().isEmpty) {
       return 'Verification code is required';
     }
-    
+
     if (value.trim().length != widget.otpLength) {
       return 'Please enter ${widget.otpLength}-digit code';
     }
-    
+
     if (!RegExp(r'^\d+$').hasMatch(value.trim())) {
       return 'Verification code must contain only numbers';
     }
-    
+
     return null;
   }
-} 
+}

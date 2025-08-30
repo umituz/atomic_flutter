@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
+
 class AtomicAccessibility {
   AtomicAccessibility._();
 
@@ -12,14 +13,15 @@ class AtomicAccessibility {
   static double contrastRatio(Color color1, Color color2) {
     final luminance1 = color1.computeLuminance();
     final luminance2 = color2.computeLuminance();
-    
+
     final lighter = luminance1 > luminance2 ? luminance1 : luminance2;
     final darker = luminance1 > luminance2 ? luminance2 : luminance1;
-    
+
     return (lighter + 0.05) / (darker + 0.05);
   }
 
-  static bool meetsWCAGAA(Color foreground, Color background, {bool isLargeText = false}) {
+  static bool meetsWCAGAA(Color foreground, Color background,
+      {bool isLargeText = false}) {
     final ratio = contrastRatio(foreground, background);
     return ratio >= (isLargeText ? minContrastLarge : minContrastNormal);
   }

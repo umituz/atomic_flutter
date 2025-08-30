@@ -4,7 +4,63 @@ import 'package:atomic_flutter_kit/themes/atomic_theme_data.dart';
 import 'package:atomic_flutter_kit/tokens/animations/atomic_animations.dart';
 import 'package:atomic_flutter_kit/tokens/borders/atomic_borders.dart';
 
+/// A customizable checkbox component with various styles and label positioning.
+///
+/// The [AtomicCheckbox] provides a flexible way to allow users to select
+/// or deselect options. It supports different sizes, shapes, colors,
+/// and can display an optional label with customizable positioning.
+/// It also supports tristate functionality.
+///
+/// Features:
+/// - Supports controlled state via [value] and [onChanged].
+/// - Three predefined sizes ([AtomicCheckboxSize]).
+/// - Three predefined shapes ([AtomicCheckboxShape]).
+/// - Customizable colors for active, inactive, and check states.
+/// - Optional text label with customizable position ([AtomicCheckboxLabelPosition]).
+/// - Support for tristate checkboxes (checked, unchecked, indeterminate).
+/// - Animated state transitions.
+///
+/// Example usage:
+/// ```dart
+/// // Basic checkbox
+/// AtomicCheckbox(
+///   value: true,
+///   onChanged: (bool? newValue) {
+///     print('Checkbox is now: $newValue');
+///   },
+///   label: 'Remember me',
+/// )
+///
+/// // Tristate checkbox
+/// bool? _tristateValue;
+/// AtomicCheckbox(
+///   value: _tristateValue,
+///   onChanged: (bool? newValue) {
+///     setState(() {
+///       _tristateValue = newValue;
+///     });
+///   },
+///   tristate: true,
+///   label: 'Indeterminate option',
+///   size: AtomicCheckboxSize.large,
+///   shape: AtomicCheckboxShape.circle,
+/// )
+/// ```
 class AtomicCheckbox extends StatefulWidget {
+  /// Creates an [AtomicCheckbox] widget.
+  ///
+  /// [value] is the current state of the checkbox. Can be true, false, or null (for tristate).
+  /// [onChanged] is the callback function executed when the value changes.
+  /// [activeColor] is the color of the checkbox when it is checked.
+  /// [checkColor] is the color of the check icon.
+  /// [inactiveColor] is the background color of the checkbox when it is unchecked.
+  /// [borderColor] is the color of the checkbox border when unchecked.
+  /// [label] is an optional text label displayed next to the checkbox.
+  /// [labelPosition] defines where the label is placed relative to the checkbox. Defaults to [AtomicCheckboxLabelPosition.end].
+  /// [size] defines the overall size of the checkbox. Defaults to [AtomicCheckboxSize.medium].
+  /// [shape] defines the shape of the checkbox. Defaults to [AtomicCheckboxShape.rounded].
+  /// [enabled] if true, the checkbox is interactive. Defaults to true.
+  /// [tristate] if true, the checkbox supports three states: true, false, and null. Defaults to false.
   const AtomicCheckbox({
     super.key,
     required this.value,
@@ -21,24 +77,47 @@ class AtomicCheckbox extends StatefulWidget {
     this.tristate = false,
   });
 
+  /// The current state of the checkbox. Can be true, false, or null (for tristate).
   final bool? value;
+
+  /// The callback function executed when the value changes.
   final ValueChanged<bool?>? onChanged;
+
+  /// The color of the checkbox when it is checked.
   final Color? activeColor;
+
+  /// The color of the check icon.
   final Color? checkColor;
+
+  /// The background color of the checkbox when it is unchecked.
   final Color? inactiveColor;
+
+  /// The color of the checkbox border when unchecked.
   final Color? borderColor;
+
+  /// An optional text label displayed next to the checkbox.
   final String? label;
+
+  /// Defines where the label is placed relative to the checkbox. Defaults to [AtomicCheckboxLabelPosition.end].
   final AtomicCheckboxLabelPosition labelPosition;
+
+  /// The overall size of the checkbox. Defaults to [AtomicCheckboxSize.medium].
   final AtomicCheckboxSize size;
+
+  /// The shape of the checkbox. Defaults to [AtomicCheckboxShape.rounded].
   final AtomicCheckboxShape shape;
+
+  /// If true, the checkbox is interactive. Defaults to true.
   final bool enabled;
+
+  /// If true, the checkbox supports three states: true, false, and null. Defaults to false.
   final bool tristate;
 
   @override
   State<AtomicCheckbox> createState() => _AtomicCheckboxState();
 }
 
-class _AtomicCheckboxState extends State<AtomicCheckbox> 
+class _AtomicCheckboxState extends State<AtomicCheckbox>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _scaleAnimation;
@@ -153,9 +232,9 @@ class _AtomicCheckboxState extends State<AtomicCheckbox>
               child: Text(
                 widget.label!,
                 style: theme.typography.bodyMedium.copyWith(
-                  color: widget.enabled 
-                    ? theme.colors.textPrimary 
-                    : theme.colors.textDisabled,
+                  color: widget.enabled
+                      ? theme.colors.textPrimary
+                      : theme.colors.textDisabled,
                 ),
               ),
             ),
@@ -168,9 +247,9 @@ class _AtomicCheckboxState extends State<AtomicCheckbox>
               child: Text(
                 widget.label!,
                 style: theme.typography.bodyMedium.copyWith(
-                  color: widget.enabled 
-                    ? theme.colors.textPrimary 
-                    : theme.colors.textDisabled,
+                  color: widget.enabled
+                      ? theme.colors.textPrimary
+                      : theme.colors.textDisabled,
                 ),
               ),
             ),
@@ -246,19 +325,35 @@ class _AtomicCheckboxState extends State<AtomicCheckbox>
   }
 }
 
+/// Defines the predefined sizes for an [AtomicCheckbox].
 enum AtomicCheckboxSize {
+  /// A small checkbox.
   small,
+
+  /// A medium-sized checkbox.
   medium,
+
+  /// A large checkbox.
   large,
 }
 
+/// Defines the predefined shapes for an [AtomicCheckbox].
 enum AtomicCheckboxShape {
+  /// A square checkbox.
   square,
+
+  /// A checkbox with rounded corners.
   rounded,
+
+  /// A circular checkbox.
   circle,
 }
 
+/// Defines the possible positions for the label of an [AtomicCheckbox].
 enum AtomicCheckboxLabelPosition {
+  /// Positions the label at the start (left) of the checkbox.
   start,
+
+  /// Positions the label at the end (right) of the checkbox.
   end,
 }

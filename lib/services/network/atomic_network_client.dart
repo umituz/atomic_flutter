@@ -119,7 +119,7 @@ class AtomicNetworkClient {
   }) async {
     try {
       final uri = _buildUri(path, queryParameters);
-      
+
       final requestHeaders = {
         ...defaultHeaders,
         if (headers != null) ...headers,
@@ -137,8 +137,9 @@ class AtomicNetworkClient {
         interceptedRequest = await interceptor.onRequest(interceptedRequest);
       }
 
-      final request = http.Request(interceptedRequest.method, interceptedRequest.uri)
-        ..headers.addAll(interceptedRequest.headers);
+      final request =
+          http.Request(interceptedRequest.method, interceptedRequest.uri)
+            ..headers.addAll(interceptedRequest.headers);
 
       if (interceptedRequest.body != null) {
         if (interceptedRequest.body is String) {
@@ -180,7 +181,8 @@ class AtomicNetworkClient {
       }
 
       for (final interceptor in _interceptors) {
-        atomicResponse = await interceptor.onResponse(atomicResponse) as AtomicResponse<T>;
+        atomicResponse =
+            await interceptor.onResponse(atomicResponse) as AtomicResponse<T>;
       }
 
       if (!atomicResponse.isSuccess) {
@@ -306,11 +308,11 @@ abstract class AtomicNetworkInterceptor {
 
 enum AtomicNetworkExceptionType {
   network,
-  
+
   timeout,
-  
+
   response,
-  
+
   unknown,
 }
 
@@ -329,4 +331,4 @@ class AtomicNetworkException implements Exception {
 
   @override
   String toString() => 'AtomicNetworkException: $message';
-} 
+}

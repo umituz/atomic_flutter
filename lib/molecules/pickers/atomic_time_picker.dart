@@ -88,14 +88,15 @@ class _AtomicTimePickerState extends State<AtomicTimePicker> {
     super.didUpdateWidget(oldWidget);
     if (widget.initialTime != oldWidget.initialTime) {
       _selectedTime = widget.initialTime;
-      _controller.text = _selectedTime != null ? _formatTime(_selectedTime!) : '';
+      _controller.text =
+          _selectedTime != null ? _formatTime(_selectedTime!) : '';
     }
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = AtomicTheme.of(context);
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -107,7 +108,6 @@ class _AtomicTimePickerState extends State<AtomicTimePicker> {
           ),
           SizedBox(height: theme.spacing.xs),
         ],
-        
         InkWell(
           onTap: widget.enabled && !widget.readOnly ? _showTimePicker : null,
           borderRadius: AtomicBorders.md,
@@ -120,19 +120,21 @@ class _AtomicTimePickerState extends State<AtomicTimePicker> {
                 if (widget.showIcon) ...[
                   AtomicIconButton(
                     icon: Icons.access_time,
-                    onPressed: widget.enabled && !widget.readOnly ? _showTimePicker : null,
+                    onPressed: widget.enabled && !widget.readOnly
+                        ? _showTimePicker
+                        : null,
                     variant: AtomicIconButtonVariant.ghost,
                     size: AtomicIconButtonSize.medium,
                   ),
                   SizedBox(width: theme.spacing.sm),
                 ],
-                
                 Expanded(
                   child: TextField(
                     controller: _controller,
-                    enabled: false, // Always disabled since we use the time picker
+                    enabled:
+                        false, // Always disabled since we use the time picker
                     style: theme.typography.bodyMedium.copyWith(
-                      color: widget.enabled 
+                      color: widget.enabled
                           ? theme.colors.textPrimary
                           : theme.colors.textPrimary.withValues(alpha: 0.5),
                     ),
@@ -146,13 +148,12 @@ class _AtomicTimePickerState extends State<AtomicTimePicker> {
                     ),
                   ),
                 ),
-                
                 if (widget.showIcon) ...[
                   SizedBox(width: theme.spacing.sm),
                   Icon(
                     Icons.arrow_drop_down,
-                    color: widget.enabled 
-                        ? theme.colors.textSecondary 
+                    color: widget.enabled
+                        ? theme.colors.textSecondary
                         : theme.colors.textSecondary.withValues(alpha: 0.5),
                     size: 24,
                   ),
@@ -161,7 +162,6 @@ class _AtomicTimePickerState extends State<AtomicTimePicker> {
             ),
           ),
         ),
-        
         if (widget.helperText != null || widget.errorText != null) ...[
           SizedBox(height: theme.spacing.xs),
           AtomicText(
@@ -180,7 +180,7 @@ class _AtomicTimePickerState extends State<AtomicTimePicker> {
 
   Future<void> _showTimePicker() async {
     final theme = AtomicTheme.of(context);
-    
+
     final TimeOfDay? picked = await showTimePicker(
       context: context,
       initialTime: _selectedTime ?? TimeOfDay.now(),
@@ -190,39 +190,40 @@ class _AtomicTimePickerState extends State<AtomicTimePicker> {
       hourLabelText: widget.hourLabelText,
       minuteLabelText: widget.minuteLabelText,
       errorInvalidText: widget.errorInvalidText,
-      builder: widget.builder ?? (context, child) {
-        return Theme(
-          data: Theme.of(context).copyWith(
-            colorScheme: Theme.of(context).colorScheme.copyWith(
-              primary: theme.colors.primary,
-              onPrimary: theme.colors.surface,
-              surface: theme.colors.surface,
-              onSurface: theme.colors.textPrimary,
-            ),
-            timePickerTheme: TimePickerThemeData(
-              backgroundColor: theme.colors.surface,
-              dialBackgroundColor: theme.colors.background,
-              dialHandColor: theme.colors.primary,
-              dialTextColor: theme.colors.textPrimary,
-              entryModeIconColor: theme.colors.primary,
-              hourMinuteTextColor: theme.colors.textPrimary,
-              hourMinuteColor: theme.colors.background,
-              dayPeriodTextColor: theme.colors.textPrimary,
-              dayPeriodColor: theme.colors.background,
-              dayPeriodBorderSide: BorderSide(
-                color: AtomicColors.dividerColor,
-                width: 1,
+      builder: widget.builder ??
+          (context, child) {
+            return Theme(
+              data: Theme.of(context).copyWith(
+                colorScheme: Theme.of(context).colorScheme.copyWith(
+                      primary: theme.colors.primary,
+                      onPrimary: theme.colors.surface,
+                      surface: theme.colors.surface,
+                      onSurface: theme.colors.textPrimary,
+                    ),
+                timePickerTheme: TimePickerThemeData(
+                  backgroundColor: theme.colors.surface,
+                  dialBackgroundColor: theme.colors.background,
+                  dialHandColor: theme.colors.primary,
+                  dialTextColor: theme.colors.textPrimary,
+                  entryModeIconColor: theme.colors.primary,
+                  hourMinuteTextColor: theme.colors.textPrimary,
+                  hourMinuteColor: theme.colors.background,
+                  dayPeriodTextColor: theme.colors.textPrimary,
+                  dayPeriodColor: theme.colors.background,
+                  dayPeriodBorderSide: BorderSide(
+                    color: AtomicColors.dividerColor,
+                    width: 1,
+                  ),
+                  inputDecorationTheme: InputDecorationTheme(
+                    border: AtomicBorders.inputDefaultBorder,
+                    focusedBorder: AtomicBorders.inputFocusedBorder,
+                    errorBorder: AtomicBorders.inputErrorBorder,
+                  ),
+                ),
               ),
-              inputDecorationTheme: InputDecorationTheme(
-                border: AtomicBorders.inputDefaultBorder,
-                focusedBorder: AtomicBorders.inputFocusedBorder,
-                errorBorder: AtomicBorders.inputErrorBorder,
-              ),
-            ),
-          ),
-          child: child!,
-        );
-      },
+              child: child!,
+            );
+          },
       useRootNavigator: widget.useRootNavigator,
       routeSettings: widget.routeSettings,
       initialEntryMode: widget.entryMode,
@@ -242,12 +243,13 @@ class _AtomicTimePickerState extends State<AtomicTimePicker> {
     if (widget.timeFormat != null) {
       return widget.timeFormat!(time);
     }
-    
-    final use24Hour = widget.use24HourFormat ?? MediaQuery.of(context).alwaysUse24HourFormat;
-    
+
+    final use24Hour =
+        widget.use24HourFormat ?? MediaQuery.of(context).alwaysUse24HourFormat;
+
     if (use24Hour) {
       return '${time.hour.toString().padLeft(2, '0')}:'
-             '${time.minute.toString().padLeft(2, '0')}';
+          '${time.minute.toString().padLeft(2, '0')}';
     } else {
       final hour = time.hourOfPeriod == 0 ? 12 : time.hourOfPeriod;
       final period = time.period == DayPeriod.am ? 'AM' : 'PM';
@@ -270,7 +272,7 @@ class _AtomicTimePickerState extends State<AtomicTimePicker> {
     switch (widget.variant) {
       case AtomicTimePickerVariant.filled:
         return BoxDecoration(
-          color: widget.enabled 
+          color: widget.enabled
               ? theme.colors.surface
               : theme.colors.surface.withValues(alpha: 0.5),
           borderRadius: AtomicBorders.md,
@@ -309,15 +311,15 @@ class _AtomicTimePickerState extends State<AtomicTimePicker> {
 }
 
 enum AtomicTimePickerVariant {
-  filled,      // Filled background
-  outlined,    // Outlined border
-  underlined,  // Bottom underline
+  filled, // Filled background
+  outlined, // Outlined border
+  underlined, // Bottom underline
 }
 
 enum AtomicTimePickerSize {
-  small,       // Compact size
-  medium,      // Standard size
-  large,       // Large size
+  small, // Compact size
+  medium, // Standard size
+  large, // Large size
 }
 
 class AtomicSimpleTimePicker extends StatelessWidget {
@@ -388,7 +390,7 @@ class _AtomicTimeRangePickerState extends State<AtomicTimeRangePicker> {
   @override
   Widget build(BuildContext context) {
     final theme = AtomicTheme.of(context);
-    
+
     return Column(
       children: [
         AtomicTimePicker(
@@ -397,7 +399,9 @@ class _AtomicTimeRangePickerState extends State<AtomicTimeRangePicker> {
           onTimeSelected: (time) {
             setState(() {
               _startTime = time;
-              if (_endTime != null && time != null && _isTimeBefore(_endTime!, time)) {
+              if (_endTime != null &&
+                  time != null &&
+                  _isTimeBefore(_endTime!, time)) {
                 _endTime = null;
               }
             });
@@ -406,9 +410,7 @@ class _AtomicTimeRangePickerState extends State<AtomicTimeRangePicker> {
           enabled: widget.enabled,
           use24HourFormat: widget.use24HourFormat,
         ),
-        
         SizedBox(height: theme.spacing.md),
-        
         AtomicTimePicker(
           initialTime: _endTime,
           label: widget.endLabel,
@@ -455,13 +457,13 @@ class TimeRange {
   Duration get duration {
     final startMinutes = start.hour * 60 + start.minute;
     final endMinutes = end.hour * 60 + end.minute;
-    
+
     int diffMinutes = endMinutes - startMinutes;
-    
+
     if (diffMinutes < 0) {
       diffMinutes += 24 * 60; // Add 24 hours
     }
-    
+
     return Duration(minutes: diffMinutes);
   }
 
@@ -478,4 +480,4 @@ class TimeRange {
 
   @override
   int get hashCode => start.hashCode ^ end.hashCode;
-} 
+}

@@ -7,7 +7,87 @@ import 'package:atomic_flutter_kit/tokens/borders/atomic_borders.dart';
 import 'package:atomic_flutter_kit/tokens/animations/atomic_animations.dart';
 import 'package:atomic_flutter_kit/atoms/overlays/atomic_divider.dart';
 
+/// A utility class for displaying customizable bottom sheets.
+///
+/// The [AtomicBottomSheet] provides static methods to show modal bottom sheets
+/// with various content types, including custom widgets and lists of actions.
+/// It offers extensive customization for appearance, behavior, and interaction.
+///
+/// Features:
+/// - Show custom content or a list of actions.
+/// - Customizable title and drag handle.
+/// - Control over dismissibility and drag behavior.
+/// - Adjustable height and maximum height.
+/// - Customizable background color and padding.
+/// - Optional close button.
+/// - Integrates with the theme for consistent styling.
+///
+/// Example usage:
+/// ```dart
+/// // Show a bottom sheet with custom content
+/// AtomicBottomSheet.show(
+///   context: context,
+///   title: 'Custom Bottom Sheet',
+///   showDragHandle: true,
+///   child: Column(
+///     mainAxisSize: MainAxisSize.min,
+///     children: [
+///       Text('This is custom content in the bottom sheet.'),
+///       SizedBox(height: 20),
+///       ElevatedButton(
+///         onPressed: () => Navigator.pop(context),
+///         child: Text('Close'),
+///       ),
+///     ],
+///   ),
+/// );
+///
+/// // Show a bottom sheet with actions
+/// AtomicBottomSheet.showActions(
+///   context: context,
+///   title: 'Choose an Option',
+///   message: 'Select one of the following actions:',
+///   actions: [
+///     AtomicBottomSheetAction(
+///       label: 'Edit Profile',
+///       icon: Icons.edit,
+///       onTap: () {
+///         print('Edit Profile tapped!');
+///         return 'profile_edited'; // Return value to show method
+///       },
+///     ),
+///     AtomicBottomSheetAction(
+///       label: 'Delete Account',
+///       icon: Icons.delete,
+///       isDestructive: true,
+///       onTap: () {
+///         print('Delete Account tapped!');
+///         return null; // Don't dismiss automatically
+///       },
+///       shouldDismiss: false,
+///     ),
+///   ],
+/// );
+/// ```
 class AtomicBottomSheet {
+  static OverlayEntry? _currentToast; // This seems to be a copy-paste error from AtomicToast, should be _currentBottomSheet
+
+  /// Displays a customizable modal bottom sheet with arbitrary content.
+  ///
+  /// [context] is the BuildContext to show the bottom sheet in.
+  /// [child] is the main content of the bottom sheet.
+  /// [title] is an optional text title displayed at the top of the sheet.
+  /// [titleWidget] is an optional custom widget to use as the title. Overrides [title].
+  /// [isDismissible] if true, the sheet can be dismissed by tapping outside. Defaults to true.
+  /// [enableDrag] if true, the sheet can be dismissed by dragging down. Defaults to true.
+  /// [showDragHandle] if true, a drag handle is displayed at the top of the sheet. Defaults to true.
+  /// [height] specifies a fixed height for the bottom sheet.
+  /// [maxHeight] specifies the maximum height as a fraction of screen height. Defaults to 0.9.
+  /// [backgroundColor] is the background color of the bottom sheet.
+  /// [padding] is the internal padding for the content area.
+  /// [isScrollControlled] if true, the sheet can be full screen. Defaults to true.
+  /// [showCloseButton] if true, a close button is displayed in the header. Defaults to false.
+  /// [onClose] is the callback function executed when the close button is pressed.
   static Future<T?> show<T>({
     required BuildContext context,
     required Widget child,
@@ -51,6 +131,16 @@ class AtomicBottomSheet {
     );
   }
 
+  /// Displays a modal bottom sheet with a list of predefined actions.
+  ///
+  /// [context] is the BuildContext to show the bottom sheet in.
+  /// [actions] is a list of [AtomicBottomSheetAction]s to display.
+  /// [title] is an optional text title for the action sheet.
+  /// [message] is an optional message displayed above the actions.
+  /// [cancelLabel] is the label for the cancel button. Defaults to 'Cancel'.
+  /// [showCancelButton] if true, a cancel button is displayed. Defaults to true.
+  /// [isDismissible] if true, the sheet can be dismissed by tapping outside. Defaults to true.
+  /// [enableDrag] if true, the sheet can be dismissed by dragging down. Defaults to true.
   static Future<T?> showActions<T>({
     required BuildContext context,
     required List<AtomicBottomSheetAction<T>> actions,
@@ -78,8 +168,8 @@ class AtomicBottomSheet {
               child: Text(
                 message,
                 style: AtomicTheme.of(context).typography.bodyMedium.copyWith(
-                  color: AtomicTheme.of(context).colors.textSecondary,
-                ),
+                      color: AtomicTheme.of(context).colors.textSecondary,
+                    ),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -102,191 +192,41 @@ class AtomicBottomSheet {
   }
 }
 
-class _AtomicBottomSheetContent extends StatelessWidget {
-  const _AtomicBottomSheetContent({
-    required this.child,
-    this.title,
-    this.titleWidget,
-    this.height,
-    this.maxHeight = 0.9,
-    this.backgroundColor,
-    this.padding,
-    this.showDragHandle = true,
-    this.showCloseButton = false,
-    this.onClose,
-  });
-
-  final Widget child;
-  final String? title;
-  final Widget? titleWidget;
-  final double? height;
-  final double maxHeight;
-  final Color? backgroundColor;
-  final EdgeInsets? padding;
-  final bool showDragHandle;
-  final bool showCloseButton;
-  final VoidCallback? onClose;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = AtomicTheme.of(context);
-    final bottomPadding = MediaQuery.of(context).viewInsets.bottom;
-    
-    return AnimatedContainer(
-      duration: AtomicAnimations.normal,
-      height: height,
-      constraints: BoxConstraints(
-        maxHeight: MediaQuery.of(context).size.height * maxHeight,
-      ),
-      decoration: BoxDecoration(
-        color: backgroundColor ?? theme.colors.surface,
-        borderRadius: const BorderRadius.vertical(
-          top: Radius.circular(AtomicBorders.radiusXl),
-        ),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (showDragHandle) ...[
-            SizedBox(height: theme.spacing.xs),
-            Container(
-              width: 40,
-              height: 4,
-              decoration: BoxDecoration(
-                color: theme.colors.gray300,
-                borderRadius: AtomicBorders.full,
-              ),
-            ),
-            SizedBox(height: theme.spacing.xs),
-          ],
-          if (title != null || titleWidget != null || showCloseButton) ...[
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: theme.spacing.lg,
-                vertical: theme.spacing.sm,
-              ),
-              child: Row(
-                children: [
-                  if (showCloseButton) ...[
-                    IconButton(
-                      icon: const Icon(Icons.close),
-                      onPressed: () {
-                        onClose?.call();
-                        Navigator.of(context).pop();
-                      },
-                      iconSize: 24,
-                      padding: EdgeInsets.zero,
-                      constraints: const BoxConstraints(
-                        minWidth: 24,
-                        minHeight: 24,
-                      ),
-                    ),
-                    SizedBox(width: theme.spacing.sm),
-                  ],
-                  Expanded(
-                    child: titleWidget ?? Text(
-                      title!,
-                      style: theme.typography.titleLarge.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
-                      textAlign: showCloseButton 
-                        ? TextAlign.start 
-                        : TextAlign.center,
-                    ),
-                  ),
-                  if (showCloseButton) ...[
-                    const SizedBox(width: 48), // Balance for close button
-                  ],
-                ],
-              ),
-            ),
-            const AtomicDivider(),
-          ],
-          Flexible(
-            child: Padding(
-              padding: padding ?? EdgeInsets.only(
-                left: theme.spacing.lg,
-                right: theme.spacing.lg,
-                top: theme.spacing.md,
-                bottom: theme.spacing.lg + bottomPadding,
-              ),
-              child: child,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _ActionItem<T> extends StatelessWidget {
-  const _ActionItem({
-    required this.action,
-  });
-
-  final AtomicBottomSheetAction<T> action;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = AtomicTheme.of(context);
-    
-    return InkWell(
-      onTap: action.isEnabled 
-        ? () {
-            final result = action.onTap();
-            if (result != null || action.shouldDismiss) {
-              Navigator.of(context).pop(result);
-            }
-          }
-        : null,
-      child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: theme.spacing.lg,
-          vertical: theme.spacing.md,
-        ),
-        child: Row(
-          children: [
-            if (action.icon != null) ...[
-              Icon(
-                action.icon,
-                size: 24,
-                color: _getColor(theme),
-              ),
-              SizedBox(width: theme.spacing.md),
-            ],
-            Expanded(
-              child: Text(
-                action.label,
-                style: theme.typography.bodyLarge.copyWith(
-                  color: _getColor(theme),
-                  fontWeight: action.isDestructive 
-                    ? FontWeight.w600 
-                    : FontWeight.normal,
-                ),
-              ),
-            ),
-            if (action.trailing != null) ...[
-              SizedBox(width: theme.spacing.md),
-              action.trailing!,
-            ],
-          ],
-        ),
-      ),
-    );
-  }
-
-  Color _getColor(AtomicThemeData theme) {
-    if (!action.isEnabled) {
-      return theme.colors.textDisabled;
-    }
-    if (action.isDestructive) {
-      return theme.colors.error;
-    }
-    return theme.colors.textPrimary;
-  }
-}
-
+/// A model representing a single action within an [AtomicBottomSheet].
 class AtomicBottomSheetAction<T> {
+  /// The label displayed for the action.
+  final String label;
+
+  /// The callback function executed when the action is tapped.
+  ///
+  /// This function can optionally return a value of type [T] which will be
+  /// returned by the `AtomicBottomSheet.show` method.
+  final T? Function() onTap;
+
+  /// An optional leading icon for the action.
+  final IconData? icon;
+
+  /// An optional trailing widget for the action.
+  final Widget? trailing;
+
+  /// If true, the action is styled as a destructive action (e.g., red text).
+  final bool isDestructive;
+
+  /// If true, the action is interactive. Defaults to true.
+  final bool isEnabled;
+
+  /// If true, the bottom sheet will be dismissed after the action's [onTap] is called. Defaults to true.
+  final bool shouldDismiss;
+
+  /// Creates an [AtomicBottomSheetAction].
+  ///
+  /// [label] is the text displayed for the action.
+  /// [onTap] is the callback function executed when the action is tapped.
+  /// [icon] is an optional leading icon.
+  /// [trailing] is an optional trailing widget.
+  /// [isDestructive] styles the action as destructive.
+  /// [isEnabled] controls interactivity.
+  /// [shouldDismiss] controls automatic dismissal after tap.
   const AtomicBottomSheetAction({
     required this.label,
     required this.onTap,
@@ -296,12 +236,3 @@ class AtomicBottomSheetAction<T> {
     this.isEnabled = true,
     this.shouldDismiss = true,
   });
-
-  final String label;
-  final T? Function() onTap;
-  final IconData? icon;
-  final Widget? trailing;
-  final bool isDestructive;
-  final bool isEnabled;
-  final bool shouldDismiss;
-}

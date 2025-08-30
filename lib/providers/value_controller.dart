@@ -129,7 +129,8 @@ class AtomicValueController<T> extends ValueNotifier<T?> {
 }
 
 class AtomicListValueController<T> extends AtomicValueController<List<T>> {
-  AtomicListValueController([List<T>? initialValue]) : super(initialValue ?? []);
+  AtomicListValueController([List<T>? initialValue])
+      : super(initialValue ?? []);
 
   List<T> get list => value ?? [];
 
@@ -156,7 +157,7 @@ class AtomicListValueController<T> extends AtomicValueController<List<T>> {
 
   T? removeAt(int index) {
     if (index < 0 || index >= list.length) return null;
-    
+
     final currentList = List<T>.from(list);
     final removed = currentList.removeAt(index);
     value = currentList;
@@ -199,7 +200,8 @@ class AtomicListValueController<T> extends AtomicValueController<List<T>> {
   }
 }
 
-extension AtomicListValueControllerExtensions<T> on AtomicListValueController<T> {
+extension AtomicListValueControllerExtensions<T>
+    on AtomicListValueController<T> {
   AtomicListValueController<T> clone() {
     return AtomicListValueController<T>(List.from(list));
   }
@@ -211,4 +213,4 @@ extension AtomicListValueControllerExtensions<T> on AtomicListValueController<T>
   void makeUnique() {
     value = list.toSet().toList();
   }
-} 
+}

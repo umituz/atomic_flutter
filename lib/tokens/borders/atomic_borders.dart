@@ -20,7 +20,8 @@ class AtomicBorders {
   static const BorderRadius lg = BorderRadius.all(Radius.circular(radiusLg));
   static const BorderRadius xl = BorderRadius.all(Radius.circular(radiusXl));
   static const BorderRadius xxl = BorderRadius.all(Radius.circular(radiusXxl));
-  static const BorderRadius full = BorderRadius.all(Radius.circular(radiusFull));
+  static const BorderRadius full =
+      BorderRadius.all(Radius.circular(radiusFull));
 
   static const BorderRadius button = md;
   static const BorderRadius card = lg;
@@ -35,95 +36,91 @@ class AtomicBorders {
   static const double widthThick = 3;
   static const double widthExtraThick = 4;
 
-  
   static Border get defaultBorder => Border.all(
-    color: AtomicColors.gray300,
-    width: widthThin,
-  );
+        color: AtomicColors.gray300,
+        width: widthThin,
+      );
 
   static Border get primaryBorder => Border.all(
-    color: AtomicColors.primary,
-    width: widthThin,
-  );
+        color: AtomicColors.primary,
+        width: widthThin,
+      );
 
   static Border get secondaryBorder => Border.all(
-    color: AtomicColors.secondary,
-    width: widthThin,
-  );
+        color: AtomicColors.secondary,
+        width: widthThin,
+      );
 
   static Border get errorBorder => Border.all(
-    color: AtomicColors.error,
-    width: widthThin,
-  );
+        color: AtomicColors.error,
+        width: widthThin,
+      );
 
   static Border get successBorder => Border.all(
-    color: AtomicColors.success,
-    width: widthThin,
-  );
+        color: AtomicColors.success,
+        width: widthThin,
+      );
 
   static Border get disabledBorder => Border.all(
-    color: AtomicColors.gray200,
-    width: widthThin,
-  );
+        color: AtomicColors.gray200,
+        width: widthThin,
+      );
 
-  
   static const BorderSide noneSide = BorderSide.none;
-  
+
   static BorderSide get defaultSide => const BorderSide(
-    color: AtomicColors.gray300,
-    width: widthThin,
-  );
+        color: AtomicColors.gray300,
+        width: widthThin,
+      );
 
   static BorderSide get primarySide => const BorderSide(
-    color: AtomicColors.primary,
-    width: widthThin,
-  );
+        color: AtomicColors.primary,
+        width: widthThin,
+      );
 
   static BorderSide get secondarySide => const BorderSide(
-    color: AtomicColors.secondary,
-    width: widthThin,
-  );
+        color: AtomicColors.secondary,
+        width: widthThin,
+      );
 
   static BorderSide get errorSide => const BorderSide(
-    color: AtomicColors.error,
-    width: widthThin,
-  );
+        color: AtomicColors.error,
+        width: widthThin,
+      );
 
   static BorderSide get successSide => const BorderSide(
-    color: AtomicColors.success,
-    width: widthThin,
-  );
+        color: AtomicColors.success,
+        width: widthThin,
+      );
 
-  
   static OutlineInputBorder get inputDefaultBorder => OutlineInputBorder(
-    borderRadius: input,
-    borderSide: defaultSide,
-  );
+        borderRadius: input,
+        borderSide: defaultSide,
+      );
 
   static OutlineInputBorder get inputFocusedBorder => OutlineInputBorder(
-    borderRadius: input,
-    borderSide: primarySide,
-  );
+        borderRadius: input,
+        borderSide: primarySide,
+      );
 
   static OutlineInputBorder get inputErrorBorder => OutlineInputBorder(
-    borderRadius: input,
-    borderSide: errorSide,
-  );
+        borderRadius: input,
+        borderSide: errorSide,
+      );
 
   static OutlineInputBorder get inputSuccessBorder => OutlineInputBorder(
-    borderRadius: input,
-    borderSide: successSide,
-  );
+        borderRadius: input,
+        borderSide: successSide,
+      );
 
   static OutlineInputBorder get inputDisabledBorder => const OutlineInputBorder(
-    borderRadius: input,
-    borderSide: BorderSide(
-      color: AtomicColors.gray200,
-      width: widthThin,
-    ),
-  );
+        borderRadius: input,
+        borderSide: BorderSide(
+          color: AtomicColors.gray200,
+          width: widthThin,
+        ),
+      );
 
-  
   static Border border({
     Color color = AtomicColors.gray300,
     double width = widthThin,
@@ -141,4 +138,4 @@ class AtomicBorders {
   }) {
     return BorderSide(color: color, width: width);
   }
-} 
+}

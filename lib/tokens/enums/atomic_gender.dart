@@ -1,12 +1,12 @@
 enum AtomicGender {
   male,
-  
+
   female,
-  
+
   nonBinary,
-  
+
   preferNotToSay,
-  
+
   other;
 
   bool get isMale => this == male;
@@ -139,22 +139,22 @@ enum AtomicGender {
   }
 
   static List<AtomicGender> get formOptions => [
-    male,
-    female,
-    nonBinary,
-    preferNotToSay,
-    other,
-  ];
+        male,
+        female,
+        nonBinary,
+        preferNotToSay,
+        other,
+      ];
 
   static List<AtomicGender> get basicOptions => [
-    male,
-    female,
-  ];
+        male,
+        female,
+      ];
 
   static List<AtomicGender> get inclusiveOptions => [
-    male,
-    female,
-    nonBinary,
-    preferNotToSay,
-  ];
-} 
+        male,
+        female,
+        nonBinary,
+        preferNotToSay,
+      ];
+}

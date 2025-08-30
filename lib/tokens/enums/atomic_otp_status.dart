@@ -3,13 +3,13 @@ import 'package:atomic_flutter_kit/tokens/colors/atomic_colors.dart';
 
 enum AtomicOtpStatus {
   verifyLoading,
-  
+
   loading,
-  
+
   timeout,
-  
+
   error,
-  
+
   duration,
 }
 
@@ -28,7 +28,7 @@ extension AtomicOtpStatusExtension on AtomicOtpStatus {
         return 'In Progress';
     }
   }
-  
+
   Color get color {
     switch (this) {
       case AtomicOtpStatus.verifyLoading:
@@ -42,7 +42,7 @@ extension AtomicOtpStatusExtension on AtomicOtpStatus {
         return AtomicColors.primary;
     }
   }
-  
+
   IconData get icon {
     switch (this) {
       case AtomicOtpStatus.verifyLoading:
@@ -56,14 +56,13 @@ extension AtomicOtpStatusExtension on AtomicOtpStatus {
         return Icons.timer;
     }
   }
-  
+
   bool get isLoading {
-    return this == AtomicOtpStatus.verifyLoading || 
-           this == AtomicOtpStatus.loading;
+    return this == AtomicOtpStatus.verifyLoading ||
+        this == AtomicOtpStatus.loading;
   }
-  
+
   bool get isError {
-    return this == AtomicOtpStatus.error || 
-           this == AtomicOtpStatus.timeout;
+    return this == AtomicOtpStatus.error || this == AtomicOtpStatus.timeout;
   }
-} 
+}

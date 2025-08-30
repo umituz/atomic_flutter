@@ -5,31 +5,31 @@ abstract class AtomicBaseService extends ChangeNotifier {
   AtomicBaseService({
     this.initialPage = 1,
     this.debounceDuration = const Duration(milliseconds: 500),
-  }) : _page = initialPage,
-       _searchDebouncer = AtomicDebouncer(delay: debounceDuration);
+  })  : _page = initialPage,
+        _searchDebouncer = AtomicDebouncer(delay: debounceDuration);
 
   int _page;
   int _lastPage = 1;
   bool _pageLoading = false;
-  
+
   String _searchQuery = '';
   final AtomicDebouncer _searchDebouncer;
-  
+
   final int initialPage;
   final Duration debounceDuration;
 
   int get page => _page;
-  
+
   int get lastPage => _lastPage;
-  
+
   bool get pageLoading => _pageLoading;
-  
+
   String get searchQuery => _searchQuery;
-  
+
   bool get hasMorePages => _page < _lastPage;
-  
+
   bool get isFirstPage => _page == 1;
-  
+
   bool get isLastPage => _page >= _lastPage;
 
   void increasePage() {
@@ -134,4 +134,3 @@ abstract class AtomicBaseService extends ChangeNotifier {
     super.dispose();
   }
 }
-

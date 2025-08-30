@@ -7,6 +7,38 @@ import 'package:atomic_flutter_kit/tokens/colors/atomic_colors.dart';
 import 'package:atomic_flutter_kit/atoms/display/atomic_text.dart';
 import 'package:atomic_flutter_kit/atoms/buttons/atomic_icon_button.dart';
 
+/// A customizable app bar component that integrates with the Atomic Design System.
+///
+/// The [AtomicAppBar] extends Flutter's [AppBar] with additional customization
+/// options for variants, sizes, and visual effects like gradients and blur.
+/// It provides a consistent navigation and branding experience across the application.
+///
+/// Features:
+/// - Customizable leading, title, and actions.
+/// - Multiple visual variants ([AtomicAppBarVariant]): standard, elevated, surface, transparent.
+/// - Three predefined sizes ([AtomicAppBarSize]): compact, medium, large.
+/// - Optional gradient background.
+/// - Optional blur effect for the background.
+/// - Automatic back button handling.
+/// - Integrates with the theme for consistent styling.
+///
+/// Example usage:
+/// ```dart
+/// AtomicAppBar(
+///   title: AtomicText('My App'),
+///   actions: [
+///     AtomicIconButton(
+///       icon: Icons.settings,
+///       onPressed: () {
+///         print('Settings tapped!');
+///       },
+///     ),
+///   ],
+///   variant: AtomicAppBarVariant.elevated,
+///   size: AtomicAppBarSize.large,
+///   showBackButton: true,
+/// )
+/// ```
 class AtomicAppBar extends StatelessWidget implements PreferredSizeWidget {
   const AtomicAppBar({
     super.key,
@@ -37,37 +69,85 @@ class AtomicAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.onBackPressed,
   });
 
+  /// A widget to display before the title.
   final Widget? leading;
+
+  /// Controls whether a back button is automatically added.
   final bool automaticallyImplyLeading;
+
+  /// The primary widget displayed in the app bar.
   final Widget? title;
+
+  /// Widgets to display after the title.
   final List<Widget>? actions;
+
+  /// A widget to display behind the app bar.
   final Widget? flexibleSpace;
+
+  /// A widget to display at the bottom of the app bar.
   final PreferredSizeWidget? bottom;
+
+  /// Controls the shadow below the app bar.
   final double? elevation;
+
+  /// The color of the shadow.
   final Color? shadowColor;
+
+  /// The surface tint color.
   final Color? surfaceTintColor;
+
+  /// The background color of the app bar.
   final Color? backgroundColor;
+
+  /// The color of the text and icons.
   final Color? foregroundColor;
+
+  /// If true, the app bar is on the primary [Scaffold].
   final bool primary;
+
+  /// Controls whether the title is centered.
   final bool? centerTitle;
+
+  /// Excludes the header from semantics.
   final bool excludeHeaderSemantics;
+
+  /// Controls the space around the title.
   final double? titleSpacing;
+
+  /// Controls the opacity of the toolbar.
   final double toolbarOpacity;
+
+  /// Controls the opacity of the bottom widget.
   final double bottomOpacity;
+
+  /// Specifies the height of the toolbar.
   final double? toolbarHeight;
+
+  /// Specifies the width of the leading widget area.
   final double? leadingWidth;
 
+  /// Defines the visual style of the app bar. Defaults to [AtomicAppBarVariant.standard].
   final AtomicAppBarVariant variant;
+
+  /// Defines the size of the app bar. Defaults to [AtomicAppBarSize.medium].
   final AtomicAppBarSize size;
+
+  /// An optional gradient to paint behind the app bar.
   final Gradient? gradient;
+
+  /// If true, applies a blur effect to the background. Defaults to false.
   final bool blur;
+
+  /// If true, a back button is automatically added if possible. Defaults to true.
   final bool showBackButton;
+
+  /// The callback function executed when the back button is pressed.
   final VoidCallback? onBackPressed;
 
   @override
   Widget build(BuildContext context) {
     final theme = AtomicTheme.of(context);
-    
+
     Widget appBar = AppBar(
       leading: _buildLeading(context, theme),
       automaticallyImplyLeading: automaticallyImplyLeading && leading == null,
@@ -105,7 +185,7 @@ class AtomicAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   Widget? _buildLeading(BuildContext context, AtomicThemeData theme) {
     if (leading != null) return leading;
-    
+
     if (showBackButton && Navigator.of(context).canPop()) {
       return AtomicIconButton(
         icon: Icons.arrow_back,
@@ -114,26 +194,26 @@ class AtomicAppBar extends StatelessWidget implements PreferredSizeWidget {
         size: _getIconButtonSize(),
       );
     }
-    
+
     return null;
   }
 
   Widget? _buildTitle(AtomicThemeData theme) {
     if (title == null) return null;
-    
+
     if (title is String) {
       return AtomicText(
         title as String,
         atomicStyle: _getTitleStyle(),
       );
     }
-    
+
     return title;
   }
 
   List<Widget>? _buildActions(AtomicThemeData theme) {
     if (actions == null) return null;
-    
+
     return actions!.map((action) {
       if (action is AtomicIconButton) {
         return Padding(
@@ -147,7 +227,7 @@ class AtomicAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   Widget? _buildFlexibleSpace(AtomicThemeData theme) {
     if (flexibleSpace != null) return flexibleSpace;
-    
+
     if (gradient != null) {
       return Container(
         decoration: BoxDecoration(
@@ -155,13 +235,13 @@ class AtomicAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       );
     }
-    
+
     return null;
   }
 
   double? _getElevation() {
     if (elevation != null) return elevation;
-    
+
     switch (variant) {
       case AtomicAppBarVariant.standard:
         return 0;
@@ -188,7 +268,7 @@ class AtomicAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   Color? _getBackgroundColor(AtomicThemeData theme) {
     if (backgroundColor != null) return backgroundColor;
-    
+
     switch (variant) {
       case AtomicAppBarVariant.standard:
         return theme.colors.surface;
@@ -208,13 +288,13 @@ class AtomicAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   bool? _getCenterTitle(BuildContext context) {
     if (centerTitle != null) return centerTitle;
-    
+
     return Theme.of(context).platform == TargetPlatform.iOS;
   }
 
   double? _getToolbarHeight() {
     if (toolbarHeight != null) return toolbarHeight;
-    
+
     switch (size) {
       case AtomicAppBarSize.compact:
         return 48;
@@ -249,12 +329,14 @@ class AtomicAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   SystemUiOverlayStyle _getSystemOverlayStyle(AtomicThemeData theme) {
     final backgroundColor = _getBackgroundColor(theme);
-    final isDark = backgroundColor != null && backgroundColor.computeLuminance() < 0.5;
-    
+    final isDark =
+        backgroundColor != null && backgroundColor.computeLuminance() < 0.5;
+
     return SystemUiOverlayStyle(
       statusBarBrightness: isDark ? Brightness.dark : Brightness.light,
       statusBarIconBrightness: isDark ? Brightness.light : Brightness.dark,
-      systemNavigationBarIconBrightness: isDark ? Brightness.light : Brightness.dark,
+      systemNavigationBarIconBrightness:
+          isDark ? Brightness.light : Brightness.dark,
     );
   }
 
@@ -266,20 +348,61 @@ class AtomicAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
+/// Defines the visual variants for an [AtomicAppBar].
 enum AtomicAppBarVariant {
-  standard,     // Default app bar
-  elevated,     // Elevated with shadow
-  surface,      // Surface tinted
-  transparent,  // Transparent background
+  /// Standard app bar appearance.
+  standard,
+
+  /// App bar with an elevated appearance (shadow).
+  elevated,
+
+  /// App bar with a surface-tinted background.
+  surface,
+
+  /// App bar with a transparent background.
+  transparent,
 }
 
+/// Defines the predefined sizes for an [AtomicAppBar].
 enum AtomicAppBarSize {
-  compact,      // Compact height
-  medium,       // Standard height
-  large,        // Large height
+  /// A compact app bar.
+  compact,
+
+  /// A standard-sized app bar.
+  medium,
+
+  /// A large app bar.
+  large,
 }
 
+/// A simplified app bar component for common use cases.
+///
+/// The [AtomicSimpleAppBar] provides a basic app bar with a title, optional
+/// actions, and a back button. It's a convenient wrapper around [AtomicAppBar]
+/// for quick setup of common app bar configurations.
+///
+/// Example usage:
+/// ```dart
+/// AtomicSimpleAppBar(
+///   title: 'My Simple Screen',
+///   showBackButton: true,
+///   actions: [
+///     IconButton(
+///       icon: Icon(Icons.share),
+///       onPressed: () {},
+///     ),
+///   ],
+/// )
+/// ```
 class AtomicSimpleAppBar extends StatelessWidget implements PreferredSizeWidget {
+  /// Creates an [AtomicSimpleAppBar] widget.
+  ///
+  /// [title] is the text title of the app bar.
+  /// [actions] are widgets to display after the title.
+  /// [showBackButton] if true, a back button is automatically added. Defaults to true.
+  /// [centerTitle] controls whether the title is centered.
+  /// [backgroundColor] is the background color of the app bar.
+  /// [variant] defines the visual style of the app bar. Defaults to [AtomicAppBarVariant.standard].
   const AtomicSimpleAppBar({
     super.key,
     required this.title,
@@ -290,11 +413,22 @@ class AtomicSimpleAppBar extends StatelessWidget implements PreferredSizeWidget 
     this.variant = AtomicAppBarVariant.standard,
   });
 
+  /// The text title of the app bar.
   final String title;
+
+  /// Widgets to display after the title.
   final List<Widget>? actions;
+
+  /// If true, a back button is automatically added. Defaults to true.
   final bool showBackButton;
+
+  /// Controls whether the title is centered.
   final bool? centerTitle;
+
+  /// The background color of the app bar.
   final Color? backgroundColor;
+
+  /// Defines the visual style of the app bar. Defaults to [AtomicAppBarVariant.standard].
   final AtomicAppBarVariant variant;
 
   @override
@@ -406,4 +540,4 @@ class _AtomicSearchAppBarState extends State<AtomicSearchAppBar> {
       backgroundColor: widget.backgroundColor,
     );
   }
-} 
+}

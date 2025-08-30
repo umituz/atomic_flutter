@@ -33,7 +33,7 @@ class AtomicCustomSheetBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = AtomicTheme.of(context);
     final screenHeight = MediaQuery.of(context).size.height;
-    
+
     final content = Container(
       constraints: BoxConstraints(
         minHeight: minHeight ?? screenHeight * 0.2,
@@ -41,25 +41,26 @@ class AtomicCustomSheetBody extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         color: backgroundColor ?? theme.colors.surface,
-        borderRadius: borderRadius ?? const BorderRadius.vertical(
-          top: Radius.circular(AtomicBorders.radiusLg),
-        ),
+        borderRadius: borderRadius ??
+            const BorderRadius.vertical(
+              top: Radius.circular(AtomicBorders.radiusLg),
+            ),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           if (showDragIndicator) _buildDragIndicator(theme),
           Flexible(
-            child: scrollable 
-              ? SingleChildScrollView(
-                  padding: padding ?? EdgeInsets.all(theme.spacing.lg),
-                  physics: const BouncingScrollPhysics(),
-                  child: child ?? const SizedBox.shrink(),
-                )
-              : Padding(
-                  padding: padding ?? EdgeInsets.all(theme.spacing.lg),
-                  child: child ?? const SizedBox.shrink(),
-                ),
+            child: scrollable
+                ? SingleChildScrollView(
+                    padding: padding ?? EdgeInsets.all(theme.spacing.lg),
+                    physics: const BouncingScrollPhysics(),
+                    child: child ?? const SizedBox.shrink(),
+                  )
+                : Padding(
+                    padding: padding ?? EdgeInsets.all(theme.spacing.lg),
+                    child: child ?? const SizedBox.shrink(),
+                  ),
           ),
         ],
       ),
@@ -82,4 +83,4 @@ class AtomicCustomSheetBody extends StatelessWidget {
       ),
     );
   }
-} 
+}

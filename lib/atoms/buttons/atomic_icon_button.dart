@@ -4,6 +4,30 @@ import 'package:atomic_flutter_kit/tokens/animations/atomic_animations.dart';
 import 'package:atomic_flutter_kit/tokens/shadows/atomic_shadows.dart';
 import 'package:atomic_flutter_kit/tokens/borders/atomic_borders.dart';
 
+/// A customizable icon-only button component following atomic design principles.
+///
+/// The [AtomicIconButton] provides a compact and versatile button solution
+/// for actions represented solely by an icon. It supports various visual variants,
+/// sizes, loading states, and tooltips for enhanced user experience.
+///
+/// Features:
+/// - Multiple variants (filled, outlined, ghost, subtle)
+/// - Three sizes (small, medium, large)
+/// - Loading state with animated indicator
+/// - Optional tooltip for accessibility and clarity
+/// - Customizable icon and background colors
+/// - Smooth animations and hover effects
+///
+/// Example usage:
+/// ```dart
+/// AtomicIconButton(
+///   icon: Icons.settings,
+///   onPressed: () => _openSettings(),
+///   variant: AtomicIconButtonVariant.filled,
+///   size: AtomicIconButtonSize.large,
+///   tooltip: 'Open Settings',
+/// )
+/// ```
 class AtomicIconButton extends StatefulWidget {
   const AtomicIconButton({
     super.key,
@@ -18,232 +42,60 @@ class AtomicIconButton extends StatefulWidget {
     this.isDisabled = false,
   });
 
+  /// The icon to display within the button.
   final IconData icon;
+
+  /// The callback function executed when the button is pressed.
   final VoidCallback? onPressed;
+
+  /// The visual variant of the icon button. Defaults to [AtomicIconButtonVariant.ghost].
   final AtomicIconButtonVariant variant;
+
+  /// The size of the icon button. Defaults to [AtomicIconButtonSize.medium].
   final AtomicIconButtonSize size;
+
+  /// The color of the icon. If null, the color is determined by the [variant].
   final Color? color;
+
+  /// The background color of the button. If null, the color is determined by the [variant].
   final Color? backgroundColor;
+
+  /// An optional text to display when the button is long-pressed or hovered over.
   final String? tooltip;
+
+  /// If true, a loading indicator is shown instead of the icon. Defaults to false.
   final bool isLoading;
+
+  /// If true, the button is disabled and cannot be pressed. Defaults to false.
   final bool isDisabled;
 
   @override
   State<AtomicIconButton> createState() => _AtomicIconButtonState();
 }
 
-class _AtomicIconButtonState extends State<AtomicIconButton> 
-    with SingleTickerProviderStateMixin {
-  late AnimationController _animationController;
-  late Animation<double> _scaleAnimation;
-  bool _isPressed = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _animationController = AnimationController(
-      duration: AtomicAnimations.fast,
-      vsync: this,
-    );
-    _scaleAnimation = Tween<double>(
-      begin: 1.0,
-      end: 0.85,
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: AtomicAnimations.buttonCurve,
-    ));
-  }
-
-  @override
-  void dispose() {
-    _animationController.dispose();
-    super.dispose();
-  }
-
-  bool get _isButtonEnabled => 
-    widget.onPressed != null && !widget.isLoading && !widget.isDisabled;
-
-  void _handleTapDown(TapDownDetails details) {
-    if (_isButtonEnabled) {
-      setState(() => _isPressed = true);
-      _animationController.forward();
-    }
-  }
-
-  void _handleTapUp(TapUpDetails details) {
-    if (_isPressed) {
-      setState(() => _isPressed = false);
-      _animationController.reverse();
-    }
-  }
-
-  void _handleTapCancel() {
-    if (_isPressed) {
-      setState(() => _isPressed = false);
-      _animationController.reverse();
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    Widget button = GestureDetector(
-      onTapDown: _handleTapDown,
-      onTapUp: _handleTapUp,
-      onTapCancel: _handleTapCancel,
-      onTap: _isButtonEnabled ? widget.onPressed : null,
-      child: AnimatedBuilder(
-        animation: _scaleAnimation,
-        builder: (context, child) {
-          return Transform.scale(
-            scale: _scaleAnimation.value,
-            child: Container(
-              width: _getSize(),
-              height: _getSize(),
-              decoration: BoxDecoration(
-                color: _getBackgroundColor(),
-                borderRadius: _getBorderRadius(),
-                border: _getBorder(),
-                boxShadow: _getShadow(),
-              ),
-              child: Center(
-                child: widget.isLoading
-                  ? SizedBox(
-                      width: _getIconSize(),
-                      height: _getIconSize(),
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        valueColor: AlwaysStoppedAnimation<Color>(_getIconColor()),
-                      ),
-                    )
-                  : Icon(
-                      widget.icon,
-                      size: _getIconSize(),
-                      color: _getIconColor(),
-                    ),
-              ),
-            ),
-          );
-        },
-      ),
-    );
-
-    if (widget.tooltip != null) {
-      return Tooltip(
-        message: widget.tooltip!,
-        child: button,
-      );
-    }
-
-    return button;
-  }
-
-  double _getSize() {
-    switch (widget.size) {
-      case AtomicIconButtonSize.small:
-        return 32;
-      case AtomicIconButtonSize.medium:
-        return 40;
-      case AtomicIconButtonSize.large:
-        return 48;
-    }
-  }
-
-  double _getIconSize() {
-    switch (widget.size) {
-      case AtomicIconButtonSize.small:
-        return 16;
-      case AtomicIconButtonSize.medium:
-        return 20;
-      case AtomicIconButtonSize.large:
-        return 24;
-    }
-  }
-
-  Color _getBackgroundColor() {
-    if (!_isButtonEnabled) {
-      return widget.variant == AtomicIconButtonVariant.ghost 
-        ? Colors.transparent 
-        : AtomicColors.gray200;
-    }
-
-    if (widget.backgroundColor != null) return widget.backgroundColor!;
-
-    switch (widget.variant) {
-      case AtomicIconButtonVariant.filled:
-        return AtomicColors.primary;
-      case AtomicIconButtonVariant.outlined:
-      case AtomicIconButtonVariant.ghost:
-        return Colors.transparent;
-      case AtomicIconButtonVariant.subtle:
-        return AtomicColors.primary.withValues(alpha: 0.1);
-    }
-  }
-
-  Color _getIconColor() {
-    if (!_isButtonEnabled) return AtomicColors.textDisabled;
-    if (widget.color != null) return widget.color!;
-
-    switch (widget.variant) {
-      case AtomicIconButtonVariant.filled:
-        return AtomicColors.textInverse;
-      case AtomicIconButtonVariant.outlined:
-      case AtomicIconButtonVariant.ghost:
-      case AtomicIconButtonVariant.subtle:
-        return AtomicColors.primary;
-    }
-  }
-
-  BorderRadius _getBorderRadius() {
-    switch (widget.variant) {
-      case AtomicIconButtonVariant.filled:
-      case AtomicIconButtonVariant.outlined:
-      case AtomicIconButtonVariant.subtle:
-        return AtomicBorders.md;
-      case AtomicIconButtonVariant.ghost:
-        return AtomicBorders.full;
-    }
-  }
-
-  Border? _getBorder() {
-    if (!_isButtonEnabled && widget.variant == AtomicIconButtonVariant.outlined) {
-      return Border.all(
-        color: AtomicColors.gray300,
-        width: AtomicBorders.widthThin,
-      );
-    }
-
-    switch (widget.variant) {
-      case AtomicIconButtonVariant.outlined:
-        return Border.all(
-          color: AtomicColors.primary,
-          width: AtomicBorders.widthThin,
-        );
-      default:
-        return null;
-    }
-  }
-
-  List<BoxShadow>? _getShadow() {
-    if (!_isButtonEnabled || _isPressed) return null;
-    
-    switch (widget.variant) {
-      case AtomicIconButtonVariant.filled:
-        return AtomicShadows.sm;
-      default:
-        return null;
-    }
-  }
-}
-
+/// Defines the visual variants of an [AtomicIconButton].
 enum AtomicIconButtonVariant {
+  /// A solid button with a filled background.
   filled,
+
+  /// A button with a transparent background and a border.
   outlined,
+
+  /// A button with no background or border, typically for subtle actions.
   ghost,
+
+  /// A button with a subtle background tint, often used for less prominent actions.
   subtle,
 }
 
+/// Defines the size variants of an [AtomicIconButton].
 enum AtomicIconButtonSize {
+  /// A small icon button, suitable for compact UIs.
   small,
+
+  /// A medium-sized icon button, the default size.
   medium,
+
+  /// A large icon button, suitable for prominent actions.
   large,
-} 
+}

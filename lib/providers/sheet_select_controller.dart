@@ -7,9 +7,9 @@ class AtomicSheetSelectController<T> extends ChangeNotifier {
     AtomicSelectListItem<T>? initialSelectedItem,
     List<AtomicSelectListItem<T>>? initialSelectedItems,
     this.allowMultipleSelection = false,
-  }) : _items = initialItems ?? [],
-       _selectedItem = initialSelectedItem,
-       _selectedItems = initialSelectedItems ?? [];
+  })  : _items = initialItems ?? [],
+        _selectedItem = initialSelectedItem,
+        _selectedItems = initialSelectedItems ?? [];
 
   List<AtomicSelectListItem<T>> _items;
   AtomicSelectListItem<T>? _selectedItem;
@@ -31,17 +31,18 @@ class AtomicSheetSelectController<T> extends ChangeNotifier {
       throw ArgumentError('Selected item must be in the items list');
     }
     _selectedItem = item;
-    
+
     if (item != null) {
       _selectedItems = [item];
     } else {
       _selectedItems.clear();
     }
-    
+
     notifyListeners();
   }
 
-  List<AtomicSelectListItem<T>> get selectedItems => List.unmodifiable(_selectedItems);
+  List<AtomicSelectListItem<T>> get selectedItems =>
+      List.unmodifiable(_selectedItems);
 
   set selectedItems(List<AtomicSelectListItem<T>> items) {
     for (final item in items) {
@@ -49,11 +50,11 @@ class AtomicSheetSelectController<T> extends ChangeNotifier {
         throw ArgumentError('All selected items must be in the items list');
       }
     }
-    
+
     _selectedItems = List.from(items);
-    
+
     _selectedItem = _selectedItems.isNotEmpty ? _selectedItems.first : null;
-    
+
     notifyListeners();
   }
 
@@ -121,13 +122,14 @@ class AtomicSheetSelectController<T> extends ChangeNotifier {
 
   bool get hasSelection => _selectedItems.isNotEmpty;
 
-  List<T?> get selectedValues => _selectedItems.map((item) => item.value).toList();
+  List<T?> get selectedValues =>
+      _selectedItems.map((item) => item.value).toList();
 
   T? get selectedValue => _selectedItem?.value;
 
   void _validateSelection() {
     _selectedItems.removeWhere((item) => !_items.contains(item));
-    
+
     if (_selectedItem != null && !_items.contains(_selectedItem!)) {
       _selectedItem = _selectedItems.isNotEmpty ? _selectedItems.first : null;
     }
@@ -139,11 +141,13 @@ class AtomicSheetSelectController<T> extends ChangeNotifier {
 
   List<AtomicSelectListItem<T>> filterItems(String searchText) {
     if (searchText.isEmpty) return items;
-    
-    return _items.where((item) =>
-      item.text.toLowerCase().contains(searchText.toLowerCase()) ||
-      (item.subText?.toLowerCase().contains(searchText.toLowerCase()) ?? false)
-    ).toList();
+
+    return _items
+        .where((item) =>
+            item.text.toLowerCase().contains(searchText.toLowerCase()) ||
+            (item.subText?.toLowerCase().contains(searchText.toLowerCase()) ??
+                false))
+        .toList();
   }
 
   @override
@@ -155,11 +159,12 @@ class AtomicSheetSelectController<T> extends ChangeNotifier {
   }
 }
 
-class AtomicSheetSelectControllerDynamic extends AtomicSheetSelectController<dynamic> {
+class AtomicSheetSelectControllerDynamic
+    extends AtomicSheetSelectController<dynamic> {
   AtomicSheetSelectControllerDynamic({
     super.initialItems,
     super.initialSelectedItem,
     super.initialSelectedItems,
     super.allowMultipleSelection = false,
   });
-} 
+}

@@ -44,7 +44,7 @@ class AtomicSearchDebouncer {
   void search(String query) {
     _lastQuery = query;
     _timer?.cancel();
-    
+
     if (query.isEmpty) {
       onSearch(query);
       return;
@@ -95,7 +95,7 @@ class AtomicFunctionController {
 
   final Duration debounceDelay;
   final Duration throttleDuration;
-  
+
   Timer? _debounceTimer;
   DateTime? _lastThrottleRun;
   VoidCallback? _pendingCallback;
@@ -110,7 +110,7 @@ class AtomicFunctionController {
 
   void throttle(VoidCallback callback) {
     final now = DateTime.now();
-    if (_lastThrottleRun == null || 
+    if (_lastThrottleRun == null ||
         now.difference(_lastThrottleRun!) >= throttleDuration) {
       _lastThrottleRun = now;
       callback();
@@ -119,16 +119,16 @@ class AtomicFunctionController {
 
   void debounceWithThrottle(VoidCallback callback) {
     _pendingCallback = callback;
-    
+
     final now = DateTime.now();
-    if (_lastThrottleRun == null || 
+    if (_lastThrottleRun == null ||
         now.difference(_lastThrottleRun!) >= throttleDuration) {
       _lastThrottleRun = now;
       callback();
       _debounceTimer?.cancel();
       return;
     }
-    
+
     _debounceTimer?.cancel();
     _debounceTimer = Timer(debounceDelay, () {
       _pendingCallback?.call();

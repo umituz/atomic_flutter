@@ -1,12 +1,12 @@
 enum AtomicLoadingState {
   idle,
-  
+
   loading,
-  
+
   success,
-  
+
   error,
-  
+
   refreshing;
 
   bool get isLoading => this == loading || this == refreshing;
@@ -79,11 +79,15 @@ enum AtomicLoadingState {
       case loading:
         return newState == success || newState == error || newState == idle;
       case success:
-        return newState == loading || newState == refreshing || newState == idle;
+        return newState == loading ||
+            newState == refreshing ||
+            newState == idle;
       case error:
-        return newState == loading || newState == refreshing || newState == idle;
+        return newState == loading ||
+            newState == refreshing ||
+            newState == idle;
       case refreshing:
         return newState == success || newState == error || newState == idle;
     }
   }
-} 
+}

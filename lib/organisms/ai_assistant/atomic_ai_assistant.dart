@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:atomic_flutter_kit/themes/atomic_theme_provider.dart';
 import 'package:atomic_flutter_kit/themes/atomic_theme_data.dart';
@@ -107,7 +106,7 @@ class AtomicAIAssistant extends StatefulWidget {
   State<AtomicAIAssistant> createState() => _AtomicAIAssistantState();
 }
 
-class _AtomicAIAssistantState extends State<AtomicAIAssistant> 
+class _AtomicAIAssistantState extends State<AtomicAIAssistant>
     with SingleTickerProviderStateMixin {
   final List<AtomicAIMessage> _messages = [];
   final ScrollController _scrollController = ScrollController();
@@ -123,7 +122,7 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
       duration: AtomicAnimations.normal,
       vsync: this,
     );
-    
+
     if (widget.initialMessages != null) {
       _messages.addAll(widget.initialMessages!);
     }
@@ -160,7 +159,7 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
     if (widget.config.responseGenerator != null) {
       try {
         final response = await widget.config.responseGenerator!(message);
-        
+
         if (mounted) {
           final aiMessage = AtomicAIMessage(
             content: response,
@@ -188,7 +187,7 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
       }
     } else {
       await Future.delayed(const Duration(milliseconds: 800));
-      
+
       if (mounted) {
         final aiMessage = AtomicAIMessage(
           content: _getDefaultResponse(message),
@@ -210,7 +209,7 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
 
   String _getDefaultResponse(String message) {
     final msg = message.toLowerCase();
-    
+
     if (msg.contains('hello') || msg.contains('hi')) {
       return "Hello! How can I assist you today?";
     } else if (msg.contains('help')) {
@@ -241,20 +240,20 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
       cancelLabel: 'Cancel',
       titleIcon: Icons.cleaning_services_rounded,
     );
-    
+
     if (shouldClear == true && mounted) {
       setState(() {
         _messages.clear();
         _isTyping = false;
         _messageController.clear();
       });
-      
+
       if (_scrollController.hasClients) {
         _scrollController.jumpTo(0);
       }
-      
+
       widget.config.onClearChat?.call();
-      
+
       AtomicToast.success(
         context: context,
         message: 'Chat history cleared',
@@ -265,17 +264,15 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
   @override
   Widget build(BuildContext context) {
     final theme = AtomicTheme.of(context);
-    
+
     return Column(
       children: [
         widget.customHeader ?? _buildDefaultHeader(theme),
-        
         Expanded(
-          child: _messages.isEmpty 
+          child: _messages.isEmpty
               ? _buildEmptyState(theme)
               : _buildMessageList(theme),
         ),
-        
         widget.customInput ?? _buildDefaultInput(theme),
       ],
     );
@@ -320,7 +317,6 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
                 ),
               ),
               SizedBox(width: theme.spacing.sm),
-              
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -341,7 +337,6 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
                   ],
                 ),
               ),
-              
               if (widget.config.headerActions != null)
                 ...widget.config.headerActions!.map((action) {
                   if (action.showLabel) {
@@ -368,9 +363,9 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
                     );
                   }
                 }),
-              
-              if (widget.config.showClearButton && 
-                  (widget.config.showClearButtonAlways || _messages.isNotEmpty)) ...[
+              if (widget.config.showClearButton &&
+                  (widget.config.showClearButtonAlways ||
+                      _messages.isNotEmpty)) ...[
                 SizedBox(width: theme.spacing.xs),
                 AtomicIconButton(
                   icon: Icons.cleaning_services_rounded,
@@ -398,14 +393,14 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
             top: theme.spacing.md,
             bottom: theme.spacing.md + MediaQuery.of(context).padding.bottom,
           ),
-                      child: ConstrainedBox(
-              constraints: BoxConstraints(
-                minHeight: constraints.maxHeight - theme.spacing.md * 2,
-              ),
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              minHeight: constraints.maxHeight - theme.spacing.md * 2,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
                 TweenAnimationBuilder<double>(
                   tween: Tween(begin: 0.0, end: 1.0),
                   duration: AtomicAnimations.normal,
@@ -435,9 +430,7 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
                     );
                   },
                 ),
-                
                 SizedBox(height: theme.spacing.md),
-                
                 if (widget.config.emptyStateTitle != null)
                   Text(
                     widget.config.emptyStateTitle!,
@@ -446,7 +439,6 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
                     ),
                     textAlign: TextAlign.center,
                   ),
-                
                 if (widget.config.emptyStateSubtitle != null) ...[
                   SizedBox(height: theme.spacing.xs),
                   Padding(
@@ -460,7 +452,6 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
                     ),
                   ),
                 ],
-                
                 if (widget.config.suggestions != null) ...[
                   SizedBox(height: theme.spacing.lg),
                   Flexible(
@@ -482,8 +473,8 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
         return Padding(
           padding: EdgeInsets.only(bottom: theme.spacing.xs),
           child: InkWell(
-            onTap: suggestion.onTap ?? 
-                () => _handleSendMessage(suggestion.text),
+            onTap:
+                suggestion.onTap ?? () => _handleSendMessage(suggestion.text),
             borderRadius: BorderRadius.circular(12),
             child: Container(
               padding: EdgeInsets.symmetric(
@@ -561,7 +552,8 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
     return Padding(
       padding: EdgeInsets.only(bottom: theme.spacing.md),
       child: Align(
-        alignment: message.isUser ? Alignment.centerRight : Alignment.centerLeft,
+        alignment:
+            message.isUser ? Alignment.centerRight : Alignment.centerLeft,
         child: Container(
           constraints: BoxConstraints(
             maxWidth: MediaQuery.of(context).size.width * 0.7,
@@ -571,9 +563,7 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
             vertical: theme.spacing.sm,
           ),
           decoration: BoxDecoration(
-            color: message.isUser
-                ? theme.colors.primary
-                : theme.colors.gray100,
+            color: message.isUser ? theme.colors.primary : theme.colors.gray100,
             borderRadius: BorderRadius.only(
               topLeft: const Radius.circular(18),
               topRight: const Radius.circular(18),
@@ -587,16 +577,15 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
               Text(
                 message.content,
                 style: theme.typography.bodyMedium.copyWith(
-                  color: message.isUser 
-                      ? Colors.white 
-                      : theme.colors.textPrimary,
+                  color:
+                      message.isUser ? Colors.white : theme.colors.textPrimary,
                 ),
               ),
               SizedBox(height: theme.spacing.xs),
               Text(
                 _formatTime(message.timestamp),
                 style: theme.typography.bodySmall.copyWith(
-                  color: message.isUser 
+                  color: message.isUser
                       ? Colors.white.withValues(alpha: 0.7)
                       : theme.colors.textTertiary,
                 ),
@@ -682,9 +671,7 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
                   ),
                 ),
               ),
-              
               SizedBox(width: theme.spacing.sm),
-              
               Container(
                 width: 48,
                 height: 48,
@@ -730,7 +717,7 @@ class _AtomicAIAssistantState extends State<AtomicAIAssistant>
   String _formatTime(DateTime time) {
     final now = DateTime.now();
     final difference = now.difference(time);
-    
+
     if (difference.inDays > 0) {
       return '${difference.inDays}d ago';
     } else if (difference.inHours > 0) {

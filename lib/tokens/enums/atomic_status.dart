@@ -1,20 +1,20 @@
 enum AtomicStatus {
   loading,
-  
+
   success,
-  
+
   error,
-  
+
   empty,
-  
+
   cannot,
-  
+
   timeout,
-  
+
   idle,
-  
+
   cancelled,
-  
+
   warning;
 
   bool get isLoading => this == loading;
@@ -139,4 +139,4 @@ enum AtomicStatus {
   bool get canRetry => isFailed || isCancelled;
 
   bool get isComplete => isSuccess || isEmpty;
-} 
+}

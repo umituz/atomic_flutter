@@ -1,7 +1,62 @@
 import 'package:flutter/material.dart';
 import 'package:atomic_flutter_kit/tokens/borders/atomic_borders.dart';
 
+/// A versatile container widget with smooth, customizable styling.
+///
+/// The [AtomicSmoothContainer] provides a flexible way to create containers
+/// with rounded corners, borders, shadows, and gradient backgrounds. It acts
+/// as a wrapper around Flutter's [Container] but simplifies common styling
+/// options.
+///
+/// Features:
+/// - Customizable width, height, padding, and margin.
+/// - Support for solid colors or gradients.
+/// - Adjustable border radius and border.
+/// - Optional box shadows.
+/// - Alignment and transformation properties.
+/// - Clip behavior control.
+///
+/// Example usage:
+/// ```dart
+/// AtomicSmoothContainer(
+///   width: 100,
+///   height: 100,
+///   color: Colors.blue,
+///   borderRadius: BorderRadius.circular(16),
+///   shadows: [
+///     BoxShadow(
+///       color: Colors.black.withOpacity(0.2),
+///       blurRadius: 8,
+///       offset: Offset(0, 4),
+///     ),
+///   ],
+///   child: Center(
+///     child: Text(
+///       'Smooth',
+///       style: TextStyle(color: Colors.white),
+///     ),
+///   ),
+/// )
+/// ```
 class AtomicSmoothContainer extends StatelessWidget {
+  /// Creates an [AtomicSmoothContainer].
+  ///
+  /// [child] is the widget contained within the container.
+  /// [width] and [height] specify the dimensions of the container.
+  /// [padding] is the internal padding of the container.
+  /// [margin] is the external margin around the container.
+  /// [color] is the background color of the container.
+  /// [gradient] is an optional gradient to paint behind the container. Overrides [color].
+  /// [borderRadius] is the border radius of the container. Defaults to [AtomicBorders.md].
+  /// [border] is an optional border for the container.
+  /// [shadows] is a list of box shadows to paint behind the container.
+  /// [alignment] aligns the child within the container.
+  /// [constraints] additional constraints on the child.
+  /// [transform] applies a transformation matrix before painting.
+  /// [transformAlignment] aligns the origin of the transformation.
+  /// [clipBehavior] controls how content is clipped. Defaults to [Clip.antiAlias].
+  /// [decoration] paints behind the child. If provided, [color], [gradient], [borderRadius], [border], and [shadows] are ignored.
+  /// [foregroundDecoration] paints in front of the child.
   const AtomicSmoothContainer({
     super.key,
     this.child,
@@ -23,22 +78,57 @@ class AtomicSmoothContainer extends StatelessWidget {
     this.foregroundDecoration,
   });
 
+  /// The widget below this widget in the tree.
   final Widget? child;
+
+  /// The width of the container.
   final double? width;
+
+  /// The height of the container.
   final double? height;
+
+  /// Empty space to inscribe inside the [decoration]. The [child] is
+  /// placed inside this padding.
   final EdgeInsetsGeometry? padding;
+
+  /// Empty space to surround the [decoration] and [child].
   final EdgeInsetsGeometry? margin;
+
+  /// The color to paint behind the [child].
   final Color? color;
+
+  /// The gradient to paint behind the [child].
   final Gradient? gradient;
+
+  /// The border radius of the container. Defaults to [AtomicBorders.md].
   final BorderRadius? borderRadius;
+
+  /// The border of the container.
   final Border? border;
+
+  /// A list of box shadows to paint behind the container.
   final List<BoxShadow>? shadows;
+
+  /// Align the [child] within the container.
   final AlignmentGeometry? alignment;
+
+  /// Additional constraints to apply to the child.
   final BoxConstraints? constraints;
+
+  /// The transformation matrix to apply before painting the container.
   final Matrix4? transform;
+
+  /// The alignment of the origin of the transformation.
   final AlignmentGeometry? transformAlignment;
+
+  /// The content will be clipped (or not) according to this option.
   final Clip clipBehavior;
+
+  /// The decoration to paint behind the [child].
+  /// If provided, [color], [gradient], [borderRadius], [border], and [shadows] are ignored.
   final Decoration? decoration;
+
+  /// The decoration to paint in front of the [child].
   final Decoration? foregroundDecoration;
 
   @override
@@ -85,7 +175,69 @@ class AtomicSmoothContainer extends StatelessWidget {
   }
 }
 
+/// An implicitly animated version of [AtomicSmoothContainer].
+///
+/// This widget animates changes to its properties over a specified [duration]
+/// and [curve]. It's useful for creating smooth transitions for container
+/// properties without explicitly managing [AnimationController]s.
+///
+/// Properties like alignment, padding, color, decoration, constraints, margin,
+/// and transform are animated when their values change.
+///
+/// Example usage:
+/// ```dart
+/// class MyAnimatedSmoothContainer extends StatefulWidget {
+///   const MyAnimatedSmoothContainer({super.key});
+///
+///   @override
+///   State<MyAnimatedSmoothContainer> createState() => _MyAnimatedSmoothContainerState();
+/// }
+///
+/// class _MyAnimatedSmoothContainerState extends State<MyAnimatedSmoothContainer> {
+///   bool _isBig = false;
+///
+///   @override
+///   Widget build(BuildContext context) {
+///     return GestureDetector(
+///       onTap: () {
+///         setState(() {
+///           _isBig = !_isBig;
+///         });
+///       },
+///       child: AtomicAnimatedSmoothContainer(
+///         duration: const Duration(milliseconds: 400),
+///         curve: Curves.easeInOut,
+///         width: _isBig ? 200 : 100,
+///         height: _isBig ? 200 : 100,
+///         color: _isBig ? Colors.green : Colors.orange,
+///         borderRadius: BorderRadius.circular(_isBig ? 20 : 5),
+///         child: Center(
+///           child: Text(
+///             _isBig ? 'Big!' : 'Small!',
+///             style: const TextStyle(color: Colors.white),
+///           ),
+///         ),
+///       ),
+///     );
+///   }
+/// }
+/// ```
 class AtomicAnimatedSmoothContainer extends ImplicitlyAnimatedWidget {
+  /// Creates an [AtomicAnimatedSmoothContainer].
+  ///
+  /// [duration] and [curve] control the animation.
+  /// [child] is the widget below this widget in the tree.
+  /// [alignment] aligns the child within the container.
+  /// [padding] insets the child.
+  /// [color] fills the container.
+  /// [decoration] paints behind the child.
+  /// [foregroundDecoration] paints in front of the child.
+  /// [width] and [height] specify the dimensions.
+  /// [constraints] additional constraints on the child.
+  /// [margin] empty space around the container.
+  /// [transform] applies a transformation matrix before painting.
+  /// [transformAlignment] aligns the origin of the transformation.
+  /// [clipBehavior] controls how content is clipped. Defaults to [Clip.none].
   AtomicAnimatedSmoothContainer({
     super.key,
     this.child,
@@ -109,100 +261,41 @@ class AtomicAnimatedSmoothContainer extends ImplicitlyAnimatedWidget {
                 BoxConstraints.tightFor(width: width, height: height)
             : constraints;
 
+  /// The widget below this widget in the tree.
   final Widget? child;
+
+  /// Align the [child] within the container.
   final AlignmentGeometry? alignment;
+
+  /// Empty space to inscribe inside the [decoration]. The [child] is
+  /// placed inside this padding.
   final EdgeInsetsGeometry? padding;
+
+  /// The color to paint behind the [child].
   final Color? color;
+
+  /// The decoration to paint behind the [child].
   final Decoration? decoration;
+
+  /// The decoration to paint in front of the [child].
   final Decoration? foregroundDecoration;
+
+  /// Additional constraints to apply to the child.
   final BoxConstraints? constraints;
+
+  /// Empty space to surround the [decoration] and [child].
   final EdgeInsetsGeometry? margin;
+
+  /// The transformation matrix to apply before painting the container.
   final Matrix4? transform;
+
+  /// The alignment of the origin of the transformation.
   final AlignmentGeometry? transformAlignment;
+
+  /// The content will be clipped (or not) according to this option.
   final Clip clipBehavior;
 
   @override
   AnimatedWidgetBaseState<AtomicAnimatedSmoothContainer> createState() =>
       _AtomicAnimatedSmoothContainerState();
 }
-
-class _AtomicAnimatedSmoothContainerState
-    extends AnimatedWidgetBaseState<AtomicAnimatedSmoothContainer> {
-  AlignmentGeometryTween? _alignment;
-  EdgeInsetsGeometryTween? _padding;
-  DecorationTween? _decoration;
-  DecorationTween? _foregroundDecoration;
-  BoxConstraintsTween? _constraints;
-  EdgeInsetsGeometryTween? _margin;
-  Matrix4Tween? _transform;
-  AlignmentGeometryTween? _transformAlignment;
-
-  @override
-  void forEachTween(TweenVisitor<dynamic> visitor) {
-    _alignment = visitor(
-      _alignment,
-      widget.alignment,
-      (dynamic value) => AlignmentGeometryTween(begin: value as AlignmentGeometry),
-    ) as AlignmentGeometryTween?;
-    
-    _padding = visitor(
-      _padding,
-      widget.padding,
-      (dynamic value) => EdgeInsetsGeometryTween(begin: value as EdgeInsetsGeometry),
-    ) as EdgeInsetsGeometryTween?;
-    
-    _decoration = visitor(
-      _decoration,
-      widget.decoration,
-      (dynamic value) => DecorationTween(begin: value as Decoration),
-    ) as DecorationTween?;
-    
-    _foregroundDecoration = visitor(
-      _foregroundDecoration,
-      widget.foregroundDecoration,
-      (dynamic value) => DecorationTween(begin: value as Decoration),
-    ) as DecorationTween?;
-    
-    _constraints = visitor(
-      _constraints,
-      widget.constraints,
-      (dynamic value) => BoxConstraintsTween(begin: value as BoxConstraints),
-    ) as BoxConstraintsTween?;
-    
-    _margin = visitor(
-      _margin,
-      widget.margin,
-      (dynamic value) => EdgeInsetsGeometryTween(begin: value as EdgeInsetsGeometry),
-    ) as EdgeInsetsGeometryTween?;
-    
-    _transform = visitor(
-      _transform,
-      widget.transform,
-      (dynamic value) => Matrix4Tween(begin: value as Matrix4),
-    ) as Matrix4Tween?;
-    
-    _transformAlignment = visitor(
-      _transformAlignment,
-      widget.transformAlignment,
-      (dynamic value) => AlignmentGeometryTween(begin: value as AlignmentGeometry),
-    ) as AlignmentGeometryTween?;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final Animation<double> animation = this.animation;
-    
-    return Container(
-      alignment: _alignment?.evaluate(animation),
-      padding: _padding?.evaluate(animation),
-      decoration: _decoration?.evaluate(animation),
-      foregroundDecoration: _foregroundDecoration?.evaluate(animation),
-      constraints: _constraints?.evaluate(animation),
-      margin: _margin?.evaluate(animation),
-      transform: _transform?.evaluate(animation),
-      transformAlignment: _transformAlignment?.evaluate(animation),
-      clipBehavior: widget.clipBehavior,
-      child: widget.child,
-    );
-  }
-} 

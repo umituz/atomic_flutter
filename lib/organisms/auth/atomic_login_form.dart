@@ -48,7 +48,7 @@ class _AtomicLoginFormState extends State<AtomicLoginForm> {
   late final TextEditingController _emailController;
   late final TextEditingController _passwordController;
   final _debouncer = AtomicDebouncer(delay: const Duration(milliseconds: 300));
-  
+
   bool _obscurePassword = true;
   bool _rememberMe = false;
   String? _formError;
@@ -70,16 +70,16 @@ class _AtomicLoginFormState extends State<AtomicLoginForm> {
 
   void _handleSubmit() {
     if (!_formKey.currentState!.validate()) return;
-    
+
     final email = _emailController.text.trim();
     final password = _passwordController.text;
-    
+
     final error = widget.validator?.call(email, password);
     if (error != null) {
       setState(() => _formError = error);
       return;
     }
-    
+
     setState(() => _formError = null);
     widget.onSubmit(email, password);
   }
@@ -87,7 +87,7 @@ class _AtomicLoginFormState extends State<AtomicLoginForm> {
   @override
   Widget build(BuildContext context) {
     final theme = AtomicTheme.of(context);
-    
+
     return Form(
       key: _formKey,
       autovalidateMode: widget.autovalidateMode,
@@ -109,9 +109,7 @@ class _AtomicLoginFormState extends State<AtomicLoginForm> {
               }),
             ),
           ),
-          
           SizedBox(height: theme.spacing.md),
-          
           AtomicFormField<String>(
             label: 'Password',
             required: true,
@@ -122,8 +120,10 @@ class _AtomicLoginFormState extends State<AtomicLoginForm> {
               obscureText: _obscurePassword,
               prefixIcon: Icons.lock_outlined,
               suffixIcon: AtomicIconButton(
-                icon: _obscurePassword ? Icons.visibility : Icons.visibility_off,
-                onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
+                icon:
+                    _obscurePassword ? Icons.visibility : Icons.visibility_off,
+                onPressed: () =>
+                    setState(() => _obscurePassword = !_obscurePassword),
                 variant: AtomicIconButtonVariant.ghost,
               ),
               enabled: !widget.isLoading,
@@ -132,19 +132,19 @@ class _AtomicLoginFormState extends State<AtomicLoginForm> {
               }),
             ),
           ),
-          
           SizedBox(height: theme.spacing.md),
-          
           if (widget.showRememberMe || widget.showForgotPassword)
             Row(
               children: [
                 if (widget.showRememberMe) ...[
                   AtomicCheckbox(
                     value: _rememberMe,
-                    onChanged: widget.isLoading ? null : (value) {
-                      setState(() => _rememberMe = value ?? false);
-                      widget.onRememberMeChanged?.call(_rememberMe);
-                    },
+                    onChanged: widget.isLoading
+                        ? null
+                        : (value) {
+                            setState(() => _rememberMe = value ?? false);
+                            widget.onRememberMeChanged?.call(_rememberMe);
+                          },
                   ),
                   const Text('Remember me'),
                 ],
@@ -152,22 +152,22 @@ class _AtomicLoginFormState extends State<AtomicLoginForm> {
                 if (widget.showForgotPassword)
                   AtomicButton(
                     label: 'Forgot Password?',
-                    onPressed: widget.isLoading ? null : widget.onForgotPassword,
+                    onPressed:
+                        widget.isLoading ? null : widget.onForgotPassword,
                     variant: AtomicButtonVariant.ghost,
                   ),
               ],
             ),
-          
           if (widget.showRememberMe || widget.showForgotPassword)
             SizedBox(height: theme.spacing.md),
-          
           if (_formError != null) ...[
             Container(
               padding: EdgeInsets.all(theme.spacing.sm),
               decoration: BoxDecoration(
                 color: theme.colors.error.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: theme.colors.error.withValues(alpha: 0.3)),
+                border: Border.all(
+                    color: theme.colors.error.withValues(alpha: 0.3)),
               ),
               child: Text(
                 _formError!,
@@ -176,7 +176,6 @@ class _AtomicLoginFormState extends State<AtomicLoginForm> {
             ),
             SizedBox(height: theme.spacing.md),
           ],
-          
           AtomicButton(
             label: widget.submitButtonText,
             onPressed: widget.isLoading ? null : _handleSubmit,
@@ -194,12 +193,12 @@ class _AtomicLoginFormState extends State<AtomicLoginForm> {
     if (value == null || value.trim().isEmpty) {
       return 'Email is required';
     }
-    
+
     final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
     if (!emailRegex.hasMatch(value.trim())) {
       return 'Please enter a valid email address';
     }
-    
+
     return null;
   }
 
@@ -207,11 +206,11 @@ class _AtomicLoginFormState extends State<AtomicLoginForm> {
     if (value == null || value.isEmpty) {
       return 'Password is required';
     }
-    
+
     if (value.length < 6) {
       return 'Password must be at least 6 characters';
     }
-    
+
     return null;
   }
-} 
+}

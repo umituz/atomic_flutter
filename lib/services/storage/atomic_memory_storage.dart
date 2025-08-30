@@ -1,8 +1,8 @@
 import 'atomic_storage_interface.dart';
 
 class AtomicMemoryStorage implements AtomicStorageInterface {
-  AtomicMemoryStorage({Map<String, String>? initialData}) 
-    : _storage = initialData ?? {};
+  AtomicMemoryStorage({Map<String, String>? initialData})
+      : _storage = initialData ?? {};
 
   final Map<String, String> _storage;
 
@@ -41,4 +41,4 @@ class AtomicMemoryStorage implements AtomicStorageInterface {
   Map<String, String> get allData => Map.unmodifiable(_storage);
 
   int get size => _storage.length;
-} 
+}

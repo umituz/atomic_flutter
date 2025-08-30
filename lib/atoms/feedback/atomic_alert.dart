@@ -5,15 +5,66 @@ import 'package:atomic_flutter_kit/tokens/borders/atomic_borders.dart';
 import 'package:atomic_flutter_kit/atoms/icons/atomic_icon.dart';
 import 'package:atomic_flutter_kit/atoms/display/atomic_text.dart';
 
+/// A customizable alert component for displaying important messages to the user.
+///
+/// The [AtomicAlert] widget provides a visually distinct way to convey
+/// success, error, warning, or informational messages. It supports a title,
+/// optional subtitle, leading icon, and a closable option.
+///
+/// Features:
+/// - Multiple variants ([AtomicAlertVariant]) for different message types.
+/// - Customizable text, subtitle, and icon.
+/// - Optional close button with a callback.
+/// - Customizable margin.
+/// - Integrates with the theme for consistent styling.
+///
+/// Example usage:
+/// ```dart
+/// AtomicAlert.success(
+///   text: 'Operation successful!',
+///   subtitle: 'Your changes have been saved.',
+///   closable: true,
+///   onClose: () {
+///     print('Success alert closed!');
+///   },
+/// )
+///
+/// AtomicAlert.error(
+///   text: 'Error occurred!',
+///   subtitle: 'Please check your internet connection and try again.',
+/// )
+/// ```
 class AtomicAlert extends StatelessWidget {
+  /// The main text content of the alert.
   final String text;
+
+  /// An optional secondary text displayed below the main text.
   final String? subtitle;
+
+  /// An optional leading icon for the alert.
   final IconData? icon;
+
+  /// The visual variant of the alert, determining its color scheme.
   final AtomicAlertVariant variant;
+
+  /// If true, a close button is displayed, allowing the user to dismiss the alert.
   final bool closable;
+
+  /// The callback function executed when the close button is pressed.
   final VoidCallback? onClose;
+
+  /// The external margin around the alert.
   final EdgeInsetsGeometry? margin;
 
+  /// Creates an [AtomicAlert] with a custom variant.
+  ///
+  /// [text] is the main content of the alert.
+  /// [subtitle] is an optional secondary text.
+  /// [icon] is an optional leading icon.
+  /// [variant] specifies the alert's visual style. Defaults to [AtomicAlertVariant.info].
+  /// [closable] determines if a close button is shown. Defaults to false.
+  /// [onClose] is the callback for the close button.
+  /// [margin] is the external margin.
   const AtomicAlert({
     super.key,
     required this.text,
@@ -25,6 +76,9 @@ class AtomicAlert extends StatelessWidget {
     this.margin,
   });
 
+  /// Creates a success-themed [AtomicAlert].
+  ///
+  /// Defaults to [Icons.check_circle_outline] as the icon.
   const AtomicAlert.success({
     super.key,
     required this.text,
@@ -35,6 +89,9 @@ class AtomicAlert extends StatelessWidget {
     this.margin,
   }) : variant = AtomicAlertVariant.success;
 
+  /// Creates an error-themed [AtomicAlert].
+  ///
+  /// Defaults to [Icons.error_outline] as the icon.
   const AtomicAlert.error({
     super.key,
     required this.text,
@@ -45,6 +102,9 @@ class AtomicAlert extends StatelessWidget {
     this.margin,
   }) : variant = AtomicAlertVariant.error;
 
+  /// Creates a warning-themed [AtomicAlert].
+  ///
+  /// Defaults to [Icons.warning_outlined] as the icon.
   const AtomicAlert.warning({
     super.key,
     required this.text,
@@ -55,6 +115,9 @@ class AtomicAlert extends StatelessWidget {
     this.margin,
   }) : variant = AtomicAlertVariant.warning;
 
+  /// Creates an info-themed [AtomicAlert].
+  ///
+  /// Defaults to [Icons.info_outline] as the icon.
   const AtomicAlert.info({
     super.key,
     required this.text,
@@ -68,7 +131,7 @@ class AtomicAlert extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = AtomicTheme.of(context);
-    
+
     return Container(
       margin: margin,
       padding: EdgeInsets.all(theme.spacing.md),
@@ -192,9 +255,17 @@ class AtomicAlert extends StatelessWidget {
   }
 }
 
+/// Defines the visual variants for an [AtomicAlert].
 enum AtomicAlertVariant {
+  /// Indicates a successful operation.
   success,
+
+  /// Indicates an error or failure.
   error,
+
+  /// Indicates a warning or caution.
   warning,
+
+  /// Provides general information.
   info,
-} 
+}

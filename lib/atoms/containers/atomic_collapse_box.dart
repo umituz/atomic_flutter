@@ -5,7 +5,52 @@ import 'package:atomic_flutter_kit/tokens/borders/atomic_borders.dart';
 import 'package:atomic_flutter_kit/atoms/containers/atomic_card.dart';
 import 'package:atomic_flutter_kit/atoms/icons/atomic_icon.dart';
 
+/// A collapsible box widget that expands and collapses its content with animation.
+///
+/// The [AtomicCollapseBox] provides a visually appealing way to hide and show
+/// content. It features a title, optional subtitle and icon, and customizable
+/// appearance and animation.
+///
+/// Features:
+/// - Animated expansion and collapse of content.
+/// - Customizable title, subtitle, and leading icon.
+/// - Optional callback for expansion state changes.
+/// - Customizable background color, border radius, padding, and margin.
+/// - Option to show or hide a border.
+/// - Control over animation duration and curve.
+///
+/// Example usage:
+/// ```dart
+/// AtomicCollapseBox(
+///   title: 'Section Title',
+///   subtitle: 'Click to expand',
+///   icon: Icons.info_outline,
+///   initiallyExpanded: false,
+///   onExpansionChanged: (expanded) {
+///     print('Expanded: $expanded');
+///   },
+///   child: Padding(
+///     padding: const EdgeInsets.all(16.0),
+///     child: Text('This is the collapsible content.'),
+///   ),
+/// )
+/// ```
 class AtomicCollapseBox extends StatefulWidget {
+  /// Creates an [AtomicCollapseBox].
+  ///
+  /// [child] is the content to be displayed when the box is expanded.
+  /// [title] is the primary text displayed in the header of the collapse box.
+  /// [subtitle] is an optional secondary text displayed below the title.
+  /// [icon] is an optional leading icon displayed in the header.
+  /// [initiallyExpanded] determines if the box is expanded by default. Defaults to false.
+  /// [onExpansionChanged] is a callback function that is called when the expansion state changes.
+  /// [backgroundColor] is the background color of the collapse box.
+  /// [borderRadius] is the border radius of the collapse box.
+  /// [padding] is the internal padding of the header.
+  /// [margin] is the external margin around the collapse box.
+  /// [showBorder] determines if a border should be displayed around the box. Defaults to true.
+  /// [animationDuration] is the duration of the expansion/collapse animation. Defaults to [AtomicAnimations.normal].
+  /// [animationCurve] is the curve used for the expansion/collapse animation. Defaults to [AtomicAnimations.standardEasing].
   const AtomicCollapseBox({
     super.key,
     required this.child,
@@ -23,25 +68,50 @@ class AtomicCollapseBox extends StatefulWidget {
     this.animationCurve = AtomicAnimations.standardEasing,
   });
 
+  /// The content to be displayed when the box is expanded.
   final Widget child;
+
+  /// The primary text displayed in the header of the collapse box.
   final String title;
+
+  /// An optional secondary text displayed below the title.
   final String? subtitle;
+
+  /// An optional leading icon displayed in the header.
   final IconData? icon;
+
+  /// Determines if the box is expanded by default. Defaults to false.
   final bool initiallyExpanded;
+
+  /// A callback function that is called when the expansion state changes.
   final ValueChanged<bool>? onExpansionChanged;
+
+  /// The background color of the collapse box.
   final Color? backgroundColor;
+
+  /// The border radius of the collapse box.
   final BorderRadius? borderRadius;
+
+  /// The internal padding of the header.
   final EdgeInsets? padding;
+
+  /// The external margin around the collapse box.
   final EdgeInsets? margin;
+
+  /// Determines if a border should be displayed around the box. Defaults to true.
   final bool showBorder;
+
+  /// The duration of the expansion/collapse animation. Defaults to [AtomicAnimations.normal].
   final Duration animationDuration;
+
+  /// The curve used for the expansion/collapse animation. Defaults to [AtomicAnimations.standardEasing].
   final Curve animationCurve;
 
   @override
   State<AtomicCollapseBox> createState() => _AtomicCollapseBoxState();
 }
 
-class _AtomicCollapseBoxState extends State<AtomicCollapseBox> 
+class _AtomicCollapseBoxState extends State<AtomicCollapseBox>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _iconTurns;
@@ -173,4 +243,4 @@ class _AtomicCollapseBoxState extends State<AtomicCollapseBox>
       child: closed ? null : widget.child,
     );
   }
-} 
+}

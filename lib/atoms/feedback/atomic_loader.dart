@@ -1,7 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:atomic_flutter_kit/tokens/colors/atomic_colors.dart';
 
+/// A customizable circular loading indicator.
+///
+/// The [AtomicLoader] widget provides a visual cue that an operation is in progress.
+/// It's a wrapper around Flutter's [CircularProgressIndicator] with predefined
+/// sizes and customizable color and stroke width.
+///
+/// Features:
+/// - Four predefined sizes ([AtomicLoaderSize]).
+/// - Customizable color.
+/// - Adjustable stroke width.
+/// - Support for determinate progress indication.
+///
+/// Example usage:
+/// ```dart
+/// // Indeterminate loader
+/// AtomicLoader(
+///   size: AtomicLoaderSize.medium,
+///   color: Colors.blue,
+/// )
+///
+/// // Determinate loader
+/// AtomicLoader(
+///   size: AtomicLoaderSize.large,
+///   value: 0.75, // 75% complete
+///   color: Colors.green,
+/// )
+/// ```
 class AtomicLoader extends StatelessWidget {
+  /// Creates an [AtomicLoader] widget.
+  ///
+  /// [size] defines the overall size of the loader. Defaults to [AtomicLoaderSize.medium].
+  /// [color] is the color of the progress indicator. Defaults to [AtomicColors.primary].
+  /// [strokeWidth] is the width of the progress indicator's stroke.
+  /// [value] is the progress value (0.0 to 1.0) for a determinate indicator.
+  /// If null, the indicator is indeterminate.
   const AtomicLoader({
     super.key,
     this.size = AtomicLoaderSize.medium,
@@ -10,9 +44,17 @@ class AtomicLoader extends StatelessWidget {
     this.value,
   });
 
+  /// The size of the loader. Defaults to [AtomicLoaderSize.medium].
   final AtomicLoaderSize size;
+
+  /// The color of the progress indicator. Defaults to [AtomicColors.primary].
   final Color? color;
+
+  /// The width of the progress indicator's stroke.
   final double? strokeWidth;
+
+  /// The progress value (0.0 to 1.0) for a determinate indicator.
+  /// If null, the indicator is indeterminate.
   final double? value;
 
   @override
@@ -60,9 +102,17 @@ class AtomicLoader extends StatelessWidget {
   }
 }
 
+/// Defines the predefined sizes for an [AtomicLoader].
 enum AtomicLoaderSize {
+  /// A small loader.
   small,
+
+  /// A medium-sized loader.
   medium,
+
+  /// A large loader.
   large,
+
+  /// A very large loader.
   huge,
-} 
+}

@@ -103,14 +103,15 @@ class _AtomicDatePickerState extends State<AtomicDatePicker> {
     super.didUpdateWidget(oldWidget);
     if (widget.initialDate != oldWidget.initialDate) {
       _selectedDate = widget.initialDate;
-      _controller.text = _selectedDate != null ? _formatDate(_selectedDate!) : '';
+      _controller.text =
+          _selectedDate != null ? _formatDate(_selectedDate!) : '';
     }
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = AtomicTheme.of(context);
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -122,7 +123,6 @@ class _AtomicDatePickerState extends State<AtomicDatePicker> {
           ),
           SizedBox(height: theme.spacing.xs),
         ],
-        
         InkWell(
           onTap: widget.enabled && !widget.readOnly ? _showDatePicker : null,
           borderRadius: _getBorderRadius(theme),
@@ -135,17 +135,19 @@ class _AtomicDatePickerState extends State<AtomicDatePicker> {
                 if (widget.showIcon) ...[
                   AtomicIconButton(
                     icon: Icons.calendar_today,
-                    onPressed: widget.enabled && !widget.readOnly ? _showDatePicker : null,
+                    onPressed: widget.enabled && !widget.readOnly
+                        ? _showDatePicker
+                        : null,
                     variant: AtomicIconButtonVariant.ghost,
                     size: _getIconSize(),
                   ),
                   SizedBox(width: theme.spacing.sm),
                 ],
-                
                 Expanded(
                   child: TextField(
                     controller: _controller,
-                    enabled: false, // Always disabled since we use the date picker
+                    enabled:
+                        false, // Always disabled since we use the date picker
                     style: _getTextStyle(theme),
                     decoration: InputDecoration(
                       border: InputBorder.none,
@@ -155,13 +157,12 @@ class _AtomicDatePickerState extends State<AtomicDatePicker> {
                     ),
                   ),
                 ),
-                
                 if (widget.showIcon) ...[
                   SizedBox(width: theme.spacing.sm),
                   Icon(
                     Icons.arrow_drop_down,
-                    color: widget.enabled 
-                        ? theme.colors.textSecondary 
+                    color: widget.enabled
+                        ? theme.colors.textSecondary
                         : theme.colors.textSecondary.withValues(alpha: 0.5),
                     size: 24,
                   ),
@@ -170,7 +171,6 @@ class _AtomicDatePickerState extends State<AtomicDatePicker> {
             ),
           ),
         ),
-        
         if (widget.helperText != null || widget.errorText != null) ...[
           SizedBox(height: theme.spacing.xs),
           AtomicText(
@@ -189,7 +189,7 @@ class _AtomicDatePickerState extends State<AtomicDatePicker> {
 
   Future<void> _showDatePicker() async {
     final theme = AtomicTheme.of(context);
-    
+
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: _selectedDate ?? widget.currentDate ?? DateTime.now(),
@@ -205,19 +205,20 @@ class _AtomicDatePickerState extends State<AtomicDatePicker> {
       useRootNavigator: widget.useRootNavigator,
       routeSettings: widget.routeSettings,
       textDirection: widget.textDirection,
-      builder: widget.builder ?? (context, child) {
-        return Theme(
-          data: Theme.of(context).copyWith(
-            colorScheme: Theme.of(context).colorScheme.copyWith(
-              primary: theme.colors.primary,
-              onPrimary: theme.colors.surface,
-              surface: theme.colors.surface,
-              onSurface: theme.colors.textPrimary,
-            ),
-          ),
-          child: child!,
-        );
-      },
+      builder: widget.builder ??
+          (context, child) {
+            return Theme(
+              data: Theme.of(context).copyWith(
+                colorScheme: Theme.of(context).colorScheme.copyWith(
+                      primary: theme.colors.primary,
+                      onPrimary: theme.colors.surface,
+                      surface: theme.colors.surface,
+                      onSurface: theme.colors.textPrimary,
+                    ),
+              ),
+              child: child!,
+            );
+          },
       initialEntryMode: widget.initialEntryMode,
       fieldHintText: widget.fieldHintText,
       fieldLabelText: widget.fieldLabelText,
@@ -239,10 +240,10 @@ class _AtomicDatePickerState extends State<AtomicDatePicker> {
     if (widget.dateFormat != null) {
       return widget.dateFormat!(date);
     }
-    
+
     return '${date.day.toString().padLeft(2, '0')}/'
-           '${date.month.toString().padLeft(2, '0')}/'
-           '${date.year}';
+        '${date.month.toString().padLeft(2, '0')}/'
+        '${date.year}';
   }
 
   double _getHeight() {
@@ -292,7 +293,7 @@ class _AtomicDatePickerState extends State<AtomicDatePicker> {
     switch (widget.variant) {
       case AtomicDatePickerVariant.filled:
         return BoxDecoration(
-          color: widget.enabled 
+          color: widget.enabled
               ? theme.colors.surface
               : theme.colors.surface.withValues(alpha: 0.5),
           borderRadius: _getBorderRadius(theme),
@@ -331,11 +332,11 @@ class _AtomicDatePickerState extends State<AtomicDatePicker> {
 
   TextStyle _getTextStyle(AtomicThemeData theme) {
     final baseStyle = theme.typography.bodyMedium.copyWith(
-      color: widget.enabled 
+      color: widget.enabled
           ? theme.colors.textPrimary
           : theme.colors.textPrimary.withValues(alpha: 0.5),
     );
-    
+
     switch (widget.size) {
       case AtomicDatePickerSize.small:
         return baseStyle.copyWith(fontSize: 14);
@@ -350,7 +351,7 @@ class _AtomicDatePickerState extends State<AtomicDatePicker> {
     final baseStyle = theme.typography.bodyMedium.copyWith(
       color: theme.colors.textSecondary,
     );
-    
+
     switch (widget.size) {
       case AtomicDatePickerSize.small:
         return baseStyle.copyWith(fontSize: 14);
@@ -363,15 +364,15 @@ class _AtomicDatePickerState extends State<AtomicDatePicker> {
 }
 
 enum AtomicDatePickerVariant {
-  filled,      // Filled background
-  outlined,    // Outlined border
-  underlined,  // Bottom underline
+  filled, // Filled background
+  outlined, // Outlined border
+  underlined, // Bottom underline
 }
 
 enum AtomicDatePickerSize {
-  small,       // Compact size
-  medium,      // Standard size
-  large,       // Large size
+  small, // Compact size
+  medium, // Standard size
+  large, // Large size
 }
 
 class AtomicSimpleDatePicker extends StatelessWidget {
@@ -442,7 +443,7 @@ class _AtomicDateRangePickerState extends State<AtomicDateRangePicker> {
   @override
   Widget build(BuildContext context) {
     final theme = AtomicTheme.of(context);
-    
+
     return Column(
       children: [
         AtomicDatePicker(
@@ -453,7 +454,9 @@ class _AtomicDateRangePickerState extends State<AtomicDateRangePicker> {
           onDateSelected: (date) {
             setState(() {
               _startDate = date;
-              if (_endDate != null && date != null && _endDate!.isBefore(date)) {
+              if (_endDate != null &&
+                  date != null &&
+                  _endDate!.isBefore(date)) {
                 _endDate = null;
               }
             });
@@ -461,9 +464,7 @@ class _AtomicDateRangePickerState extends State<AtomicDateRangePicker> {
           },
           enabled: widget.enabled,
         ),
-        
         SizedBox(height: theme.spacing.md),
-        
         AtomicDatePicker(
           initialDate: _endDate,
           firstDate: _startDate ?? widget.firstDate,
@@ -491,4 +492,4 @@ class _AtomicDateRangePickerState extends State<AtomicDateRangePicker> {
       widget.onDateRangeSelected(null);
     }
   }
-} 
+}

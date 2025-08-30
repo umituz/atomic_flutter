@@ -50,7 +50,8 @@ class AtomicIconBox extends StatefulWidget {
   State<AtomicIconBox> createState() => _AtomicIconBoxState();
 }
 
-class _AtomicIconBoxState extends State<AtomicIconBox> with SingleTickerProviderStateMixin {
+class _AtomicIconBoxState extends State<AtomicIconBox>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _scaleAnimation;
   bool _isPressed = false;
@@ -104,7 +105,7 @@ class _AtomicIconBoxState extends State<AtomicIconBox> with SingleTickerProvider
   @override
   Widget build(BuildContext context) {
     final theme = AtomicTheme.of(context);
-    
+
     Widget iconBox = GestureDetector(
       onTapDown: _handleTapDown,
       onTapUp: _handleTapUp,
@@ -121,7 +122,9 @@ class _AtomicIconBoxState extends State<AtomicIconBox> with SingleTickerProvider
               width: widget.autoWidth ? null : widget.width,
               height: widget.height,
               color: _getBackgroundColor(theme),
-              constraints: widget.autoWidth ? BoxConstraints(minWidth: widget.width) : null,
+              constraints: widget.autoWidth
+                  ? BoxConstraints(minWidth: widget.width)
+                  : null,
               border: Border.all(color: _getBorderColor(theme)),
               shadows: _getShadow(),
               alignment: Alignment.center,
@@ -204,4 +207,4 @@ enum AtomicIconBoxShadow {
   small,
   medium,
   large,
-} 
+}

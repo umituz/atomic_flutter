@@ -3,18 +3,80 @@ import 'package:atomic_flutter_kit/themes/atomic_theme_provider.dart';
 import 'package:atomic_flutter_kit/themes/atomic_theme_data.dart';
 import 'package:atomic_flutter_kit/atoms/display/atomic_text.dart';
 
+/// A customizable progress indicator for displaying the progress of a task.
+///
+/// The [AtomicProgress] widget supports both linear and circular progress
+/// indicators. It can display determinate or indeterminate progress, and
+/// offers various customization options for size, color, and labels.
+///
+/// Features:
+/// - Supports linear and circular variants ([AtomicProgressVariant]).
+/// - Three predefined sizes ([AtomicProgressSize]).
+/// - Customizable background and value colors.
+/// - Optional label and percentage display.
+/// - Semantic labels for accessibility.
+///
+/// Example usage:
+/// ```dart
+/// // Linear determinate progress
+/// AtomicProgress(
+///   value: 0.7,
+///   variant: AtomicProgressVariant.linear,
+///   size: AtomicProgressSize.medium,
+///   label: 'Downloading...',
+///   showPercentage: true,
+/// )
+///
+/// // Circular indeterminate progress
+/// AtomicProgress.circular(
+///   size: AtomicProgressSize.large,
+///   valueColor: Colors.green,
+/// )
+/// ```
 class AtomicProgress extends StatelessWidget {
+  /// The current progress value, from 0.0 to 1.0.
+  /// If null, the indicator is indeterminate.
   final double? value;
+
+  /// The color of the track behind the progress indicator.
   final Color? backgroundColor;
+
+  /// The color of the progress indicator itself.
   final Color? valueColor;
+
+  /// The visual variant of the progress indicator (linear or circular).
   final AtomicProgressVariant variant;
+
+  /// The size of the progress indicator.
   final AtomicProgressSize size;
+
+  /// The width of the progress indicator's stroke (for circular) or height (for linear).
   final double? strokeWidth;
+
+  /// An optional label to display above the progress indicator.
   final String? label;
+
+  /// If true, displays the percentage completion next to the progress indicator.
   final bool showPercentage;
+
+  /// A semantic label for accessibility purposes.
   final String? semanticLabel;
+
+  /// The external margin around the progress indicator.
   final EdgeInsetsGeometry? margin;
 
+  /// Creates an [AtomicProgress] widget.
+  ///
+  /// [value] is the current progress (0.0 to 1.0). If null, it's indeterminate.
+  /// [backgroundColor] is the color of the track.
+  /// [valueColor] is the color of the progress.
+  /// [variant] specifies linear or circular. Defaults to [AtomicProgressVariant.linear].
+  /// [size] defines the size. Defaults to [AtomicProgressSize.medium].
+  /// [strokeWidth] customizes the thickness.
+  /// [label] is text displayed above.
+  /// [showPercentage] displays percentage if true and [value] is not null.
+  /// [semanticLabel] for accessibility.
+  /// [margin] for external spacing.
   const AtomicProgress({
     super.key,
     this.value,
@@ -29,6 +91,16 @@ class AtomicProgress extends StatelessWidget {
     this.margin,
   });
 
+  /// Creates a linear [AtomicProgress] indicator.
+  ///
+  /// [value] is the current progress (0.0 to 1.0). If null, it's indeterminate.
+  /// [backgroundColor] is the color of the track.
+  /// [valueColor] is the color of the progress.
+  /// [size] defines the size. Defaults to [AtomicProgressSize.medium].
+  /// [label] is text displayed above.
+  /// [showPercentage] displays percentage if true and [value] is not null.
+  /// [semanticLabel] for accessibility.
+  /// [margin] for external spacing.
   const AtomicProgress.linear({
     super.key,
     this.value,
@@ -39,9 +111,20 @@ class AtomicProgress extends StatelessWidget {
     this.showPercentage = false,
     this.semanticLabel,
     this.margin,
-  }) : variant = AtomicProgressVariant.linear,
-       strokeWidth = null;
+  })  : variant = AtomicProgressVariant.linear,
+        strokeWidth = null;
 
+  /// Creates a circular [AtomicProgress] indicator.
+  ///
+  /// [value] is the current progress (0.0 to 1.0). If null, it's indeterminate.
+  /// [backgroundColor] is the color of the track.
+  /// [valueColor] is the color of the progress.
+  /// [size] defines the size. Defaults to [AtomicProgressSize.medium].
+  /// [strokeWidth] customizes the thickness.
+  /// [label] is text displayed above.
+  /// [showPercentage] displays percentage if true and [value] is not null.
+  /// [semanticLabel] for accessibility.
+  /// [margin] for external spacing.
   const AtomicProgress.circular({
     super.key,
     this.value,
@@ -58,14 +141,14 @@ class AtomicProgress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = AtomicTheme.of(context);
-    
+
     return Container(
       margin: margin,
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: variant == AtomicProgressVariant.linear 
-          ? CrossAxisAlignment.stretch 
-          : CrossAxisAlignment.center,
+        crossAxisAlignment: variant == AtomicProgressVariant.linear
+            ? CrossAxisAlignment.stretch
+            : CrossAxisAlignment.center,
         children: [
           if (label != null) ...[
             AtomicText.bodyMedium(
@@ -86,9 +169,9 @@ class AtomicProgress extends StatelessWidget {
                 color: theme.colors.textSecondary,
                 fontWeight: FontWeight.w500,
               ),
-              textAlign: variant == AtomicProgressVariant.circular 
-                ? TextAlign.center 
-                : TextAlign.end,
+              textAlign: variant == AtomicProgressVariant.circular
+                  ? TextAlign.center
+                  : TextAlign.end,
             ),
           ],
         ],
@@ -101,9 +184,11 @@ class AtomicProgress extends StatelessWidget {
     final effectiveBackgroundColor = backgroundColor ?? theme.colors.gray200;
 
     if (variant == AtomicProgressVariant.circular) {
-      return _buildCircularProgress(theme, effectiveValueColor, effectiveBackgroundColor);
+      return _buildCircularProgress(
+          theme, effectiveValueColor, effectiveBackgroundColor);
     } else {
-      return _buildLinearProgress(theme, effectiveValueColor, effectiveBackgroundColor);
+      return _buildLinearProgress(
+          theme, effectiveValueColor, effectiveBackgroundColor);
     }
   }
 
@@ -113,7 +198,7 @@ class AtomicProgress extends StatelessWidget {
     Color backgroundColor,
   ) {
     final height = _getLinearHeight();
-    
+
     return SizedBox(
       height: height,
       child: LinearProgressIndicator(
@@ -133,7 +218,7 @@ class AtomicProgress extends StatelessWidget {
   ) {
     final circularSize = _getCircularSize();
     final effectiveStrokeWidth = strokeWidth ?? _getDefaultStrokeWidth();
-    
+
     return SizedBox(
       width: circularSize,
       height: circularSize,
@@ -182,19 +267,79 @@ class AtomicProgress extends StatelessWidget {
   }
 }
 
+/// A card component that displays a progress indicator along with a title and optional details.
+///
+/// The [AtomicProgressCard] is useful for showing the status of a specific item
+/// or task within a card-like layout. It combines a title, subtitle, icon,
+/// and a progress bar, with an optional tap action.
+///
+/// Features:
+/// - Displays a title, optional subtitle, and leading icon.
+/// - Integrates an [AtomicProgress] indicator.
+/// - Shows percentage completion.
+/// - Customizable colors for progress and background.
+/// - Optional tap interaction for the entire card.
+///
+/// Example usage:
+/// ```dart
+/// AtomicProgressCard(
+///   title: 'Task Completion',
+///   subtitle: 'Progress for current sprint',
+///   value: 0.8,
+///   icon: Icons.task_alt,
+///   valueColor: Colors.purple,
+///   onTap: () {
+///     print('Progress card tapped!');
+///   },
+/// )
+/// ```
 class AtomicProgressCard extends StatelessWidget {
+  /// The current progress value, from 0.0 to 1.0.
   final double? value;
+
+  /// The main title of the progress card.
   final String title;
+
+  /// An optional subtitle displayed below the title.
   final String? subtitle;
+
+  /// An optional leading icon for the card.
   final IconData? icon;
+
+  /// The color of the progress indicator within the card.
   final Color? valueColor;
+
+  /// The background color of the progress track within the card.
   final Color? backgroundColor;
+
+  /// The visual variant of the progress indicator (linear or circular).
   final AtomicProgressVariant variant;
+
+  /// If true, displays the percentage completion on the card.
   final bool showPercentage;
+
+  /// The callback function executed when the card is tapped.
   final VoidCallback? onTap;
+
+  /// The external margin around the card.
   final EdgeInsetsGeometry? margin;
+
+  /// The internal padding of the card.
   final EdgeInsetsGeometry? padding;
 
+  /// Creates an [AtomicProgressCard].
+  ///
+  /// [value] is the current progress (0.0 to 1.0).
+  /// [title] is the main title.
+  /// [subtitle] is an optional secondary text.
+  /// [icon] is an optional leading icon.
+  /// [valueColor] is the color of the progress.
+  /// [backgroundColor] is the color of the progress track.
+  /// [variant] specifies linear or circular progress. Defaults to [AtomicProgressVariant.linear].
+  /// [showPercentage] displays percentage if true. Defaults to true.
+  /// [onTap] is the callback for card tap.
+  /// [margin] for external spacing.
+  /// [padding] for internal spacing.
   const AtomicProgressCard({
     super.key,
     this.value,
@@ -213,7 +358,7 @@ class AtomicProgressCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = AtomicTheme.of(context);
-    
+
     return Container(
       margin: margin,
       child: Material(
@@ -288,15 +433,63 @@ class AtomicProgressCard extends StatelessWidget {
   }
 }
 
+/// A widget that displays a multi-step progress indicator.
+///
+/// The [AtomicStepProgress] visually guides the user through a series of steps,
+/// highlighting the current step and indicating completed ones. It supports
+/// both horizontal and vertical orientations.
+///
+/// Features:
+/// - Displays a list of [AtomicProgressStep]s.
+/// - Highlights the [currentStep].
+/// - Customizable colors for active, inactive, and completed steps.
+/// - Supports horizontal and vertical orientations.
+/// - Optional margin for external spacing.
+///
+/// Example usage:
+/// ```dart
+/// AtomicStepProgress(
+///   steps: const [
+///     AtomicProgressStep(title: 'Personal Info', subtitle: 'Enter your details'),
+///     AtomicProgressStep(title: 'Address', subtitle: 'Provide your address'),
+///     AtomicProgressStep(title: 'Payment', subtitle: 'Complete payment'),
+///     AtomicProgressStep(title: 'Confirmation', subtitle: 'Review your order'),
+///   ],
+///   currentStep: 1, // Second step is active
+///   orientation: AtomicStepProgressOrientation.horizontal,
+/// )
+/// ```
 class AtomicStepProgress extends StatelessWidget {
+  /// A list of steps to display in the progress indicator.
   final List<AtomicProgressStep> steps;
+
+  /// The index of the currently active step (0-based).
   final int currentStep;
+
+  /// The color of the active step.
   final Color? activeColor;
+
+  /// The color of the inactive steps.
   final Color? inactiveColor;
+
+  /// The color of the completed steps.
   final Color? completedColor;
+
+  /// The orientation of the step progress indicator (horizontal or vertical).
   final AtomicStepProgressOrientation orientation;
+
+  /// The external margin around the step progress indicator.
   final EdgeInsetsGeometry? margin;
 
+  /// Creates an [AtomicStepProgress] widget.
+  ///
+  /// [steps] is a list of [AtomicProgressStep]s.
+  /// [currentStep] is the 0-based index of the active step.
+  /// [activeColor] is the color for the active step.
+  /// [inactiveColor] is the color for inactive steps.
+  /// [completedColor] is the color for completed steps.
+  /// [orientation] specifies horizontal or vertical layout. Defaults to [AtomicStepProgressOrientation.horizontal].
+  /// [margin] for external spacing.
   const AtomicStepProgress({
     super.key,
     required this.steps,
@@ -318,8 +511,10 @@ class AtomicStepProgress extends StatelessWidget {
     return Container(
       margin: margin,
       child: orientation == AtomicStepProgressOrientation.horizontal
-        ? _buildHorizontalSteps(theme, effectiveActiveColor, effectiveInactiveColor, effectiveCompletedColor)
-        : _buildVerticalSteps(theme, effectiveActiveColor, effectiveInactiveColor, effectiveCompletedColor),
+          ? _buildHorizontalSteps(theme, effectiveActiveColor,
+              effectiveInactiveColor, effectiveCompletedColor)
+          : _buildVerticalSteps(theme, effectiveActiveColor,
+              effectiveInactiveColor, effectiveCompletedColor),
     );
   }
 
@@ -382,9 +577,9 @@ class AtomicStepProgress extends StatelessWidget {
                       steps[i].title,
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
-                        color: i <= currentStep 
-                          ? theme.colors.textPrimary
-                          : theme.colors.textSecondary,
+                        color: i <= currentStep
+                            ? theme.colors.textPrimary
+                            : theme.colors.textSecondary,
                       ),
                     ),
                     if (steps[i].subtitle != null) ...[
@@ -427,8 +622,9 @@ class AtomicStepProgress extends StatelessWidget {
   ) {
     final isCompleted = index < currentStep;
     final isActive = index == currentStep;
-    final color = isCompleted ? completedColor : (isActive ? activeColor : inactiveColor);
-    
+    final color =
+        isCompleted ? completedColor : (isActive ? activeColor : inactiveColor);
+
     return Container(
       width: 24,
       height: 24,
@@ -438,20 +634,20 @@ class AtomicStepProgress extends StatelessWidget {
         shape: BoxShape.circle,
       ),
       child: isCompleted
-        ? Icon(
-            Icons.check,
-            size: 16,
-            color: theme.colors.textInverse,
-          )
-        : Center(
-            child: AtomicText.bodySmall(
-              '${index + 1}',
-              style: TextStyle(
-                color: isActive ? theme.colors.textInverse : color,
-                fontWeight: FontWeight.w600,
+          ? Icon(
+              Icons.check,
+              size: 16,
+              color: theme.colors.textInverse,
+            )
+          : Center(
+              child: AtomicText.bodySmall(
+                '${index + 1}',
+                style: TextStyle(
+                  color: isActive ? theme.colors.textInverse : color,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
-          ),
     );
   }
 
@@ -472,11 +668,22 @@ class AtomicStepProgress extends StatelessWidget {
   }
 }
 
+/// A model representing a single step in a multi-step progress indicator.
 class AtomicProgressStep {
+  /// The title of the step.
   final String title;
+
+  /// An optional subtitle for the step.
   final String? subtitle;
+
+  /// An optional icon for the step.
   final IconData? icon;
 
+  /// Creates an [AtomicProgressStep].
+  ///
+  /// [title] is the main text for the step.
+  /// [subtitle] is an optional secondary text.
+  /// [icon] is an optional icon for the step.
   const AtomicProgressStep({
     required this.title,
     this.subtitle,
@@ -484,18 +691,32 @@ class AtomicProgressStep {
   });
 }
 
+/// Defines the visual variants for an [AtomicProgress] indicator.
 enum AtomicProgressVariant {
+  /// A linear progress indicator (horizontal bar).
   linear,
+
+  /// A circular progress indicator.
   circular,
 }
 
+/// Defines the predefined sizes for an [AtomicProgress] indicator.
 enum AtomicProgressSize {
+  /// A small progress indicator.
   small,
+
+  /// A medium-sized progress indicator.
   medium,
+
+  /// A large progress indicator.
   large,
 }
 
+/// Defines the orientation for an [AtomicStepProgress] indicator.
 enum AtomicStepProgressOrientation {
+  /// Horizontal layout for steps.
   horizontal,
+
+  /// Vertical layout for steps.
   vertical,
-} 
+}

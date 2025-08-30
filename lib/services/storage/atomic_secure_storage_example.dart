@@ -26,12 +26,12 @@ abstract class AtomicSecureStorageExample implements AtomicStorageInterface {
       'auth_token',
       (str) => jsonDecode(str) as Map<String, dynamic>,
     );
-    
+
     if (data == null || data['timestamp'] == null) return true;
-    
+
     final timestamp = DateTime.parse(data['timestamp'] as String);
     final expiryDuration = const Duration(hours: 24); // Example: 24 hour expiry
-    
+
     return DateTime.now().isAfter(timestamp.add(expiryDuration));
   }
 
@@ -51,17 +51,16 @@ abstract class AtomicSecureStorageExample implements AtomicStorageInterface {
 
   Future<bool> clearSecureData() async {
     final keys = await getKeys();
-    final secureKeys = keys.where((key) => 
-      key.startsWith('auth_') || 
-      key.startsWith('user_') ||
-      key.contains('token') ||
-      key.contains('credential')
-    );
-    
+    final secureKeys = keys.where((key) =>
+        key.startsWith('auth_') ||
+        key.startsWith('user_') ||
+        key.contains('token') ||
+        key.contains('credential'));
+
     for (final key in secureKeys) {
       await delete(key);
     }
-    
+
     return true;
   }
 }
@@ -81,9 +80,8 @@ class AtomicTokenModel {
 
   bool get isExpired => DateTime.now().isAfter(expiresAt);
 
-  bool get needsRefresh => DateTime.now().isAfter(
-    expiresAt.subtract(const Duration(minutes: 5))
-  );
+  bool get needsRefresh =>
+      DateTime.now().isAfter(expiresAt.subtract(const Duration(minutes: 5)));
 
   factory AtomicTokenModel.fromJson(Map<String, dynamic> json) {
     return AtomicTokenModel(
@@ -133,9 +131,9 @@ mixin AtomicTokenStorageMixin {
   }) async {
     final token = await getToken();
     if (token == null) return null;
-    
+
     if (!token.isExpired) return token;
-    
+
     if (token.refreshToken != null && onRefresh != null) {
       final newToken = await onRefresh(token.refreshToken!);
       if (newToken != null) {
@@ -143,8 +141,8 @@ mixin AtomicTokenStorageMixin {
         return newToken;
       }
     }
-    
+
     await clearToken();
     return null;
   }
-} 
+}

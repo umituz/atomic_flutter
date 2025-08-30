@@ -3,7 +3,48 @@ import 'package:atomic_flutter_kit/themes/atomic_theme_provider.dart';
 import 'package:atomic_flutter_kit/tokens/borders/atomic_borders.dart';
 import 'package:atomic_flutter_kit/tokens/animations/atomic_animations.dart';
 
+/// A customizable shimmer effect widget for indicating loading states.
+///
+/// The [AtomicShimmer] widget provides a visual placeholder that animates
+/// a light "shimmer" across its content, commonly used to improve user
+/// experience during data loading. It can be applied to any widget or
+/// used as a standalone placeholder.
+///
+/// Features:
+/// - Customizable width and height.
+/// - Adjustable border radius.
+/// - Customizable base and highlight colors for the shimmer effect.
+/// - Control over animation duration.
+/// - Can be enabled/disabled.
+/// - Can wrap any child widget.
+///
+/// Example usage:
+/// ```dart
+/// // Standalone shimmer placeholder
+/// AtomicShimmer(
+///   width: 200,
+///   height: 100,
+///   borderRadius: BorderRadius.circular(8),
+/// )
+///
+/// // Shimmer applied to a text widget
+/// AtomicShimmer(
+///   child: Text(
+///     'Loading Content...',
+///     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+///   ),
+/// )
+/// ```
 class AtomicShimmer extends StatefulWidget {
+  /// Creates an [AtomicShimmer] widget.
+  ///
+  /// [width] and [height] specify the dimensions of the shimmer effect.
+  /// [borderRadius] is the border radius of the shimmer container.
+  /// [baseColor] is the primary color of the shimmer effect.
+  /// [highlightColor] is the secondary color of the shimmer effect.
+  /// [child] is the widget over which the shimmer effect will be applied.
+  /// [duration] is the duration of one shimmer animation cycle. Defaults to [AtomicAnimations.shimmer].
+  /// [enabled] controls whether the shimmer animation is active. Defaults to true.
   const AtomicShimmer({
     super.key,
     this.width,
@@ -16,20 +57,35 @@ class AtomicShimmer extends StatefulWidget {
     this.enabled = true,
   });
 
+  /// The width of the shimmer effect.
   final double? width;
+
+  /// The height of the shimmer effect.
   final double? height;
+
+  /// The border radius of the shimmer container. Defaults to [AtomicBorders.md].
   final BorderRadius? borderRadius;
+
+  /// The primary color of the shimmer effect.
   final Color? baseColor;
+
+  /// The secondary color of the shimmer effect.
   final Color? highlightColor;
+
+  /// The widget over which the shimmer effect will be applied.
   final Widget? child;
+
+  /// The duration of one shimmer animation cycle. Defaults to [AtomicAnimations.shimmer].
   final Duration duration;
+
+  /// Controls whether the shimmer animation is active. Defaults to true.
   final bool enabled;
 
   @override
   State<AtomicShimmer> createState() => _AtomicShimmerState();
 }
 
-class _AtomicShimmerState extends State<AtomicShimmer> 
+class _AtomicShimmerState extends State<AtomicShimmer>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
@@ -48,7 +104,7 @@ class _AtomicShimmerState extends State<AtomicShimmer>
       parent: _controller,
       curve: Curves.easeInOutSine,
     ));
-    
+
     if (widget.enabled) {
       _controller.repeat();
     }
@@ -135,7 +191,34 @@ class _ShimmerSlideTransform extends GradientTransform {
   }
 }
 
+/// A widget that displays a list of shimmer placeholders.
+///
+/// The [AtomicShimmerList] is useful for indicating that a list of items
+/// is loading, providing a smooth transition before the actual content appears.
+///
+/// Features:
+/// - Customizable number of shimmer items.
+/// - Adjustable item height and spacing.
+/// - Supports vertical and horizontal scroll directions.
+/// - Optional padding for the list.
+///
+/// Example usage:
+/// ```dart
+/// AtomicShimmerList(
+///   itemCount: 3,
+///   itemHeight: 120,
+///   spacing: 10,
+///   scrollDirection: Axis.vertical,
+/// )
+/// ```
 class AtomicShimmerList extends StatelessWidget {
+  /// Creates an [AtomicShimmerList].
+  ///
+  /// [itemCount] is the number of shimmer items to display. Defaults to 5.
+  /// [itemHeight] is the height of each shimmer item. Defaults to 80.
+  /// [spacing] is the spacing between shimmer items. Defaults to 16.
+  /// [padding] is the internal padding of the list.
+  /// [scrollDirection] determines the scroll direction of the list. Defaults to [Axis.vertical].
   const AtomicShimmerList({
     super.key,
     this.itemCount = 5,
@@ -145,10 +228,19 @@ class AtomicShimmerList extends StatelessWidget {
     this.scrollDirection = Axis.vertical,
   });
 
+  /// The number of shimmer items to display. Defaults to 5.
   final int itemCount;
+
+  /// The height of each shimmer item. Defaults to 80.
   final double itemHeight;
+
+  /// The spacing between shimmer items. Defaults to 16.
   final double spacing;
+
+  /// The internal padding of the list.
   final EdgeInsets? padding;
+
+  /// The scroll direction of the list. Defaults to [Axis.vertical].
   final Axis scrollDirection;
 
   @override
@@ -174,7 +266,32 @@ class AtomicShimmerList extends StatelessWidget {
   }
 }
 
+/// A widget that displays a shimmer placeholder for a card-like layout.
+///
+/// The [AtomicShimmerCard] provides a structured shimmer effect that mimics
+/// the layout of a typical card with an avatar, title, subtitle, and action.
+/// It's useful for indicating that card content is loading.
+///
+/// Features:
+/// - Customizable visibility of avatar, title, subtitle, and action placeholders.
+/// - Integrates with the theme for consistent spacing.
+///
+/// Example usage:
+/// ```dart
+/// AtomicShimmerCard(
+///   showAvatar: true,
+///   showTitle: true,
+///   showSubtitle: true,
+///   showAction: false,
+/// )
+/// ```
 class AtomicShimmerCard extends StatelessWidget {
+  /// Creates an [AtomicShimmerCard].
+  ///
+  /// [showAvatar] controls the visibility of the avatar placeholder. Defaults to true.
+  /// [showTitle] controls the visibility of the title placeholder. Defaults to true.
+  /// [showSubtitle] controls the visibility of the subtitle placeholder. Defaults to true.
+  /// [showAction] controls the visibility of the action button placeholder. Defaults to false.
   const AtomicShimmerCard({
     super.key,
     this.showAvatar = true,
@@ -183,9 +300,16 @@ class AtomicShimmerCard extends StatelessWidget {
     this.showAction = false,
   });
 
+  /// Controls the visibility of the avatar placeholder. Defaults to true.
   final bool showAvatar;
+
+  /// Controls the visibility of the title placeholder. Defaults to true.
   final bool showTitle;
+
+  /// Controls the visibility of the subtitle placeholder. Defaults to true.
   final bool showSubtitle;
+
+  /// Controls the visibility of the action button placeholder. Defaults to false.
   final bool showAction;
 
   @override

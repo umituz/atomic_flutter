@@ -1,4 +1,3 @@
-
 extension AtomicBoolExtension on bool {
   int toInt() {
     return this ? 1 : 0;
@@ -32,7 +31,7 @@ class AtomicBool {
 
   static bool fromString(String? value) {
     if (value == null) return false;
-    
+
     final lowered = value.toLowerCase().trim();
     return ['true', 'yes', 'on', '1', 'enabled'].contains(lowered);
   }
@@ -44,4 +43,4 @@ class AtomicBool {
     if (value is String) return fromString(value);
     return false;
   }
-} 
+}

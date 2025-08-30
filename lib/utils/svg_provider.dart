@@ -37,9 +37,11 @@ class SvgProvider extends ImageProvider<SvgImageKey> {
   @override
   Future<SvgImageKey> obtainKey(ImageConfiguration configuration) {
     final Color effectiveColor = color ?? Colors.transparent;
-    final double effectiveScale = scale ?? configuration.devicePixelRatio ?? 1.0;
+    final double effectiveScale =
+        scale ?? configuration.devicePixelRatio ?? 1.0;
     final double logicWidth = size?.width ?? configuration.size?.width ?? 100;
-    final double logicHeight = size?.height ?? configuration.size?.height ?? 100;
+    final double logicHeight =
+        size?.height ?? configuration.size?.height ?? 100;
 
     return SynchronousFuture<SvgImageKey>(
       SvgImageKey(
@@ -71,15 +73,15 @@ class SvgProvider extends ImageProvider<SvgImageKey> {
 
   static Future<ImageInfo> _loadAsync(SvgImageKey key) async {
     final String rawSvg = await _getSvgString(key);
-    
+
     final PictureInfo pictureInfo = await svg.vg.loadPicture(
       svg.SvgStringLoader(rawSvg),
       null,
     );
-    
+
     final ui.PictureRecorder recorder = ui.PictureRecorder();
     final Canvas canvas = Canvas(recorder);
-    
+
     if (key.color != null && key.color != Colors.transparent) {
       final Paint paint = Paint()
         ..colorFilter = ColorFilter.mode(
@@ -88,23 +90,23 @@ class SvgProvider extends ImageProvider<SvgImageKey> {
         );
       canvas.saveLayer(null, paint);
     }
-    
+
     final double scaleX = key.pixelWidth / pictureInfo.size.width;
     final double scaleY = key.pixelHeight / pictureInfo.size.height;
     canvas.scale(scaleX, scaleY);
-    
+
     canvas.drawPicture(pictureInfo.picture);
-    
+
     if (key.color != null && key.color != Colors.transparent) {
       canvas.restore();
     }
-    
+
     final ui.Picture picture = recorder.endRecording();
     final ui.Image image = await picture.toImage(
       key.pixelWidth,
       key.pixelHeight,
     );
-    
+
     pictureInfo.picture.dispose();
 
     return ImageInfo(
@@ -164,9 +166,10 @@ class SvgImageKey {
   }
 
   @override
-  int get hashCode => Object.hash(path, pixelWidth, pixelHeight, scale, source, color);
+  int get hashCode =>
+      Object.hash(path, pixelWidth, pixelHeight, scale, source, color);
 
   @override
   String toString() => '${objectRuntimeType(this, 'SvgImageKey')}'
       '(path: "$path", pixelWidth: $pixelWidth, pixelHeight: $pixelHeight, scale: $scale, source: $source)';
-} 
+}

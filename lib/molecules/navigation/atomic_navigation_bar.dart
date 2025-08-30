@@ -72,26 +72,29 @@ class _AtomicNavigationBarState extends State<AtomicNavigationBar>
   Widget build(BuildContext context) {
     final theme = AtomicTheme.of(context);
     final bottomPadding = MediaQuery.of(context).padding.bottom;
-    
+
     return Container(
-      margin: widget.margin ?? EdgeInsets.symmetric(
-        horizontal: AtomicSpacing.md,
-        vertical: AtomicSpacing.sm,
-      ),
+      margin: widget.margin ??
+          EdgeInsets.symmetric(
+            horizontal: AtomicSpacing.md,
+            vertical: AtomicSpacing.sm,
+          ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(widget.borderRadius),
         child: BackdropFilter(
-          filter: widget.glassMorphism 
+          filter: widget.glassMorphism
               ? ImageFilter.blur(sigmaX: 10, sigmaY: 10)
               : ImageFilter.blur(sigmaX: 0, sigmaY: 0),
           child: Container(
-            height: widget.height + (bottomPadding > 0 ? bottomPadding : AtomicSpacing.sm),
+            height: widget.height +
+                (bottomPadding > 0 ? bottomPadding : AtomicSpacing.sm),
             decoration: BoxDecoration(
               color: widget.glassMorphism
-                  ? (widget.backgroundColor ?? theme.colors.surface).withValues(alpha: 0.8)
+                  ? (widget.backgroundColor ?? theme.colors.surface)
+                      .withValues(alpha: 0.8)
                   : (widget.backgroundColor ?? theme.colors.surface),
               borderRadius: BorderRadius.circular(widget.borderRadius),
-              border: widget.glassMorphism 
+              border: widget.glassMorphism
                   ? Border.all(
                       color: theme.colors.gray200.withValues(alpha: 0.3),
                       width: 1.5,
@@ -191,9 +194,7 @@ class _AtomicNavigationBarState extends State<AtomicNavigationBar>
                           ),
                         ),
                       ),
-                      
-                      if (widget.showLabels && 
-                          destination.label.isNotEmpty)
+                      if (widget.showLabels && destination.label.isNotEmpty)
                         Flexible(
                           flex: 1,
                           child: Container(
@@ -203,11 +204,11 @@ class _AtomicNavigationBarState extends State<AtomicNavigationBar>
                               child: Text(
                                 destination.label,
                                 style: theme.typography.labelMedium.copyWith(
-                                  color: isSelected 
-                                      ? theme.colors.primary 
+                                  color: isSelected
+                                      ? theme.colors.primary
                                       : theme.colors.textSecondary,
-                                  fontWeight: isSelected 
-                                      ? AtomicTypography.bold 
+                                  fontWeight: isSelected
+                                      ? AtomicTypography.bold
                                       : AtomicTypography.medium,
                                 ),
                                 textAlign: TextAlign.center,
@@ -240,9 +241,7 @@ class _AtomicNavigationBarState extends State<AtomicNavigationBar>
     Widget iconWidget = AtomicIcon(
       icon: iconData,
       size: AtomicIconSize.large,
-      color: isSelected 
-          ? theme.colors.primary 
-          : theme.colors.textSecondary,
+      color: isSelected ? theme.colors.primary : theme.colors.textSecondary,
     );
 
     if (destination.badge != null) {
@@ -328,7 +327,7 @@ class AtomicNavigationRail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = AtomicTheme.of(context);
-    
+
     return NavigationRail(
       selectedIndex: selectedIndex,
       onDestinationSelected: onDestinationSelected,
@@ -360,7 +359,8 @@ class AtomicNavigationRail extends StatelessWidget {
     );
   }
 
-  Widget _buildIcon(AtomicNavigationRailDestination destination, bool isSelected) {
+  Widget _buildIcon(
+      AtomicNavigationRailDestination destination, bool isSelected) {
     Widget iconWidget = destination.selectedIcon != null && isSelected
         ? AtomicIcon(
             icon: destination.selectedIcon!,
@@ -407,4 +407,4 @@ class AtomicNavigationRailDestination {
   final AtomicBadge? badge;
   final bool enabled;
   final EdgeInsetsGeometry? padding;
-} 
+}

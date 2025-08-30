@@ -62,7 +62,7 @@ class AtomicSheetBuilder {
     bool enableDrag = true,
   }) {
     final theme = AtomicTheme.of(context);
-    
+
     return showCustomSheet<T>(
       context: context,
       isDismissible: isDismissible,
@@ -101,11 +101,11 @@ class AtomicSheetBuilder {
               ),
             ),
           ...actions.map((action) => _buildActionItem(
-            context: context,
-            action: action,
-            theme: theme,
-            actionColor: actionColor,
-          )),
+                context: context,
+                action: action,
+                theme: theme,
+                actionColor: actionColor,
+              )),
           if (showCancelButton) ...[
             SizedBox(height: theme.spacing.sm),
             _buildCancelButton(
@@ -219,4 +219,4 @@ class AtomicSheetAction<T> {
   final VoidCallback? onTap;
   final bool isDestructive;
   final bool isEnabled;
-} 
+}
