@@ -27,11 +27,11 @@ A modern atomic design system for Flutter applications following umituz.com stan
 
 ## Installation
 
-Add `atomic_flutter` to your `pubspec.yaml`:
+Add `atomic_flutter_kit` to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  atomic_flutter: ^0.0.1
+  atomic_flutter_kit: ^0.0.1
 ```
 
 Then run:
@@ -45,7 +45,7 @@ flutter pub get
 ### Import the package
 
 ```dart
-import 'package:atomic_flutter/atomic_flutter.dart';
+import 'package:atomic_flutter_kit/atomic_flutter_kit.dart';
 ```
 
 ### Design Tokens
@@ -149,7 +149,7 @@ AtomicTextField(
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:atomic_flutter/atomic_flutter.dart';
+import 'package:atomic_flutter_kit/atomic_flutter_kit.dart';
 
 class LoginScreen extends StatelessWidget {
   final _emailController = TextEditingController();
