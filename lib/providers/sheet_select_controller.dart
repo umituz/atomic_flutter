@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:atomic_flutter/models/select_list_item.dart';
+import 'package:atomic_flutter_kit/models/select_list_item.dart';
 
 class AtomicSheetSelectController<T> extends ChangeNotifier {
   AtomicSheetSelectController({

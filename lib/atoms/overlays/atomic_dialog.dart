@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:atomic_flutter/themes/atomic_theme_provider.dart';
-import 'package:atomic_flutter/atoms/containers/atomic_card.dart';
-import 'package:atomic_flutter/atoms/buttons/atomic_button.dart';
+import 'package:atomic_flutter_kit/themes/atomic_theme_provider.dart';
+import 'package:atomic_flutter_kit/atoms/containers/atomic_card.dart';
+import 'package:atomic_flutter_kit/atoms/buttons/atomic_button.dart';
 
 class AtomicDialog extends StatelessWidget {
   const AtomicDialog({

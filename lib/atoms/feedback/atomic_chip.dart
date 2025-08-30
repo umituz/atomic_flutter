@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:atomic_flutter/tokens/colors/atomic_colors.dart';
-import 'package:atomic_flutter/tokens/spacing/atomic_spacing.dart';
-import 'package:atomic_flutter/tokens/typography/atomic_typography.dart';
-import 'package:atomic_flutter/tokens/borders/atomic_borders.dart';
+import 'package:atomic_flutter_kit/tokens/colors/atomic_colors.dart';
+import 'package:atomic_flutter_kit/tokens/spacing/atomic_spacing.dart';
+import 'package:atomic_flutter_kit/tokens/typography/atomic_typography.dart';
+import 'package:atomic_flutter_kit/tokens/borders/atomic_borders.dart';
 
 class AtomicChip extends StatelessWidget {
   const AtomicChip({

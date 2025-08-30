@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:atomic_flutter/tokens/colors/atomic_colors.dart';
-import 'package:atomic_flutter/tokens/animations/atomic_animations.dart';
-import 'package:atomic_flutter/tokens/shadows/atomic_shadows.dart';
-import 'package:atomic_flutter/tokens/borders/atomic_borders.dart';
+import 'package:atomic_flutter_kit/tokens/colors/atomic_colors.dart';
+import 'package:atomic_flutter_kit/tokens/animations/atomic_animations.dart';
+import 'package:atomic_flutter_kit/tokens/shadows/atomic_shadows.dart';
+import 'package:atomic_flutter_kit/tokens/borders/atomic_borders.dart';
 
 class AtomicIconButton extends StatefulWidget {
   const AtomicIconButton({

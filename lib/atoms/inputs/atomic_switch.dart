@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:atomic_flutter/themes/atomic_theme_provider.dart';
-import 'package:atomic_flutter/themes/atomic_theme_data.dart';
-import 'package:atomic_flutter/tokens/animations/atomic_animations.dart';
+import 'package:atomic_flutter_kit/themes/atomic_theme_provider.dart';
+import 'package:atomic_flutter_kit/themes/atomic_theme_data.dart';
+import 'package:atomic_flutter_kit/tokens/animations/atomic_animations.dart';
 
 class AtomicSwitch extends StatefulWidget {
   const AtomicSwitch({

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:atomic_flutter/atoms/buttons/atomic_button.dart';
-import 'package:atomic_flutter/atoms/buttons/atomic_icon_button.dart';
-import 'package:atomic_flutter/atoms/inputs/atomic_text_field.dart';
-import 'package:atomic_flutter/atoms/inputs/atomic_checkbox.dart';
-import 'package:atomic_flutter/molecules/forms/atomic_form_field.dart';
-import 'package:atomic_flutter/themes/atomic_theme_provider.dart';
-import 'package:atomic_flutter/utilities/atomic_debouncer.dart';
+import 'package:atomic_flutter_kit/atoms/buttons/atomic_button.dart';
+import 'package:atomic_flutter_kit/atoms/buttons/atomic_icon_button.dart';
+import 'package:atomic_flutter_kit/atoms/inputs/atomic_text_field.dart';
+import 'package:atomic_flutter_kit/atoms/inputs/atomic_checkbox.dart';
+import 'package:atomic_flutter_kit/molecules/forms/atomic_form_field.dart';
+import 'package:atomic_flutter_kit/themes/atomic_theme_provider.dart';
+import 'package:atomic_flutter_kit/utilities/atomic_debouncer.dart';
 
 class AtomicLoginForm extends StatefulWidget {
   const AtomicLoginForm({

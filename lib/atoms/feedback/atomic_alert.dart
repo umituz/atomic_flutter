@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:atomic_flutter/themes/atomic_theme_provider.dart';
-import 'package:atomic_flutter/themes/atomic_theme_data.dart';
-import 'package:atomic_flutter/tokens/borders/atomic_borders.dart';
-import 'package:atomic_flutter/atoms/icons/atomic_icon.dart';
-import 'package:atomic_flutter/atoms/display/atomic_text.dart';
+import 'package:atomic_flutter_kit/themes/atomic_theme_provider.dart';
+import 'package:atomic_flutter_kit/themes/atomic_theme_data.dart';
+import 'package:atomic_flutter_kit/tokens/borders/atomic_borders.dart';
+import 'package:atomic_flutter_kit/atoms/icons/atomic_icon.dart';
+import 'package:atomic_flutter_kit/atoms/display/atomic_text.dart';
 
 class AtomicAlert extends StatelessWidget {
   final String text;

@@ -1,5 +1,5 @@
 import 'dart:developer' as developer;
-import 'package:atomic_flutter/services/network/atomic_network_client.dart';
+import 'package:atomic_flutter_kit/services/network/atomic_network_client.dart';
 
 /// Atomic Logging Interceptor
 /// Logs all network requests and responses for debugging

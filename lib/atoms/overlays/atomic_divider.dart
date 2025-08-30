@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:atomic_flutter/tokens/colors/atomic_colors.dart';
-import 'package:atomic_flutter/tokens/spacing/atomic_spacing.dart';
+import 'package:atomic_flutter_kit/tokens/colors/atomic_colors.dart';
+import 'package:atomic_flutter_kit/tokens/spacing/atomic_spacing.dart';
 
 class AtomicDivider extends StatelessWidget {
   const AtomicDivider({

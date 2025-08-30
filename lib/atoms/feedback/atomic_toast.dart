@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:atomic_flutter/themes/atomic_theme_provider.dart';
-import 'package:atomic_flutter/themes/atomic_theme_data.dart';
-import 'package:atomic_flutter/tokens/borders/atomic_borders.dart';
-import 'package:atomic_flutter/tokens/shadows/atomic_shadows.dart';
-import 'package:atomic_flutter/tokens/animations/atomic_animations.dart';
-import 'package:atomic_flutter/atoms/icons/atomic_icon.dart';
+import 'package:atomic_flutter_kit/themes/atomic_theme_provider.dart';
+import 'package:atomic_flutter_kit/themes/atomic_theme_data.dart';
+import 'package:atomic_flutter_kit/tokens/borders/atomic_borders.dart';
+import 'package:atomic_flutter_kit/tokens/shadows/atomic_shadows.dart';
+import 'package:atomic_flutter_kit/tokens/animations/atomic_animations.dart';
+import 'package:atomic_flutter_kit/atoms/icons/atomic_icon.dart';
 
 class AtomicToast {
   static OverlayEntry? _currentToast;

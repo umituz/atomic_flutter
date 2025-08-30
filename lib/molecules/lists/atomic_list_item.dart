@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:atomic_flutter/themes/atomic_theme_provider.dart';
-import 'package:atomic_flutter/themes/atomic_theme_data.dart';
-import 'package:atomic_flutter/tokens/borders/atomic_borders.dart';
-import 'package:atomic_flutter/tokens/colors/atomic_colors.dart';
-import 'package:atomic_flutter/atoms/display/atomic_text.dart';
-import 'package:atomic_flutter/atoms/icons/atomic_icon.dart';
-import 'package:atomic_flutter/atoms/feedback/atomic_badge.dart';
-import 'package:atomic_flutter/atoms/display/atomic_avatar.dart';
+import 'package:atomic_flutter_kit/themes/atomic_theme_provider.dart';
+import 'package:atomic_flutter_kit/themes/atomic_theme_data.dart';
+import 'package:atomic_flutter_kit/tokens/borders/atomic_borders.dart';
+import 'package:atomic_flutter_kit/tokens/colors/atomic_colors.dart';
+import 'package:atomic_flutter_kit/atoms/display/atomic_text.dart';
+import 'package:atomic_flutter_kit/atoms/icons/atomic_icon.dart';
+import 'package:atomic_flutter_kit/atoms/feedback/atomic_badge.dart';
+import 'package:atomic_flutter_kit/atoms/display/atomic_avatar.dart';
 
 class AtomicListItem extends StatelessWidget {
   const AtomicListItem({

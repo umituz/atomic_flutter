@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:atomic_flutter/tokens/borders/atomic_borders.dart';
+import 'package:atomic_flutter_kit/tokens/borders/atomic_borders.dart';
 
 class AtomicSmoothContainer extends StatelessWidget {
   const AtomicSmoothContainer({

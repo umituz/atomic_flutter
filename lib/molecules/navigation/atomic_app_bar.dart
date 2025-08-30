@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:ui' show ImageFilter;
-import 'package:atomic_flutter/themes/atomic_theme_provider.dart';
-import 'package:atomic_flutter/themes/atomic_theme_data.dart';
-import 'package:atomic_flutter/tokens/colors/atomic_colors.dart';
-import 'package:atomic_flutter/atoms/display/atomic_text.dart';
-import 'package:atomic_flutter/atoms/buttons/atomic_icon_button.dart';
+import 'package:atomic_flutter_kit/themes/atomic_theme_provider.dart';
+import 'package:atomic_flutter_kit/themes/atomic_theme_data.dart';
+import 'package:atomic_flutter_kit/tokens/colors/atomic_colors.dart';
+import 'package:atomic_flutter_kit/atoms/display/atomic_text.dart';
+import 'package:atomic_flutter_kit/atoms/buttons/atomic_icon_button.dart';
 
 class AtomicAppBar extends StatelessWidget implements PreferredSizeWidget {
   const AtomicAppBar({

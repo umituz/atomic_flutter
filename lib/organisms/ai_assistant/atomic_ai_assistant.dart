@@ -1,13 +1,13 @@
 
 import 'package:flutter/material.dart';
-import 'package:atomic_flutter/themes/atomic_theme_provider.dart';
-import 'package:atomic_flutter/themes/atomic_theme_data.dart';
-import 'package:atomic_flutter/atoms/buttons/atomic_button.dart';
-import 'package:atomic_flutter/atoms/buttons/atomic_icon_button.dart';
-import 'package:atomic_flutter/atoms/feedback/atomic_toast.dart';
-import 'package:atomic_flutter/atoms/feedback/atomic_dot_loading.dart';
-import 'package:atomic_flutter/atoms/overlays/atomic_dialog.dart';
-import 'package:atomic_flutter/tokens/animations/atomic_animations.dart';
+import 'package:atomic_flutter_kit/themes/atomic_theme_provider.dart';
+import 'package:atomic_flutter_kit/themes/atomic_theme_data.dart';
+import 'package:atomic_flutter_kit/atoms/buttons/atomic_button.dart';
+import 'package:atomic_flutter_kit/atoms/buttons/atomic_icon_button.dart';
+import 'package:atomic_flutter_kit/atoms/feedback/atomic_toast.dart';
+import 'package:atomic_flutter_kit/atoms/feedback/atomic_dot_loading.dart';
+import 'package:atomic_flutter_kit/atoms/overlays/atomic_dialog.dart';
+import 'package:atomic_flutter_kit/tokens/animations/atomic_animations.dart';
 
 class AtomicAIMessage {
   final String content;

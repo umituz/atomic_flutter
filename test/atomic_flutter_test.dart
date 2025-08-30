@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
-import 'package:atomic_flutter/atomic_flutter.dart';
+import 'package:atomic_flutter_kit/atomic_flutter.dart';
 
 void main() {
   group('AtomicColors', () {

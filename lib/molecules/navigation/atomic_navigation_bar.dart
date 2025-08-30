@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
-import 'package:atomic_flutter/themes/atomic_theme_provider.dart';
-import 'package:atomic_flutter/themes/atomic_theme_data.dart';
-import 'package:atomic_flutter/tokens/colors/atomic_colors.dart';
-import 'package:atomic_flutter/tokens/animations/atomic_animations.dart';
-import 'package:atomic_flutter/tokens/spacing/atomic_spacing.dart';
-import 'package:atomic_flutter/tokens/typography/atomic_typography.dart';
-import 'package:atomic_flutter/atoms/icons/atomic_icon.dart';
-import 'package:atomic_flutter/atoms/feedback/atomic_badge.dart';
+import 'package:atomic_flutter_kit/themes/atomic_theme_provider.dart';
+import 'package:atomic_flutter_kit/themes/atomic_theme_data.dart';
+import 'package:atomic_flutter_kit/tokens/colors/atomic_colors.dart';
+import 'package:atomic_flutter_kit/tokens/animations/atomic_animations.dart';
+import 'package:atomic_flutter_kit/tokens/spacing/atomic_spacing.dart';
+import 'package:atomic_flutter_kit/tokens/typography/atomic_typography.dart';
+import 'package:atomic_flutter_kit/atoms/icons/atomic_icon.dart';
+import 'package:atomic_flutter_kit/atoms/feedback/atomic_badge.dart';
 
 class AtomicNavigationBar extends StatefulWidget {
   const AtomicNavigationBar({
