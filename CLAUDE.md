@@ -99,10 +99,37 @@ class AtomicComponent {
 ```
 
 ### Version Management
-- Use semantic versioning (major.minor.patch)
-- Update CHANGELOG.md for each release
-- Update README.md version references
-- Test with `dart pub publish --dry-run` before publishing
+
+#### CRITICAL: Always Check Existing Versions Before Publishing
+🚨 **NEVER publish without checking if version exists on pub.dev first!**
+
+**Pre-publishing Checklist:**
+1. **Check pub.dev**: Visit https://pub.dev/packages/atomic_flutter_kit/versions
+2. **Verify version**: Ensure your version number doesn't exist
+3. **Increment properly**: Use next available version number
+4. **Test dry-run**: Always run `dart pub publish --dry-run` first
+
+**Version Increment Rules:**
+- **PATCH** (x.x.X): Bug fixes, documentation improvements, minor changes
+- **MINOR** (x.X.x): New features, backward-compatible changes  
+- **MAJOR** (X.x.x): Breaking changes, API modifications
+
+**Standard Workflow:**
+```bash
+# 1. Check current published version on pub.dev
+# 2. Update pubspec.yaml with next version
+# 3. Update CHANGELOG.md with new version entry
+# 4. Update README.md version references
+# 5. Test with dry-run
+dart pub publish --dry-run
+# 6. If successful, publish
+dart pub publish
+```
+
+**Common Version Conflicts:**
+- Error: "Version X.X.X already exists" → Increment to next available version
+- Multiple developers → Coordinate version numbers in team
+- Hotfixes → Use patch increment (0.12.1 → 0.12.2)
 
 ## Component Development Patterns
 

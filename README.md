@@ -31,7 +31,7 @@ Add `atomic_flutter_kit` to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  atomic_flutter_kit: ^0.12.1
+  atomic_flutter_kit: ^0.12.2
 ```
 
 Then run:
