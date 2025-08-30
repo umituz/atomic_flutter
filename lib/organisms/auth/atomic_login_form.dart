@@ -7,7 +7,65 @@ import 'package:atomic_flutter_kit/molecules/forms/atomic_form_field.dart';
 import 'package:atomic_flutter_kit/themes/atomic_theme_provider.dart';
 import 'package:atomic_flutter_kit/utilities/atomic_debouncer.dart';
 
+/// A customizable login form component.
+///
+/// The [AtomicLoginForm] provides a ready-to-use UI for user authentication,
+/// including email and password input fields, "Remember Me" checkbox,
+/// "Forgot Password" link, and a submit button. It integrates with form
+/// validation and handles loading states.
+///
+/// Features:
+/// - Email and password input fields with built-in validation.
+/// - Optional "Remember Me" checkbox with state management.
+/// - Optional "Forgot Password" link with a customizable callback.
+/// - Customizable submit button text.
+/// - Loading state for the submit button.
+/// - Customizable hint texts for email and password fields.
+/// - Integrates with [AtomicFormField] for consistent error display.
+/// - Supports custom validation logic for the entire form.
+///
+/// Example usage:
+/// ```dart
+/// AtomicLoginForm(
+///   onSubmit: (email, password) async {
+///     print('Submitting login for: $email with password: $password');
+///     // Simulate API call
+///     await Future.delayed(const Duration(seconds: 2));
+///     if (email == 'test@example.com' && password == 'password') {
+///       print('Login successful!');
+///       // Navigate to home screen
+///     } else {
+///       print('Login failed!');
+///       // Show error message
+///     }
+///   },
+///   showRememberMe: true,
+///   showForgotPassword: true,
+///   onForgotPassword: () {
+///     print('Forgot password clicked!');
+///     // Navigate to forgot password screen
+///   },
+///   submitButtonText: 'Log In',
+///   emailHint: 'Your email address',
+///   passwordHint: 'Your secret password',
+/// )
+/// ```
 class AtomicLoginForm extends StatefulWidget {
+  /// Creates an [AtomicLoginForm] widget.
+  ///
+  /// [onSubmit] is the callback function executed when the form is submitted.
+  /// [emailController] is an optional controller for the email text field.
+  /// [passwordController] is an optional controller for the password text field.
+  /// [isLoading] if true, the submit button shows a loading indicator and is disabled. Defaults to false.
+  /// [showRememberMe] if true, displays a "Remember Me" checkbox. Defaults to true.
+  /// [showForgotPassword] if true, displays a "Forgot Password" link. Defaults to true.
+  /// [onForgotPassword] is the callback function executed when "Forgot Password" is tapped.
+  /// [onRememberMeChanged] is the callback function executed when the "Remember Me" checkbox changes.
+  /// [submitButtonText] is the text displayed on the submit button. Defaults to 'Sign In'.
+  /// [emailHint] is the hint text for the email input field. Defaults to 'Enter your email'.
+  /// [passwordHint] is the hint text for the password input field. Defaults to 'Enter your password'.
+  /// [validator] is a function that validates the entire form (email and password).
+  /// [autovalidateMode] specifies when to auto-validate the form. Defaults to [AutovalidateMode.disabled].
   const AtomicLoginForm({
     super.key,
     required this.onSubmit,
@@ -25,18 +83,43 @@ class AtomicLoginForm extends StatefulWidget {
     this.autovalidateMode = AutovalidateMode.disabled,
   });
 
+  /// The callback function executed when the form is submitted.
   final Function(String email, String password) onSubmit;
+
+  /// An optional controller for the email text field.
   final TextEditingController? emailController;
+
+  /// An optional controller for the password text field.
   final TextEditingController? passwordController;
+
+  /// If true, the submit button shows a loading indicator and is disabled. Defaults to false.
   final bool isLoading;
+
+  /// If true, displays a "Remember Me" checkbox. Defaults to true.
   final bool showRememberMe;
+
+  /// If true, displays a "Forgot Password" link. Defaults to true.
   final bool showForgotPassword;
+
+  /// The callback function executed when "Forgot Password" is tapped.
   final VoidCallback? onForgotPassword;
+
+  /// The callback function executed when the "Remember Me" checkbox changes.
   final ValueChanged<bool>? onRememberMeChanged;
+
+  /// The text displayed on the submit button. Defaults to 'Sign In'.
   final String submitButtonText;
+
+  /// The hint text for the email input field. Defaults to 'Enter your email'.
   final String emailHint;
+
+  /// The hint text for the password input field. Defaults to 'Enter your password'.
   final String passwordHint;
+
+  /// A function that validates the entire form (email and password).
   final String? Function(String email, String password)? validator;
+
+  /// Specifies when to auto-validate the form. Defaults to [AutovalidateMode.disabled].
   final AutovalidateMode autovalidateMode;
 
   @override

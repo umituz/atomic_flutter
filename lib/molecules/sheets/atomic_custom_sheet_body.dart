@@ -5,7 +5,58 @@ import 'package:atomic_flutter_kit/themes/atomic_theme_data.dart';
 import 'package:atomic_flutter_kit/tokens/borders/atomic_borders.dart';
 import 'package:atomic_flutter_kit/tokens/animations/atomic_animations.dart';
 
+/// A customizable body component for bottom sheets or other overlay panels.
+///
+/// The [AtomicCustomSheetBody] provides a flexible container for content
+/// that typically appears in a bottom sheet. It includes options for
+/// background color, border radius, padding, height constraints, and a
+/// draggable indicator.
+///
+/// Features:
+/// - Customizable background color and border radius.
+/// - Adjustable padding for content.
+/// - Control over minimum and maximum height.
+/// - Optional drag indicator at the top.
+/// - Customizable drag indicator color.
+/// - Option to make the content scrollable.
+///
+/// Example usage:
+/// ```dart
+/// AtomicCustomSheetBody(
+///   backgroundColor: Colors.blue.shade50,
+///   borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+///   minHeight: 200,
+///   maxHeight: 400,
+///   showDragIndicator: true,
+///   child: Padding(
+///     padding: const EdgeInsets.all(16.0),
+///     child: Column(
+///       mainAxisSize: MainAxisSize.min,
+///       children: [
+///         Text(
+///           'Sheet Content',
+///           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+///         ),
+///         SizedBox(height: 10),
+///         Text('This is some custom content inside the sheet body.'),
+///         // ... more content
+///       ],
+///     ),
+///   ),
+/// )
+/// ```
 class AtomicCustomSheetBody extends StatelessWidget {
+  /// Creates an [AtomicCustomSheetBody] widget.
+  ///
+  /// [child] is the content to be displayed within the sheet body.
+  /// [backgroundColor] is the background color of the sheet.
+  /// [borderRadius] is the border radius of the sheet.
+  /// [padding] is the internal padding for the content.
+  /// [minHeight] is the minimum height of the sheet.
+  /// [maxHeight] is the maximum height of the sheet.
+  /// [showDragIndicator] if true, a drag indicator is displayed at the top. Defaults to true.
+  /// [dragIndicatorColor] is the color of the drag indicator.
+  /// [scrollable] if true, the child content will be wrapped in a [SingleChildScrollView]. Defaults to true.
   const AtomicCustomSheetBody({
     super.key,
     this.child,
@@ -19,14 +70,31 @@ class AtomicCustomSheetBody extends StatelessWidget {
     this.scrollable = true,
   });
 
+  /// The content to be displayed within the sheet body.
   final Widget? child;
+
+  /// The background color of the sheet.
   final Color? backgroundColor;
+
+  /// The border radius of the sheet. Defaults to a large top border radius.
   final BorderRadius? borderRadius;
+
+  /// The internal padding for the content.
   final EdgeInsetsGeometry? padding;
+
+  /// The minimum height of the sheet.
   final double? minHeight;
+
+  /// The maximum height of the sheet.
   final double? maxHeight;
+
+  /// If true, a drag indicator is displayed at the top. Defaults to true.
   final bool showDragIndicator;
+
+  /// The color of the drag indicator.
   final Color? dragIndicatorColor;
+
+  /// If true, the child content will be wrapped in a [SingleChildScrollView]. Defaults to true.
   final bool scrollable;
 
   @override

@@ -8,13 +8,30 @@ import 'package:atomic_flutter_kit/atoms/feedback/atomic_dot_loading.dart';
 import 'package:atomic_flutter_kit/atoms/overlays/atomic_dialog.dart';
 import 'package:atomic_flutter_kit/tokens/animations/atomic_animations.dart';
 
+/// A model representing a single message in the AI assistant chat.
 class AtomicAIMessage {
+  /// The content of the message.
   final String content;
+
+  /// True if the message is from the user, false if from the AI.
   final bool isUser;
+
+  /// The timestamp when the message was created.
   final DateTime timestamp;
+
+  /// An optional unique identifier for the message.
   final String? id;
+
+  /// Optional metadata associated with the message.
   final Map<String, dynamic>? metadata;
 
+  /// Creates an [AtomicAIMessage].
+  ///
+  /// [content] is the text of the message.
+  /// [isUser] indicates if the message is from the user.
+  /// [timestamp] is when the message was sent.
+  /// [id] is an optional unique identifier.
+  /// [metadata] is optional additional data.
   AtomicAIMessage({
     required this.content,
     required this.isUser,
@@ -24,20 +41,55 @@ class AtomicAIMessage {
   });
 }
 
+/// Configuration for the [AtomicAIAssistant] widget.
 class AtomicAIAssistantConfig {
+  /// The title displayed in the assistant's header. Defaults to 'AI Assistant'.
   final String title;
+
+  /// The subtitle displayed in the assistant's header. Defaults to 'Your intelligent helper'.
   final String subtitle;
+
+  /// The icon displayed in the assistant's header. Defaults to [Icons.auto_awesome].
   final IconData icon;
+
+  /// A list of actions to display in the header.
   final List<AtomicAIAction>? headerActions;
+
+  /// A list of suggested prompts to display in the empty state.
   final List<AtomicAISuggestion>? suggestions;
+
+  /// A function that generates an AI response based on a user message.
   final AtomicAIResponseGenerator? responseGenerator;
+
+  /// A callback function executed when the chat history is cleared.
   final VoidCallback? onClearChat;
+
+  /// If true, a clear chat button is shown in the header. Defaults to true.
   final bool showClearButton;
+
+  /// The title displayed when the chat history is empty. Defaults to 'Welcome to AI Assistant'.
   final String? emptyStateTitle;
-  final String? emptyStateSubtitle;
+
+  /// The subtitle displayed when the chat history is empty. Defaults to 'Ask me anything'.
   final String? inputPlaceholder;
+
+  /// If true, the clear chat button is always shown, even if the chat is empty. Defaults to false.
   final bool showClearButtonAlways;
 
+  /// Creates an [AtomicAIAssistantConfig].
+  ///
+  /// [title] is the header title.
+  /// [subtitle] is the header subtitle.
+  /// [icon] is the header icon.
+  /// [headerActions] are actions in the header.
+  /// [suggestions] are prompts for the empty state.
+  /// [responseGenerator] generates AI responses.
+  /// [onClearChat] is called when chat is cleared.
+  /// [showClearButton] controls clear button visibility.
+  /// [showClearButtonAlways] forces clear button visibility.
+  /// [emptyStateTitle] is the empty state title.
+  /// [emptyStateSubtitle] is the empty state subtitle.
+  /// [inputPlaceholder] is the input field hint.
   const AtomicAIAssistantConfig({
     this.title = 'AI Assistant',
     this.subtitle = 'Your intelligent helper',
@@ -54,12 +106,26 @@ class AtomicAIAssistantConfig {
   });
 }
 
+/// A model representing an action that can be performed in the AI assistant.
 class AtomicAIAction {
+  /// The label displayed for the action.
   final String label;
+
+  /// The icon displayed for the action.
   final IconData icon;
+
+  /// The callback function executed when the action is pressed.
   final VoidCallback onPressed;
+
+  /// If true, the label is shown alongside the icon. Defaults to true.
   final bool showLabel;
 
+  /// Creates an [AtomicAIAction].
+  ///
+  /// [label] is the text label.
+  /// [icon] is the icon.
+  /// [onPressed] is the callback.
+  /// [showLabel] controls label visibility.
   const AtomicAIAction({
     required this.label,
     required this.icon,
@@ -68,11 +134,22 @@ class AtomicAIAction {
   });
 }
 
+/// A model representing a suggested prompt or action in the AI assistant.
 class AtomicAISuggestion {
+  /// The text of the suggestion.
   final String text;
+
+  /// The icon displayed with the suggestion.
   final IconData icon;
+
+  /// The callback function executed when the suggestion is tapped.
   final VoidCallback? onTap;
 
+  /// Creates an [AtomicAISuggestion].
+  ///
+  /// [text] is the suggestion text.
+  /// [icon] is the suggestion icon.
+  /// [onTap] is the callback when tapped.
   const AtomicAISuggestion({
     required this.text,
     required this.icon,
@@ -80,17 +157,87 @@ class AtomicAISuggestion {
   });
 }
 
+/// A typedef for a function that generates an AI response.
+///
+/// This function takes a user's [message] as input and returns a [Future]
+/// that resolves to the AI's response as a [String].
 typedef AtomicAIResponseGenerator = Future<String> Function(String message);
 
+/// A comprehensive AI assistant chat interface.
+///
+/// The [AtomicAIAssistant] provides a ready-to-use chat UI for integrating
+/// AI capabilities into your Flutter application. It handles message display,
+/// user input, and can integrate with a custom response generation logic.
+///
+/// Features:
+/// - Displays chat messages from user and AI.
+/// - Customizable header with title, subtitle, icon, and actions.
+/// - Input field for sending messages with suggestions.
+/// - Empty state display with customizable title, subtitle, and suggestions.
+/// - Typing indicator for AI responses.
+/// - Clear chat history functionality.
+/// - Customizable message builder for unique message appearances.
+/// - Integrates with [AtomicToast] and [AtomicDialog] for feedback.
+///
+/// Example usage:
+/// ```dart
+/// AtomicAIAssistant(
+///   config: AtomicAIAssistantConfig(
+///     title: 'My Custom AI',
+///     subtitle: 'How can I help you?',
+///     icon: Icons.psychology,
+///     responseGenerator: (message) async {
+///       await Future.delayed(const Duration(seconds: 1));
+///       if (message.toLowerCase().contains('hello')) {
+///         return 'Hello there! How can I assist you?';
+///       } else {
+///         return 'I received your message: "$message".';
+///       }
+///     },
+///     suggestions: const [
+///       AtomicAISuggestion(text: 'What is Flutter?', icon: Icons.question_answer),
+///       AtomicAISuggestion(text: 'Tell me a joke', icon: Icons.lightbulb),
+///     ],
+///     headerActions: [
+///       AtomicAIAction(label: 'Help', icon: Icons.help, onPressed: () => print('Help!')),
+///     ],
+///   ),
+///   onSendMessage: (message) {
+///     print('User sent: $message');
+///   },
+/// )
+/// ```
 class AtomicAIAssistant extends StatefulWidget {
+  /// Configuration for the AI assistant's appearance and behavior.
   final AtomicAIAssistantConfig config;
+
+  /// Callback function executed when the user sends a message.
   final Function(String message)? onSendMessage;
+
+  /// Callback function executed when a new message (user or AI) is added to the chat.
   final Function(AtomicAIMessage message)? onMessageAdded;
+
+  /// Initial list of messages to display in the chat history.
   final List<AtomicAIMessage>? initialMessages;
+
+  /// A custom widget to use as the header instead of the default.
   final Widget? customHeader;
+
+  /// A custom widget to use as the input area instead of the default.
   final Widget? customInput;
+
+  /// A builder function for customizing the appearance of individual messages.
   final Widget Function(AtomicAIMessage message, bool isUser)? messageBuilder;
 
+  /// Creates an [AtomicAIAssistant] widget.
+  ///
+  /// [config] provides the main configuration for the assistant.
+  /// [onSendMessage] is called when the user sends a message.
+  /// [onMessageAdded] is called when any message is added to the chat.
+  /// [initialMessages] are messages to pre-populate the chat.
+  /// [customHeader] allows providing a custom header widget.
+  /// [customInput] allows providing a custom input widget.
+  /// [messageBuilder] allows customizing message rendering.
   const AtomicAIAssistant({
     super.key,
     required this.config,
@@ -101,10 +248,6 @@ class AtomicAIAssistant extends StatefulWidget {
     this.customInput,
     this.messageBuilder,
   });
-
-  @override
-  State<AtomicAIAssistant> createState() => _AtomicAIAssistantState();
-}
 
 class _AtomicAIAssistantState extends State<AtomicAIAssistant>
     with SingleTickerProviderStateMixin {

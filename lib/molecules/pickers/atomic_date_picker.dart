@@ -6,7 +6,68 @@ import 'package:atomic_flutter_kit/tokens/borders/atomic_borders.dart';
 import 'package:atomic_flutter_kit/atoms/display/atomic_text.dart';
 import 'package:atomic_flutter_kit/atoms/buttons/atomic_icon_button.dart';
 
+/// A customizable date picker input field.
+///
+/// The [AtomicDatePicker] provides a text field that, when tapped, opens a
+/// Material Design date picker. It supports various customization options
+/// for initial date, date range, appearance, and validation.
+///
+/// Features:
+/// - Integrates with Flutter's `showDatePicker` for date selection.
+/// - Customizable initial, first, and last selectable dates.
+/// - Three visual variants ([AtomicDatePickerVariant]): filled, outlined, underlined.
+/// - Three predefined sizes ([AtomicDatePickerSize]): small, medium, large.
+/// - Optional label, helper text, and error text.
+/// - Customizable date formatting.
+/// - Enabled/disabled and read-only states.
+/// - Optional leading calendar icon.
+///
+/// Example usage:
+/// ```dart
+/// DateTime? _selectedDate;
+/// AtomicDatePicker(
+///   initialDate: DateTime.now(),
+///   firstDate: DateTime(2000),
+///   lastDate: DateTime(2030),
+///   onDateSelected: (date) {
+///     setState(() {
+///       _selectedDate = date;
+///     });
+///     print('Selected date: $_selectedDate');
+///   },
+///   label: 'Select your birth date',
+///   variant: AtomicDatePickerVariant.outlined,
+///   size: AtomicDatePickerSize.large,
+/// )
+/// ```
 class AtomicDatePicker extends StatefulWidget {
+  /// Creates an [AtomicDatePicker] widget.
+  ///
+  /// [initialDate] is the date initially selected in the picker.
+  /// [firstDate] is the earliest date the user can select.
+  /// [lastDate] is the latest date the user can select.
+  /// [onDateSelected] is the callback function executed when a date is selected.
+  /// [currentDate] is the date to highlight in the picker.
+  /// [initialDatePickerMode] is the initial mode of the date picker (day, year).
+  /// [selectableDayPredicate] is a function that determines if a day is selectable.
+  /// [helpText], [cancelText], [confirmText] customize the picker's labels.
+  /// [locale] specifies the locale for the picker.
+  /// [useRootNavigator] if true, the picker is pushed onto the root navigator.
+  /// [routeSettings] are settings for the picker's route.
+  /// [textDirection] specifies the text direction for the picker.
+  /// [builder] is a builder function for the picker's theme.
+  /// [initialEntryMode] is the initial entry mode of the date picker (calendar, input).
+  /// [fieldHintText], [fieldLabelText], [errorFormatText], [errorInvalidText] customize text field labels and errors.
+  /// [keyboardType] specifies the keyboard type for date input.
+  /// [variant] defines the visual style of the input field. Defaults to [AtomicDatePickerVariant.filled].
+  /// [size] defines the size of the input field. Defaults to [AtomicDatePickerSize.medium].
+  /// [showIcon] if true, displays a leading calendar icon. Defaults to true.
+  /// [enabled] if true, the input field is interactive. Defaults to true.
+  /// [readOnly] if true, the input field cannot be edited directly. Defaults to false.
+  /// [label] is the text label for the input field.
+  /// [helperText] is an optional helper text displayed below the input field.
+  /// [errorText] is an optional error text displayed below the input field.
+  /// [dateFormat] is a function to format the selected date for display.
   const AtomicDatePicker({
     super.key,
     this.initialDate,
@@ -41,38 +102,94 @@ class AtomicDatePicker extends StatefulWidget {
     this.dateFormat,
   });
 
+  /// The date initially selected in the picker.
   final DateTime? initialDate;
+
+  /// The earliest date the user can select.
   final DateTime? firstDate;
+
+  /// The latest date the user can select.
   final DateTime? lastDate;
+
+  /// The callback function executed when a date is selected.
   final ValueChanged<DateTime?>? onDateSelected;
+
+  /// The date to highlight in the picker.
   final DateTime? currentDate;
+
+  /// The initial mode of the date picker (day, year).
   final DatePickerMode initialDatePickerMode;
+
+  /// A function that determines if a day is selectable.
   final SelectableDayPredicate? selectableDayPredicate;
 
+  /// The help text displayed in the picker.
   final String? helpText;
+
+  /// The text for the cancel button in the picker.
   final String? cancelText;
+
+  /// The text for the confirm button in the picker.
   final String? confirmText;
+
+  /// The locale for the picker.
   final Locale? locale;
+
+  /// If true, the picker is pushed onto the root navigator.
   final bool useRootNavigator;
+
+  /// Settings for the picker's route.
   final RouteSettings? routeSettings;
+
+  /// The text direction for the picker.
   final TextDirection? textDirection;
+
+  /// A builder function for the picker's theme.
   final TransitionBuilder? builder;
 
+  /// The initial entry mode of the date picker (calendar, input).
   final DatePickerEntryMode initialEntryMode;
+
+  /// The hint text for the date input field.
   final String? fieldHintText;
+
+  /// The label text for the date input field.
   final String? fieldLabelText;
+
+  /// The error text for invalid date format.
   final String? errorFormatText;
+
+  /// The error text for invalid date.
   final String? errorInvalidText;
+
+  /// The keyboard type for date input.
   final TextInputType? keyboardType;
 
+  /// Defines the visual style of the input field. Defaults to [AtomicDatePickerVariant.filled].
   final AtomicDatePickerVariant variant;
+
+  /// Defines the size of the input field. Defaults to [AtomicDatePickerSize.medium].
   final AtomicDatePickerSize size;
+
+  /// If true, displays a leading calendar icon. Defaults to true.
   final bool showIcon;
+
+  /// If true, the input field is interactive. Defaults to true.
   final bool enabled;
+
+  /// If true, the input field cannot be edited directly. Defaults to false.
   final bool readOnly;
+
+  /// The text label for the input field.
   final String? label;
+
+  /// An optional helper text displayed below the input field.
   final String? helperText;
+
+  /// An optional error text displayed below the input field.
   final String? errorText;
+
+  /// A function to format the selected date for display.
   final String Function(DateTime)? dateFormat;
 
   @override
@@ -363,19 +480,55 @@ class _AtomicDatePickerState extends State<AtomicDatePicker> {
   }
 }
 
+/// Defines the visual variants for an [AtomicDatePicker].
 enum AtomicDatePickerVariant {
-  filled, // Filled background
-  outlined, // Outlined border
-  underlined, // Bottom underline
+  /// A date picker with a filled background.
+  filled,
+
+  /// A date picker with an outlined border.
+  outlined,
+
+  /// A date picker with only a bottom underline.
+  underlined,
 }
 
+/// Defines the predefined sizes for an [AtomicDatePicker].
 enum AtomicDatePickerSize {
-  small, // Compact size
-  medium, // Standard size
-  large, // Large size
+  /// A small date picker.
+  small,
+
+  /// A medium-sized date picker.
+  medium,
+
+  /// A large date picker.
+  large,
 }
 
+/// A simplified date picker component for common use cases.
+///
+/// The [AtomicSimpleDatePicker] provides a basic date picker input field
+/// with a label and hint text. It's a convenient wrapper around [AtomicDatePicker]
+/// for quick setup.
+///
+/// Example usage:
+/// ```dart
+/// AtomicSimpleDatePicker(
+///   initialDate: DateTime.now(),
+///   onDateSelected: (date) {
+///     print('Selected simple date: $date');
+///   },
+///   label: 'Event Date',
+///   hintText: 'Choose a date for the event',
+/// )
+/// ```
 class AtomicSimpleDatePicker extends StatelessWidget {
+  /// Creates an [AtomicSimpleDatePicker] widget.
+  ///
+  /// [onDateSelected] is the callback function executed when a date is selected.
+  /// [initialDate] is the date initially selected.
+  /// [label] is the text label for the input field.
+  /// [hintText] is the hint text displayed in the input field. Defaults to 'Select date'.
+  /// [enabled] if true, the input field is interactive. Defaults to true.
   const AtomicSimpleDatePicker({
     super.key,
     required this.onDateSelected,
@@ -385,10 +538,19 @@ class AtomicSimpleDatePicker extends StatelessWidget {
     this.enabled = true,
   });
 
+  /// The callback function executed when a date is selected.
   final ValueChanged<DateTime?> onDateSelected;
+
+  /// The date initially selected in the picker.
   final DateTime? initialDate;
+
+  /// The text label for the input field.
   final String? label;
+
+  /// The hint text displayed in the input field. Defaults to 'Select date'.
   final String hintText;
+
+  /// If true, the input field is interactive. Defaults to true.
   final bool enabled;
 
   @override
@@ -403,7 +565,46 @@ class AtomicSimpleDatePicker extends StatelessWidget {
   }
 }
 
+/// A date range picker component for selecting a start and end date.
+///
+/// The [AtomicDateRangePicker] provides two linked date picker input fields
+/// for selecting a date range. It ensures that the end date is not before
+/// the start date and provides a single callback for the selected range.
+///
+/// Features:
+/// - Two linked date pickers for start and end dates.
+/// - Customizable labels for start and end date fields.
+/// - Customizable initial, first, and last selectable dates.
+/// - Enabled/disabled states.
+/// - Provides a single [DateTimeRange] in the callback.
+///
+/// Example usage:
+/// ```dart
+/// DateTimeRange? _selectedRange;
+/// AtomicDateRangePicker(
+///   onDateRangeSelected: (range) {
+///     setState(() {
+///       _selectedRange = range;
+///     });
+///     print('Selected range: $_selectedRange');
+///   },
+///   initialStartDate: DateTime.now(),
+///   initialEndDate: DateTime.now().add(Duration(days: 7)),
+///   startLabel: 'Check-in Date',
+///   endLabel: 'Check-out Date',
+/// )
+/// ```
 class AtomicDateRangePicker extends StatefulWidget {
+  /// Creates an [AtomicDateRangePicker] widget.
+  ///
+  /// [onDateRangeSelected] is the callback function executed when a date range is selected.
+  /// [initialStartDate] is the initially selected start date.
+  /// [initialEndDate] is the initially selected end date.
+  /// [firstDate] is the earliest date the user can select.
+  /// [lastDate] is the latest date the user can select.
+  /// [startLabel] is the label for the start date field. Defaults to 'Start Date'.
+  /// [endLabel] is the label for the end date field. Defaults to 'End Date'.
+  /// [enabled] if true, the date pickers are interactive. Defaults to true.
   const AtomicDateRangePicker({
     super.key,
     required this.onDateRangeSelected,
@@ -416,13 +617,28 @@ class AtomicDateRangePicker extends StatefulWidget {
     this.enabled = true,
   });
 
+  /// The callback function executed when a date range is selected.
   final ValueChanged<DateTimeRange?> onDateRangeSelected;
+
+  /// The initially selected start date.
   final DateTime? initialStartDate;
+
+  /// The initially selected end date.
   final DateTime? initialEndDate;
+
+  /// The earliest date the user can select.
   final DateTime? firstDate;
+
+  /// The latest date the user can select.
   final DateTime? lastDate;
+
+  /// The label for the start date field. Defaults to 'Start Date'.
   final String startLabel;
+
+  /// The label for the end date field. Defaults to 'End Date'.
   final String endLabel;
+
+  /// If true, the date pickers are interactive. Defaults to true.
   final bool enabled;
 
   @override

@@ -6,7 +6,99 @@ import 'package:atomic_flutter_kit/molecules/forms/atomic_form_field.dart';
 import 'package:atomic_flutter_kit/themes/atomic_theme_provider.dart';
 import 'package:atomic_flutter_kit/utilities/atomic_debouncer.dart';
 
+/// A customizable One-Time Password (OTP) form component.
+///
+/// The [AtomicOTPForm] provides a UI for requesting and verifying OTPs,
+/// typically used for two-factor authentication or passwordless login.s
+/// It handles email input, OTP input, and manages the flow between requesting
+/// and verifying the code.
+///
+/// Features:
+/// - Email input field for requesting OTP.
+/// - OTP input field with customizable length and numeric-only input.
+/// - Loading states for request and verify buttons.
+/// - Customizable button texts.
+/// - Optional resend OTP functionality with countdown.
+/// - Integrates with form validation and error display.
+///
+/// Example usage:
+/// ```dart
+/// bool _isLoading = false;
+/// bool _isOTPSent = false;
+/// int _countdown = 60;
+/// Timer? _timer;
+///
+/// void _startCountdown() {
+///   _countdown = 60;
+///   _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+///     if (_countdown == 0) {
+///       timer.cancel();
+///       setState(() {}); // Rebuild to enable resend button
+///     } else {
+///       setState(() {
+///         _countdown--;
+///       });
+///     }
+///   });
+/// }
+///
+/// AtomicOTPForm(
+///   onRequestOTP: (email) async {
+///     setState(() { _isLoading = true; });
+///     print('Requesting OTP for: $email');
+///     await Future.delayed(const Duration(seconds: 2)); // Simulate API call
+///     setState(() {
+///       _isLoading = false;
+///       _isOTPSent = true;
+///     });
+///     _startCountdown();
+///   },
+///   onVerifyOTP: (email, otp) async {
+///     setState(() { _isLoading = true; });
+///     print('Verifying OTP: $otp for $email');
+///     await Future.delayed(const Duration(seconds: 2)); // Simulate API call
+///     setState(() { _isLoading = false; });
+///     if (otp == '123456') { // Simple mock verification
+///       print('OTP Verified!');
+///     } else {
+///       print('Invalid OTP!');
+///     }
+///   },
+///   isLoading: _isLoading,
+///   isOTPSent: _isOTPSent,
+///   canResend: _countdown == 0,
+///   countdownSeconds: _countdown,
+///   onResendOTP: () {
+///     print('Resending OTP...');
+///     _startCountdown();
+///   },
+///   emailHint: 'your.email@example.com',
+///   otpHint: 'Enter 6-digit code',
+///   otpLength: 6,
+/// )
+/// ```
 class AtomicOTPForm extends StatefulWidget {
+  /// Creates an [AtomicOTPForm] widget.
+  ///
+  /// [onRequestOTP] is the callback function executed when the user requests an OTP.
+  /// [onVerifyOTP] is the callback function executed when the user attempts to verify the OTP.
+  /// [emailController] is an optional controller for the email text field.
+  /// [otpController] is an optional controller for the OTP text field.
+  /// [emailFocusNode] is an optional focus node for the email text field.
+  /// [otpFocusNode] is an optional focus node for the OTP text field.
+  /// [isLoading] if true, shows a loading indicator and disables buttons. Defaults to false.
+  /// [isOTPSent] if true, the OTP input field and verify button are shown. Defaults to false.
+  /// [requestButtonText] is the text for the button to request OTP. Defaults to 'Send Code'.
+  /// [verifyButtonText] is the text for the button to verify OTP. Defaults to 'Verify Code'.
+  /// [resendButtonText] is the text for the resend OTP button. Defaults to 'Resend Code'.
+  /// [emailHint] is the hint text for the email input field. Defaults to 'Enter your email'.
+  /// [otpHint] is the hint text for the OTP input field. Defaults to 'Enter 6-digit code'.
+  /// [otpLength] is the expected length of the OTP. Defaults to 6.
+  /// [canResend] if true, enables the resend OTP button.
+  /// [onResendOTP] is the callback function executed when the resend OTP button is pressed.
+  /// [countdownSeconds] is the number of seconds remaining before OTP can be resent.
+  /// [validator] is a function that validates the email and/or OTP.
+  /// [autovalidateMode] specifies when to auto-validate the form. Defaults to [AutovalidateMode.disabled].
   const AtomicOTPForm({
     super.key,
     required this.onRequestOTP,
@@ -30,24 +122,61 @@ class AtomicOTPForm extends StatefulWidget {
     this.autovalidateMode = AutovalidateMode.disabled,
   });
 
+  /// The callback function executed when the user requests an OTP.
   final Function(String email) onRequestOTP;
+
+  /// The callback function executed when the user attempts to verify the OTP.
   final Function(String email, String otp) onVerifyOTP;
+
+  /// An optional controller for the email text field.
   final TextEditingController? emailController;
+
+  /// An optional controller for the OTP text field.
   final TextEditingController? otpController;
+
+  /// An optional focus node for the email text field.
   final FocusNode? emailFocusNode;
+
+  /// An optional focus node for the OTP text field.
   final FocusNode? otpFocusNode;
+
+  /// If true, shows a loading indicator and disables buttons. Defaults to false.
   final bool isLoading;
+
+  /// If true, the OTP input field and verify button are shown. Defaults to false.
   final bool isOTPSent;
+
+  /// The text for the button to request OTP. Defaults to 'Send Code'.
   final String requestButtonText;
+
+  /// The text for the button to verify OTP. Defaults to 'Verify Code'.
   final String verifyButtonText;
+
+  /// The text for the resend OTP button. Defaults to 'Resend Code'.
   final String resendButtonText;
+
+  /// The hint text for the email input field. Defaults to 'Enter your email'.
   final String emailHint;
+
+  /// The hint text for the OTP input field. Defaults to 'Enter 6-digit code'.
   final String otpHint;
+
+  /// The expected length of the OTP. Defaults to 6.
   final int otpLength;
+
+  /// If true, enables the resend OTP button.
   final bool canResend;
+
+  /// The callback function executed when the resend OTP button is pressed.
   final VoidCallback? onResendOTP;
+
+  /// The number of seconds remaining before OTP can be resent.
   final int? countdownSeconds;
+
+  /// A function that validates the email and/or OTP.
   final String? Function(String email, String? otp)? validator;
+
+  /// Specifies when to auto-validate the form. Defaults to [AutovalidateMode.disabled].
   final AutovalidateMode autovalidateMode;
 
   @override

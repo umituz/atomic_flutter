@@ -6,7 +6,62 @@ import 'package:atomic_flutter_kit/tokens/borders/atomic_borders.dart';
 import 'package:atomic_flutter_kit/atoms/display/atomic_text.dart';
 import 'package:atomic_flutter_kit/atoms/buttons/atomic_icon_button.dart';
 
+/// A customizable time picker input field.
+///
+/// The [AtomicTimePicker] provides a text field that, when tapped, opens a
+/// Material Design time picker. It supports various customization options
+/// for initial time, appearance, and validation.
+///
+/// Features:
+/// - Integrates with Flutter's `showTimePicker` for time selection.
+/// - Customizable initial time.
+/// - Three visual variants ([AtomicTimePickerVariant]): filled, outlined, underlined.
+/// - Three predefined sizes ([AtomicTimePickerSize]): small, medium, large.
+/// - Optional label, helper text, and error text.
+/// - Customizable time formatting (12-hour or 24-hour).
+/// - Enabled/disabled and read-only states.
+/// - Optional leading clock icon.
+///
+/// Example usage:
+/// ```dart
+/// TimeOfDay? _selectedTime;
+/// AtomicTimePicker(
+///   initialTime: TimeOfDay.now(),
+///   onTimeSelected: (time) {
+///     setState(() {
+///       _selectedTime = time;
+///     });
+///     print('Selected time: $_selectedTime');
+///   },
+///   label: 'Select meeting time',
+///   variant: AtomicTimePickerVariant.outlined,
+///   size: AtomicTimePickerSize.large,
+///   use24HourFormat: true,
+/// )
+/// ```
 class AtomicTimePicker extends StatefulWidget {
+  /// Creates an [AtomicTimePicker] widget.
+  ///
+  /// [initialTime] is the time initially selected in the picker.
+  /// [onTimeSelected] is the callback function executed when a time is selected.
+  /// [helpText], [cancelText], [confirmText] customize the picker's labels.
+  /// [hourLabelText], [minuteLabelText] customize hour/minute input labels.
+  /// [errorInvalidText] customizes the error message for invalid time.
+  /// [builder] is a builder function for the picker's theme.
+  /// [useRootNavigator] if true, the picker is pushed onto the root navigator.
+  /// [routeSettings] are settings for the picker's route.
+  /// [entryMode] is the initial entry mode of the time picker (dial, input).
+  /// [orientation] specifies the preferred orientation for the picker.
+  /// [variant] defines the visual style of the input field. Defaults to [AtomicTimePickerVariant.filled].
+  /// [size] defines the size of the input field. Defaults to [AtomicTimePickerSize.medium].
+  /// [showIcon] if true, displays a leading clock icon. Defaults to true.
+  /// [enabled] if true, the input field is interactive. Defaults to true.
+  /// [readOnly] if true, the input field cannot be edited directly. Defaults to false.
+  /// [label] is the text label for the input field.
+  /// [helperText] is an optional helper text displayed below the input field.
+  /// [errorText] is an optional error text displayed below the input field.
+  /// [timeFormat] is a function to format the selected time for display.
+  /// [use24HourFormat] if true, uses 24-hour format; if false, uses 12-hour format. If null, uses system setting.
   const AtomicTimePicker({
     super.key,
     this.initialTime,
@@ -34,30 +89,73 @@ class AtomicTimePicker extends StatefulWidget {
     this.use24HourFormat,
   });
 
+  /// The time initially selected in the picker.
   final TimeOfDay? initialTime;
+
+  /// The callback function executed when a time is selected.
   final ValueChanged<TimeOfDay?>? onTimeSelected;
 
+  /// The help text displayed in the picker.
   final String? helpText;
+
+  /// The text for the cancel button in the picker.
   final String? cancelText;
+
+  /// The text for the confirm button in the picker.
   final String? confirmText;
+
+  /// The label text for the hour input field in the picker.
   final String? hourLabelText;
+
+  /// The label text for the minute input field in the picker.
   final String? minuteLabelText;
+
+  /// The error text for invalid time.
   final String? errorInvalidText;
+
+  /// A builder function for the picker's theme.
   final TransitionBuilder? builder;
+
+  /// If true, the picker is pushed onto the root navigator.
   final bool useRootNavigator;
+
+  /// Settings for the picker's route.
   final RouteSettings? routeSettings;
+
+  /// The initial entry mode of the time picker (dial, input).
   final TimePickerEntryMode entryMode;
+
+  /// Specifies the preferred orientation for the picker.
   final Orientation? orientation;
 
+  /// Defines the visual style of the input field. Defaults to [AtomicTimePickerVariant.filled].
   final AtomicTimePickerVariant variant;
+
+  /// Defines the size of the input field. Defaults to [AtomicTimePickerSize.medium].
   final AtomicTimePickerSize size;
+
+  /// If true, displays a leading clock icon. Defaults to true.
   final bool showIcon;
+
+  /// If true, the input field is interactive. Defaults to true.
   final bool enabled;
+
+  /// If true, the input field cannot be edited directly. Defaults to false.
   final bool readOnly;
+
+  /// The text label for the input field.
   final String? label;
+
+  /// An optional helper text displayed below the input field.
   final String? helperText;
+
+  /// An optional error text displayed below the input field.
   final String? errorText;
+
+  /// A function to format the selected time for display.
   final String Function(TimeOfDay)? timeFormat;
+
+  /// If true, uses 24-hour format; if false, uses 12-hour format. If null, uses system setting.
   final bool? use24HourFormat;
 
   @override
@@ -310,19 +408,56 @@ class _AtomicTimePickerState extends State<AtomicTimePicker> {
   }
 }
 
+/// Defines the visual variants for an [AtomicTimePicker].
 enum AtomicTimePickerVariant {
-  filled, // Filled background
-  outlined, // Outlined border
-  underlined, // Bottom underline
+  /// A time picker with a filled background.
+  filled,
+
+  /// A time picker with an outlined border.
+  outlined,
+
+  /// A time picker with only a bottom underline.
+  underlined,
 }
 
+/// Defines the predefined sizes for an [AtomicTimePicker].
 enum AtomicTimePickerSize {
-  small, // Compact size
-  medium, // Standard size
-  large, // Large size
+  /// A small time picker.
+  small,
+
+  /// A medium-sized time picker.
+  medium,
+
+  /// A large time picker.
+  large,
 }
 
+/// A simplified time picker component for common use cases.
+///
+/// The [AtomicSimpleTimePicker] provides a basic time picker input field
+/// with a label and hint text. It's a convenient wrapper around [AtomicTimePicker]
+/// for quick setup.
+///
+/// Example usage:
+/// ```dart
+/// AtomicSimpleTimePicker(
+///   initialTime: TimeOfDay.now(),
+///   onTimeSelected: (time) {
+///     print('Selected simple time: $time');
+///   },
+///   label: 'Meeting Time',
+///   hintText: 'Choose a time for the meeting',
+/// )
+/// ```
 class AtomicSimpleTimePicker extends StatelessWidget {
+  /// Creates an [AtomicSimpleTimePicker] widget.
+  ///
+  /// [onTimeSelected] is the callback function executed when a time is selected.
+  /// [initialTime] is the time initially selected.
+  /// [label] is the text label for the input field.
+  /// [hintText] is the hint text displayed in the input field. Defaults to 'Select time'.
+  /// [enabled] if true, the input field is interactive. Defaults to true.
+  /// [use24HourFormat] if true, uses 24-hour format; if false, uses 12-hour format. If null, uses system setting.
   const AtomicSimpleTimePicker({
     super.key,
     required this.onTimeSelected,
@@ -333,11 +468,22 @@ class AtomicSimpleTimePicker extends StatelessWidget {
     this.use24HourFormat,
   });
 
+  /// The callback function executed when a time is selected.
   final ValueChanged<TimeOfDay?> onTimeSelected;
+
+  /// The time initially selected in the picker.
   final TimeOfDay? initialTime;
+
+  /// The text label for the input field.
   final String? label;
+
+  /// The hint text displayed in the input field. Defaults to 'Select time'.
   final String hintText;
+
+  /// If true, the input field is interactive. Defaults to true.
   final bool enabled;
+
+  /// If true, uses 24-hour format; if false, uses 12-hour format. If null, uses system setting.
   final bool? use24HourFormat;
 
   @override
@@ -352,7 +498,46 @@ class AtomicSimpleTimePicker extends StatelessWidget {
   }
 }
 
+/// A time range picker component for selecting a start and end time.
+///
+/// The [AtomicTimeRangePicker] provides two linked time picker input fields
+/// for selecting a time range. It ensures that the end time is not before
+/// the start time and provides a single callback for the selected range.
+///
+/// Features:
+/// - Two linked time pickers for start and end times.
+/// - Customizable labels for start and end time fields.
+/// - Enabled/disabled states.
+/// - Provides a single [TimeRange] in the callback.
+/// - Supports 12-hour or 24-hour format.
+///
+/// Example usage:
+/// ```dart
+/// TimeRange? _selectedTimeRange;
+/// AtomicTimeRangePicker(
+///   onTimeRangeSelected: (range) {
+///     setState(() {
+///       _selectedTimeRange = range;
+///     });
+///     print('Selected time range: $_selectedTimeRange');
+///   },
+///   initialStartTime: TimeOfDay(hour: 9, minute: 0),
+///   initialEndTime: TimeOfDay(hour: 17, minute: 0),
+///   startLabel: 'Meeting Start',
+///   endLabel: 'Meeting End',
+///   use24HourFormat: false,
+/// )
+/// ```
 class AtomicTimeRangePicker extends StatefulWidget {
+  /// Creates an [AtomicTimeRangePicker] widget.
+  ///
+  /// [onTimeRangeSelected] is the callback function executed when a time range is selected.
+  /// [initialStartTime] is the initially selected start time.
+  /// [initialEndTime] is the initially selected end time.
+  /// [startLabel] is the label for the start time field. Defaults to 'Start Time'.
+  /// [endLabel] is the label for the end time field. Defaults to 'End Time'.
+  /// [enabled] if true, the time pickers are interactive. Defaults to true.
+  /// [use24HourFormat] if true, uses 24-hour format; if false, uses 12-hour format. If null, uses system setting.
   const AtomicTimeRangePicker({
     super.key,
     required this.onTimeRangeSelected,
@@ -364,12 +549,25 @@ class AtomicTimeRangePicker extends StatefulWidget {
     this.use24HourFormat,
   });
 
+  /// The callback function executed when a time range is selected.
   final ValueChanged<TimeRange?> onTimeRangeSelected;
+
+  /// The initially selected start time.
   final TimeOfDay? initialStartTime;
+
+  /// The initially selected end time.
   final TimeOfDay? initialEndTime;
+
+  /// The label for the start time field. Defaults to 'Start Time'.
   final String startLabel;
+
+  /// The label for the end time field. Defaults to 'End Time'.
   final String endLabel;
+
+  /// If true, the time pickers are interactive. Defaults to true.
   final bool enabled;
+
+  /// If true, uses 24-hour format; if false, uses 12-hour format. If null, uses system setting.
   final bool? use24HourFormat;
 
   @override
@@ -445,14 +643,22 @@ class _AtomicTimeRangePickerState extends State<AtomicTimeRangePicker> {
   }
 }
 
+/// A model representing a time range with a start and end time.
 class TimeRange {
+  /// The start time of the range.
+  final TimeOfDay start;
+
+  /// The end time of the range.
+  final TimeOfDay end;
+
+  /// Creates a [TimeRange].
+  ///
+  /// [start] is the beginning of the time range.
+  /// [end] is the end of the time range.
   const TimeRange({
     required this.start,
     required this.end,
   });
-
-  final TimeOfDay start;
-  final TimeOfDay end;
 
   Duration get duration {
     final startMinutes = start.hour * 60 + start.minute;

@@ -447,7 +447,41 @@ class AtomicSimpleAppBar extends StatelessWidget implements PreferredSizeWidget 
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
 
+/// A customizable app bar component with search functionality.
+///
+/// The [AtomicSearchAppBar] provides an app bar that integrates a search field
+/// for filtering content. It supports a hint text, back button, and actions.
+///
+/// Features:
+/// - Integrated search text field.
+/// - Customizable hint text for the search field.
+/// - Optional back button.
+/// - Customizable actions.
+/// - Callbacks for search input changes and submission.
+/// - Integrates with the theme for consistent styling.
+///
+/// Example usage:
+/// ```dart
+/// AtomicSearchAppBar(
+///   hintText: 'Search items...',
+///   onSearchChanged: (query) {
+///     print('Search query: $query');
+///   },
+///   onSearch: (query) {
+///     print('Search submitted: $query');
+///   },
+///   showBackButton: true,
+/// )
+/// ```
 class AtomicSearchAppBar extends StatefulWidget implements PreferredSizeWidget {
+  /// Creates an [AtomicSearchAppBar] widget.
+  ///
+  /// [onSearch] is the callback function executed when the search is submitted.
+  /// [onSearchChanged] is the callback function executed when the search text changes.
+  /// [hintText] is the hint text displayed in the search field. Defaults to 'Search...'.
+  /// [showBackButton] if true, a back button is automatically added. Defaults to true.
+  /// [actions] are widgets to display after the search field.
+  /// [backgroundColor] is the background color of the app bar.
   const AtomicSearchAppBar({
     super.key,
     this.onSearch,
@@ -458,11 +492,22 @@ class AtomicSearchAppBar extends StatefulWidget implements PreferredSizeWidget {
     this.backgroundColor,
   });
 
+  /// The callback function executed when the search is submitted.
   final ValueChanged<String>? onSearch;
+
+  /// The callback function executed when the search text changes.
   final ValueChanged<String>? onSearchChanged;
+
+  /// The hint text displayed in the search field. Defaults to 'Search...'.
   final String hintText;
+
+  /// If true, a back button is automatically added. Defaults to true.
   final bool showBackButton;
+
+  /// Widgets to display after the search field.
   final List<Widget>? actions;
+
+  /// The background color of the app bar.
   final Color? backgroundColor;
 
   @override
