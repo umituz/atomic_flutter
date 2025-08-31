@@ -52,9 +52,12 @@ export 'models/icon_list_item.dart';
 export 'models/select_list_item.dart';
 export 'models/text_list_item.dart';
 export 'models/base_model.dart';
+export 'models/auth/auth_user.dart';
+export 'models/auth/auth_result.dart';
 
 export 'providers/sheet_select_controller.dart';
 export 'providers/value_controller.dart';
+export 'providers/auth/auth_provider.dart';
 
 export 'tokens/enums/atomic_loading_state.dart';
 export 'tokens/enums/atomic_status.dart';
@@ -67,6 +70,8 @@ export 'services/atomic_haptic_service.dart';
 export 'services/network/network.dart';
 export 'services/storage/storage.dart';
 export 'services/atomic_base_service.dart';
+export 'services/auth/auth_service.dart';
+export 'services/auth/token_storage_service.dart';
 
 export 'atoms/buttons/atomic_button.dart';
 export 'atoms/buttons/atomic_icon_button.dart';
