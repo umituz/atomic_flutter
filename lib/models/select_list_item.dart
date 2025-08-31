@@ -116,7 +116,6 @@ class AtomicSelectListItem<T> {
   }
 
   @override
-  @override
   String toString() {
     return 'AtomicSelectListItem(text: $text, value: $value, selected: $selected)';
   }

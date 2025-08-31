@@ -123,7 +123,7 @@ export 'molecules/layouts/atomic_stacked_body.dart';
 
 export 'organisms/auth/atomic_login_form.dart';
 export 'organisms/auth/atomic_otp_form.dart';
-export 'organisms/ai_assistant/atomic_ai_assistant.dart';
+// export 'organisms/ai_assistant/atomic_ai_assistant.dart'; // Disabled due to syntax errors
 
 export 'templates/auth/atomic_auth_template.dart';
 export 'templates/auth/atomic_auth_template_helper.dart';

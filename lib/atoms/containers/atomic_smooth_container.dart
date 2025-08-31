@@ -299,3 +299,23 @@ class AtomicAnimatedSmoothContainer extends ImplicitlyAnimatedWidget {
   AnimatedWidgetBaseState<AtomicAnimatedSmoothContainer> createState() =>
       _AtomicAnimatedSmoothContainerState();
 }
+
+class _AtomicAnimatedSmoothContainerState 
+    extends AnimatedWidgetBaseState<AtomicAnimatedSmoothContainer> {
+  
+  @override
+  Widget build(BuildContext context) {
+    return AtomicSmoothContainer(
+      width: animation.value,
+      height: animation.value,
+      decoration: widget.decoration,
+      clipBehavior: widget.clipBehavior,
+      child: widget.child,
+    );
+  }
+  
+  @override
+  void forEachTween(TweenVisitor<dynamic> visitor) {
+    // Add tween animations for properties that need to be animated
+  }
+}

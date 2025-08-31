@@ -280,7 +280,7 @@ class AtomicSheetSelectController<T> extends ChangeNotifier {
 
     return _items
         .where((item) =>
-            item.label.toLowerCase().contains(searchText.toLowerCase()) ||
+            item.text.toLowerCase().contains(searchText.toLowerCase()) ||
             (item.subText?.toLowerCase().contains(searchText.toLowerCase()) ??
                 false))
         .toList();

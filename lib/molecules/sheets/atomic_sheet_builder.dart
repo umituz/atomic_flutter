@@ -141,7 +141,8 @@ class AtomicSheetBuilder {
   /// [cancelColor] is the color for the cancel button's text.
   /// [isDismissible] if true, the sheet can be dismissed by tapping outside. Defaults to true.
   /// [enableDrag] if true, the sheet can be dismissed by dragging down. Defaults to true.
-  static Future<T?> showActionSheet<T>({n    required BuildContext context,
+  static Future<T?> showActionSheet<T>({
+    required BuildContext context,
     required List<AtomicSheetAction<T>> actions,
     String? title,
     String? message,
@@ -331,3 +332,4 @@ class AtomicSheetAction<T> {
     this.isDestructive = false,
     this.isEnabled = true,
   });
+}

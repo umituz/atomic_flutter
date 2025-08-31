@@ -411,8 +411,7 @@ class AtomicValidators {
   static String? email(String? value, [String? message]) {
     if (value == null || value.isEmpty) return null;
 
-    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}
-);
+    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
     if (!emailRegex.hasMatch(value)) {
       return message ?? 'Please enter a valid email address';
     }
@@ -470,8 +469,7 @@ class AtomicValidators {
   static String? phone(String? value, [String? message]) {
     if (value == null || value.isEmpty) return null;
 
-    final phoneRegex = RegExp(r'^\+?[1-9]\d{1,14}
-);
+    final phoneRegex = RegExp(r'^\+?[1-9]\d{1,14}$');
     if (!phoneRegex.hasMatch(value.replaceAll(RegExp(r'[\s\-\(\)]'), ''))) {
       return message ?? 'Please enter a valid phone number';
     }

@@ -333,6 +333,7 @@ class AtomicRadioItem<T> {
     required this.label,
     this.enabled = true,
   });
+}
 
 /// Defines the predefined sizes for an [AtomicRadio] button.
 enum AtomicRadioSize {

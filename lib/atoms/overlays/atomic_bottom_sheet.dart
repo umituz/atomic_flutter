@@ -116,17 +116,30 @@ class AtomicBottomSheet {
           top: Radius.circular(AtomicBorders.radiusXl),
         ),
       ),
-      builder: (context) => _AtomicBottomSheetContent(
-        title: title,
-        titleWidget: titleWidget,
-        height: height,
-        maxHeight: maxHeight,
-        backgroundColor: backgroundColor,
-        padding: padding,
-        showDragHandle: showDragHandle,
-        showCloseButton: showCloseButton,
-        onClose: onClose,
-        child: child,
+      builder: (context) => Container(
+        height: height ?? 400,
+        padding: padding ?? const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: backgroundColor ?? Colors.white,
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+        ),
+        child: Column(
+          children: [
+            if (showDragHandle)
+              Container(
+                width: 32,
+                height: 4,
+                margin: const EdgeInsets.only(bottom: 16),
+                decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+            if (title != null)
+              Text(title!, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            Expanded(child: child),
+          ],
+        ),
       ),
     );
   }
@@ -175,15 +188,18 @@ class AtomicBottomSheet {
             ),
             const AtomicDivider(),
           ],
-          ...actions.map((action) => _ActionItem(action: action)),
+          ...actions.map((action) => ListTile(
+            title: Text(action.label),
+            onTap: () {
+              Navigator.of(context).pop();
+              action.onTap();
+            },
+          )),
           if (showCancelButton) ...[
             const AtomicDivider(),
-            _ActionItem(
-              action: AtomicBottomSheetAction(
-                label: cancelLabel ?? 'Cancel',
-                onTap: () => Navigator.of(context).pop(),
-                isDestructive: false,
-              ),
+            ListTile(
+              title: Text(cancelLabel ?? 'Cancel'),
+              onTap: () => Navigator.of(context).pop(),
             ),
           ],
         ],
@@ -236,3 +252,4 @@ class AtomicBottomSheetAction<T> {
     this.isEnabled = true,
     this.shouldDismiss = true,
   });
+}
