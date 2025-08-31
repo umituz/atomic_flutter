@@ -54,6 +54,7 @@ export 'models/text_list_item.dart';
 export 'models/base_model.dart';
 export 'models/auth/auth_user.dart';
 export 'models/auth/auth_result.dart';
+export 'models/http/api_response.dart';
 
 export 'providers/sheet_select_controller.dart';
 export 'providers/value_controller.dart';
@@ -72,6 +73,7 @@ export 'services/storage/storage.dart';
 export 'services/atomic_base_service.dart';
 export 'services/auth/auth_service.dart';
 export 'services/auth/token_storage_service.dart';
+export 'services/http/atomic_http_client.dart';
 
 export 'atoms/buttons/atomic_button.dart';
 export 'atoms/buttons/atomic_icon_button.dart';
