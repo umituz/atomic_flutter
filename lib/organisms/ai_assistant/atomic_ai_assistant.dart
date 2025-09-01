@@ -71,6 +71,9 @@ class AtomicAIAssistantConfig {
   final String? emptyStateTitle;
 
   /// The subtitle displayed when the chat history is empty. Defaults to 'Ask me anything'.
+  final String? emptyStateSubtitle;
+
+  /// The placeholder text for the input field. Defaults to 'Type a message...'.
   final String? inputPlaceholder;
 
   /// If true, the clear chat button is always shown, even if the chat is empty. Defaults to false.
@@ -248,6 +251,10 @@ class AtomicAIAssistant extends StatefulWidget {
     this.customInput,
     this.messageBuilder,
   });
+
+  @override
+  State<AtomicAIAssistant> createState() => _AtomicAIAssistantState();
+}
 
 class _AtomicAIAssistantState extends State<AtomicAIAssistant>
     with SingleTickerProviderStateMixin {

@@ -48,17 +48,23 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             const SizedBox(height: 10),
             AtomicButton(
-              text: 'Primary Button',
+              label: 'Primary Button',
               onPressed: () {
-                AtomicToast.show(context, 'Primary Button Pressed!');
+                AtomicToast.show(
+                  context: context,
+                  message: 'Primary Button Pressed!',
+                );
               },
             ),
             const SizedBox(height: 10),
             AtomicButton(
-              text: 'Secondary Button',
-              type: AtomicButtonType.secondary,
+              label: 'Secondary Button',
+              variant: AtomicButtonVariant.secondary,
               onPressed: () {
-                AtomicToast.show(context, 'Secondary Button Pressed!');
+                AtomicToast.show(
+                  context: context,
+                  message: 'Secondary Button Pressed!',
+                );
               },
             ),
             const SizedBox(height: 20),
@@ -68,6 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             const SizedBox(height: 10),
             AtomicTextField(
+              controller: TextEditingController(),
               hintText: 'Enter some text',
               onChanged: (value) {
                 setState(() {
@@ -89,7 +96,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 setState(() {
                   _switchValue = value;
                 });
-                AtomicToast.show(context, 'Switch is now: $value');
+                AtomicToast.show(
+                  context: context,
+                  message: 'Switch is now: $value',
+                );
               },
             ),
             const SizedBox(height: 10),
