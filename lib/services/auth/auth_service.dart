@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:flutter/foundation.dart';
+import '../../config/api_config.dart';
 import '../../models/auth/auth_result.dart';
 import '../../models/auth/auth_user.dart';
 import 'token_storage_service.dart';
@@ -25,24 +27,37 @@ class AuthService {
   /// User Login
   Future<AuthResult> login(String email, String password) async {
     try {
+      debugPrint('🔐 AuthService.login: Starting login for $email');
+      
       final response = await http.post(
-        Uri.parse('$_baseUrl/api/login'),
-        headers: {'Content-Type': 'application/json'},
+        Uri.parse('$_baseUrl${ApiConfig.loginEndpoint}'),
+        headers: ApiConfig.defaultHeaders,
         body: jsonEncode({
           'email': email,
           'password': password,
         }),
       );
 
+      debugPrint('🔐 AuthService.login: Response status: ${response.statusCode}');
+      debugPrint('🔐 AuthService.login: Response body: ${response.body}');
+
       final data = jsonDecode(response.body) as Map<String, dynamic>;
       final result = AuthResult.fromJson(data);
+      
+      debugPrint('🔐 AuthService.login: AuthResult isSuccess: ${result.isSuccess}');
+      debugPrint('🔐 AuthService.login: AuthResult token: ${result.token != null ? "[token present]" : "[no token]"}');
+      debugPrint('🔐 AuthService.login: AuthResult user: ${result.user != null ? "[user present]" : "[no user]"}');
+      debugPrint('🔐 AuthService.login: AuthResult message: ${result.message}');
 
       if (result.isSuccess && result.token != null) {
+        debugPrint('🔐 AuthService.login: Saving token to storage');
         await _tokenStorage.saveToken(result.token!);
+        debugPrint('🔐 AuthService.login: Token saved successfully');
       }
 
       return result;
     } catch (e) {
+      debugPrint('🔐 AuthService.login: Error occurred: $e');
       return AuthResult.error(message: 'Network error occurred');
     }
   }
@@ -56,8 +71,8 @@ class AuthService {
   }) async {
     try {
       final response = await http.post(
-        Uri.parse('$_baseUrl/api/register'),
-        headers: {'Content-Type': 'application/json'},
+        Uri.parse('$_baseUrl${ApiConfig.registerEndpoint}'),
+        headers: ApiConfig.defaultHeaders,
         body: jsonEncode({
           'email': email,
           'name': name,
@@ -86,9 +101,9 @@ class AuthService {
       
       if (authHeader != null) {
         await http.post(
-          Uri.parse('$_baseUrl/api/logout'),
+          Uri.parse('$_baseUrl${ApiConfig.logoutEndpoint}'),
           headers: {
-            'Content-Type': 'application/json',
+            ...ApiConfig.defaultHeaders,
             'Authorization': authHeader,
           },
         );
@@ -112,9 +127,9 @@ class AuthService {
       }
 
       final response = await http.get(
-        Uri.parse('$_baseUrl/api/user'),
+        Uri.parse('$_baseUrl${ApiConfig.userProfileEndpoint}'),
         headers: {
-          'Content-Type': 'application/json',
+          ...ApiConfig.defaultHeaders,
           'Authorization': authHeader,
         },
       );

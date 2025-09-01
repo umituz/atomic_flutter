@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/foundation.dart';
 import '../../models/auth/auth_result.dart';
 import '../../models/auth/auth_user.dart';
 import '../../services/auth/auth_service.dart';
@@ -133,20 +134,31 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
   /// User Login
   Future<void> login(String email, String password) async {
+    debugPrint('🔐 AuthProvider.login: Starting login for $email');
+    
     if (state.message != null) state = state.copyWith(message: null);
     if (state.error != null) state = state.copyWith(error: null);
     
     state = AuthState.loading();
+    debugPrint('🔐 AuthProvider.login: State set to loading');
     
     try {
       final result = await _authService.login(email, password);
+      debugPrint('🔐 AuthProvider.login: AuthService returned result');
+      debugPrint('🔐 AuthProvider.login: Result isSuccess: ${result.isSuccess}');
+      debugPrint('🔐 AuthProvider.login: Result user: ${result.user != null ? "present" : "null"}');
+      debugPrint('🔐 AuthProvider.login: Result message: ${result.message}');
       
       if (result.isSuccess && result.user != null) {
+        debugPrint('🔐 AuthProvider.login: Setting state to authenticated');
         state = AuthState.authenticated(result.user!);
+        debugPrint('🔐 AuthProvider.login: State set to authenticated successfully');
       } else {
+        debugPrint('🔐 AuthProvider.login: Setting state to error: ${result.message}');
         state = AuthState.error(result.message);
       }
     } catch (e) {
+      debugPrint('🔐 AuthProvider.login: Exception caught: $e');
       state = AuthState.error('Authentication failed');
     }
   }
