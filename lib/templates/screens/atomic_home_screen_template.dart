@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../atoms/buttons/atomic_button.dart';
 import '../../providers/auth/auth_provider.dart';
 import '../constants/atomic_app_constants.dart';
 
@@ -329,15 +328,15 @@ class AtomicExtendedHomeScreenTemplate extends ConsumerWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            primaryColor.withOpacity(0.1),
-            primaryColor.withOpacity(0.05),
+            primaryColor.withValues(alpha: 0.1),
+            primaryColor.withValues(alpha: 0.05),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: primaryColor.withOpacity(0.2),
+          color: primaryColor.withValues(alpha: 0.2),
           width: 1,
         ),
       ),

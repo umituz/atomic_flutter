@@ -75,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
             const SizedBox(height: 10),
             AtomicTextField(
               controller: TextEditingController(),
-              hintText: 'Enter some text',
+              hint: 'Enter some text',
               onChanged: (value) {
                 setState(() {
                   _textFieldValue = value;

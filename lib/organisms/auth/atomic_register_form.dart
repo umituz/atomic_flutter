@@ -4,7 +4,6 @@ import 'package:atomic_flutter_kit/atoms/inputs/atomic_text_field.dart';
 import 'package:atomic_flutter_kit/atoms/inputs/atomic_checkbox.dart';
 import 'package:atomic_flutter_kit/molecules/forms/atomic_form_field.dart';
 import 'package:atomic_flutter_kit/themes/atomic_theme_provider.dart';
-import 'package:atomic_flutter_kit/utilities/atomic_debouncer.dart';
 
 /// A customizable registration form component.
 ///
@@ -92,7 +91,6 @@ class AtomicRegisterForm extends StatefulWidget {
 
 class _AtomicRegisterFormState extends State<AtomicRegisterForm> {
   final _formKey = GlobalKey<FormState>();
-  final _debouncer = AtomicDebouncer(delay: const Duration(milliseconds: 300));
 
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();

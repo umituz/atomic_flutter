@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:atomic_flutter_kit/themes/atomic_theme_provider.dart';
-import 'package:atomic_flutter_kit/themes/atomic_theme_data.dart';
 import 'package:atomic_flutter_kit/tokens/colors/atomic_colors.dart';
 import 'package:atomic_flutter_kit/tokens/spacing/atomic_spacing.dart';
 import 'package:atomic_flutter_kit/tokens/borders/atomic_borders.dart';
-import 'package:atomic_flutter_kit/tokens/animations/atomic_animations.dart';
 import 'package:atomic_flutter_kit/atoms/overlays/atomic_divider.dart';
 
 /// A utility class for displaying customizable bottom sheets.
