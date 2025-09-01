@@ -139,3 +139,9 @@ export 'templates/auth/atomic_auth_template.dart';
 export 'templates/auth/atomic_auth_template_helper.dart';
 
 export 'navigation/atomic_router.dart';
+
+// Templates - New standardization layer
+export 'templates/constants/atomic_app_constants.dart';
+export 'templates/initialization/atomic_app_initializer.dart';
+export 'templates/routing/atomic_router_template.dart';
+export 'templates/screens/atomic_home_screen_template.dart';
