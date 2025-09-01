@@ -122,13 +122,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const AtomicText(
+                  children: const [
+                    AtomicText(
                       'This is an Atomic Card',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(height: 8),
-                    const AtomicText(
+                    SizedBox(height: 8),
+                    AtomicText(
                       'You can put any content inside this card.',
                     ),
                   ],

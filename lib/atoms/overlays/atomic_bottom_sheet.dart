@@ -68,8 +68,6 @@ import 'package:atomic_flutter_kit/atoms/overlays/atomic_divider.dart';
 /// );
 /// ```
 class AtomicBottomSheet {
-  static OverlayEntry? _currentToast; // This seems to be a copy-paste error from AtomicToast, should be _currentBottomSheet
-
   /// Displays a customizable modal bottom sheet with arbitrary content.
   ///
   /// [context] is the BuildContext to show the bottom sheet in.
@@ -134,7 +132,7 @@ class AtomicBottomSheet {
                 ),
               ),
             if (title != null)
-              Text(title!, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              Text(title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             Expanded(child: child),
           ],
         ),

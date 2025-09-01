@@ -119,6 +119,7 @@ class AtomicRouterTemplate {
       builder: (context, state) => _buildPlaceholderScreen(
         'Settings',
         'Settings screen not implemented for this app',
+        context,
       ),
     ),
     GoRoute(
@@ -127,6 +128,7 @@ class AtomicRouterTemplate {
       builder: (context, state) => _buildPlaceholderScreen(
         'Profile',
         'Profile screen not implemented for this app',
+        context,
       ),
     ),
     GoRoute(
@@ -135,6 +137,7 @@ class AtomicRouterTemplate {
       builder: (context, state) => _buildPlaceholderScreen(
         'Favorites',
         'Favorites screen not implemented for this app',
+        context,
       ),
     ),
     GoRoute(
@@ -143,6 +146,7 @@ class AtomicRouterTemplate {
       builder: (context, state) => _buildPlaceholderScreen(
         'History',
         'History screen not implemented for this app',
+        context,
       ),
     ),
   ];
@@ -165,12 +169,12 @@ class AtomicRouterTemplate {
   ) {
     return MaterialPage<void>(
       key: state.pageKey,
-      child: _buildErrorScreen(state.error.toString()),
+      child: _buildErrorScreen(state.error.toString(), context),
     );
   }
 
   /// Build a placeholder screen for unimplemented routes
-  static Widget _buildPlaceholderScreen(String title, String message) {
+  static Widget _buildPlaceholderScreen(String title, String message, BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
@@ -205,7 +209,7 @@ class AtomicRouterTemplate {
   }
 
   /// Build error screen
-  static Widget _buildErrorScreen(String error) {
+  static Widget _buildErrorScreen(String error, BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Error'),
