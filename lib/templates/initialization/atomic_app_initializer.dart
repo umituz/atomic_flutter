@@ -217,7 +217,7 @@ class AtomicAppInitializer {
   }) async {
     await initialize(
       debugPrefix: debugPrefix,
-      envFileName: '.env.development',
+      envFileName: '.env',
       enableHttpLogging: true,
       additionalSetup: () async {
         validateEnvironment(debugPrefix);

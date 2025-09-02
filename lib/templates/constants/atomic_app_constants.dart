@@ -1,69 +1,12 @@
-/// Abstract base class for standardized app constants across Flutter applications.
+/// Base class providing standardized app constants across Flutter applications.
 ///
-/// This class provides common constants that are identical across all apps,
-/// while allowing app-specific customization through inheritance.
-///
-/// Usage:
-/// ```dart
-/// class AppConstants extends AtomicAppConstants {
-///   @override
-///   static String get appName => 'My Amazing App';
-///   
-///   @override
-///   static String get tagline => 'Amazing features await!';
-///   
-///   @override
-///   static int get primaryColorValue => 0xFF6366F1;
-/// }
-/// ```
-abstract class AtomicAppConstants {
-  // =================================================================
-  // APP IDENTITY - Must be overridden by implementing classes
-  // =================================================================
-  
-  /// The display name of the application
-  static String get appName => throw UnimplementedError('appName must be implemented');
-  
-  /// App tagline or subtitle
-  static String get tagline => throw UnimplementedError('tagline must be implemented');
-  
-  /// Primary color value as int (for atomic_flutter_kit compatibility)
-  static int get primaryColorValue => throw UnimplementedError('primaryColorValue must be implemented');
-  
-  /// Secondary color value as int
-  static int get secondaryColorValue => throw UnimplementedError('secondaryColorValue must be implemented');
-  
-  /// Accent color value as int
-  static int get accentColorValue => throw UnimplementedError('accentColorValue must be implemented');
+/// This class provides common constants that are identical across all apps.
+/// App-specific constants should be defined separately in each app's constants class.
+class AtomicAppConstants {
   
   // =================================================================
-  // CONST COLOR VALUES - Must be overridden by implementing classes for const expressions
+  // AUTH AND COMMON UI TEXT - Standardized across all apps
   // =================================================================
-  
-  /// Primary color value as const int (for const expressions)
-  /// This should match the value returned by primaryColorValue getter
-  static const int constPrimaryColorValue = 0xFF000000; // Placeholder - must be overridden
-  
-  /// Secondary color value as const int (for const expressions)
-  /// This should match the value returned by secondaryColorValue getter
-  static const int constSecondaryColorValue = 0xFF000000; // Placeholder - must be overridden
-  
-  /// Accent color value as const int (for const expressions)
-  /// This should match the value returned by accentColorValue getter
-  static const int constAccentColorValue = 0xFF000000; // Placeholder - must be overridden
-  
-  // =================================================================
-  // COMPUTED PROPERTIES - Automatically generated from overrides
-  // =================================================================
-  
-  /// Debug prefix for logging - automatically generated from app name
-  static String get debugPrefix => '[${appName.replaceAll(' ', '').replaceAll(RegExp(r'[^a-zA-Z0-9]'), '')}]';
-  
-  /// Welcome title with app name
-  static String get welcomeTitle => 'Welcome to $appName!';
-  
-  /// Join app title with app name
-  static String get joinAppTitle => 'Join $appName';
   
   /// Welcome back title for login
   static String get welcomeBackTitle => 'Welcome Back';
@@ -213,14 +156,13 @@ abstract class AtomicAppConstants {
   static const int errorColorValue = 0xFFEF4444;
   static const int infoColorValue = 0xFF3B82F6;
   
-  // Storage Keys - Standardized prefix pattern
-  static String get storagePrefix => '${appName.toLowerCase().replaceAll(' ', '_')}_';
-  static String get userPreferencesKey => '${storagePrefix}user_preferences';
-  static String get historyKey => '${storagePrefix}history';
-  static String get favoritesKey => '${storagePrefix}favorites';
-  static String get themeKey => '${storagePrefix}theme';
-  static String get languageKey => '${storagePrefix}language';
-  static String get notificationsKey => '${storagePrefix}notifications';
+  // Storage Keys - Base keys (apps should add their own prefix)
+  static const String baseUserPreferencesKey = 'user_preferences';
+  static const String baseHistoryKey = 'history';
+  static const String baseFavoritesKey = 'favorites';
+  static const String baseThemeKey = 'theme';
+  static const String baseLanguageKey = 'language';
+  static const String baseNotificationsKey = 'notifications';
   
   // API Configuration Keys
   static const String tokenKey = 'auth_token';

@@ -59,6 +59,7 @@ export 'models/http/api_response.dart';
 export 'providers/sheet_select_controller.dart';
 export 'providers/value_controller.dart';
 export 'providers/auth/auth_provider.dart';
+export 'providers/base_provider.dart';
 
 export 'tokens/enums/atomic_loading_state.dart';
 export 'tokens/enums/atomic_status.dart';
@@ -75,6 +76,7 @@ export 'config/api_config.dart';
 export 'config/auth_constants.dart';
 export 'services/auth/auth_service.dart';
 export 'services/auth/token_storage_service.dart';
+export 'services/base_api_service.dart';
 export 'services/http/atomic_http_client.dart';
 
 export 'atoms/buttons/atomic_button.dart';
